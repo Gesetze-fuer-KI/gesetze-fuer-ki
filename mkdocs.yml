@@ -1,0 +1,76 @@
+site_name: Gesetze für KI
+site_description: Aktuelles Bundesrecht für KI-Assistenten. Ein MCP-Server, mit dem Claude, ChatGPT und andere Agenten die Gesetze selbst nachschlagen.
+site_url: https://gesetze-fuer-ki.de/
+repo_url: https://github.com/Marceltov/Gesetze-fuer-KI
+repo_name: Marceltov/Gesetze-fuer-KI
+edit_uri: edit/main/docs/
+copyright: Copyright &copy; 2026 Marcel Bruckner · <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a>
+
+# Planning notes are local-only.
+exclude_docs: |
+  superpowers/
+
+nav:
+  - Start: index.md
+  - Verbinden: verbinden.md
+  - Werkzeuge: werkzeuge.md
+  - Daten und Grenzen: daten.md
+  - Impressum: impressum.md
+  - Datenschutz: datenschutz.md
+
+theme:
+  name: material
+  language: de
+  font:
+    text: Atkinson Hyperlegible Next
+    code: Atkinson Hyperlegible Mono
+  icon:
+    logo: material/scale-balance
+  favicon: favicon.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Dunkles Design
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Helles Design
+  features:
+    - navigation.instant
+    - navigation.footer
+    - navigation.top
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+
+plugins:
+  - search:
+      lang: de
+  # Downloads fonts and other external assets at build time, so visitors' browsers never contact Google.
+  - privacy
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true

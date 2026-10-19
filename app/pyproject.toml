@@ -1,0 +1,27 @@
+[project]
+name = "gesetze_fuer_ki"
+version = "0.1.0"
+description = "MCP server that lets AI agents search German federal law (gesetze-im-internet.de)"
+license = "AGPL-3.0-or-later"
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=3.0.0",
+    "httpx>=0.28.1",
+    "pyyaml>=6.0",
+    "uvicorn>=0.30",
+]
+
+[tool.uv]
+# Plain modules next to each other; install only the dependencies (no build backend needed).
+package = false
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+]
+docs = [
+    "mkdocs-material>=9.6",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

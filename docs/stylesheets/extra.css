@@ -1,0 +1,43 @@
+/* Ink blue of a Gesetzblatt, quiet header. */
+
+:root > * {
+  --gk-blue: #1f4e79;
+  --gk-red: #9b2c2c;
+  --gk-ink: #1e293b;
+
+  --md-primary-fg-color: #ffffff;
+  --md-primary-fg-color--light: #ffffff;
+  --md-primary-fg-color--dark: #ffffff;
+  --md-primary-bg-color: var(--gk-ink);
+  --md-primary-bg-color--light: #475569;
+  --md-accent-fg-color: var(--gk-red);
+  --md-typeset-a-color: var(--gk-blue);
+  --md-footer-bg-color: #15253a;
+  --md-footer-bg-color--dark: #0f1b2b;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 215;
+  --gk-blue: #8fb8e8;
+  --gk-red: #f19a9a;
+  --gk-ink: #e2e8f0;
+
+  --md-primary-fg-color: hsla(215, 25%, 12%, 1);
+  --md-primary-fg-color--light: hsla(215, 25%, 12%, 1);
+  --md-primary-fg-color--dark: hsla(215, 25%, 12%, 1);
+  --md-primary-bg-color: var(--gk-ink);
+}
+
+.md-header {
+  border-bottom: 1px solid hsla(215, 20%, 50%, 0.2);
+  box-shadow: none;
+}
+
+/* The endpoint box on the start page. */
+.endpoint {
+  font-size: 1.2em;
+  padding: 0.8em 1em;
+  border-left: 4px solid var(--gk-blue);
+  background: hsla(215, 40%, 50%, 0.08);
+  margin: 1em 0 1.5em;
+}

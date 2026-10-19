@@ -1,0 +1,19 @@
+name: Tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Run the tests
+        working-directory: app
+        run: uv run --frozen pytest -q
+      - name: Build the docs (fails on broken links)
+        working-directory: app
+        run: uv run --frozen --only-group docs mkdocs build --strict -f ../mkdocs.yml --site-dir /tmp/site
