@@ -41,25 +41,28 @@ PART_CHARS = 30_000
 log = logging.getLogger("gesetze")
 
 INSTRUCTIONS = """\
-Current German federal law (Bundesrecht) from gesetze-im-internet.de, the official
-consolidated texts of the Federal Ministry of Justice, updated nightly.
+Aktuelles Bundesrecht von gesetze-im-internet.de: die amtlichen Texte des
+Bundesministeriums der Justiz, jede Nacht abgeglichen.
 
-Use these tools whenever a question touches German law: taxes, trade registration
-(Gewerbe), employment, tenancy, contracts, data protection, traffic and so on.
-Answer from the text you retrieved, not from memory, because laws change.
+Nutze diese Werkzeuge, sobald eine Frage deutsches Recht berührt: Steuern,
+Gewerbeanmeldung, Arbeit, Miete, Verträge, Datenschutz, Verkehr und so weiter.
+Antworte aus dem abgerufenen Wortlaut, nicht aus dem Gedächtnis, denn Gesetze ändern sich.
+Die Nutzer sind meist keine Juristen: Erkläre einfach und auf Deutsch.
 
-- search_laws finds provisions by topic. It matches words, not meaning: search in
-  the words the law itself uses ("Informationspflichten Diensteanbieter", not
-  "Impressum"; "Kleinunternehmer Umsatz", not "small business VAT limit"). Try
-  two or three phrasings, and narrow with `law` once you know the law.
-- When you already know where a rule is (§ 19 UStG, § 14 GewO), call
-  get_provision directly instead of searching.
-- get_provision returns the full text of one § or Artikel. Read it before you rely on it,
-  and follow the cross-references that matter ("§ 4 Nummer 8 gilt entsprechend").
-- Cite what you used as "§ 19 UStG" and give the Stand and link the tool returns.
-- Federal law only: no state law (Landesrecht), no EU regulations, no court rulings.
-- This is information, not legal advice. For decisions with consequences, point to a
-  Steuerberater, Rechtsanwalt or the responsible authority.
+- gesetze_durchsuchen findet Vorschriften zu einem Thema. Es vergleicht Wörter, nicht
+  Bedeutungen: Suche mit den Wörtern, die das Gesetz selbst benutzt
+  („Informationspflichten Diensteanbieter“, nicht „Impressum“; „Kleinunternehmer
+  Umsatz“, nicht „Umsatzgrenze kleine Firma“). Probiere zwei oder drei Formulierungen
+  und schränke mit `law` ein, sobald du das Gesetz kennst.
+- Wenn du schon weißt, wo eine Regel steht (§ 19 UStG, § 14 GewO), rufe
+  vorschrift_lesen direkt auf, statt zu suchen.
+- vorschrift_lesen liefert den vollständigen Wortlaut eines § oder Artikels. Lies ihn,
+  bevor du dich darauf stützt, und folge den Verweisen, auf die es ankommt
+  („§ 4 Nummer 8 gilt entsprechend“).
+- Zitiere, was du benutzt hast, als „§ 19 UStG“ und nenne Stand und Link aus der Antwort.
+- Nur Bundesrecht: kein Landesrecht, keine EU-Verordnungen, keine Gerichtsentscheidungen.
+- Das ist eine Auskunft, keine Rechtsberatung. Bei Entscheidungen mit Folgen auf
+  Steuerberater, Rechtsanwalt oder die zuständige Behörde verweisen.
 """
 
 mcp = FastMCP("gesetze-fuer-ki", instructions=INSTRUCTIONS, website_url="https://gesetze-fuer-ki.de")
@@ -155,7 +158,7 @@ def resolve(s: store.Store, law: str) -> tuple[dict | None, str | None]:
     """The one law meant by `law`, or an error text that lists the candidates."""
     rows = s.resolve_law(law)
     if not rows:
-        return None, f"Kein Gesetz zu „{law}“ gefunden. Mit find_law nach dem Namen suchen."
+        return None, f"Kein Gesetz zu „{law}“ gefunden. Mit gesetz_finden nach dem Namen suchen."
     exact = [r for r in rows if r["abk_norm"] == store.abk_key(law) or r["slug"] == law.strip().lower()]
     if len(exact) == 1:
         return dict(exact[0]), None
@@ -186,20 +189,28 @@ def _not_ready() -> str:
     return "Der Suchindex wird gerade aufgebaut. Bitte in einer Minute erneut versuchen."
 
 
+# Tool names, titles and descriptions are what users see in their client, so they are German; the Python
+# names and docstrings stay English.
+
 # ---- tools ------------------------------------------------------------------------------------
 
 
-@mcp.tool(annotations=READ_ONLY)
+@mcp.tool(
+    name="gesetze_durchsuchen",
+    title="Gesetze durchsuchen",
+    description=(
+        "Volltextsuche in allen Paragrafen, Artikeln und Anlagen des aktuellen Bundesrechts. "
+        "Liefert die passendsten Vorschriften mit Gesetz, Überschrift und einem Textausschnitt. "
+        "Danach mit vorschrift_lesen den vollständigen Wortlaut der wichtigen Vorschriften holen."
+    ),
+    annotations=READ_ONLY,
+)
 def search_laws(
-    query: Annotated[str, Field(description="Search terms in German legal language, e.g. 'Kleinunternehmer Umsatzgrenze' or 'Gewerbe anzeigen'")],
-    law: Annotated[str | None, Field(description="Restrict to one law: abbreviation like 'UStG', 'GewO', 'BGB', or a slug from find_law")] = None,
-    limit: Annotated[int, Field(ge=1, le=25)] = 8,
+    query: Annotated[str, Field(description="Suchbegriffe in der Sprache des Gesetzes, z. B. „Kleinunternehmer Umsatzgrenze“ oder „Gewerbe anzeigen“")],
+    law: Annotated[str | None, Field(description="Nur in einem Gesetz suchen: Abkürzung wie „UStG“, „GewO“, „BGB“ oder eine Kennung aus gesetz_finden")] = None,
+    limit: Annotated[int, Field(ge=1, le=25, description="Höchstzahl der Treffer")] = 8,
 ) -> str:
-    """Full-text search over all provisions (§§, Artikel, Anlagen) of current German federal law.
-
-    Returns the best-matching provisions with law, designation, heading and a text
-    snippet. Then call get_provision for the full text of the ones that matter.
-    """
+    """Full-text search over all provisions of current German federal law."""
     try:
         s = INDEX.get()
     except NotReady:
@@ -224,15 +235,20 @@ def search_laws(
     return "\n".join(lines).rstrip()
 
 
-@mcp.tool(annotations=READ_ONLY)
+@mcp.tool(
+    name="gesetz_finden",
+    title="Gesetz finden",
+    description=(
+        "Gesetze und Verordnungen über ihren Namen oder ihre Abkürzung finden. "
+        "Liefert die richtige Abkürzung und Kennung, wenn der genaue Name unbekannt ist."
+    ),
+    annotations=READ_ONLY,
+)
 def find_law(
-    query: Annotated[str, Field(description="Name, part of the title or abbreviation, e.g. 'Gewerbeordnung', 'Mindestlohn', 'DSGVO-Anpassung', 'AO'")],
-    limit: Annotated[int, Field(ge=1, le=25)] = 10,
+    query: Annotated[str, Field(description="Name, Teil des Titels oder Abkürzung, z. B. „Gewerbeordnung“, „Mindestlohn“, „AO“")],
+    limit: Annotated[int, Field(ge=1, le=25, description="Höchstzahl der Treffer")] = 10,
 ) -> str:
-    """Find laws and regulations (Gesetze, Verordnungen) by name or abbreviation.
-
-    Use this to get the right abbreviation or slug when a law's exact name is unknown.
-    """
+    """Find laws and regulations by name or abbreviation."""
     try:
         s = INDEX.get()
     except NotReady:
@@ -251,14 +267,22 @@ def find_law(
     return "\n".join(lines)
 
 
-@mcp.tool(annotations=READ_ONLY)
+@mcp.tool(
+    name="vorschrift_lesen",
+    title="Vorschrift lesen",
+    description=(
+        "Der vollständige Wortlaut eines Paragrafen, Artikels oder einer Anlage, mit Stand und "
+        "Link zur amtlichen Fassung. Mit date auch die Fassung an einem früheren Tag."
+    ),
+    annotations=READ_ONLY,
+)
 def get_provision(
-    law: Annotated[str, Field(description="Abbreviation like 'UStG' or a slug like 'ustg_1980'")],
-    provision: Annotated[str, Field(description="The § or Artikel, e.g. '§ 19', '19a', 'Art 3', 'Anlage 2'")],
-    date: Annotated[str | None, Field(description="Optional YYYY-MM-DD: the wording in force in this mirror on that day. Omit for the current text.")] = None,
-    part: Annotated[int, Field(ge=1, description="For very long provisions: which part to return")] = 1,
+    law: Annotated[str, Field(description="Abkürzung wie „UStG“ oder Kennung wie „ustg_1980“")],
+    provision: Annotated[str, Field(description="Der Paragraf oder Artikel, z. B. „§ 19“, „19a“, „Art 3“, „Anlage 2“")],
+    date: Annotated[str | None, Field(description="Optional, als JJJJ-MM-TT: der Wortlaut, der an diesem Tag galt. Weglassen für den aktuellen Text.")] = None,
+    part: Annotated[int, Field(ge=1, description="Bei sehr langen Vorschriften: welcher Teil")] = 1,
 ) -> str:
-    """The full text of one provision of a German federal law, with its Stand and official link."""
+    """The full text of one provision, with its Stand and official link."""
     try:
         s = INDEX.get()
     except NotReady:
@@ -272,7 +296,7 @@ def get_provision(
     if unit is None:
         return (
             f"{provision} {found['abk']} nicht gefunden. "
-            f"Mit get_law_outline('{found['slug']}') die Gliederung ansehen."
+            f"Mit gliederung_anzeigen('{found['slug']}') die Gliederung ansehen."
         )
     return _format_provision(found, dict(unit), part, stand=found["stand"])
 
@@ -320,11 +344,16 @@ def _provision_at(law: dict, provision: str, date: str, part: int) -> str:
     return f"{provision} {law['abk']} gab es am {date} in diesem Spiegel nicht."
 
 
-@mcp.tool(annotations=READ_ONLY)
+@mcp.tool(
+    name="gliederung_anzeigen",
+    title="Gliederung anzeigen",
+    description="Der Aufbau eines Gesetzes: Teile, Abschnitte und alle Vorschriften mit ihren Überschriften.",
+    annotations=READ_ONLY,
+)
 def get_law_outline(
-    law: Annotated[str, Field(description="Abbreviation like 'GewO' or a slug")],
+    law: Annotated[str, Field(description="Abkürzung wie „GewO“ oder eine Kennung")],
 ) -> str:
-    """The structure of a law: its parts, sections and all provisions with their headings."""
+    """The structure of a law with all headings."""
     try:
         s = INDEX.get()
     except NotReady:
@@ -346,15 +375,20 @@ def get_law_outline(
     return "\n".join(lines)
 
 
-@mcp.tool(annotations=READ_ONLY)
+@mcp.tool(
+    name="aenderungen_anzeigen",
+    title="Änderungen anzeigen",
+    description=(
+        "Wann sich ein Gesetz geändert hat, neueste zuerst, mit dem amtlichen Änderungsvermerk. "
+        "Zusammen mit vorschrift_lesen und date lässt sich der Wortlaut vor und nach einer Änderung vergleichen."
+    ),
+    annotations=READ_ONLY,
+)
 def get_law_changes(
-    law: Annotated[str, Field(description="Abbreviation like 'EStG' or a slug")],
-    limit: Annotated[int, Field(ge=1, le=50)] = 10,
+    law: Annotated[str, Field(description="Abkürzung wie „EStG“ oder eine Kennung")],
+    limit: Annotated[int, Field(ge=1, le=50, description="Höchstzahl der Einträge")] = 10,
 ) -> str:
-    """When a law's text changed in this mirror, newest first, with the official amendment note.
-
-    Use with get_provision(date=...) to compare wordings before and after a change.
-    """
+    """When a law changed in this mirror, newest first, with the official amendment note."""
     try:
         s = INDEX.get()
     except NotReady:

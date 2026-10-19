@@ -9,7 +9,7 @@ Public MCP server for German federal law. Code in `app/`, docs site (German) in 
 
 Data flow: `sync.py` (nightly, in the data repo's Action) mirrors gesetze-im-internet.de into one Markdown file per
 law and commits; `server.py` clones that repo, pulls hourly, rebuilds the SQLite FTS5 index (`store.py`) on change
-and swaps it in atomically; `repo.py` answers history questions (`get_law_changes`, `date=`) from git itself.
+and swaps it in atomically; `repo.py` answers history questions (`aenderungen_anzeigen`, `date=`) from git itself.
 
 ## Commands
 
@@ -29,8 +29,9 @@ docker build -t gesetze-fuer-ki:dev .
   ~6,100 files in the data repo in one commit, which buries real changes in its history: do it rarely, on purpose.
 - The commit message `sync.py` writes (`.sync/commit-message.txt`, one `- ABK: stand` / `- neu: ABK (…)` line per
   law) is parsed by `repo.changes`; keep the two in step.
-- Everything users see is German: docs (written for non-lawyers), tool responses, READMEs. Code, comments,
-  docstrings, tool names and descriptions stay English.
+- Everything users see is German: docs (written for non-lawyers), tool responses, READMEs, and the tool names,
+  titles and descriptions (set via `@mcp.tool(name=…, title=…, description=…)` and `Field(description=…)`, since
+  users read them in Claude). Code, comments, docstrings, Python names and parameter names stay English.
 - No request content is logged; the privacy page (`docs/datenschutz.md`) promises it. The docs site makes no
   third-party requests either (privacy plugin, no `repo_url`).
 - Releases: tag `vX.Y.Z` → `publish.yml` pushes `ghcr.io/marceltov/gesetze-fuer-ki`. Deployment lives in

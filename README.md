@@ -42,11 +42,11 @@ gesetze-im-internet.de ──nachts──▶ Marceltov/gesetze ──stündlich 
 
 | Werkzeug | |
 |---|---|
-| `search_laws` | Volltextsuche über alle Vorschriften, optional in einem Gesetz |
-| `get_provision` | der vollständige Wortlaut eines §, Artikels oder einer Anlage, optional zu einem Datum |
-| `find_law` | ein Gesetz über Namen oder Abkürzung finden |
-| `get_law_outline` | die Gliederung eines Gesetzes mit allen Überschriften |
-| `get_law_changes` | wann sich ein Gesetz geändert hat, mit dem amtlichen Änderungsvermerk |
+| `gesetze_durchsuchen` | Volltextsuche über alle Vorschriften, optional in einem Gesetz |
+| `vorschrift_lesen` | der vollständige Wortlaut eines §, Artikels oder einer Anlage, optional zu einem Datum |
+| `gesetz_finden` | ein Gesetz über Namen oder Abkürzung finden |
+| `gliederung_anzeigen` | die Gliederung eines Gesetzes mit allen Überschriften |
+| `aenderungen_anzeigen` | wann sich ein Gesetz geändert hat, mit dem amtlichen Änderungsvermerk |
 
 ## Selbst betreiben
 
@@ -85,7 +85,12 @@ GESETZE_REPO_URL=/tmp/gesetze DATA_DIR=/tmp/gk SITE_DIR=../site uv run python se
 uv run --only-group docs mkdocs build -f ../mkdocs.yml --site-dir ../site   # die Dokumentation unter /
 ```
 
-Code, Kommentare und Werkzeugbeschreibungen sind Englisch; alles, was Nutzer sehen, ist Deutsch.
+Code und Kommentare sind Englisch; alles, was Nutzer sehen, auch Namen und Beschreibungen der Werkzeuge, ist Deutsch.
+
+## Unterstützen
+
+Der Dienst ist kostenlos und wird privat betrieben. Wer die Kosten für Server und Domain
+mittragen möchte: [gesetze-fuer-ki.de/unterstuetzen](https://gesetze-fuer-ki.de/unterstuetzen/).
 
 ## Lizenz
 

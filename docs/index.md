@@ -63,3 +63,6 @@ Der Server, die Aufbereitung der Gesetze und diese Seite sind Open Source
 selbst liegen als lesbare Markdown-Dateien mit vollständiger Änderungshistorie in einem
 eigenen Repository ([gesetze](https://github.com/Marceltov/gesetze)): Jede Änderung eines
 Gesetzes ist dort ein Commit, den man Zeile für Zeile nachlesen kann.
+
+Betrieben wird der Dienst privat. Wer mithelfen möchte, die Kosten für Server und Domain
+zu tragen: [Unterstützen](unterstuetzen.md).
