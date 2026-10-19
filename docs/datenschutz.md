@@ -33,6 +33,11 @@ Rechtsgrundlage ist das berechtigte Interesse am sicheren Betrieb
 
 Der Server läuft bei der Hetzner Online GmbH in Deutschland.
 
+Die Namensauflösung (DNS) für gesetze-fuer-ki.de übernimmt Cloudflare, Inc. (USA): Wer
+den Namen aufruft, erfährt dort die Adresse des Servers. Cloudflare sieht dabei die
+Adresse des anfragenden DNS-Resolvers, nicht Ihre. Die Anfragen an den Server selbst
+laufen nicht über Cloudflare.
+
 ## Diese Webseite
 
 Die Dokumentation ist eine statische Seite ohne Tracking und ohne Cookies. Schriften und
