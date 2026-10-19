@@ -1,5 +1,5 @@
 ---
-title: Gesetze für KI
+title: Aktuelles Bundesrecht für KI-Assistenten
 hide:
   - navigation
 ---
@@ -18,6 +18,7 @@ dem Stand und einem Link zur Quelle.
 
 <div class="endpoint" markdown>
 **Adresse zum Verbinden:** `https://gesetze-fuer-ki.de/mcp`
+
 Ohne Anmeldung, ohne API-Schlüssel.
 </div>
 
