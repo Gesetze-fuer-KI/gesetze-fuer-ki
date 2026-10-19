@@ -64,3 +64,19 @@
 .endpoint code {
   font-size: 1em;
 }
+
+/* Support page: QR code next to the bank details, stacked on phones. */
+.giro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+}
+.giro img {
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+}
+.giro table {
+  margin: 0;
+}

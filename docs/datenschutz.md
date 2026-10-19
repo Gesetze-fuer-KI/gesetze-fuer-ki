@@ -44,11 +44,12 @@ Die Dokumentation ist eine statische Seite ohne Tracking und ohne Cookies. Schri
 alle anderen Bestandteile werden von diesem Server ausgeliefert; Ihr Browser nimmt keine
 Verbindung zu Dritten auf.
 
-Die Seite [Unterstützen](unterstuetzen.md) verlinkt auf Ko-fi (Ko-fi Labs Limited,
-Vereinigtes Königreich). Erst wenn Sie dem Link folgen, verbindet sich Ihr Browser mit
-Ko-fi; für alles Weitere, auch die Zahlung, gilt dann die Datenschutzerklärung von Ko-fi.
-Ich erfahre dabei nur, was Ko-fi mir zu einem Beitrag mitteilt (Name oder Pseudonym,
-Betrag und gegebenenfalls Ihre Nachricht).
+Die Seite [Unterstützen](unterstuetzen.md) verlinkt auf Liberapay (Liberapay, Frankreich).
+Erst wenn Sie dem Link folgen, verbindet sich Ihr Browser mit Liberapay; für alles
+Weitere, auch die Zahlung, gilt dann die Datenschutzerklärung von Liberapay. Der
+QR-Code für die Überweisung liegt auf diesem Server. Bei einer Überweisung erhalte ich,
+wie bei jeder Überweisung, Ihren Namen, Ihre IBAN, den Betrag und den
+Verwendungszweck; diese Angaben verwende ich nur für meine Buchhaltung.
 
 ## Ihre Rechte
 

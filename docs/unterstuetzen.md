@@ -17,12 +17,32 @@ Die Kosten trage ich derzeit allein.
 ## So können Sie helfen
 
 Wenn Ihnen der Dienst geholfen hat, etwa bei der Gewerbeanmeldung oder vor dem Termin
-bei der Steuerberaterin, freue ich mich über einen Beitrag auf Ko-fi, einmalig oder
-monatlich. Ein Konto brauchen Sie dafür nicht; bezahlt wird mit PayPal oder Karte.
+bei der Steuerberaterin, freue ich mich über einen Beitrag. Jeder Betrag hilft, den
+Server am Laufen zu halten.
 
-[Auf Ko-fi unterstützen](https://ko-fi.com/KOFI_NAME){ .md-button .md-button--primary }
+### Regelmäßig: Liberapay
 
-Jeder Betrag hilft, den Server am Laufen zu halten.
+[Liberapay](https://liberapay.com) ist eine gemeinnützige, europäische Plattform für
+regelmäßige Beiträge, wöchentlich, monatlich oder jährlich. Sie nimmt keine eigene
+Gebühr; bezahlt wird mit Karte, SEPA-Lastschrift oder PayPal. Für den Beitrag legen Sie
+dort ein Konto an und können ihn jederzeit beenden.
+
+[Über Liberapay unterstützen](https://liberapay.com/LIBERAPAY_NAME/donate){ .md-button .md-button--primary }
+
+### Einmalig: Überweisung
+
+Ohne Konto und ohne Gebühren geht es per Überweisung. Mit der Banking-App lässt sich
+der QR-Code scannen, dann sind die Angaben schon ausgefüllt; den Betrag wählen Sie selbst.
+
+<div class="giro" markdown>
+![GiroCode für die Überweisung](assets/girocode.svg){ width="180" }
+
+| | |
+|---|---|
+| Empfänger | KONTOINHABER |
+| IBAN | IBAN_HIER |
+| Verwendungszweck | Gesetze für KI |
+</div>
 
 !!! note "Keine Spendenquittung"
 
