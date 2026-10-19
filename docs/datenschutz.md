@@ -19,9 +19,13 @@ Der Server verarbeitet die Anfrage (zum Beispiel den Suchbegriff
 „Kleinunternehmer Umsatz“), beantwortet sie und vergisst sie. Die Inhalte der Anfragen
 werden nicht protokolliert.
 
-Für den Betrieb wird je Anfrage eine Protokollzeile geschrieben: Zeitpunkt, Pfad,
-Statuscode, Antwortgröße und Dauer, **ohne IP-Adresse** und ohne Inhalt. Diese Zeilen
-dienen dazu, Störungen zu erkennen, und werden nach 14 Tagen gelöscht.
+Für den Betrieb wird je Anfrage eine Protokollzeile geschrieben: Zeitpunkt, Methode,
+Pfad, Statuscode, Antwortgröße und Dauer sowie das Netz, aus dem die Anfrage kam. Die
+IP-Adresse wird dafür **gekürzt, bevor sie gespeichert wird** (bei IPv4 die letzte
+Stelle, bei IPv6 alles nach den ersten 48 Bit), sodass sie keinem einzelnen Anschluss
+mehr zugeordnet werden kann. Inhalte, Suchbegriffe und Header werden nicht
+gespeichert. Diese Zeilen dienen dazu, Störungen zu erkennen, und werden nach 14 Tagen
+gelöscht.
 Rechtsgrundlage ist das berechtigte Interesse am sicheren Betrieb
 (Art. 6 Abs. 1 lit. f DSGVO).
 
