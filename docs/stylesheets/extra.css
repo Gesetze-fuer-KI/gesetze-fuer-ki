@@ -41,3 +41,26 @@
   background: hsla(215, 40%, 50%, 0.08);
   margin: 1em 0 1.5em;
 }
+
+/* The header colour is white, which Material also uses for buttons: give them the ink blue instead. */
+.md-typeset .md-button {
+  color: var(--gk-blue);
+  border-color: var(--gk-blue);
+}
+.md-typeset .md-button--primary {
+  background-color: var(--gk-blue);
+  border-color: var(--gk-blue);
+  color: var(--md-default-bg-color);
+}
+.md-typeset .md-button:focus,
+.md-typeset .md-button:hover {
+  background-color: var(--gk-red);
+  border-color: var(--gk-red);
+  color: var(--md-default-bg-color);
+}
+.endpoint p {
+  margin: 0.2em 0;
+}
+.endpoint code {
+  font-size: 1em;
+}
