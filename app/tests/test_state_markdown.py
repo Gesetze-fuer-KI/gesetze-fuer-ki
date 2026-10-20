@@ -5,7 +5,7 @@ UNITS = [Unit("gliederung", "g1", 1, "Erster Teil Allgemeines", ""),
          Unit("norm", "n1", None, "Art. 1 Geltungsbereich", "(1) Text.\n\n(2) Mehr."),
          Unit("norm", "n2", None, "Art. 2 Begriffe", "Text.")]
 FRONT = {"land": "BY", "abkuerzung": "BayBO", "titel": "Bayerische Bauordnung",
-         "stand": "Text gilt ab: 01.01.2026", "quelle": "https://www.gesetze-bayern.de/Content/Document/BayBO"}
+         "stand": "Fassung gültig ab 01.01.2026", "quelle": "https://www.gesetze-bayern.de/Content/Document/BayBO"}
 
 
 def test_render_roundtrips_through_split_law():

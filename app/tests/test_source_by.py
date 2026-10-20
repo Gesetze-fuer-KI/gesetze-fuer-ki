@@ -1,4 +1,5 @@
 import datetime
+import re
 import io
 import zipfile
 from pathlib import Path
@@ -113,12 +114,12 @@ def test_fetch_baybo_front_and_units():
     assert f.front["land"] == "BY"
     assert f.front["abkuerzung"] == "BayBO"
     assert f.front["titel"] == "Bayerische Bauordnung"
-    assert f.front["stand"] == "Text gilt ab: 01.05.2026"
+    assert f.front["stand"] == "Fassung gültig ab 01.05.2026"  # no "Stand: …: …" double colon
     assert f.front["gilt_ab"] == "2026-05-01"
     assert f.front["quelle"] == "https://www.gesetze-bayern.de/Content/Document/BayBO"
     front, preamble, units = store.split_law(f.markdown)
     assert front["abkuerzung"] == "BayBO"
-    assert "Stand: Text gilt ab: 01.05.2026" in preamble
+    assert "Stand: Fassung gültig ab 01.05.2026" in preamble
     assert [(u.kind, u.unit_id, u.ebene, u.heading) for u in units[:4]] == [
         ("gliederung", "ersterteil", 1, "Erster Teil Allgemeine Vorschriften"),
         ("norm", "art1", None, "Art. 1 Anwendungsbereich"),
@@ -239,3 +240,19 @@ def test_emphasis_keeps_spaces_outside_the_markers():
         b'<span class="i">Art. 167 bis 176 des Wassergesetzes</span>', b'<span class="i">Art. 167 </span>bis 176')
     _, _, units = store.split_law(fetch("BayAlmG", xml).markdown)
     assert "Vorschriften der *Art. 167* bis 176" in next(u for u in units if u.unit_id == "art19").body
+
+
+def test_list_item_with_several_paragraphs_keeps_the_break():
+    _, _, units = store.split_law(fetch("BayBO").markdown)
+    art2 = next(u for u in units if u.unit_id == "art2").body
+    assert "- 2\\. Gebäudeklasse 2:  \n  Gebäude mit einer Höhe bis zu 7 m" in art2
+
+
+def test_absatz_number_stays_on_the_line_of_a_bold_start():
+    xml = (FIXTURES / "BayAlmG.xml").read_bytes().decode("utf-8-sig")
+    m = re.search(r"(<jurAbsatz[^>]*>\s*<absatz.nr[^>]*>[^<]*</absatz.nr>\s*<absatz.text>\s*<p[^>]*>)", xml)
+    assert m
+    xml = xml.replace(m[1], m[1] + '<span class="b">Fett</span> ', 1)
+    bodies = [u.body for u in store.split_law(fetch("BayAlmG", xml.encode()).markdown)[2]]
+    assert any(re.search(r"^\(\d+\) \*\*Fett\*\* ", b, re.M) for b in bodies)
+    assert not any(re.search(r"^\(\d+\)$", b, re.M) for b in bodies)

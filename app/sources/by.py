@@ -136,7 +136,7 @@ def parse_law(xml: bytes, url: str, today: datetime.date) -> Fetched:
         "abkuerzung": abk or doc_id,
         "titel": titel or kurz or abk or doc_id,
         "kurztitel": kurz or None,
-        "stand": f"Text gilt ab: {inkraft.strftime('%d.%m.%Y')}",
+        "stand": f"Fassung gültig ab {inkraft:%d.%m.%Y}",  # as for SN and NW; no "Stand: …: …"
         "gilt_ab": inkraft.isoformat(),
         "quelle": url,
     }
@@ -295,7 +295,9 @@ class _Law:
         nr = self.plain(el.find("absatz.nr"))
         blocks = self.blocks(el)
         if nr:
-            if blocks and not blocks[0].startswith(("- ", "|", "**")):
+            # On the line of the text, as gesetze-im-internet.de has it, also before bold text;
+            # a list or table must start a block of its own.
+            if blocks and not blocks[0].startswith(("- ", "|")):
                 blocks[0] = f"{nr} {blocks[0]}"
             else:
                 blocks.insert(0, nr)
@@ -323,7 +325,8 @@ class _Law:
                         nested.append(indent + "  " + text.replace("\n", "\n" + indent + "  "))
                     else:
                         texts.append(text)
-            head = " ".join(texts).replace("\n", "\n" + indent + "  ")
+            # Several paragraphs of one item ("Gebäudeklasse 2:" / "Gebäude mit …") keep their break.
+            head = "  \n".join(texts).replace("\n", "\n" + indent + "  ")
             label = _escape_list_marker(symbol)
             lines.append(f"{indent}- {label} {head}".rstrip() if label else f"{indent}- {head}".rstrip())
             lines.extend(nested)
