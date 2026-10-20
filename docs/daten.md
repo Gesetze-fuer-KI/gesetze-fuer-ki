@@ -10,7 +10,7 @@ in die jede Änderung eingearbeitet ist.
 
 Jede Nacht fragt ein automatischer Abgleich alle rund 6.100 Gesetze und Verordnungen
 ab, übernimmt die geänderten und legt sie als Markdown in einem öffentlichen
-Repository ab: [github.com/Gesetze-fuer-KI/gesetze](https://github.com/Gesetze-fuer-KI/gesetze).
+Repository ab: [github.com/Gesetze-fuer-KI/bundesrecht](https://github.com/Gesetze-fuer-KI/bundesrecht).
 Der Server holt sich diese Fassung stündlich. Zwischen einer Änderung auf
 gesetze-im-internet.de und ihrer Verfügbarkeit hier liegt also höchstens ein Tag.
 

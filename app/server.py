@@ -30,7 +30,7 @@ import repo
 import states
 import store
 
-DATA_REPO_URL = os.environ.get("GESETZE_REPO_URL", "https://github.com/Gesetze-fuer-KI/gesetze.git")
+DATA_REPO_URL = os.environ.get("GESETZE_REPO_URL", "https://github.com/Gesetze-fuer-KI/bundesrecht.git")
 DATA_REPO_BRANCH = os.environ.get("GESETZE_REPO_BRANCH", "main")
 # One data repository per integrated state; "{code}" is the lower-case state code. Empty: no state law.
 STATE_REPO_URL = os.environ.get("STATE_REPO_URL", "https://github.com/Gesetze-fuer-KI/landesrecht-{code}.git")
@@ -118,7 +118,7 @@ INDEX = Index()
 def clone_for(law: dict) -> Path:
     """The clone that holds a law's file: the federal data repository or its state's."""
     land = law.get("land")
-    return DATA_DIR / "gesetze" if land is None else DATA_DIR / f"landesrecht-{land.lower()}"
+    return DATA_DIR / "bundesrecht" if land is None else DATA_DIR / f"landesrecht-{land.lower()}"
 
 
 def _update_states() -> tuple[dict[str, Path], list[str]]:
@@ -151,7 +151,7 @@ def _update_states() -> tuple[dict[str, Path], list[str]]:
 
 
 def refresh_once() -> None:
-    clone = DATA_DIR / "gesetze"
+    clone = DATA_DIR / "bundesrecht"
     db_path = DATA_DIR / "index.sqlite"
     rev = repo.update(clone, DATA_REPO_URL, DATA_REPO_BRANCH)
     state_clones, state_revs = _update_states()

@@ -20,7 +20,7 @@
 <text x="105" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">Amtliche Texte</text>
 <text x="105" y="168" text-anchor="middle" font-size="13" fill="#9aa7b4">gesetze-im-internet.de</text>
 <text x="105" y="186" text-anchor="middle" font-size="13" fill="#9aa7b4">amtliche Fassung des BMJ</text>
-<text x="315" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">gesetze</text>
+<text x="315" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">bundesrecht</text>
 <text x="315" y="168" text-anchor="middle" font-size="13" fill="#9aa7b4">eine Markdown-Datei je Gesetz,</text>
 <text x="315" y="186" text-anchor="middle" font-size="13" fill="#9aa7b4">jede Änderung ein Commit</text>
 <text x="525" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">gesetze-fuer-ki</text>
