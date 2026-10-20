@@ -11,20 +11,20 @@ Listing: the Vorschriften search, filtered to the type "Gesetze und Rechtsverord
 count, which the unique hits must match. Each hit is one version of a law: its id changes with
 every new version, and the listing shows its Stand (the day the portal updated it), which
 together with the id serves as lastmod. The filter also returns non-laws (Prüfungsordnungen,
-overviews), which fetch skips by the juris Dokumenttyp. Ortsgesetze of the Stadtgemeinden Bremen
-and Bremerhaven are kept: the portal files them with the Gesetze, and their Verordnungen cannot
-be told apart from the Land's anyway. The 33 listing pages are slow (about 2.5 minutes).
+overviews) and Ortsgesetze of the Stadtgemeinden Bremen and Bremerhaven (municipal law, like
+Satzungen elsewhere); fetch skips them by the juris Dokumenttyp and logs the type, so a full run
+shows what was left out. The 33 listing pages are slow (about 2.5 minutes).
 
 Slug: a version id is no stable law id, so each law's page is read once per version to find
 the juris document key ("jlr-TariftVergabeGBRrahmen" -> "hb-tariftvergabegbr"), which stays
 the same across versions. The cache keeps version id -> slug across runs, so a night only reads
 the pages of new versions, and the page read while listing is kept for fetch: a new version
 costs one request. A document without juris key (an overview) gets its version id. The first
-run thus reads all ~1,600 pages while listing (two at a time), and fetch reuses them.
+run thus reads all ~1,600 pages while listing (two at a time, before the runner's time budget
+applies), holding them compressed for fetch; with the cache, later nights read only new versions.
 
 Law: /metainformationen/<title>-<version id>?template=20_gp_ifg_meta_detail_d is the whole
-text: a header (abbreviation, juris Dokumenttyp: only Gesetz, Verordnung and Ortsgesetz are
-kept), the title, the period of this version, the Stand ("letzte berücksichtigte Änderung"),
+text: a header (abbreviation, juris Dokumenttyp: only Gesetz and Verordnung are kept), the title, the period of this version, the Stand ("letzte berücksichtigte Änderung"),
 then one block per unit: Eingangsformel, table of contents (skipped), Gliederungen (heading
 level h3, h4, … is their depth) and §§/Artikel/Anlagen with their footnotes. Unit ids come from
 the designations ("par5", "zweiterhauptteil-1abschnitt").
@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import datetime
 import html
+import logging
 import re
 import zlib
 from concurrent.futures import ThreadPoolExecutor
@@ -52,6 +53,8 @@ from state_markdown import render
 from state_sync import Entry, Fetched, NotYetInForce
 from store import Unit
 
+log = logging.getLogger("sources.hb")
+
 BASE = "https://www.transparenz.bremen.de"
 LISTING = f"{BASE}/vorschriften-72741"
 LISTING_TYPE = "Gesetze und Rechtsverordnungen"
@@ -60,7 +63,7 @@ LISTING_PARAMS = {
     "vorschriften[0]": LISTING_TYPE, "gltigkeit[0]": "In Kraft", "sort": "titel", "order": "asc",
 }
 PAGE_SIZE = 50  # the most the portal shows per page
-KINDS = {"Gesetz", "Verordnung", "Rechtsverordnung", "Ortsgesetz"}  # juris Dokumenttyp of the laws kept
+KINDS = {"Gesetz", "Verordnung", "Rechtsverordnung"}  # juris Dokumenttyp of the laws kept
 MIN_TEXT_WITHOUT_NORMS = 2000  # a longer text without any § or Artikel is a layout this parser does not know
 
 _COUNT = re.compile(r"Ergebnisse\s+[\d.]+\s*-\s*[\d.]+\s+von\s+\(([\d.]+)\)")
@@ -206,7 +209,10 @@ def parse_law(page: str, url: str, slug: str, today: datetime.date) -> Fetched |
     if text is None or header is None:
         return None  # no juris document: an overview or a notice
     fields = _fields(header)
-    if fields.get("Dokumenttyp") not in KINDS:
+    kind = fields.get("Dokumenttyp")
+    if kind not in KINDS:
+        if kind:  # a juris document of another type; a page without one is an overview
+            log.info("skipped juris Dokumenttyp: %s", kind)
         return None
     key = law_key(page)
     if key is None or slug_for(key) != slug:

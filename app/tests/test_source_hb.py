@@ -1,4 +1,5 @@
 import datetime
+import logging
 import re
 from pathlib import Path
 
@@ -62,7 +63,7 @@ def url(doc: str) -> str:
 
 
 SLUGS = {"410489": "hb-tariftvergabegbr", "270394": "hb-schulgbr", "232507": "hb-verfbr2019",
-         "406160": "hb-kostobr", "332115": "hb-bgbr2010", "344516": "hb-athschulbacpobr2023", "192655": "hb-192655"}
+         "406160": "hb-kostobr", "332115": "hb-bgbr2010", "296562": "hb-stephanichebildogbr", "344516": "hb-athschulbacpobr2023", "192655": "hb-192655"}
 
 
 def fetch(doc: str, html: str | None = None, today: datetime.date = D) -> state_sync.Fetched | None:
@@ -267,9 +268,14 @@ def test_amtliche_abkuerzung_and_anlage_table():
     assert "\n| " in units[-1].body  # the Kostenverzeichnis is a table
 
 
-def test_documents_other_than_gesetze_and_verordnungen_are_skipped():
+def test_documents_other_than_gesetze_and_verordnungen_are_skipped(caplog):
+    caplog.set_level(logging.INFO, logger="sources.hb")
     assert fetch("344516") is None  # a Prüfungsordnung ("ohne Qualifikation")
+    assert fetch("296562") is None  # an Ortsgesetz: municipal law, like a Satzung
     assert fetch("192655") is None  # an overview without a juris document
+    # The first full run shows which juris document types were skipped, and nothing else.
+    assert [r.getMessage() for r in caplog.records] == [
+        "skipped juris Dokumenttyp: ohne Qualifikation", "skipped juris Dokumenttyp: Ortsgesetz"]
 
 
 def test_a_version_not_yet_in_force():
