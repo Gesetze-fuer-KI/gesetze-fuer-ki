@@ -24,7 +24,7 @@ ordered by id, so that passes progress evenly. Slug: "bb-" + the document id.
 Law: /gesetze/<name>, /verordnungen/<name> or /de/gesetze-<id> is the current version
 ("Aktuelle Fassung"): a head with the title, "vom …" and "zuletzt geändert durch …" (the Stand),
 then flat HTML: an optional Eingangsformel, a table of contents (skipped), headings for
-Gliederungen ("Abschnitt 1", "1. Hauptteil:") and §§/Artikel (<a name="…"> anchors), and
+Gliederungen ("Abschnitt 1", "1. Hauptteil:", "Erster Abschnitt") and §§/Artikel (<a name="…"> anchors), and
 footnotes to the title after <a name="0">. Unit ids come from the designations ("art7a",
 "2hauptteil-1abschnitt"); a Gliederung's level follows the order its kind first appears in.
 Anlagen published only as attachments are not part of the text.
@@ -42,7 +42,7 @@ import re
 import httpx
 
 from convert import _escape_list_marker, footnote_block
-from sources.html import HEADINGS, Node, Renderer, designation_slug, line, parse_html
+from sources.html import HEADINGS, ORDINAL, Node, Renderer, designation_slug, line, parse_html
 from state_markdown import render
 from state_sync import Entry, Fetched
 from store import Unit
@@ -54,6 +54,7 @@ SACHGEBIETE = range(1, 10)
 # The Fundstellennachweis and the search disagree slightly (1,785 and 1,780 on 2026-10-20);
 # the smallest Sachgebiet holds 42 laws, so a missing page still fails the check.
 MAX_MISMATCH = 10
+MIN_TEXT_WITHOUT_NORMS = 2000  # a longer text without any § or Artikel is a layout this parser does not know
 SKIPPED = "kein Gesetz und keine Verordnung"  # cache value for a document that is neither
 
 _HIT_COUNT = re.compile(r"wurde in (\d[\d.]*) Treffern gefunden")
@@ -67,7 +68,7 @@ _TITLE_ABK = re.compile(r"\(([^()]+)\)\s*$")
 
 _NORM_DESIGNATION = re.compile(r"(?:§§?|Art\.|Artikel|Anlagen?|Anhang)\s*(?:\d+[a-z]*\b)?(?:\s+bis\s+\d+[a-z]*\b)?")
 _GLIEDERUNG = re.compile(
-    r"(?:[IVXLC\d]+\.\s*)?(Hauptteil|Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
+    rf"(?:[IVXLC\d]+\.\s*|{ORDINAL})?(Hauptteil|Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
     r"(?:\s+[IVXLC\d]+[a-z]?\b\.?)?")
 
 
@@ -85,14 +86,16 @@ class BbSource:
 
     def list_laws(self, client: httpx.Client) -> list[Entry]:
         total, newest = search(client)
-        # The Fundstellennachweis takes a few days to list a new law; the search's first page
-        # (the ten newest) fills that gap.
-        found: dict[str, str] = dict(newest)
+        found: dict[str, str] = {}
         for n in SACHGEBIETE:
             response = client.get(f"{FNA}/{n}")
             response.raise_for_status()
             for doc_id, url in parse_fna(response.text, n):
                 found.setdefault(doc_id, url)  # a law listed under two Sachgebiete counts once
+        # The Fundstellennachweis takes a few days to list a new law; the search's first page
+        # (the ten newest) fills that gap. Its link is used only for laws missing there.
+        for doc_id, url in newest:
+            found.setdefault(doc_id, url)
         if abs(len(found) - total) > MAX_MISMATCH:
             raise ValueError(f"search announces {total} Gesetze and Verordnungen, Fundstellennachweis lists {len(found)}")
         return [Entry(slug_for(doc_id), url) for doc_id, url in sorted(found.items(), key=lambda x: int(x[0]))
@@ -102,10 +105,11 @@ class BbSource:
         doc_id = entry.slug.removeprefix("bb-")
         response = client.get(entry.url)
         response.raise_for_status()
-        fetched = parse_law(response.text, entry.url, doc_id)
-        if fetched is None and _kind(entry.url) is None:
+        url = str(response.url)  # classified by where a link ends up, after redirects
+        if _kind(url) is None:
             self.cache[doc_id] = SKIPPED
-        return fetched
+            return None
+        return parse_law(response.text, url, doc_id)
 
 
 def slug_for(doc_id: str) -> str:
@@ -129,7 +133,7 @@ def search(client: httpx.Client) -> tuple[int, list[tuple[str, str]]]:
     m = _HIT_COUNT.search(response.text)
     if not m or "Gesetze und Verordnungen" not in response.text:
         raise ValueError("search result without a count of Gesetze und Verordnungen")
-    hits = [_law_link(m[1], m[2], "search") for m in _HIT.finditer(response.text)]
+    hits = [_law_link(h[1], h[2], "search") for h in _HIT.finditer(response.text)]
     return int(m[1].replace(".", "")), [h for h in hits if h]
 
 
@@ -211,6 +215,10 @@ def parse_law(page: str, url: str, doc_id: str) -> Fetched | None:
     }
     law = _Law()
     law.walk(body)
+    if not any(u.kind == "norm" and _NORM_DESIGNATION.match(u.heading) for u in law.units) and \
+            sum(len(u.body) for u in law.units) > MIN_TEXT_WITHOUT_NORMS:
+        # A changed page layout must not turn a whole law into one Eingangsformel.
+        raise ValueError(f"{url}: no § or Artikel in {sum(len(u.body) for u in law.units)} characters of text")
     return Fetched(markdown=render(front, law.units), front=front, next_version_from=None)
 
 

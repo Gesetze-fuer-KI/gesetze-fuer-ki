@@ -32,7 +32,7 @@ import re
 import httpx
 
 from convert import footnote_block
-from sources.html import HEADINGS, Node, Renderer, designation_slug, line, parse_html
+from sources.html import HEADINGS, ORDINAL, Node, Renderer, designation_slug, line, parse_html
 from state_markdown import render
 from state_sync import Entry, Fetched, NotYetInForce
 from store import Unit
@@ -51,10 +51,11 @@ _HIT_TYPE = re.compile(r"Vorschriftentyp:\s*([^<\n]+)")
 _HIT_VALID = re.compile(r"Fassung gültig ab:([^<]+)")
 _VERSION_DATE = re.compile(r"(\d{2})\.(\d{2})\.(\d{4})")
 
-# A norm's designation at the start of its heading, and a Gliederung's ("1. Abschnitt", "Teil 2").
+# A norm's designation at the start of its heading, and a Gliederung's ("1. Abschnitt", "Teil 2",
+# "Erster Abschnitt").
 _NORM_DESIGNATION = re.compile(r"(?:§§?|Art\.|Artikel|Anlagen?|Anhang)\s*(?:\d+[a-z]*\b)?(?:\s+bis\s+\d+[a-z]*\b)?")
 _GLIEDERUNG_DESIGNATION = re.compile(
-    r"(?:[IVXLC\d]+\.\s*)?(?:Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
+    rf"(?:[IVXLC\d]+\.\s*|{ORDINAL})?(?:Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
     r"(?:\s+[IVXLC\d]+[a-z]?\b\.?)?")
 
 

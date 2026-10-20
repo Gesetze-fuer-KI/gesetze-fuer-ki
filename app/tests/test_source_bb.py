@@ -28,8 +28,9 @@ class Portal:
     """
 
     def __init__(self, laws: dict[str, str] | None = None, fna: dict[int, str] | None = None,
-                 search: str | None = None):
+                 search: str | None = None, redirects: dict[str, str] | None = None):
         self.laws = laws or {}
+        self.redirects = redirects or {}
         self.fna = fna or {n: read(f"fna-{n}.html") for n in range(1, 10)}
         self.search = search if search is not None else read("suche.html")
         self.requests: list[str] = []
@@ -52,6 +53,8 @@ class Portal:
             n = int(path.removeprefix(prefix))
             if n in self.fna:
                 return httpx.Response(200, text=self.fna[n])
+        if path in self.redirects:
+            return httpx.Response(302, headers={"Location": self.redirects[path]})
         if path in self.laws:
             return httpx.Response(200, text=self.laws[path])
         return httpx.Response(404)
@@ -276,3 +279,43 @@ def test_run_with_bb_source_waits_the_crawl_delay(tmp_path, monkeypatch):
     assert "land: BB" in (tmp_path / "21" / "bb-212792.md").read_text(encoding="utf-8")
     message = (tmp_path / ".sync" / "commit-message.txt").read_text(encoding="utf-8")
     assert "- neu: KPAnGZV (Verordnung über Zuständigkeiten nach dem Kraftstoffpreisanpassungsgesetz)" in message
+
+
+def test_gliederung_named_with_an_ordinal_word():
+    html = read("212792.html").replace("2. Abschnitt: <br />Freiheit", "Zweiter Abschnitt<br />Freiheit")
+    assert html != read("212792.html")
+    g = next(u for u in units_of("212792", html) if u.heading.startswith("Zweiter Abschnitt"))
+    assert (g.kind, g.unit_id, g.ebene) == ("gliederung", "2hauptteil-zweiterabschnitt", 2)
+    assert g.heading == "Zweiter Abschnitt Freiheit, Gleichheit und Würde"
+    # "Allgemeiner Teil" at the top: the first kind seen is level 1.
+    html = read("263411.html").replace('<h4 class="paragraph_bez"><a name="1">',
+                                       '<h3>Allgemeiner Teil</h3><h4 class="paragraph_bez"><a name="1">', 1)
+    units = units_of("263411", html)
+    assert [(u.kind, u.unit_id, u.ebene) for u in units[1:3]] == [("gliederung", "allgemeinerteil", 1),
+                                                                   ("norm", "par1", None)]
+
+
+def test_law_page_redirecting_to_another_kind_is_skipped_for_good():
+    portal = Portal({"/de/vertraege-212999": read("263411.html")}, redirects={"/verordnungen/x": "/de/vertraege-212999"})
+    source = bb.BbSource()
+    with portal.client() as client:
+        assert source.fetch(client, state_sync.Entry("bb-212999", f"{bb.BASE}/verordnungen/x"), D) is None
+    assert source.cache == {"212999": bb.SKIPPED}
+
+
+def test_fundstellennachweis_url_wins_over_the_search():
+    # A search hit with the Verfassung's id but another link: the Fundstellennachweis's link wins.
+    search = read("suche.html").replace("<!-- 263392-->", "<!-- 212792-->", 1)
+    with Portal(search=search).client() as client:
+        entries = {e.slug: e for e in bb.BbSource().list_laws(client)}
+    assert entries["bb-212792"].url == "https://bravors.brandenburg.de/de/gesetze-212792"
+
+
+def test_long_text_without_any_provision_is_refused():
+    body = "".join(f"<p>Satz {i} eines langen Textes ohne Paragraphen und Artikel.</p>" for i in range(60))
+    html = read("263411.html")
+    start, end = html.index('<h4 class="paragraph_bez">'), html.index("<p>Potsdam, den")
+    with pytest.raises(ValueError, match="no § or Artikel"):
+        fetch("263411", html[:start] + body + html[end:])
+    short = html[:start] + "<p>Kurzer Text.</p>" + html[end:]
+    assert fetch("263411", short) is not None

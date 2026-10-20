@@ -317,3 +317,13 @@ def test_page_newer_or_older_than_the_listing_is_refused():
     assert fetch("20111", lastmod="2025-01-01") is not None
     with pytest.raises(ValueError, match="2024-05-01"):
         fetch("20111", lastmod="2024-05-01")
+
+
+def test_gliederung_named_with_an_ordinal_word_stays_a_gliederung():
+    # "Zweiter Abschnitt" with text of its own: a Gliederung like "Abschnitt 2", not a norm.
+    html = page("20111").replace("Allgemeine Vorschriften</h4>", "Allgemeine Vorschriften</h4><p>Vorbemerkung.</p>", 1)
+    html = html.replace('<h4 class="centre">Abschnitt\u00a01', '<h4 class="centre">Erster Abschnitt', 1)
+    assert html.count("Erster Abschnitt") == 1
+    units = units_of("20111", html)
+    assert (units[1].kind, units[1].unit_id, units[1].ebene) == ("gliederung", "ersterabschnitt", 1)
+    assert units[1].body == "Vorbemerkung."

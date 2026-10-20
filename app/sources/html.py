@@ -92,6 +92,12 @@ def text(raw: str) -> str:
     return "  \n".join(x for x in lines if x)
 
 
+# An ordinal word naming a Gliederung: "Erster Abschnitt", "Zweites Kapitel", "Allgemeiner Teil".
+ORDINAL = (r"(?:Erst|Zweit|Dritt|Viert|Fünft|Sechst|Sieb(?:en)?t|Acht|Neunt|Zehnt|Elft|Zwölft"
+           r"|(?:Drei|Vier|Fünf|Sech|Sieb|Acht|Neun)zehnt|Zwanzigst|Allgemein|Besonder|Letzt|Gemeinsam|Schluss)"
+           r"(?:er|es|e|en)\s+")
+
+
 def designation_slug(designation: str) -> str:
     """An id part from a designation: "§ 44a" -> "par44a", "Artikel 3" -> "art3", "1. Abschnitt" -> "1abschnitt"."""
     s = designation.lower().replace("§", "par")
