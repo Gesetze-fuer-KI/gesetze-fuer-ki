@@ -222,8 +222,11 @@ def test_parallel_workers_need_no_crawl_delay(tmp_path):
         run(tmp_path, src)
 
 
-def test_failures_are_retried_next_run(tmp_path):
+def test_failing_law_does_not_block_the_pass(tmp_path):
     src = FakeSource()
+    assert run(tmp_path, src) == 0  # first pass: every file exists
+    old = state_sync.state_law_path(tmp_path, "by-law05").read_text()
+    src.lastmod = {slug: "2026-05-05" for slug in src.lastmod}
     real = src.fetch
 
     def flaky(client, entry, today):
@@ -234,11 +237,65 @@ def test_failures_are_retried_next_run(tmp_path):
     src.fetch = flaky
     assert run(tmp_path, src) == 0
     st = load_state(tmp_path)
-    assert not st["complete"] and "by-law05" not in st["pass_done"]
+    assert st["complete"] and st["pass_done"] == [] and st["pass_failed"] == []
+    assert state_sync.state_law_path(tmp_path, "by-law05").read_text() == old
+    assert "Nicht abrufbar (1): by-law05" in commit_msg(tmp_path)
+    assert "Abgleich läuft noch" not in commit_msg(tmp_path)
+    # the next pass tries it again
     src.fetch = real
     src.fetches = 0
     assert run(tmp_path, src) == 0
-    assert src.fetches == 1 and load_state(tmp_path)["complete"]
+    assert src.fetches == 1
+
+
+def test_failed_law_not_retried_within_a_pass(tmp_path):
+    src = FakeSource()
+    real = src.fetch
+    tried = []
+
+    def flaky(client, entry, today):
+        tried.append(entry.slug)
+        if entry.slug == "by-law00":
+            raise RuntimeError("boom")
+        return real(client, entry, today)
+
+    src.fetch = flaky
+    assert run(tmp_path, src, max_minutes=4, clock=FakeClock(60)) == 0
+    st = load_state(tmp_path)
+    assert st["pass_failed"] == ["by-law00"] and not st["complete"]
+    tried.clear()
+    while not load_state(tmp_path)["complete"]:
+        assert run(tmp_path, src, max_minutes=4, clock=FakeClock(60)) == 0
+    assert "by-law00" not in tried
+
+
+def test_too_many_failures_in_a_pass_keep_complete_false(tmp_path):
+    src = FakeSource(n=12)
+
+    def broken(client, entry, today):
+        raise RuntimeError("boom")
+
+    src.fetch = broken
+    run(tmp_path, src)
+    st = load_state(tmp_path)
+    assert not st["complete"] and st["pass_done"] == [] and st["pass_failed"] == []
+
+
+def test_interrupted_run_keeps_progress(tmp_path):
+    src = FakeSource(n=40)
+    real = src.fetch
+
+    def interrupted(client, entry, today):
+        if src.fetches == 30:
+            raise KeyboardInterrupt
+        return real(client, entry, today)
+
+    src.fetch = interrupted
+    with pytest.raises(KeyboardInterrupt):
+        run(tmp_path, src)
+    st = load_state(tmp_path)
+    assert len(st["pass_done"]) == 30 and len(st["laws"]) == 30
+    assert src.fetches == 30
 
 
 def test_many_failures_exit_1(tmp_path):
