@@ -30,6 +30,7 @@ cd app && uv run python sync.py --out DIR --only estg gewo   # sync a few laws (
 cd app && uv run python sync.py --land SN --out DIR --max-minutes 5  # part of a state pass; resumes next run
 cd app && GESETZE_REPO_URL=DIR STATE_REPO_URL= DATA_DIR=/tmp/gk SITE_DIR=../site uv run python server.py  # DIR: a git repo; empty STATE_REPO_URL: no state law
 cd app && uv run --only-group docs mkdocs build --strict -f ../mkdocs.yml --site-dir /tmp/site
+cd app && uv run python laender_pages.py  # docs/laender/ from the landesrecht-<code> READMEs and their state.json
 docker build -t gesetze-fuer-ki:dev .
 ```
 

@@ -9,7 +9,7 @@ eine Mail an die zuständige Stelle.
 | [Baden-Württemberg](baden-wuerttemberg.md) | ❌ nicht erlaubt | Portal sperrt automatische Abrufe (robots.txt) |
 | [Bayern](bayern.md) | ✅ enthalten | Nutzungshinweise erlauben die Weiterverwendung |
 | [Berlin](berlin.md) | ❌ nicht erlaubt | Portal sperrt automatische Abrufe (robots.txt) |
-| [Brandenburg](brandenburg.md) | ⏳ im Aufbau | erlaubt; erster Abgleich läuft (ein Abruf alle 20 Sekunden) |
+| [Brandenburg](brandenburg.md) | ⏳ im Aufbau | erlaubt (ein Abruf alle 20 Sekunden) |
 | [Bremen](bremen.md) | ❌ nicht erlaubt | Portal sperrt Abrufe aus Rechenzentren |
 | [Hamburg](hamburg.md) | ❌ nicht erlaubt | Portal sperrt automatische Abrufe (robots.txt) |
 | [Hessen](hessen.md) | ❌ nicht erlaubt | Portal sperrt automatische Abrufe (robots.txt) |
