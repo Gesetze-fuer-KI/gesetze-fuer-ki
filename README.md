@@ -1,8 +1,6 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/logo-dunkel.svg">
-    <img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src=".github/readme/logo.svg" width="110">
-  </picture>
+  <img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src=".github/readme/logo.svg#gh-light-mode-only" width="110">
+<img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src=".github/readme/logo-dunkel.svg#gh-dark-mode-only" width="110">
 </p>
 
 <h1 align="center"><a href="https://gesetze-fuer-ki.de">Gesetze für KI</a></h1>
@@ -25,19 +23,15 @@ https://gesetze-fuer-ki.de/mcp
 
 ## Loslegen
 
-| | |
-|---|---|
-| **[Verbinden](https://gesetze-fuer-ki.de/verbinden/)** | Schritt für Schritt für [Claude](https://gesetze-fuer-ki.de/verbinden/#claude-claudeai-desktop-und-mobil), [ChatGPT](https://gesetze-fuer-ki.de/verbinden/#chatgpt), [Claude Code](https://gesetze-fuer-ki.de/verbinden/#claude-code), Cursor, VS Code, Gemini CLI, Codex und [weitere](https://gesetze-fuer-ki.de/verbinden/#weitere-assistenten) |
-| **[Werkzeuge](https://gesetze-fuer-ki.de/werkzeuge/)** | Was der Assistent damit kann, [wie die Suche funktioniert](https://gesetze-fuer-ki.de/werkzeuge/#wie-die-suche-funktioniert) und wie man [frühere Fassungen](https://gesetze-fuer-ki.de/werkzeuge/#fruhere-fassungen) abruft |
-| **[Daten und Grenzen](https://gesetze-fuer-ki.de/daten/)** | [Woher die Texte kommen](https://gesetze-fuer-ki.de/daten/#woher-die-texte-kommen) und [was nicht enthalten ist](https://gesetze-fuer-ki.de/daten/#was-nicht-enthalten-ist), etwa Landesrecht und Urteile |
-| **[Unterstützen](https://gesetze-fuer-ki.de/unterstuetzen/)** | Der Dienst ist kostenlos und wird privat betrieben |
+- **[Verbinden](https://gesetze-fuer-ki.de/verbinden/)**: Schritt für Schritt für [Claude](https://gesetze-fuer-ki.de/verbinden/#claude-claudeai-desktop-und-mobil), [ChatGPT](https://gesetze-fuer-ki.de/verbinden/#chatgpt), [Claude Code](https://gesetze-fuer-ki.de/verbinden/#claude-code), Cursor, VS Code, Gemini CLI, Codex und [weitere](https://gesetze-fuer-ki.de/verbinden/#weitere-assistenten)
+- **[Werkzeuge](https://gesetze-fuer-ki.de/werkzeuge/)**: Was der Assistent damit kann, [wie die Suche funktioniert](https://gesetze-fuer-ki.de/werkzeuge/#wie-die-suche-funktioniert) und wie man [frühere Fassungen](https://gesetze-fuer-ki.de/werkzeuge/#fruhere-fassungen) abruft
+- **[Daten und Grenzen](https://gesetze-fuer-ki.de/daten/)**: [Woher die Texte kommen](https://gesetze-fuer-ki.de/daten/#woher-die-texte-kommen) und [was nicht enthalten ist](https://gesetze-fuer-ki.de/daten/#was-nicht-enthalten-ist), etwa Landesrecht und Urteile
+- **[Unterstützen](https://gesetze-fuer-ki.de/unterstuetzen/)**: Der Dienst ist kostenlos und wird privat betrieben
 
 ## So funktioniert es
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/ablauf-dunkel.svg">
-  <img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf.svg" width="100%">
-</picture>
+<img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf.svg#gh-light-mode-only" width="100%">
+<img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf-dunkel.svg#gh-dark-mode-only" width="100%">
 
 Dieses Repository enthält den Server ([`app/`](app/)) und die Webseite ([`docs/`](docs/)). Die Gesetzestexte selbst liegen in **[Gesetze-fuer-KI/gesetze](https://github.com/Gesetze-fuer-KI/gesetze)**; mehr zur Herkunft auf **[Daten und Grenzen](https://gesetze-fuer-ki.de/daten/)**.
 
