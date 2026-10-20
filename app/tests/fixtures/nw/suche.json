@@ -1,0 +1,84 @@
+{
+ "_comment": "Response of the listing query (sources.nw.listing_query) from recht.nrw.de/search-middleware on 2026-10-20: 1209 hits; trimmed to 4 and the total edited to match.",
+ "took": 180,
+ "timed_out": false,
+ "_shards": {
+  "total": 1,
+  "successful": 1,
+  "skipped": 0,
+  "failed": 0
+ },
+ "hits": {
+  "total": {
+   "value": 4,
+   "relation": "eq"
+  },
+  "max_score": null,
+  "hits": [
+   {
+    "_index": "opensearch_internet",
+    "_id": "entity:node/172883:de",
+    "_score": 0,
+    "_source": {
+     "field_document_type_name": [
+      "Rechtsverordnung"
+     ],
+     "field_effective_from": [
+      1792152000
+     ],
+     "url": [
+      "/lrgv/rechtsverordnung/16102026-landeswahlordnung"
+     ]
+    }
+   },
+   {
+    "_index": "opensearch_internet",
+    "_id": "entity:node/172880:de",
+    "_score": 0,
+    "_source": {
+     "field_document_type_name": [
+      "Gesetz"
+     ],
+     "field_effective_from": [
+      1792152000
+     ],
+     "url": [
+      "/lrgv/gesetz/16102026-studierendenwerksgesetz-stwg"
+     ]
+    }
+   },
+   {
+    "_index": "opensearch_internet",
+    "_id": "entity:node/172791:de",
+    "_score": 0,
+    "_source": {
+     "field_document_type_name": [
+      "Rechtsverordnung"
+     ],
+     "field_effective_from": [
+      1788868800
+     ],
+     "url": [
+      "/lrgv/rechtsverordnung/08092026-vergabeverordnung-nrw-vergabevo-nrw"
+     ]
+    }
+   },
+   {
+    "_index": "opensearch_internet",
+    "_id": "entity:node/171998:de",
+    "_score": 0,
+    "_source": {
+     "field_document_type_name": [
+      "Gesetz"
+     ],
+     "field_effective_from": [
+      1768564800
+     ],
+     "url": [
+      "/lrgv/gesetz/16012026-verfassung-fuer-das-land-nordrhein-westfalen"
+     ]
+    }
+   }
+  ]
+ }
+}
