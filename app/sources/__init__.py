@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from sources.by import BySource
+from sources.sn import SnSource
 from state_sync import Source
 
-SOURCES: dict[str, Callable[[], Source]] = {"by": BySource}
+SOURCES: dict[str, Callable[[], Source]] = {"by": BySource, "sn": SnSource}
