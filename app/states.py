@@ -48,8 +48,8 @@ STATES: dict[str, State] = {
         _state("BB", "Brandenburg", "https://bravors.brandenburg.de", integrated=True),
         _state("HB", "Bremen", "https://www.transparenz.bremen.de", ("Freie Hansestadt Bremen",),
                integrated=True,
-               attribution="Texte: Transparenzportal Bremen, Der Senator für Finanzen, "
-               "Lizenz CC BY-NC-ND 3.0 DE."),
+               attribution="Texte: Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt "
+               "Bremen, Lizenz CC BY-NC-ND 3.0."),
         _state("HH", "Hamburg", "https://www.landesrecht-hamburg.de", ("Freie und Hansestadt Hamburg",),
                integrated=False, reason=REASON_JURIS),
         _state("HE", "Hessen", "https://www.rv.hessenrecht.hessen.de", integrated=False, reason=REASON_JURIS),

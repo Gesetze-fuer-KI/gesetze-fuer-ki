@@ -231,8 +231,8 @@ def test_state_provision_labelled(srv):
 
 def test_state_attribution(srv):
     out = server.get_provision("BrG", "§ 1")
-    assert "CC BY-NC-ND 3.0 DE" in out
-    assert "CC BY-NC-ND 3.0 DE" in server.get_law_outline("BrG")
+    assert "CC BY-NC-ND 3.0." in out
+    assert "CC BY-NC-ND 3.0." in server.get_law_outline("BrG")
 
 
 def test_federal_provision_unchanged(srv):
