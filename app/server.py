@@ -72,9 +72,10 @@ Die Nutzer sind meist keine Juristen: Erkläre einfach und auf Deutsch.
   bevor du dich darauf stützt, und folge den Verweisen, auf die es ankommt
   („§ 4 Nummer 8 gilt entsprechend“).
 - Zitiere, was du benutzt hast, als „§ 19 UStG“ und nenne Stand und Link aus der Antwort.
-- Enthalten: Bundesrecht und Landesrecht aus {INTEGRATED};
-  keine EU-Verordnungen, keine Gerichtsentscheidungen. Kennt der Nutzer sein Bundesland
-  oder seinen Ort, `land` setzen und Bund und Land getrennt abfragen.
+- Bundesrecht und Landesrecht aus {INTEGRATED} (ein Land erst nach seinem ersten
+  vollständigen Abgleich); keine EU-Verordnungen, keine Gerichtsentscheidungen. Kennt der
+  Nutzer sein Bundesland oder seinen Wohnort, das Bundesland als `land` setzen und Bund
+  und Land getrennt abfragen.
 - Das ist eine Auskunft, keine Rechtsberatung. Bei Entscheidungen mit Folgen auf
   Steuerberater, Rechtsanwalt oder die zuständige Behörde verweisen.
 """

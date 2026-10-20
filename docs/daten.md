@@ -50,7 +50,7 @@ Texte ausdrücklich vor. Im Repository jedes Landes steht, woran es genau scheit
 | Bayern | im Aufbau | [gesetze-bayern.de](https://www.gesetze-bayern.de) | Nutzungshinweise erlauben uneingeschränkte Weiterverwendung, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-by) |
 | Berlin | noch nicht integriert | [gesetze.berlin.de](https://gesetze.berlin.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-be) |
 | Brandenburg | im Aufbau | [bravors.brandenburg.de](https://bravors.brandenburg.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG). Texte bis zu zwei Tage alt, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-bb) |
-| Bremen | im Aufbau | [transparenz.bremen.de](https://www.transparenz.bremen.de) | Lizenz CC BY-NC-ND 3.0, Namensnennung: Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt Bremen. Ohne Ortsgesetze, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-hb) |
+| Bremen | im Aufbau | [transparenz.bremen.de](https://www.transparenz.bremen.de) | CC BY-NC-ND 3.0, Namensnennung siehe unten. Ohne Ortsgesetze, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-hb) |
 | Hamburg | noch nicht integriert | [landesrecht-hamburg.de](https://www.landesrecht-hamburg.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-hh) |
 | Hessen | noch nicht integriert | [rv.hessenrecht.hessen.de](https://www.rv.hessenrecht.hessen.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-he) |
 | Mecklenburg-Vorpommern | noch nicht integriert | [landesrecht-mv.de](https://www.landesrecht-mv.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-mv) |
@@ -68,8 +68,10 @@ erste Abgleich läuft noch. **Noch nicht integriert** heißt: Das Land lässt de
 zu; die Gesetze stehen nur auf dem Landesportal.
 
 Die Bremer Texte stehen unter der Lizenz
-[CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/3.0/de/): Sie werden nicht
-verändert, nur ins einheitliche Format gebracht, und jede Antwort nennt die Quelle.
+[CC BY-NC-ND 3.0](https://creativecommons.org/licenses/by-nc-nd/3.0/). Namensnennung:
+Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt Bremen. Die Texte
+werden nicht verändert, nur ins einheitliche Format gebracht, und jede Antwort nennt die
+Quelle.
 
 !!! info "Ihr Land fehlt?"
 

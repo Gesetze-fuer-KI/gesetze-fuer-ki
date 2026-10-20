@@ -64,7 +64,7 @@ uv run python sync.py --land SN --out /tmp/landesrecht-sn --max-minutes 5   # La
 
 ## Lizenz
 
-[AGPL-3.0 oder später](LICENSE), © 2026 Marcel Bruckner. Die Gesetzestexte selbst sind gemeinfrei (§ 5 UrhG); die Texte aus Bremen stehen unter CC BY-NC-ND 3.0 (Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt Bremen).
+[AGPL-3.0 oder später](LICENSE), © 2026 Marcel Bruckner. Die Gesetzestexte des Bundes, von Nordrhein-Westfalen, Sachsen und Brandenburg sind als amtliche Werke gemeinfrei (§ 5 UrhG); für Bayern erlauben die Nutzungshinweise des Portals die uneingeschränkte Weiterverwendung; die Texte aus Bremen stehen unter CC BY-NC-ND 3.0 (Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt Bremen).
 
 ---
 

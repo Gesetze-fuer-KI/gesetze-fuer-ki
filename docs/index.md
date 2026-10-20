@@ -56,8 +56,12 @@ jedes Land in ein eigenes Repository. Mehr dazu unter [Daten und Grenzen](daten.
 | Enthalten | Nicht enthalten |
 |---|---|
 | Alle Gesetze und Rechtsverordnungen des Bundes in der aktuellen Fassung | Landesrecht der elf Länder, deren Portale den Abruf nicht erlauben |
-| Gesetze und Verordnungen von Bayern, Brandenburg, Bremen, Nordrhein-Westfalen und Sachsen (im Aufbau: durchsuchbar nach dem ersten vollständigen Abgleich) | Ältere Fassungen vor dem Start dieses Dienstes |
-| Änderungen ab Oktober 2026 mit Datum, abrufbar als frühere Fassung | Gerichtsentscheidungen (geplant), EU-Verordnungen wie die DSGVO |
+| Änderungen ab Oktober 2026 mit Datum, abrufbar als frühere Fassung | Ältere Fassungen vor dem Start dieses Dienstes |
+| | Gerichtsentscheidungen (geplant), EU-Verordnungen wie die DSGVO |
+
+**Landesrecht (im Aufbau):** Gesetze und Verordnungen von Bayern, Brandenburg, Bremen,
+Nordrhein-Westfalen und Sachsen. Ein Land ist durchsuchbar, sobald sein erster
+vollständiger Abgleich durch ist.
 
 Mehr dazu unter [Daten und Grenzen](daten.md).
 
