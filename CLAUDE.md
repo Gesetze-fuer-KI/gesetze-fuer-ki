@@ -9,7 +9,9 @@ lives in `Gesetze-fuer-KI/bundesrecht`, state law in one repo per state, `Gesetz
 nw, sn are integrated; the other twelve are not. hb keeps its source `sources/hb.py`, but Bremen's portal
 answers 403 to data centres, so it stays off until Bremen allows access). Each data repo's nightly workflow
 (`.github/workflows/sync.yml` there) checks out this repo and runs `app/sync.py`, so a change to the sync's command line must be made in this
-repo, `bundesrecht` and the four integrated state repos.
+repo, `bundesrecht` and the four integrated state repos. Those workflows run on a self-hosted runner (label
+`gesetze`, on notefeed-1, role `github_runner` in `../notefeed-ansible`; GitHub's own runners often cannot reach the
+sources) and report to healthchecks.io (secret `HEALTHCHECKS_URL` per repo).
 
 Data flow: `sync.py` (nightly, in the data repo's Action) mirrors gesetze-im-internet.de into one Markdown file per
 law and commits; `server.py` clones that repo, pulls hourly, rebuilds the SQLite FTS5 index (`store.py`) on change
