@@ -44,8 +44,8 @@ der eigenen Website.
 
 ## Woher die Antworten kommen
 
-![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf.svg#only-light)
-![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf-dunkel.svg#only-dark)
+![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository bundesrecht übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf.svg#only-light)
+![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository bundesrecht übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf-dunkel.svg#only-dark)
 
 Jede Nacht werden die amtlichen Texte abgeglichen; Ihr Assistent liest immer die
 aktuelle Fassung. Das Landesrecht kommt auf dem gleichen Weg von den Portalen der Länder,
@@ -76,7 +76,7 @@ Mehr dazu unter [Daten und Grenzen](daten.md).
 Der Server, die Aufbereitung der Gesetze und diese Seite sind Open Source
 ([Gesetze-fuer-KI/gesetze-fuer-ki](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki)). Die Gesetzestexte
 selbst liegen als lesbare Markdown-Dateien mit vollständiger Änderungshistorie in einem
-eigenen Repository ([gesetze](https://github.com/Gesetze-fuer-KI/gesetze), das Landesrecht in
+eigenen Repository ([bundesrecht](https://github.com/Gesetze-fuer-KI/bundesrecht), das Landesrecht in
 einem je Land, etwa [landesrecht-by](https://github.com/Gesetze-fuer-KI/landesrecht-by)): Jede
 Änderung eines Gesetzes ist dort ein Commit, den man Zeile für Zeile nachlesen kann.
 

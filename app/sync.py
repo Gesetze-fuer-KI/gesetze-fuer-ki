@@ -2,7 +2,7 @@
 
 Run nightly by the data repository's GitHub Action:
 
-    python sync.py --out /path/to/gesetze
+    python sync.py --out /path/to/bundesrecht
 
 For every law in gii-toc.xml the XML zip is requested with the ETag of the last
 run, so an unchanged law costs one "304 Not Modified". Changed laws are converted

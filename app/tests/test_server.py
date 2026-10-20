@@ -72,7 +72,7 @@ def test_refresh_skips_missing_state_repo(tmp_path, monkeypatch):
 
 
 def test_clone_for():
-    assert server.clone_for({"land": None}) == server.DATA_DIR / "gesetze"
+    assert server.clone_for({"land": None}) == server.DATA_DIR / "bundesrecht"
     assert server.clone_for({"land": "BY"}) == server.DATA_DIR / "landesrecht-by"
 
 
