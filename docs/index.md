@@ -40,6 +40,14 @@ Typische Anlässe: die Gewerbeanmeldung, die Vorbereitung auf das Gespräch mit 
 Steuerberaterin, ein Arbeitsvertrag, eine Mieterhöhung, eine Frage zum Datenschutz auf
 der eigenen Website.
 
+## Woher die Antworten kommen
+
+![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf.svg#only-light)
+![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf-dunkel.svg#only-dark)
+
+Jede Nacht werden die amtlichen Texte abgeglichen; Ihr Assistent liest immer die
+aktuelle Fassung. Mehr dazu unter [Daten und Grenzen](daten.md).
+
 ## Was drin ist und was nicht
 
 | Enthalten | Nicht enthalten |

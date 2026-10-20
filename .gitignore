@@ -5,3 +5,4 @@ site/
 data/
 .cache/
 .playwright-mcp/
+.superpowers/

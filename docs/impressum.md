@@ -2,7 +2,7 @@
 
 ## Anbieter (§ 5 DDG)
 
-Marcel Bruckner\
+Marcel Bruckner<br>
 Deutschland
 
 Das vollständige Impressum mit Anschrift gilt für alle meine Seiten:
