@@ -3,6 +3,7 @@
 <p align="center">
   <a href="https://gesetze-fuer-ki.de/"><img alt="Dokumentation" src="https://img.shields.io/badge/docs-gesetze--fuer--ki.de-1f4e79"></a>
   <a href="https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/pkgs/container/gesetze-fuer-ki"><img alt="GHCR-Image" src="https://img.shields.io/badge/ghcr.io-gesetze--fuer--ki%2Fgesetze--fuer--ki-2496ED?logo=docker&logoColor=white"></a>
+  <a href="https://liberapay.com/GesetzeFuerKI"><img alt="Über Liberapay unterstützen" src="https://img.shields.io/badge/Liberapay-unterst%C3%BCtzen-F6C915?logo=liberapay&logoColor=black"></a>
   <a href="LICENSE"><img alt="Lizenz: AGPL v3" src="https://img.shields.io/badge/License-AGPL_v3-blue.svg"></a>
 </p>
 
