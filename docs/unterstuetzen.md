@@ -44,11 +44,12 @@ der QR-Code scannen, dann sind die Angaben schon ausgefüllt; den Betrag wählen
 | Verwendungszweck | Gesetze für KI |
 </div>
 
-!!! note "Keine Spendenquittung"
+!!! warning "Das ist keine Spende"
 
-    Gesetze für KI ist kein gemeinnütziger Verein. Ihr Beitrag ist deshalb keine
-    steuerlich absetzbare Spende, und es gibt keine Spendenbescheinigung. Eine
-    Gegenleistung ist damit nicht verbunden: Der Dienst bleibt für alle gleich.
+    Ihr Beitrag ist eine freiwillige Unterstützung für einen privat betriebenen Dienst,
+    keine Spende. Gesetze für KI ist kein gemeinnütziger Verein: Sie können den Beitrag
+    nicht von der Steuer absetzen, und es gibt keine Spendenbescheinigung. Eine
+    Gegenleistung ist damit nicht verbunden; der Dienst bleibt für alle gleich.
 
 ## Ohne Geld helfen
 
