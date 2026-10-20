@@ -43,39 +43,11 @@ Abgeglichen wird nur, wo das Portal den automatischen Abruf zulässt. Zwölf Lä
 deshalb noch: Zehn Portale (von juris betrieben) sperren in ihrer robots.txt jeden Abruf
 außer durch Suchmaschinen. Niedersachsen behält sich die Nutzung der Texte ausdrücklich
 vor. Bremen sperrt jeden automatischen Abruf aus Rechenzentren, also auch von dem Server,
-auf dem dieser Dienst läuft; nur Anschlüsse von zu Hause kommen durch. Im Repository jedes
+auf dem dieser Dienst läuft; nur Anschlüsse von zu Hause kommen durch. Auf der Seite jedes
 Landes steht, woran es genau scheitert.
 
-| Land | Stand | Quelle | Hinweis |
-|---|---|---|---|
-| Baden-Württemberg | noch nicht integriert | [landesrecht-bw.de](https://www.landesrecht-bw.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-bw) |
-| Bayern | enthalten | [gesetze-bayern.de](https://www.gesetze-bayern.de) | Nutzungshinweise erlauben uneingeschränkte Weiterverwendung, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-by) |
-| Berlin | noch nicht integriert | [gesetze.berlin.de](https://gesetze.berlin.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-be) |
-| Brandenburg | im Aufbau | [bravors.brandenburg.de](https://bravors.brandenburg.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG). Texte bis zu zwei Tage alt, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-bb) |
-| Bremen | noch nicht integriert | [transparenz.bremen.de](https://www.transparenz.bremen.de) | Portal sperrt Abrufe aus Rechenzentren, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-hb) |
-| Hamburg | noch nicht integriert | [landesrecht-hamburg.de](https://www.landesrecht-hamburg.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-hh) |
-| Hessen | noch nicht integriert | [rv.hessenrecht.hessen.de](https://www.rv.hessenrecht.hessen.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-he) |
-| Mecklenburg-Vorpommern | noch nicht integriert | [landesrecht-mv.de](https://www.landesrecht-mv.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-mv) |
-| Niedersachsen | noch nicht integriert | [voris.wolterskluwer-online.de](https://voris.wolterskluwer-online.de) | Betreiber behält sich die Nutzung der Texte vor, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-ni) |
-| Nordrhein-Westfalen | enthalten | [recht.nrw.de](https://recht.nrw.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-nw) |
-| Rheinland-Pfalz | noch nicht integriert | [landesrecht.rlp.de](https://www.landesrecht.rlp.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-rp) |
-| Saarland | noch nicht integriert | [recht.saarland.de](https://recht.saarland.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-sl) |
-| Sachsen | enthalten | [revosax.sachsen.de](https://www.revosax.sachsen.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-sn) |
-| Sachsen-Anhalt | noch nicht integriert | [landesrecht.sachsen-anhalt.de](https://www.landesrecht.sachsen-anhalt.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-st) |
-| Schleswig-Holstein | noch nicht integriert | [gesetze-rechtsprechung.sh.juris.de](https://www.gesetze-rechtsprechung.sh.juris.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-sh) |
-| Thüringen | noch nicht integriert | [landesrecht.thueringen.de](https://landesrecht.thueringen.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-th) |
-
-**Enthalten** heißt: vollständig abgeglichen und durchsuchbar. **Im Aufbau** heißt: Der
-erste Abgleich läuft noch. **Noch nicht integriert** heißt: Das Land lässt den Abruf nicht
-zu; die Gesetze stehen nur auf dem Landesportal.
-
-!!! info "Ihr Land fehlt?"
-
-    Schreiben Sie an [kontakt@gesetze-fuer-ki.de](mailto:kontakt@gesetze-fuer-ki.de), wenn
-    Sie das Recht eines fehlenden Landes brauchen. Das hilft, bei den Ländern nachzufragen.
-
-    Und an die Länder: Wenn Sie den automatischen Abruf Ihres Portals erlauben oder die
-    Texte als Download anbieten können, melden Sie sich bitte unter derselben Adresse.
+Welche Länder enthalten sind, warum die anderen fehlen und an wen Sie schreiben können, um
+das zu ändern, steht auf der Seite [Bundesländer](laender/index.md), mit einer eigenen Seite je Land.
 
 ## Was nicht enthalten ist
 
