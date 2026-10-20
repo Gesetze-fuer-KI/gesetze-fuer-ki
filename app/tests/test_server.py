@@ -1,3 +1,4 @@
+import subprocess
 from pathlib import Path
 
 import server
@@ -35,3 +36,49 @@ def test_commit_message_lists_each_law():
     assert "- EStG: zuletzt geändert durch X" in msg
     assert "- neu: NeuG (Neues Gesetz)" in msg
     assert "- entfernt: altg" in msg
+
+
+def _git_repo(path: Path, files: dict[str, str]) -> None:
+    for name, text in files.items():
+        (path / name).parent.mkdir(parents=True, exist_ok=True)
+        (path / name).write_text(text, encoding="utf-8")
+    for args in (["init", "-q", "-b", "main"], ["add", "-A"],
+                 ["-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "init"]):
+        subprocess.run(["git", "-C", str(path), *args], check=True, capture_output=True)
+
+
+def test_refresh_skips_missing_state_repo(tmp_path, monkeypatch):
+    federal = tmp_path / "gesetze"
+    _git_repo(federal, {"ab/abg.md": "---\nabkuerzung: AbG\ntitel: Abgesetz\nquelle: q\n---\n\n# Abgesetz\n"})
+    monkeypatch.setattr(server, "DATA_REPO_URL", str(federal))
+    monkeypatch.setattr(server, "DATA_DIR", tmp_path / "data")
+    monkeypatch.setattr(server, "STATE_REPO_URL", str(tmp_path / "missing-{code}"))
+    monkeypatch.setattr(server, "INDEX", server.Index())
+    server.refresh_once()
+    s = server.INDEX.get()
+    assert [r["slug"] for r in s.resolve_law("AbG")] == ["abg"]
+    assert s.state_status() == {}
+    assert server.INDEX.error is None
+
+
+def test_clone_for():
+    assert server.clone_for({"land": None}) == server.DATA_DIR / "gesetze"
+    assert server.clone_for({"land": "BY"}) == server.DATA_DIR / "landesrecht-by"
+
+
+def test_refresh_indexes_state_repo(tmp_path, monkeypatch):
+    federal, by = tmp_path / "gesetze", tmp_path / "landesrecht-by"
+    _git_repo(federal, {"ab/abg.md": "---\nabkuerzung: AbG\ntitel: Abgesetz\nquelle: q\n---\n\n# Abgesetz\n"})
+    _git_repo(by, {"by/by-bayg.md": "---\nland: BY\nabkuerzung: BayG\ntitel: Bayerngesetz\nquelle: q\n---\n\n# B\n",
+                   ".sync/state.json": '{"complete": true}'})
+    monkeypatch.setattr(server, "DATA_REPO_URL", str(federal))
+    monkeypatch.setattr(server, "DATA_DIR", tmp_path / "data")
+    monkeypatch.setattr(server, "STATE_REPO_URL", str(tmp_path / "landesrecht-{code}"))
+    monkeypatch.setattr(server, "INDEX", server.Index())
+    server.refresh_once()
+    s = server.INDEX.get()
+    assert s.state_status() == {"BY": True}
+    law = dict(s.resolve_law("BayG")[0])
+    assert law["land"] == "BY"
+    assert (server.clone_for(law) / law["path"]).exists()
+    assert server.INDEX.revision.count("+") == 1

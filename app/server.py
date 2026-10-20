@@ -27,10 +27,13 @@ from starlette.responses import JSONResponse
 from starlette.staticfiles import StaticFiles
 
 import repo
+import states
 import store
 
 DATA_REPO_URL = os.environ.get("GESETZE_REPO_URL", "https://github.com/Gesetze-fuer-KI/gesetze.git")
 DATA_REPO_BRANCH = os.environ.get("GESETZE_REPO_BRANCH", "main")
+# One data repository per integrated state; "{code}" is the lower-case state code. Empty: no state law.
+STATE_REPO_URL = os.environ.get("STATE_REPO_URL", "https://github.com/Gesetze-fuer-KI/landesrecht-{code}.git")
 DATA_DIR = Path(os.environ.get("DATA_DIR", "/data"))
 REFRESH_SECONDS = int(os.environ.get("REFRESH_SECONDS", "3600"))
 SITE_DIR = Path(os.environ.get("SITE_DIR", "/app/site"))
@@ -100,10 +103,40 @@ class NotReady(Exception):
 INDEX = Index()
 
 
+def clone_for(law: dict) -> Path:
+    """The clone that holds a law's file: the federal data repository or its state's."""
+    land = law.get("land")
+    return DATA_DIR / "gesetze" if land is None else DATA_DIR / f"landesrecht-{land.lower()}"
+
+
+def _update_states() -> tuple[dict[str, Path], list[str]]:
+    """Clone or update every integrated state's repository: (code -> clone, revisions).
+
+    A state repository that cannot be fetched (not created yet, or gone) is left out, so it
+    never blocks the federal index.
+    """
+    clones: dict[str, Path] = {}
+    revisions: list[str] = []
+    if not STATE_REPO_URL:
+        return clones, revisions
+    for code in sorted(c for c, s in states.STATES.items() if s.integrated):
+        clone = clone_for({"land": code})
+        try:
+            revisions.append(repo.update(clone, STATE_REPO_URL.format(code=code.lower())))
+        except Exception as exc:
+            log.warning("state repository %s not available: %s", code, exc)
+            continue
+        clones[code] = clone
+    return clones, revisions
+
+
 def refresh_once() -> None:
     clone = DATA_DIR / "gesetze"
     db_path = DATA_DIR / "index.sqlite"
     rev = repo.update(clone, DATA_REPO_URL, DATA_REPO_BRANCH)
+    state_clones, state_revs = _update_states()
+    # Any repository moving changes the revision, and so triggers a rebuild.
+    rev = "+".join([rev, *state_revs])
     if INDEX.revision == rev:
         return
     if db_path.exists():
@@ -114,7 +147,7 @@ def refresh_once() -> None:
             return
         existing.close()
     started = time.monotonic()
-    count = store.build(clone, db_path, rev)
+    count = store.build(clone, db_path, rev, states=state_clones)
     INDEX.swap(store.Store(db_path), rev)
     log.info("indexed %d laws at %s in %.0fs", count, rev[:10], time.monotonic() - started)
 
@@ -321,7 +354,7 @@ def _format_provision(law: dict, unit: dict, part: int, stand: str | None, note:
 def _provision_at(law: dict, provision: str, date: str, part: int) -> str:
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
         return "date bitte als JJJJ-MM-TT angeben."
-    clone = DATA_DIR / "gesetze"
+    clone = clone_for(law)
     found = repo.file_at(clone, law["path"], date)
     if found is None:
         first = (repo.first_date(clone) or "")[:10]
@@ -396,7 +429,7 @@ def get_law_changes(
     found, error = resolve(s, law)
     if error:
         return error
-    clone = DATA_DIR / "gesetze"
+    clone = clone_for(found)
     entries = repo.changes(clone, found["path"], found["abk"], limit)
     first = (repo.first_date(clone) or "")[:10]
     lines = [f"Änderungen an {law_label(found)} in diesem Spiegel (Historie ab {first}):", ""]
