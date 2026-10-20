@@ -401,3 +401,16 @@ def test_a_broken_listing_keeps_the_ids_it_has_read():
     with portal.client() as client, pytest.raises(httpx.HTTPStatusError):
         source.list_laws(client)
     assert source.cache == {nw.BASE + p: t for t, p in PATHS.items() if t != "26520"}
+
+
+def test_a_page_without_a_law_body_is_refused():
+    pages = {p: page(t) for t, p in PATHS.items()}
+    pages[PATHS["31127"]] = pages[PATHS["31127"]].replace("field--field_body", "field--field_other")
+    with pytest.raises(ValueError, match="no law body"):
+        fetch("31127", portal=Portal(pages=pages))
+
+
+def test_an_index_document_without_a_type_is_skipped():
+    index = json.loads((FIXTURES / "index.json").read_text(encoding="utf-8"))
+    index[PATHS["31127"]]["field_document_type_name"] = []
+    assert fetch("31127", portal=Portal(index=index)) is None

@@ -12,6 +12,11 @@ import sync
 D = datetime.date(2026, 10, 20)
 
 
+def law(title: str) -> str:
+    """A law file with a title line and one norm (the runner refuses files without any)."""
+    return f"# {title}\n\n<!-- norm id=\"par1\" -->\n## § 1\n\nText.\n"
+
+
 class FakeSource:
     """Serves laws from dicts; every list/fetch is a real request through the given client."""
 
@@ -22,7 +27,7 @@ class FakeSource:
     def __init__(self, n=10, min_entries=5):
         self.min_entries = min_entries
         self.lastmod = {f"by-law{i:02d}": "2026-01-01" for i in range(n)}
-        self.texts = {slug: f"# {slug}\n\nText.\n" for slug in self.lastmod}
+        self.texts = {slug: law(slug) for slug in self.lastmod}
         self.future: dict[str, tuple[datetime.date, str]] = {}  # slug -> (start date, new text)
         # slug -> (start date, text): the portal only has a text that starts later (NotYetInForce before then)
         self.pending: dict[str, tuple[datetime.date, str]] = {}
@@ -161,14 +166,14 @@ def test_only_never_deletes_and_keeps_pass_state(tmp_path):
     assert run(tmp_path, src, max_minutes=4, clock=FakeClock(60)) == 0
     st = load_state(tmp_path)
     del src.lastmod["by-law09"]
-    src.texts["by-law08"] = "# neu\n"
+    src.texts["by-law08"] = law("neu")
     src.fetches = 0
     assert run(tmp_path, src, only=["by-law08"]) == 0
     assert src.fetches == 1
     after = load_state(tmp_path)
     assert after["complete"] == st["complete"] and after["pass_done"] == st["pass_done"]
     path = state_sync.state_law_path(tmp_path, "by-law08")
-    assert path.read_text() == "# neu\n"
+    assert path.read_text() == law("neu")
 
 
 def test_new_and_changed_laws_in_commit_message(tmp_path):
@@ -176,7 +181,7 @@ def test_new_and_changed_laws_in_commit_message(tmp_path):
     assert run(tmp_path, src) == 0
     assert "- neu: BY-LAW00 (Gesetz)" in commit_msg(tmp_path)
     src.lastmod["by-law01"] = "2026-03-03"
-    src.texts["by-law01"] = "# geändert\n"
+    src.texts["by-law01"] = law("geändert")
     assert run(tmp_path, src) == 0
     msg = commit_msg(tmp_path)
     assert msg.splitlines()[0] == "Bayern Stand 2026-10-20: 1 geändert, 0 neu, 0 entfernt"
@@ -203,7 +208,7 @@ def test_missing_file_is_refetched(tmp_path):
 
 def test_future_version_taken_over_on_start_date(tmp_path):
     src = FakeSource()
-    src.future["by-law02"] = (D + datetime.timedelta(days=1), "# neue Fassung\n")
+    src.future["by-law02"] = (D + datetime.timedelta(days=1), law("neue Fassung"))
     assert run(tmp_path, src) == 0
     path = state_sync.state_law_path(tmp_path, "by-law02")
     assert path.read_text() == src.texts["by-law02"]
@@ -213,7 +218,7 @@ def test_future_version_taken_over_on_start_date(tmp_path):
     assert src.fetches == 0
     assert run(tmp_path, src, today=D + datetime.timedelta(days=1)) == 0
     assert src.fetches == 1
-    assert path.read_text() == "# neue Fassung\n"
+    assert path.read_text() == law("neue Fassung")
     assert load_state(tmp_path)["laws"]["by-law02"]["next_version_from"] is None
 
 
@@ -223,7 +228,7 @@ def test_text_not_yet_in_force_keeps_the_old_file_and_is_no_failure(tmp_path):
     path = state_sync.state_law_path(tmp_path, "by-law03")
     old = path.read_text()
     start = D + datetime.timedelta(days=3)
-    src.pending["by-law03"] = (start, "# ab dem Stichtag\n")
+    src.pending["by-law03"] = (start, law("ab dem Stichtag"))
     src.lastmod["by-law03"] = "2026-10-23"  # the listing already shows the coming version
     assert run(tmp_path, src) == 0
     st = load_state(tmp_path)
@@ -237,7 +242,7 @@ def test_text_not_yet_in_force_keeps_the_old_file_and_is_no_failure(tmp_path):
     assert src.fetches == 0 and path.read_text() == old
     # taken over on the start date
     assert run(tmp_path, src, today=start) == 0
-    assert src.fetches == 1 and path.read_text() == "# ab dem Stichtag\n"
+    assert src.fetches == 1 and path.read_text() == law("ab dem Stichtag")
     assert load_state(tmp_path)["laws"]["by-law03"]["next_version_from"] is None
 
 
@@ -245,7 +250,7 @@ def test_new_law_not_yet_in_force_appears_on_its_start_date(tmp_path):
     src = FakeSource()
     start = D + datetime.timedelta(days=2)
     src.lastmod["by-law99"] = start.isoformat()
-    src.pending["by-law99"] = (start, "# neues Gesetz\n")
+    src.pending["by-law99"] = (start, law("neues Gesetz"))
     assert run(tmp_path, src) == 0
     path = state_sync.state_law_path(tmp_path, "by-law99")
     st = load_state(tmp_path)
@@ -255,7 +260,7 @@ def test_new_law_not_yet_in_force_appears_on_its_start_date(tmp_path):
     assert run(tmp_path, src, today=D + datetime.timedelta(days=1)) == 0
     assert src.fetches == 0 and not path.exists()  # a missing file alone does not trigger a refetch
     assert run(tmp_path, src, today=start) == 0
-    assert path.read_text() == "# neues Gesetz\n"
+    assert path.read_text() == law("neues Gesetz")
     assert "- neu: BY-LAW99" in commit_msg(tmp_path)
 
 
@@ -461,3 +466,27 @@ def test_cache_is_saved_when_the_listing_breaks_off(tmp_path):
     with pytest.raises(KeyboardInterrupt):
         run(tmp_path, Breaking(n=3, min_entries=1))
     assert load_state(tmp_path)["cache"] == {"half": "done"}
+
+
+def test_a_text_without_any_norm_is_a_failure_and_keeps_the_old_file(tmp_path):
+    # A changed page template must not wipe the texts: a file without a single norm is refused.
+    src = FakeSource(min_entries=1)
+    assert run(tmp_path, src) == 0
+    path = state_sync.state_law_path(tmp_path, "by-law04")
+    old = path.read_text()
+    src.lastmod["by-law04"] = "2026-05-05"
+    src.texts["by-law04"] = "# by-law04\n\nNur noch Navigation.\n"
+    assert run(tmp_path, src) == 0
+    assert path.read_text() == old
+    assert "Nicht abrufbar (1): by-law04" in commit_msg(tmp_path)
+
+
+def test_cache_is_saved_sorted(tmp_path):
+    class Unsorted(CachingSource):
+        def list_laws(self, client):
+            self.cache.update({"z": "1", "a": "2"})
+            return super().list_laws(client)
+
+    run(tmp_path, Unsorted(n=3, min_entries=1))
+    keys = list(load_state(tmp_path)["cache"])
+    assert keys == sorted(keys)

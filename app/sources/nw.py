@@ -149,7 +149,7 @@ class NwSource:
 
     def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
         meta = index_entry(client, entry.url)
-        if meta.get("field_document_type_name", [None])[0] not in TYPES:
+        if (meta.get("field_document_type_name") or [None])[0] not in TYPES:
             return None
         page = _get(client, entry.url)
         newest = _valid_from(page)
@@ -287,6 +287,7 @@ def parse_law(root: Node, url: str, meta: dict, term: str, next_version: str | N
     if content is None:
         raise ValueError(f"{url}: no law text")
     law = _Law()
+    body_seen = False
     article = content.find("article") or content
     holder = next((n for n in article.elements() if n.tag == "div"), article)
     for part in holder.elements():
@@ -296,11 +297,14 @@ def parse_law(root: Node, url: str, meta: dict, term: str, next_version: str | N
         elif "field--name-field-preamble" in classes:
             law.preamble(part)
         elif "field--field_body" in classes:
+            body_seen = True
             law.flush_preamble()
             law.body(part, [])
         elif "field--name-field-conclusions" in classes:
             law.flush_preamble()
             law.formula(part, "schlussformel", "Schlussformel")
+    if not body_seen:
+        raise ValueError(f"{url}: no law body")  # the page layout has changed
     law.flush_preamble()
     law.attachments(root.find("div", id="block-rnrw-attachments"))
     return Fetched(markdown=render(front, law.units), front=front, next_version_from=next_version)

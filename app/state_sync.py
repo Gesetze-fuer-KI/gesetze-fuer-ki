@@ -30,6 +30,7 @@ from typing import Protocol
 import httpx
 
 import states
+import store
 from sync import USER_AGENT, commit_lines, law_path
 
 log = logging.getLogger("state_sync")
@@ -138,7 +139,7 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
         state["pass_done"] = sorted(pass_done)
         state["pass_failed"] = sorted(pass_failed)
         state["laws"] = dict(sorted(laws.items()))
-        state["cache"] = getattr(source, "cache", state["cache"])
+        state["cache"] = dict(sorted(getattr(source, "cache", state["cache"]).items()))
         tmp = state_file.with_suffix(".tmp")
         tmp.write_text(json.dumps(state, indent=1, ensure_ascii=False) + "\n")
         tmp.replace(state_file)
@@ -184,7 +185,11 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
                 if clock() > deadline:
                     return e, "postponed", None
                 try:
-                    return e, "fetched", source.fetch(client, e, today)
+                    fetched = source.fetch(client, e, today)
+                    if fetched is not None and not any(u.kind == "norm" for u in store.split_law(fetched.markdown)[2]):
+                        # A real law has at least one norm: a changed page template must not wipe the texts.
+                        raise ValueError("no norm in the converted text")
+                    return e, "fetched", fetched
                 except NotYetInForce as exc:
                     return e, "waiting", exc.start
                 except Exception as exc:  # one broken law must not stop the others
