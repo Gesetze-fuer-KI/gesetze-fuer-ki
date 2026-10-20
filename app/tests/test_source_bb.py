@@ -303,6 +303,15 @@ def test_law_page_redirecting_to_another_kind_is_skipped_for_good():
     assert source.cache == {"212999": bb.SKIPPED}
 
 
+def test_law_page_redirecting_to_an_unknown_page_fails_and_is_not_cached():
+    # A maintenance page or a new URL scheme is no evidence that the document is no law.
+    portal = Portal({"/wartung": "<html><body>Wartungsarbeiten</body></html>"}, redirects={"/verordnungen/x": "/wartung"})
+    source = bb.BbSource()
+    with portal.client() as client, pytest.raises(ValueError, match="/wartung"):
+        source.fetch(client, state_sync.Entry("bb-212999", f"{bb.BASE}/verordnungen/x"), D)
+    assert source.cache == {}
+
+
 def test_fundstellennachweis_url_wins_over_the_search():
     # A search hit with the Verfassung's id but another link: the Fundstellennachweis's link wins.
     search = read("suche.html").replace("<!-- 263392-->", "<!-- 212792-->", 1)

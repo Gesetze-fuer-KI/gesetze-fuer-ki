@@ -339,11 +339,13 @@ def test_page_and_listing_must_agree_on_the_date():
         fetch("31127", lastmod="2026-10-01")
 
 
-def test_a_document_of_another_type_is_skipped():
+def test_a_document_of_another_type_is_refused_not_skipped():
+    # The listing filters on the same field: another type here is an error, never a skip.
     index = json.loads((FIXTURES / "index.json").read_text(encoding="utf-8"))
     index[PATHS["31127"]]["field_document_type_name"] = ["Verwaltungsvorschrift"]
     portal = Portal(index=index)
-    assert fetch("31127", portal=portal) is None
+    with pytest.raises(ValueError, match="Verwaltungsvorschrift"):
+        fetch("31127", portal=portal)
     assert portal.requests == [f"POST index {PATHS['31127']}"]
 
 
@@ -410,7 +412,8 @@ def test_a_page_without_a_law_body_is_refused():
         fetch("31127", portal=Portal(pages=pages))
 
 
-def test_an_index_document_without_a_type_is_skipped():
+def test_an_index_document_without_a_type_is_refused():
     index = json.loads((FIXTURES / "index.json").read_text(encoding="utf-8"))
     index[PATHS["31127"]]["field_document_type_name"] = []
-    assert fetch("31127", portal=Portal(index=index)) is None
+    with pytest.raises(ValueError, match="None"):
+        fetch("31127", portal=Portal(index=index))

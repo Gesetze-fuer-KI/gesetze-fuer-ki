@@ -147,10 +147,12 @@ class NwSource:
                 entries[entry.slug] = entry
         return list(entries.values())
 
-    def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
+    def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched:
         meta = index_entry(client, entry.url)
-        if (meta.get("field_document_type_name") or [None])[0] not in TYPES:
-            return None
+        kind = (meta.get("field_document_type_name") or [None])[0]
+        if kind not in TYPES:
+            # The listing filters on this field: another type is a changed index, not a non-law.
+            raise ValueError(f"index document of type {kind}")
         page = _get(client, entry.url)
         newest = _valid_from(page)
         if entry.lastmod and newest.isoformat() != entry.lastmod:

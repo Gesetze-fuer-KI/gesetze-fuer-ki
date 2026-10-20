@@ -99,11 +99,11 @@ class SnSource:
             raise ValueError(f"{total} hits announced, {len(entries)} listed")
         return list(entries.values())
 
-    def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
+    def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched:
         response = client.get(entry.url)
         response.raise_for_status()
         fetched = parse_law(response.text, entry.url, today)
-        if fetched is not None and entry.lastmod and fetched.front["gilt_ab"] != entry.lastmod:
+        if entry.lastmod and fetched.front["gilt_ab"] != entry.lastmod:
             # The page and the listing disagree (one was updated in between): try again next run
             # rather than store this text under the listing's lastmod.
             raise ValueError(f"page valid from {fetched.front['gilt_ab']}, listing says {entry.lastmod}")
@@ -145,14 +145,17 @@ def parse_hitlist(page: str) -> tuple[int, list[Entry]]:
 # -- the law page
 
 
-def parse_law(page: str, url: str, today: datetime.date) -> Fetched | None:
-    """The Markdown file for one law from its page; None if it is no Gesetz or Verordnung."""
+def parse_law(page: str, url: str, today: datetime.date) -> Fetched:
+    """The Markdown file for one law from its page.
+
+    The listing holds only Gesetze and Verordnungen, so a page naming another type (or none)
+    raises: it is a changed page, not a reason to delete the law."""
     root = parse_html(page)
     description = next((n.attrs.get("content", "") for n in root.iter()
                         if n.tag == "meta" and n.attrs.get("name") == "description"), "")
     kind, _, long_title = description.removeprefix("Sächsisches Landesrecht ").partition(":")
     if kind.strip() not in TYPES:
-        return None
+        raise ValueError(f"{url}: unexpected document type {kind.strip()!r}")
     article = root.find("article", id="lesetext")
     if article is None:
         raise ValueError(f"{url}: no law text")

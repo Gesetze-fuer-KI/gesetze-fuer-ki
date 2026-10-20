@@ -163,7 +163,20 @@ def test_list_laws_keeps_the_later_of_two_versions_of_one_law(caplog):
     # Same Inkrafttreten: the higher version id wins, whatever the order.
     a = hb._Hit("100", "u100", "x", datetime.date(2026, 1, 1))
     b = hb._Hit("99", "u99", "x", datetime.date(2026, 1, 1))
-    assert hb._later(a, b) is a and hb._later(b, a) is a
+    assert hb._preferred(a, b, D) is a and hb._preferred(b, a, D) is a
+
+
+def test_of_two_versions_the_one_in_force_today_wins_over_a_future_one():
+    past = hb._Hit("1", "u1", "x", datetime.date(2025, 4, 12))
+    current = hb._Hit("2", "u2", "x", datetime.date(2026, 10, 2))
+    future = hb._Hit("3", "u3", "x", datetime.date(2027, 1, 1))
+    later_future = hb._Hit("4", "u4", "x", datetime.date(2028, 1, 1))
+    assert hb._preferred(current, future, D) is current and hb._preferred(future, current, D) is current
+    assert hb._preferred(past, current, D) is current
+    # Only future versions: the earliest, which comes into force first.
+    assert hb._preferred(later_future, future, D) is future and hb._preferred(future, later_future, D) is future
+    # A version starting today is in force.
+    assert hb._preferred(future, current, datetime.date(2027, 1, 1)) is future
 
 
 def test_list_laws_rejects_an_unrecognised_page_and_does_not_cache_it():
@@ -175,21 +188,17 @@ def test_list_laws_rejects_an_unrecognised_page_and_does_not_cache_it():
     assert "232507" not in source.cache
 
 
-def test_get_retries_once_on_a_server_error(monkeypatch):
-    monkeypatch.setattr(hb, "RETRY_DELAY", 0)
+def test_get_raises_on_an_error_status():
+    # Retrying is the runner client's job (state_sync), not the source's.
     calls = []
 
     def handle(request: httpx.Request) -> httpx.Response:
         calls.append(request.url.path)
-        return httpx.Response(503) if len(calls) == 1 else httpx.Response(200, text="ok")
+        return httpx.Response(503)
 
-    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
-        assert hb._get(client, "https://example.org/x") == "ok"
-    assert len(calls) == 2
-    calls.clear()
-    with httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(404))) as client, \
-            pytest.raises(httpx.HTTPStatusError):
-        hb._get(client, "https://example.org/x")  # a 404 is not retried
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client, pytest.raises(httpx.HTTPStatusError):
+        hb._get(client, "https://example.org/x")
+    assert len(calls) == 1
 
 
 def test_list_laws_fails_on_an_unreachable_law_page_but_keeps_what_it_resolved():
@@ -310,6 +319,13 @@ def test_documents_other_than_gesetze_and_verordnungen_are_skipped(caplog):
     # The first full run shows which juris document types were skipped, and nothing else.
     assert [r.getMessage() for r in caplog.records] == [
         "skipped juris Dokumenttyp: ohne Qualifikation", "skipped juris Dokumenttyp: Ortsgesetz"]
+
+
+def test_an_unknown_document_type_is_refused_not_skipped():
+    # Only types known to be no Gesetz or Verordnung are skipped (their file would be deleted).
+    html = read("296562.html").replace('class="TD70">Ortsgesetz<', 'class="TD70">Landesgesetz neuer Art<')
+    with pytest.raises(ValueError, match="Landesgesetz neuer Art"):
+        fetch("296562", html)
 
 
 def test_a_version_not_yet_in_force():

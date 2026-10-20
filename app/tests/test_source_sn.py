@@ -250,9 +250,15 @@ def test_verordnung_with_sections_in_a_wrapper():
     assert "**Anlage 1**  \n**(zu § 7 Absatz 8 Satz 1)**" in units[3].body
 
 
-def test_other_document_types_are_skipped():
+def test_a_page_of_another_document_type_is_refused_not_skipped():
+    # The listing only holds Gesetze and Verordnungen: another type on the page is an error
+    # (kept file, retried), never a skip that would delete the law.
     html = page("21677").replace("Landesrecht Verordnung:", "Landesrecht Verwaltungsvorschrift:")
-    assert fetch("21677", html) is None
+    with pytest.raises(ValueError, match="Verwaltungsvorschrift"):
+        fetch("21677", html)
+    html = page("21677").replace('name="description"', 'name="other"')
+    with pytest.raises(ValueError, match="document type"):
+        fetch("21677", html)
 
 
 def test_duplicate_designations_get_stable_suffixes():

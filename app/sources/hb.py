@@ -12,8 +12,10 @@ count, which the unique hits must match. Each hit is one version of a law: its i
 every new version, and the listing shows its Stand (the day the portal updated it), which
 together with the id serves as lastmod. The filter also returns non-laws (Prüfungsordnungen,
 overviews) and Ortsgesetze of the Stadtgemeinden Bremen and Bremerhaven (municipal law, like
-Satzungen elsewhere); fetch skips them by the juris Dokumenttyp and logs the type, so a full run
-shows what was left out. The 33 listing pages are slow (about 2.5 minutes).
+Satzungen elsewhere); fetch skips them by the juris Dokumenttyp (NON_LAW_KINDS) and logs the
+type, so a full run shows what was left out; a type it does not know fails instead. Two listed
+versions of one law: the latest in force today is kept. The 33 listing pages are slow (about
+2.5 minutes).
 
 Slug: a version id is no stable law id, so each law's page is read once per version to find
 the juris document key ("jlr-TariftVergabeGBRrahmen" -> "hb-tariftvergabegbr"), which stays
@@ -42,7 +44,6 @@ import datetime
 import html
 import logging
 import re
-import time
 import zlib
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -65,8 +66,11 @@ LISTING_PARAMS = {
     "vorschriften[0]": LISTING_TYPE, "gltigkeit[0]": "In Kraft", "sort": "titel", "order": "asc",
 }
 PAGE_SIZE = 50  # the most the portal shows per page
-RETRY_DELAY = 5.0  # seconds before the one retry of a request that failed on the server's side
 KINDS = {"Gesetz", "Verordnung", "Rechtsverordnung"}  # juris Dokumenttyp of the laws kept
+# juris Dokumenttyp of documents known to be no Gesetz or Verordnung: skipped. Any other type
+# raises, so that a law is never deleted because the portal names its type differently.
+NON_LAW_KINDS = {"ohne Qualifikation", "Ortsgesetz", "Satzung", "Verwaltungsvorschrift", "Bekanntmachung",
+                 "Geschäftsordnung", "Richtlinie", "Erlass", "Staatsvertrag", "Vertrag", "Abkommen", "Vereinbarung"}
 MIN_TEXT_WITHOUT_NORMS = 2000  # a longer text without any § or Artikel is a layout this parser does not know
 
 _COUNT = re.compile(r"Ergebnisse\s+[\d.]+\s*-\s*[\d.]+\s+von\s+\(([\d.]+)\)")
@@ -125,9 +129,9 @@ class HbSource:
         for h in hits:
             slug = self.cache[h.version]
             if slug in chosen:
-                # Two listed versions of one law (the portal lagging): the later one applies.
+                # Two listed versions of one law (the portal lagging): keep the one in force today.
                 log.warning("%s listed twice (versions %s and %s)", slug, chosen[slug].version, h.version)
-                h = _later(chosen[slug], h)
+                h = _preferred(chosen[slug], h, datetime.date.today())
             chosen[slug] = h
         return [Entry(slug, h.url, h.lastmod) for slug, h in chosen.items()]
 
@@ -139,23 +143,19 @@ class HbSource:
 
 
 def _get(client: httpx.Client, url: str) -> str:
-    """A page's text; a network error or a 5xx is retried once after RETRY_DELAY."""
-    try:
-        response = client.get(url)
-        if response.status_code < 500:
-            response.raise_for_status()
-            return response.text
-    except httpx.TransportError:
-        pass
-    time.sleep(RETRY_DELAY)
+    """A page's text (the runner's client retries a network error or a 5xx once)."""
     response = client.get(url)
     response.raise_for_status()
     return response.text
 
 
-def _later(a: _Hit, b: _Hit) -> _Hit:
-    """The version that applies later; on the same day the one with the higher id."""
-    return max(a, b, key=lambda h: (h.inkraft, int(h.version)))
+def _preferred(a: _Hit, b: _Hit, today: datetime.date) -> _Hit:
+    """Of two versions of one law, the latest in force today; if neither is, the earliest
+    to come. On the same day the one with the higher id."""
+    in_force = [h for h in (a, b) if h.inkraft <= today]
+    if in_force:
+        return max(in_force, key=lambda h: (h.inkraft, int(h.version)))
+    return min((a, b), key=lambda h: (h.inkraft, -int(h.version)))
 
 
 def _resolve(page: str, version: str) -> str:
@@ -248,9 +248,11 @@ def parse_law(page: str, url: str, slug: str, today: datetime.date) -> Fetched |
         if key is None:
             return None  # an overview: the portal's layout for documents that are no juris text
         raise ValueError(f"{url}: no Dokumenttyp in the header")
-    if kind not in KINDS:
+    if kind in NON_LAW_KINDS:
         log.info("skipped juris Dokumenttyp: %s", kind)
         return None
+    if kind not in KINDS:
+        raise ValueError(f"{url}: unknown juris Dokumenttyp {kind}")
     if key is None or slug_for(key) != slug:
         raise ValueError(f"{url}: the page of {slug_for(key) if key else 'another document'}, not {slug}")
     units_nodes = [n for n in text.iter() if n.tag == "div" and "jgwsAiZDoc" in n.classes()]

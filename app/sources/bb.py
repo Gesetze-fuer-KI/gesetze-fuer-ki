@@ -13,8 +13,10 @@ stale. A change feed or a sitemap with lastmod from BRAVORS would allow an incre
 
 Listing: the Fundstellennachweis "Gesetze und Verordnungen", sachgebietlich: nine pages
 (Sachgebiete 1–9) that list every law in force with its document id ("<!-- 212792 -->") and
-link. Verträge in it are left out by their link ("/de/vertraege-…"). The Fundstellennachweis
-announces no count, so the listing checks itself against the extended search's total for
+link. Verträge in it are left out by their link ("/de/vertraege-…"), and so is a law link
+that redirects to one (cached, never fetched again); a redirect to any other page fails.
+The Fundstellennachweis announces no count, so the listing checks itself against the
+extended search's total for
 "Gesetze und Verordnungen" (one form post): the two differ by a few laws (1,785 and 1,780 on
 2026-10-20), so up to MAX_MISMATCH is accepted, less than the smallest Sachgebiet (42 laws);
 and every Sachgebiet page must parse. The Fundstellennachweis lists a new law only after a few
@@ -107,6 +109,9 @@ class BbSource:
         response.raise_for_status()
         url = str(response.url)  # classified by where a link ends up, after redirects
         if _kind(url) is None:
+            if not _TREATY_LINK.fullmatch(response.url.path):
+                # A maintenance page or a new URL scheme: no evidence the document is no law.
+                raise ValueError(f"redirected to an unknown page {url}")
             self.cache[doc_id] = SKIPPED
             return None
         return parse_law(response.text, url, doc_id)
