@@ -1,7 +1,7 @@
 """The 16 German states (Länder): which state law is integrated, and where the rest lives.
 
 State law (Landesrecht) is mirrored from the states' official portals into one data repository
-per state. Five states are integrated; for the others the portal forbids or reserves automated
+per state. Four states are integrated; for the others the portal forbids, reserves or blocks automated
 use, and the tools answer with a short explanation and a link instead.
 """
 
@@ -14,6 +14,7 @@ REPO_BASE = "https://github.com/Gesetze-fuer-KI/landesrecht-"
 
 REASON_JURIS = "Das Landesportal erlaubt keinen automatischen Abruf."
 REASON_NI = "Der Betreiber des Landesportals behält sich die Nutzung der Texte vor."
+REASON_HB = "Das Landesportal sperrt automatische Abrufe aus Rechenzentren."
 
 # Prefixes that are ignored when looking a state up by name (longest first).
 PREFIXES = ("freie und hansestadt ", "freie hansestadt ", "freistaat ", "land ")
@@ -47,7 +48,8 @@ STATES: dict[str, State] = {
         _state("BE", "Berlin", "https://gesetze.berlin.de", integrated=False, reason=REASON_JURIS),
         _state("BB", "Brandenburg", "https://bravors.brandenburg.de", integrated=True),
         _state("HB", "Bremen", "https://www.transparenz.bremen.de", ("Freie Hansestadt Bremen",),
-               integrated=True,
+               integrated=False, reason=REASON_HB,
+               # Kept for sources/hb.py, should Bremen allow access from data centres.
                attribution="Texte: Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt "
                "Bremen, Lizenz CC BY-NC-ND 3.0."),
         _state("HH", "Hamburg", "https://www.landesrecht-hamburg.de", ("Freie und Hansestadt Hamburg",),

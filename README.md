@@ -28,7 +28,7 @@
 <img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository bundesrecht übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf-dunkel.svg#gh-dark-mode-only" width="100%">
 
 - **[`app/sync.py`](app/sync.py)** holt jede Nacht die geänderten Gesetze von gesetze-im-internet.de und wandelt sie mit [`app/convert.py`](app/convert.py) in Markdown um. Das läuft als Action im Repository **[bundesrecht](https://github.com/Gesetze-fuer-KI/bundesrecht)**, das die Dateien samt Historie enthält.
-- **Landesrecht:** `sync.py --land BY` spiegelt das Portal eines Landes ([`app/sources/`](app/sources/), [`app/state_sync.py`](app/state_sync.py)) in dasselbe Format, jedes Land in ein eigenes Repository `landesrecht-<kürzel>` ([Bayern](https://github.com/Gesetze-fuer-KI/landesrecht-by), [Brandenburg](https://github.com/Gesetze-fuer-KI/landesrecht-bb), [Bremen](https://github.com/Gesetze-fuer-KI/landesrecht-hb), [Nordrhein-Westfalen](https://github.com/Gesetze-fuer-KI/landesrecht-nw), [Sachsen](https://github.com/Gesetze-fuer-KI/landesrecht-sn)). Die übrigen elf Länder erlauben den automatischen Abruf nicht; warum, steht in ihren Repositories und auf [gesetze-fuer-ki.de/daten](https://gesetze-fuer-ki.de/daten/#landesrecht).
+- **Landesrecht:** `sync.py --land BY` spiegelt das Portal eines Landes ([`app/sources/`](app/sources/), [`app/state_sync.py`](app/state_sync.py)) in dasselbe Format, jedes Land in ein eigenes Repository `landesrecht-<kürzel>` ([Bayern](https://github.com/Gesetze-fuer-KI/landesrecht-by), [Brandenburg](https://github.com/Gesetze-fuer-KI/landesrecht-bb), [Nordrhein-Westfalen](https://github.com/Gesetze-fuer-KI/landesrecht-nw), [Sachsen](https://github.com/Gesetze-fuer-KI/landesrecht-sn)). Die übrigen zwölf Länder erlauben den automatischen Abruf nicht (Bremen sperrt Abrufe aus Rechenzentren); warum, steht in ihren Repositories und auf [gesetze-fuer-ki.de/daten](https://gesetze-fuer-ki.de/daten/#landesrecht).
 - **[`app/server.py`](app/server.py)** klont diese Repositories, baut daraus einen SQLite-Suchindex ([`app/store.py`](app/store.py)) und stellt die [fünf Werkzeuge](https://gesetze-fuer-ki.de/werkzeuge/) über MCP bereit. Frühere Fassungen liest [`app/repo.py`](app/repo.py) aus git.
 - **[`docs/`](docs/)** ist die Webseite gesetze-fuer-ki.de; der Server liefert sie unter `/` mit aus.
 
@@ -64,7 +64,7 @@ uv run python sync.py --land SN --out /tmp/landesrecht-sn --max-minutes 5   # La
 
 ## Lizenz
 
-[AGPL-3.0 oder später](LICENSE), © 2026 Marcel Bruckner. Die Gesetzestexte des Bundes, von Nordrhein-Westfalen, Sachsen und Brandenburg sind als amtliche Werke gemeinfrei (§ 5 UrhG); für Bayern erlauben die Nutzungshinweise des Portals die uneingeschränkte Weiterverwendung; die Texte aus Bremen stehen unter CC BY-NC-ND 3.0 (Transparenzportal Bremen, Der Senator für Finanzen der Freien Hansestadt Bremen).
+[AGPL-3.0 oder später](LICENSE), © 2026 Marcel Bruckner. Die Gesetzestexte des Bundes, von Nordrhein-Westfalen, Sachsen und Brandenburg sind als amtliche Werke gemeinfrei (§ 5 UrhG); für Bayern erlauben die Nutzungshinweise des Portals die uneingeschränkte Weiterverwendung.
 
 ---
 
