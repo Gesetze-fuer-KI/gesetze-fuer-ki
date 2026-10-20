@@ -1,4 +1,5 @@
 import asyncio
+import dataclasses
 import json
 import os
 import shutil
@@ -165,10 +166,10 @@ def srv(tmp_path, monkeypatch):
     _state_law(nw, "NW", "nw-nwg", "NwG", "Nordrhein-westfälisches Gesetz", "§ 1 Geltungsbereich",
                "Dieses Gesetz gilt in Nordrhein-Westfalen.")
     _state_file(nw, complete=False)
-    hb = tmp_path / "landesrecht-hb"
-    _state_law(hb, "HB", "hb-brg", "BrG", "Bremisches Gesetz", "§ 1 Zweck", "Dieses Gesetz gilt in Bremen.")
-    _state_file(hb, complete=True)
-    s = _serve(tmp_path, monkeypatch, {"BY": by, "NW": nw, "HB": hb})
+    sn = tmp_path / "landesrecht-sn"
+    _state_law(sn, "SN", "sn-sng", "SnG", "Sächsisches Gesetz", "§ 1 Zweck", "Dieses Gesetz gilt in Sachsen.")
+    _state_file(sn, complete=True)
+    s = _serve(tmp_path, monkeypatch, {"BY": by, "NW": nw, "SN": sn})
     yield s
     s.close()
 
@@ -192,6 +193,8 @@ def test_search_in_law_without_land_finds_state_law(srv):
 def test_not_integrated_state(srv):
     out = server.search_laws("Schule", land="Hessen")
     assert "noch nicht integriert" in out and "kontakt@gesetze-fuer-ki.de" in out
+    out = server.search_laws("Schule", land="Bremen")
+    assert "noch nicht integriert" in out and "Rechenzentren" in out
 
 
 def test_state_in_progress(srv):
@@ -208,7 +211,7 @@ def test_unknown_land(srv):
 def test_land_scope(srv):
     assert server.land_scope(srv, None) == (None, None)
     assert server.land_scope(srv, "Freistaat Bayern") == ("BY", None)
-    code, message = server.land_scope(srv, "SN")  # integrated, but no repository indexed yet
+    code, message = server.land_scope(srv, "BB")  # integrated, but no repository indexed yet
     assert code is None and "zum ersten Mal abgeglichen" in message
 
 
@@ -230,10 +233,15 @@ def test_state_provision_labelled(srv):
     assert "Quelle: https://example.org/by-minig" in out
 
 
-def test_state_attribution(srv):
-    out = server.get_provision("BrG", "§ 1")
-    assert "CC BY-NC-ND 3.0." in out
-    assert "CC BY-NC-ND 3.0." in server.get_law_outline("BrG")
+def test_state_attribution(srv, monkeypatch):
+    # No integrated state needs an attribution today; Bremen's would, were it integrated.
+    sn = dataclasses.replace(server.states.STATES["SN"], attribution="Texte: Landesportal, Lizenz CC BY 4.0.")
+    monkeypatch.setitem(server.states.STATES, "SN", sn)
+    out = server.get_provision("SnG", "§ 1")
+    assert "Lizenz CC BY 4.0." in out
+    assert "Lizenz CC BY 4.0." in server.get_law_outline("SnG")
+    assert "Lizenz CC BY 4.0." in server.search_laws("Zweck", land="Sachsen")
+    assert "Lizenz CC BY 4.0." not in server.get_provision("MiniG", "§ 1", land="Bayern")
 
 
 def test_federal_provision_unchanged(srv):
@@ -243,8 +251,8 @@ def test_federal_provision_unchanged(srv):
 
 def test_not_found_lists_contained_states(srv):
     out = server.get_provision("HBO", "§ 1")
-    assert "Enthalten: Bundesrecht und Landesrecht aus Bayern und Bremen." in out
-    assert "Im Aufbau: Brandenburg, Nordrhein-Westfalen und Sachsen." in out
+    assert "Enthalten: Bundesrecht und Landesrecht aus Bayern und Sachsen." in out
+    assert "Im Aufbau: Brandenburg und Nordrhein-Westfalen." in out
     assert "Andere Länder fehlen noch (kontakt@gesetze-fuer-ki.de)." in out
 
 
@@ -314,7 +322,7 @@ def test_history_works_for_state_law(srv_with_git):
 
 def test_health_reports_states(srv):
     response = asyncio.run(server.health(None))
-    assert json.loads(response.body)["states"] == {"BY": True, "HB": True, "NW": False}
+    assert json.loads(response.body)["states"] == {"BY": True, "NW": False, "SN": True}
 
 
 def test_search_in_federal_law_with_land(srv):

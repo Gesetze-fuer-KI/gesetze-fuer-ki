@@ -5,9 +5,15 @@ import pytest
 import states
 
 
-def test_all_sixteen_states_and_five_integrated():
+def test_all_sixteen_states_and_four_integrated():
     assert len(states.STATES) == 16
-    assert {s.code for s in states.STATES.values() if s.integrated} == {"BY", "NW", "SN", "BB", "HB"}
+    assert {s.code for s in states.STATES.values() if s.integrated} == {"BY", "NW", "SN", "BB"}
+
+
+def test_bremen_blocks_data_centres():
+    hb = states.STATES["HB"]
+    assert not hb.integrated and hb.reason == states.REASON_HB
+    assert "Rechenzentren" in states.not_integrated_text(hb)
 
 
 @pytest.mark.parametrize("text", ["BY", "by", "Bayern", "Freistaat Bayern"])

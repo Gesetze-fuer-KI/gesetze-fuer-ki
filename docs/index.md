@@ -13,7 +13,7 @@ gesamten aktuellen Bundesrecht: rund 6.100 Gesetze und Verordnungen, von der
 Gewerbeordnung bis zum Umsatzsteuergesetz, jede Nacht abgeglichen mit den amtlichen
 Texten auf [gesetze-im-internet.de](https://www.gesetze-im-internet.de). Dazu kommt das
 Landesrecht von Bayern, Nordrhein-Westfalen und Sachsen, direkt von den Portalen der Länder;
-Brandenburg und Bremen sind [im Aufbau](daten.md#landesrecht).
+Brandenburg ist [im Aufbau](daten.md#landesrecht).
 Einmal verbunden, sucht Claude, ChatGPT oder ein anderer Agent selbst die passenden
 Paragrafen heraus, wenn Ihre Frage das Recht berührt, und antwortet mit dem Wortlaut,
 dem Stand und einem Link zur Quelle.
@@ -55,12 +55,12 @@ jedes Land in ein eigenes Repository. Mehr dazu unter [Daten und Grenzen](daten.
 
 | Enthalten | Nicht enthalten |
 |---|---|
-| Alle Gesetze und Rechtsverordnungen des Bundes in der aktuellen Fassung | Landesrecht der elf Länder, deren Portale den Abruf nicht erlauben |
+| Alle Gesetze und Rechtsverordnungen des Bundes in der aktuellen Fassung | Landesrecht der zwölf Länder, deren Portale den Abruf nicht erlauben |
 | Änderungen ab Oktober 2026 mit Datum, abrufbar als frühere Fassung | Ältere Fassungen vor dem Start dieses Dienstes |
 | | Gerichtsentscheidungen (geplant), EU-Verordnungen wie die DSGVO |
 
 **Landesrecht:** Gesetze und Verordnungen von Bayern, Nordrhein-Westfalen und Sachsen. Im
-Aufbau sind Brandenburg und Bremen; ein Land ist durchsuchbar, sobald sein erster
+Aufbau ist Brandenburg; ein Land ist durchsuchbar, sobald sein erster
 vollständiger Abgleich durch ist.
 
 Mehr dazu unter [Daten und Grenzen](daten.md).

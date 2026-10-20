@@ -6,9 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Public MCP server for German federal and state law. Code in `app/`, docs site (German) in `docs/`. Federal data
 lives in `Gesetze-fuer-KI/bundesrecht`, state law in one repo per state, `Gesetze-fuer-KI/landesrecht-<code>` (by, bb,
-hb, nw, sn; the other eleven hold only a README). Each data repo's nightly workflow (`.github/workflows/sync.yml`
-there) checks out this repo and runs `app/sync.py`, so a change to the sync's command line must be made in this
-repo, `bundesrecht` and the five integrated state repos.
+nw, sn are integrated; the other twelve are not. hb keeps its source `sources/hb.py`, but Bremen's portal
+answers 403 to data centres, so it stays off until Bremen allows access). Each data repo's nightly workflow
+(`.github/workflows/sync.yml` there) checks out this repo and runs `app/sync.py`, so a change to the sync's command line must be made in this
+repo, `bundesrecht` and the four integrated state repos.
 
 Data flow: `sync.py` (nightly, in the data repo's Action) mirrors gesetze-im-internet.de into one Markdown file per
 law and commits; `server.py` clones that repo, pulls hourly, rebuilds the SQLite FTS5 index (`store.py`) on change
