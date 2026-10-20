@@ -150,12 +150,46 @@ def test_list_laws_rejects_other_document_types():
         hb.HbSource().list_laws(client)
 
 
-def test_list_laws_rejects_two_versions_of_one_law():
+def test_list_laws_keeps_the_later_of_two_versions_of_one_law(caplog):
     source = hb.HbSource()
     source.cache = {"410489": "hb-tariftvergabegbr", "270394": "hb-tariftvergabegbr", "232507": "hb-verfbr2019",
                     "192655": "hb-192655", "344516": "hb-athschulbacpobr2023"}
-    with Portal().client() as client, pytest.raises(ValueError, match="hb-tariftvergabegbr"):
+    with Portal().client() as client:
+        entries = source.list_laws(client)
+    # 410489 applies from 02.10.2026, 270394 from 12.04.2025: the later one stays.
+    assert [e.url for e in entries if e.slug == "hb-tariftvergabegbr"] == [entries[0].url]
+    assert "-410489?" in entries[0].url and len(entries) == 4
+    assert any(r.levelname == "WARNING" and "hb-tariftvergabegbr" in r.getMessage() for r in caplog.records)
+    # Same Inkrafttreten: the higher version id wins, whatever the order.
+    a = hb._Hit("100", "u100", "x", datetime.date(2026, 1, 1))
+    b = hb._Hit("99", "u99", "x", datetime.date(2026, 1, 1))
+    assert hb._later(a, b) is a and hb._later(b, a) is a
+
+
+def test_list_laws_rejects_an_unrecognised_page_and_does_not_cache_it():
+    laws = {doc: read(f"{doc}.html") for doc in LAWS}
+    laws["232507"] = "<html><body><h1>Wartungsarbeiten</h1></body></html>"  # a 200 without juris markup
+    source = hb.HbSource()
+    with Portal(laws=laws).client() as client, pytest.raises(ValueError, match="232507"):
         source.list_laws(client)
+    assert "232507" not in source.cache
+
+
+def test_get_retries_once_on_a_server_error(monkeypatch):
+    monkeypatch.setattr(hb, "RETRY_DELAY", 0)
+    calls = []
+
+    def handle(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url.path)
+        return httpx.Response(503) if len(calls) == 1 else httpx.Response(200, text="ok")
+
+    with httpx.Client(transport=httpx.MockTransport(handle)) as client:
+        assert hb._get(client, "https://example.org/x") == "ok"
+    assert len(calls) == 2
+    calls.clear()
+    with httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(404))) as client, \
+            pytest.raises(httpx.HTTPStatusError):
+        hb._get(client, "https://example.org/x")  # a 404 is not retried
 
 
 def test_list_laws_fails_on_an_unreachable_law_page_but_keeps_what_it_resolved():
@@ -291,6 +325,21 @@ def test_rejects_the_page_of_another_law():
     portal = Portal()
     with portal.client() as client, pytest.raises(ValueError, match="hb-schulgbr"):
         hb.HbSource().fetch(client, state_sync.Entry("hb-tariftvergabegbr", url("270394")), D)
+
+
+def test_rejects_an_unrecognised_page_instead_of_skipping_it():
+    html = read("410489.html")
+    with pytest.raises(ValueError, match="unrecognised"):
+        fetch("410489", html.replace('class="docLayoutText"', 'class="other"'))
+    with pytest.raises(ValueError, match="Dokumenttyp"):
+        fetch("410489", html.replace("Dokumenttyp:", "Art des Dokuments:"))
+
+
+def test_norm_designation_is_a_whole_word():
+    assert not hb._NORM_DESIGNATION.match("Anlagenverzeichnis")
+    assert hb._NORM_DESIGNATION.match("Anlagen 1 bis 3") and hb._NORM_DESIGNATION.match("§ 1")
+    html = read("406160.html").replace(">Anlage</h3>", ">Anlagenverzeichnis</h3>")
+    assert store.split_law(fetch("406160", html).markdown)[2][-1].unit_id == "anlagenverzeichnis"
 
 
 def test_rejects_a_page_without_law_text():

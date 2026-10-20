@@ -24,7 +24,8 @@ run thus reads all ~1,600 pages while listing (two at a time, before the runner'
 applies), holding them compressed for fetch; with the cache, later nights read only new versions.
 
 Law: /metainformationen/<title>-<version id>?template=20_gp_ifg_meta_detail_d is the whole
-text: a header (abbreviation, juris Dokumenttyp: only Gesetz and Verordnung are kept), the title, the period of this version, the Stand ("letzte berücksichtigte Änderung"),
+text: a header (abbreviation, juris Dokumenttyp: only Gesetz and Verordnung are kept), the title,
+the period of this version, the Stand ("letzte berücksichtigte Änderung"),
 then one block per unit: Eingangsformel, table of contents (skipped), Gliederungen (heading
 level h3, h4, … is their depth) and §§/Artikel/Anlagen with their footnotes. Unit ids come from
 the designations ("par5", "zweiterhauptteil-1abschnitt").
@@ -41,6 +42,7 @@ import datetime
 import html
 import logging
 import re
+import time
 import zlib
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
@@ -63,6 +65,7 @@ LISTING_PARAMS = {
     "vorschriften[0]": LISTING_TYPE, "gltigkeit[0]": "In Kraft", "sort": "titel", "order": "asc",
 }
 PAGE_SIZE = 50  # the most the portal shows per page
+RETRY_DELAY = 5.0  # seconds before the one retry of a request that failed on the server's side
 KINDS = {"Gesetz", "Verordnung", "Rechtsverordnung"}  # juris Dokumenttyp of the laws kept
 MIN_TEXT_WITHOUT_NORMS = 2000  # a longer text without any § or Artikel is a layout this parser does not know
 
@@ -70,15 +73,18 @@ _COUNT = re.compile(r"Ergebnisse\s+[\d.]+\s*-\s*[\d.]+\s+von\s+\(([\d.]+)\)")
 _HIT = re.compile(r'<li class="search-result-item" data-id="(\d+)">(.*?)</li>', re.DOTALL)
 _HIT_TYPES = re.compile(r"<b>Dokumententyp:</b>\s*((?:<span>[^<]*</span>)+)")
 _HIT_STAND = re.compile(r"Stand: (\d{2})\.(\d{2})\.(\d{4})")
+_HIT_INKRAFT = re.compile(r"Inkrafttreten: (\d{2}\.\d{2}\.\d{4})")
 _HIT_LINK = re.compile(r'<a class="more" href="([^"]+)"[^>]*><b>Vorschrift direkt aufrufen</b>')
 _VERSION = re.compile(r"-(\d+)\?")
 _DATE = re.compile(r"(\d{2})\.(\d{2})\.(\d{4})")
 _PERIOD = re.compile(r"Gültigkeit vom (\d{2}\.\d{2}\.\d{4})(?: bis (\d{2}\.\d{2}\.\d{4}))?")
 _TITLE_END = re.compile(r"(?:Vom|vom|In der Fassung|in der Fassung)\b")
 
-_NORM_DESIGNATION = re.compile(r"(?:§§?|Art\.|Artikel|Anlagen?|Anhang)\s*(?:\d+[a-z]*\b)?(?:\s+bis\s+\d+[a-z]*\b)?")
+_NORM_DESIGNATION = re.compile(
+    r"(?:§§?|Art\.|(?:Artikel|Anlagen?|Anhang)\b)\s*(?:\d+[a-z]*\b)?(?:\s+bis\s+\d+[a-z]*\b)?")
 _GLIEDERUNG = re.compile(
-    rf"(?:[IVXLC\d]+\.\s*|{ORDINAL})?(?:Hauptteil|Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
+    rf"(?:[IVXLC\d]+\.\s*|{ORDINAL})?"
+    r"(?:Hauptteil|Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
     r"(?:\s+[IVXLC\d]+[a-z]?\b\.?)?")
 
 
@@ -87,6 +93,7 @@ class _Hit:
     version: str
     url: str
     lastmod: str
+    inkraft: datetime.date
 
 
 class HbSource:
@@ -110,17 +117,19 @@ class HbSource:
         try:
             for hit, page in zip(todo, pool.map(lambda h: _get(client, h.url), todo)):
                 # Saved one by one: a listing that breaks off keeps what it has resolved.
-                self.cache[hit.version] = slug_for(law_key(page) or hit.version)
+                self.cache[hit.version] = _resolve(page, hit.version)
                 self._pages[hit.version] = zlib.compress(page.encode())
         finally:
             pool.shutdown(cancel_futures=True)  # after a failure, request no more pages
-        entries: dict[str, Entry] = {}
+        chosen: dict[str, _Hit] = {}
         for h in hits:
             slug = self.cache[h.version]
-            if slug in entries:
-                raise ValueError(f"{slug} listed twice ({entries[slug].url}, {h.url})")
-            entries[slug] = Entry(slug, h.url, h.lastmod)
-        return list(entries.values())
+            if slug in chosen:
+                # Two listed versions of one law (the portal lagging): the later one applies.
+                log.warning("%s listed twice (versions %s and %s)", slug, chosen[slug].version, h.version)
+                h = _later(chosen[slug], h)
+            chosen[slug] = h
+        return [Entry(slug, h.url, h.lastmod) for slug, h in chosen.items()]
 
     def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
         m = _VERSION.search(entry.url)
@@ -130,13 +139,43 @@ class HbSource:
 
 
 def _get(client: httpx.Client, url: str) -> str:
+    """A page's text; a network error or a 5xx is retried once after RETRY_DELAY."""
+    try:
+        response = client.get(url)
+        if response.status_code < 500:
+            response.raise_for_status()
+            return response.text
+    except httpx.TransportError:
+        pass
+    time.sleep(RETRY_DELAY)
     response = client.get(url)
     response.raise_for_status()
     return response.text
 
 
+def _later(a: _Hit, b: _Hit) -> _Hit:
+    """The version that applies later; on the same day the one with the higher id."""
+    return max(a, b, key=lambda h: (h.inkraft, int(h.version)))
+
+
+def _resolve(page: str, version: str) -> str:
+    """The slug for a version from its page: the juris key, or the version id for an overview.
+
+    Any other page (an error page, a truncated response, a new template) raises: a made-up slug
+    would be cached for good, and the law's file deleted at the end of the pass.
+    """
+    key = law_key(page)
+    if key:
+        return slug_for(key)
+    _, _, fields = _document(page, version)
+    if "Dokumenttyp" not in fields:
+        return slug_for(version)
+    raise ValueError(f"{version}: a juris document without key")
+
+
 def slug_for(key: str) -> str:
-    """A juris document key (or a version id) as a slug: "TariftVergabeGBR" -> "hb-tariftvergabegbr"."""
+    """A juris document key (or a version id) as a slug:
+    "TariftVergabeGBR" -> "hb-tariftvergabegbr"."""
     return "hb-" + re.sub(r"[^a-z0-9_-]", "_", key.lower())
 
 
@@ -174,13 +213,13 @@ def parse_listing(page: str) -> tuple[int, list[_Hit]]:
         names = [line(html.unescape(x)).removeprefix("•").strip() for x in spans]
         if LISTING_TYPE not in names:  # an overview carries every type
             raise ValueError(f"{version}: unexpected type {', '.join(names) or None}")
-        stand, link = _HIT_STAND.search(block), _HIT_LINK.search(block)
-        if not stand or not link:
-            raise ValueError(f"{version}: hit without Stand or link")
+        stand, inkraft, link = _HIT_STAND.search(block), _HIT_INKRAFT.search(block), _HIT_LINK.search(block)
+        if not stand or not inkraft or not link:
+            raise ValueError(f"{version}: hit without Stand, Inkrafttreten or link")
         url = link[1].replace("&amp;", "&")
         if not url.startswith(f"{BASE}/metainformationen/") or f"-{version}?" not in url:
             raise ValueError(f"{version}: unexpected link {url}")
-        hits.append(_Hit(version, url, f"{stand[3]}-{stand[2]}-{stand[1]}/{version}"))
+        hits.append(_Hit(version, url, f"{stand[3]}-{stand[2]}-{stand[1]}/{version}", _date(inkraft[1])))
     return int(m[1].replace(".", "")), hits
 
 
@@ -202,19 +241,16 @@ def _date(text: str) -> datetime.date:
 
 def parse_law(page: str, url: str, slug: str, today: datetime.date) -> Fetched | None:
     """The Markdown file for one law from its page; None if it is no Gesetz or Verordnung."""
-    root = parse_html(page)
-    text = next((n for n in root.iter() if n.tag == "div" and "docLayoutText" in n.classes()), None)
-    header = next((n for n in text.iter() if n.tag == "div" and "jgwsHead" in n.classes()), None) \
-        if text is not None else None
-    if text is None or header is None:
-        return None  # no juris document: an overview or a notice
-    fields = _fields(header)
+    root, text, fields = _document(page, url)
     kind = fields.get("Dokumenttyp")
-    if kind not in KINDS:
-        if kind:  # a juris document of another type; a page without one is an overview
-            log.info("skipped juris Dokumenttyp: %s", kind)
-        return None
     key = law_key(page)
+    if kind is None:
+        if key is None:
+            return None  # an overview: the portal's layout for documents that are no juris text
+        raise ValueError(f"{url}: no Dokumenttyp in the header")
+    if kind not in KINDS:
+        log.info("skipped juris Dokumenttyp: %s", kind)
+        return None
     if key is None or slug_for(key) != slug:
         raise ValueError(f"{url}: the page of {slug_for(key) if key else 'another document'}, not {slug}")
     units_nodes = [n for n in text.iter() if n.tag == "div" and "jgwsAiZDoc" in n.classes()]
@@ -231,7 +267,8 @@ def parse_law(page: str, url: str, slug: str, today: datetime.date) -> Fetched |
         kurz = None
     law.title_notes, law.notes = law.notes, []
 
-    period = next((line(n.text()) for n in text.iter() if n.tag == "div" and "docLayoutMarginTopMore" in n.classes()), "")
+    period = next((line(n.text()) for n in text.iter()
+                   if n.tag == "div" and "docLayoutMarginTopMore" in n.classes()), "")
     m = _PERIOD.search(period)
     if m:
         gilt_ab, until = _date(m[1]), _date(m[2]) if m[2] else None
@@ -268,6 +305,17 @@ def parse_law(page: str, url: str, slug: str, today: datetime.date) -> Fetched |
         # A changed page layout must not turn a whole law into one Eingangsformel.
         raise ValueError(f"{url}: no § or Artikel in {sum(len(u.body) for u in units)} characters of text")
     return Fetched(markdown=render(front, units), front=front, next_version_from=next_version_from)
+
+
+def _document(page: str, where: str) -> tuple[Node, Node, dict[str, str]]:
+    """(tree, text container, header fields) of a document page; anything else raises."""
+    root = parse_html(page)
+    text = next((n for n in root.iter() if n.tag == "div" and "docLayoutText" in n.classes()), None)
+    header = next((n for n in text.iter() if n.tag == "div" and "jgwsHead" in n.classes()), None) \
+        if text is not None else None
+    if text is None or header is None:
+        raise ValueError(f"{where}: unrecognised page (no document text or header)")
+    return root, text, _fields(header)
 
 
 def _fields(header: Node) -> dict[str, str]:
