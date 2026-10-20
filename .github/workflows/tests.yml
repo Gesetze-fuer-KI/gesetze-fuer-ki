@@ -17,3 +17,14 @@ jobs:
       - name: Build the docs (fails on broken links)
         working-directory: app
         run: uv run --frozen --only-group docs mkdocs build --strict -f ../mkdocs.yml --site-dir /tmp/site
+
+  image:
+    # Builds the image and imports the server in it: the tests run from the source tree and cannot see a module the
+    # Dockerfile leaves out.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the image
+        run: docker build -t gesetze-fuer-ki:test .
+      - name: Import the server inside the image
+        run: docker run --rm gesetze-fuer-ki:test python -c "import server"
