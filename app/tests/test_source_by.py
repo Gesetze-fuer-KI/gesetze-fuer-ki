@@ -6,6 +6,7 @@ from pathlib import Path
 import httpx
 import pytest
 
+import sources
 import state_sync
 import store
 from sources import by
@@ -69,7 +70,7 @@ def fetch(name: str, xml: bytes | None = None, today: datetime.date = D) -> stat
 
 
 def test_registered():
-    assert state_sync.SOURCES["by"]().code == "BY"
+    assert sources.SOURCES["by"]().code == "BY"
 
 
 def test_slug():
@@ -191,13 +192,19 @@ def test_duplicate_designations_get_stable_suffixes():
 
 
 def test_portal_serves_only_the_current_version():
-    # The portal has no future versions (Hilfe: "in aktueller Fassung"); a text that only
-    # starts after today is not mirrored: the law fails and keeps its old file.
+    # The portal has no future versions (Hilfe: "in aktueller Fassung"). A text that only
+    # starts after today is not mirrored early: the runner keeps the old file until then.
     xml = (FIXTURES / "BayBO.xml").read_bytes().replace(b"<inkraft>2026-05-01</inkraft>",
                                                        b"<inkraft>2027-01-01</inkraft>")
-    with pytest.raises(ValueError, match="2027-01-01"):
+    with pytest.raises(state_sync.NotYetInForce) as exc:
         fetch("BayBO", xml)
+    assert exc.value.start == "2027-01-01"
     assert fetch("BayBO", xml, today=datetime.date(2027, 1, 1)).next_version_from is None
+
+
+def test_hit_count_with_thousands_separator():
+    total, entries = by.parse_hitlist('<p id="readable">1.476 Treffer in 1.476 Verwaltungsvorschriften</p>')
+    assert total == 1476 and entries == []
 
 
 def test_fetch_requests_the_zip():

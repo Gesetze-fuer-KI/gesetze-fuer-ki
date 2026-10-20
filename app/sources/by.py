@@ -14,8 +14,8 @@ Law: the per-law ZIP (/Content/Zip/<id>) holds one XML file in the portal's own 
 from the designations instead ("art44a", "ersterteil-1abschnitt").
 
 The portal only serves the version in force ("in aktueller Fassung", Hilfe), so there is no
-future version to announce and next_version_from is always None. A text that only applies
-after today is refused rather than mirrored early.
+future version to announce and next_version_from is always None. Should it ever serve a text
+that only applies after today, fetch raises NotYetInForce and the runner waits for that date.
 """
 
 from __future__ import annotations
@@ -31,17 +31,16 @@ import zipfile
 
 import httpx
 
+from convert import _SUBSCRIPT, _SUPERSCRIPT, _clean, _escape_list_marker, footnote_block
 from state_markdown import render
-from state_sync import Entry, Fetched
+from state_sync import Entry, Fetched, NotYetInForce
 from store import Unit
 
 BASE = "https://www.gesetze-bayern.de"
 NORMTYPES = ("ges", "rv")
 MAX_XML_BYTES = 50_000_000
 
-_COUNT = re.compile(r'<p id="readable">\s*(\d+) Treffer')
-_SUPERSCRIPT = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
-_SUBSCRIPT = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
+_COUNT = re.compile(r'<p id="readable">\s*(\d[\d.]*) Treffer')  # "1.476 Treffer"
 # Rendered as blocks of their own (their content is walked), not as inline text.
 _CONTAINERS = {"p", "absatz.text", "annex.text", "annex.koerper", "einleitungssatz", "einleitungssatz.text"}
 # Rendered as headings, or not at all.
@@ -112,7 +111,7 @@ def parse_hitlist(page: str) -> tuple[int, list[Entry]]:
         stand = re.search(r"Rechtsstand:\s*(\d{2})\.(\d{2})\.(\d{4})", block)
         lastmod = f"{stand[3]}-{stand[2]}-{stand[1]}" if stand else None
         entries.append(Entry(slug_for(doc_id), f"{BASE}/Content/Document/{doc_id}", lastmod))
-    return int(m[1]), entries
+    return int(m[1].replace(".", "")), entries
 
 
 def parse_law(xml: bytes, url: str, today: datetime.date) -> Fetched:
@@ -125,7 +124,7 @@ def parse_law(xml: bytes, url: str, today: datetime.date) -> Fetched:
     doc_id = doc.get("dokid") or url.rsplit("/", 1)[1]
     inkraft = datetime.date.fromisoformat((head.findtext("inkraft") or "").strip())
     if inkraft > today:
-        raise ValueError(f"{doc_id}: the portal's text applies from {inkraft.isoformat()}, after {today.isoformat()}")
+        raise NotYetInForce(inkraft.isoformat())
 
     law = _Law()
     abk = law.plain(head.find("amtlicheAbk"))
@@ -161,7 +160,7 @@ def _line(text: str) -> str:
 
 def _text(raw: str) -> str:
     """Inline text with line breaks kept, spaces collapsed within lines."""
-    lines = [re.sub(r" +", " ", line).strip() for line in raw.split("\n")]
+    lines = [_clean(line).strip() for line in raw.split("\n")]
     return "  \n".join(line for line in lines if line)
 
 
@@ -172,16 +171,6 @@ def _slug(text: str) -> str:
         s = s.replace(a, b)
     s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
     return re.sub(r"[^a-z0-9]+", "", s)[:40]
-
-
-def _escape_list_marker(marker: str) -> str:
-    # "1." at the start of a list item would become a Markdown ordered list.
-    return re.sub(r"^(\d+[a-z]?)\.", r"\1\\.", marker)
-
-
-def _footnotes(notes: list[str]) -> str:
-    quoted = ["\n".join("> " + line if line else ">" for line in note.split("\n")) for note in notes]
-    return "> **Fußnote**\n>\n" + "\n>\n".join(quoted)
 
 
 class _Law:
@@ -203,7 +192,7 @@ class _Law:
 
     def add(self, kind: str, base: str, ebene: int | None, heading: str, blocks: list[str]) -> None:
         if self.notes:
-            blocks = blocks + [_footnotes(self.notes)]
+            blocks = blocks + [footnote_block(self.notes)]
         self.units.append(Unit(kind, self.unit_id(base), ebene, heading, "\n\n".join(blocks)))
         self.notes = []
 

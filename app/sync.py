@@ -191,11 +191,12 @@ def main() -> None:
     if not args.land:
         sys.exit(run(args.out, args.only, args.workers))
 
-    import state_sync  # imports this module, so not at the top
+    import sources  # imports this module (through state_sync), so not at the top
+    import state_sync
 
-    factory = state_sync.SOURCES.get(args.land.lower())
+    factory = sources.SOURCES.get(args.land.lower())
     if factory is None:
-        log.error("no source for state %r (known: %s)", args.land, ", ".join(sorted(state_sync.SOURCES)) or "none")
+        log.error("no source for state %r (known: %s)", args.land, ", ".join(sorted(sources.SOURCES)) or "none")
         sys.exit(2)
     sys.exit(state_sync.run(args.out, factory(), args.only, args.max_minutes, datetime.date.today()))
 

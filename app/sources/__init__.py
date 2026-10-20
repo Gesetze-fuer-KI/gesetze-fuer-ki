@@ -1,8 +1,10 @@
-"""One module per state portal; importing this package registers each in state_sync.SOURCES."""
+"""One module per state portal, and SOURCES: each state's source, keyed by lower-case state code."""
 
 from __future__ import annotations
 
-from sources import by
-from state_sync import SOURCES
+from collections.abc import Callable
 
-SOURCES["by"] = by.BySource
+from sources.by import BySource
+from state_sync import Source
+
+SOURCES: dict[str, Callable[[], Source]] = {"by": BySource}

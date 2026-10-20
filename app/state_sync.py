@@ -4,7 +4,7 @@ Run nightly by each state data repository's GitHub Action:
 
     python sync.py --land BY --out /path/to/landesrecht-by
 
-A source (one per state portal, see SOURCES) lists the laws and fetches one at a time.
+A source (one per state portal, see sources.SOURCES) lists the laws and fetches one at a time.
 State portals are slower and stricter than gesetze-im-internet.de, so the first full pass
 may take several nights: a run stops starting new fetches after `--max-minutes`, saves
 which laws this pass has done in `<out>/.sync/state.json`, and the next run carries on.
@@ -42,6 +42,17 @@ class Entry:
     lastmod: str | None = None
 
 
+class NotYetInForce(Exception):
+    """The portal only has a text that applies from `start` (ISO date) on, not today's.
+
+    Not a failure: the law keeps its file (or stays absent if new) and is fetched again on `start`.
+    """
+
+    def __init__(self, start: str):
+        super().__init__(f"text applies from {start}")
+        self.start = start
+
+
 @dataclass
 class Fetched:
     markdown: str
@@ -60,10 +71,6 @@ class Source(Protocol):
     def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
         """None means the entry is no Gesetz or Verordnung and is skipped."""
         ...
-
-
-# Filled by the source modules, keyed by lower-case state code.
-SOURCES: dict[str, Callable[[], Source]] = {}
 
 
 def state_law_path(out: Path, slug: str) -> Path:
@@ -144,6 +151,8 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
                 nvf = known.get("next_version_from")
                 if nvf and nvf <= today.isoformat():
                     return True
+                if nvf and known.get("waiting"):
+                    return False  # only a later text exists; nothing to do before its start date
                 if known.get("skip"):
                     return e.slug not in pass_done and (e.lastmod is None or e.lastmod != known.get("lastmod"))
                 if not state_law_path(out, e.slug).exists():
@@ -157,11 +166,13 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
                 # Unchanged laws count as done for this pass without a request.
                 pass_done |= listed - pass_failed - {e.slug for e in todo}
 
-            def one(e: Entry) -> tuple[Entry, str, Fetched | None]:
+            def one(e: Entry) -> tuple[Entry, str, Fetched | str | None]:
                 if clock() > deadline:
                     return e, "postponed", None
                 try:
                     return e, "fetched", source.fetch(client, e, today)
+                except NotYetInForce as exc:
+                    return e, "waiting", exc.start
                 except Exception as exc:  # one broken law must not stop the others
                     log.warning("%s: %s", e.slug, exc)
                     return e, "failed", None
@@ -184,6 +195,11 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
                         continue
                     if not only:
                         pass_done.add(e.slug)
+                    if status == "waiting":
+                        # Keep the old lastmod: the law is fetched again on the start date anyway.
+                        known = laws.get(e.slug, {})
+                        laws[e.slug] = {"lastmod": known.get("lastmod"), "next_version_from": fetched, "waiting": True}
+                        continue
                     if fetched is None:
                         laws[e.slug] = {"lastmod": e.lastmod, "next_version_from": None, "skip": True}
                         continue
@@ -229,7 +245,3 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
     finally:
         if started:
             save()
-
-
-# The sources package fills SOURCES; imported last, since its modules import this one.
-import sources  # noqa: E402, F401

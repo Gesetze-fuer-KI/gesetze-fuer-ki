@@ -5,6 +5,7 @@ import sys
 import httpx
 import pytest
 
+import sources
 import state_sync
 import sync
 
@@ -23,6 +24,8 @@ class FakeSource:
         self.lastmod = {f"by-law{i:02d}": "2026-01-01" for i in range(n)}
         self.texts = {slug: f"# {slug}\n\nText.\n" for slug in self.lastmod}
         self.future: dict[str, tuple[datetime.date, str]] = {}  # slug -> (start date, new text)
+        # slug -> (start date, text): the portal only has a text that starts later (NotYetInForce before then)
+        self.pending: dict[str, tuple[datetime.date, str]] = {}
         self.fetches = 0
         self.requests = 0
         self.transport = httpx.MockTransport(self._handle)
@@ -38,6 +41,11 @@ class FakeSource:
     def fetch(self, client, entry, today):
         client.get(entry.url)
         self.fetches += 1
+        if entry.slug in self.pending:
+            start, new = self.pending[entry.slug]
+            if today < start:
+                raise state_sync.NotYetInForce(start.isoformat())
+            self.texts[entry.slug] = new
         text, nvf = self.texts[entry.slug], None
         if entry.slug in self.future:
             start, new = self.future[entry.slug]
@@ -205,6 +213,48 @@ def test_future_version_taken_over_on_start_date(tmp_path):
     assert load_state(tmp_path)["laws"]["by-law02"]["next_version_from"] is None
 
 
+def test_text_not_yet_in_force_keeps_the_old_file_and_is_no_failure(tmp_path):
+    src = FakeSource()
+    assert run(tmp_path, src) == 0
+    path = state_sync.state_law_path(tmp_path, "by-law03")
+    old = path.read_text()
+    start = D + datetime.timedelta(days=3)
+    src.pending["by-law03"] = (start, "# ab dem Stichtag\n")
+    src.lastmod["by-law03"] = "2026-10-23"  # the listing already shows the coming version
+    assert run(tmp_path, src) == 0
+    st = load_state(tmp_path)
+    assert st["complete"] and st["pass_failed"] == []
+    assert st["laws"]["by-law03"]["next_version_from"] == start.isoformat()
+    assert path.read_text() == old
+    assert "Nicht abrufbar" not in commit_msg(tmp_path)
+    # not asked again before the start date, although lastmod changed
+    src.fetches = 0
+    assert run(tmp_path, src, today=D + datetime.timedelta(days=1)) == 0
+    assert src.fetches == 0 and path.read_text() == old
+    # taken over on the start date
+    assert run(tmp_path, src, today=start) == 0
+    assert src.fetches == 1 and path.read_text() == "# ab dem Stichtag\n"
+    assert load_state(tmp_path)["laws"]["by-law03"]["next_version_from"] is None
+
+
+def test_new_law_not_yet_in_force_appears_on_its_start_date(tmp_path):
+    src = FakeSource()
+    start = D + datetime.timedelta(days=2)
+    src.lastmod["by-law99"] = start.isoformat()
+    src.pending["by-law99"] = (start, "# neues Gesetz\n")
+    assert run(tmp_path, src) == 0
+    path = state_sync.state_law_path(tmp_path, "by-law99")
+    st = load_state(tmp_path)
+    assert not path.exists() and st["complete"] and st["pass_failed"] == []
+    assert st["laws"]["by-law99"]["next_version_from"] == start.isoformat()
+    src.fetches = 0
+    assert run(tmp_path, src, today=D + datetime.timedelta(days=1)) == 0
+    assert src.fetches == 0 and not path.exists()  # a missing file alone does not trigger a refetch
+    assert run(tmp_path, src, today=start) == 0
+    assert path.read_text() == "# neues Gesetz\n"
+    assert "- neu: BY-LAW99" in commit_msg(tmp_path)
+
+
 def test_crawl_delay_sleeps_between_requests(tmp_path):
     src = FakeSource()
     src.crawl_delay = 20
@@ -334,7 +384,7 @@ def test_federal_cli_unchanged(monkeypatch, tmp_path):
 def test_cli_land_dispatches_to_state_sync(monkeypatch, tmp_path):
     calls = []
     monkeypatch.setattr(sync, "run", lambda *a: pytest.fail("federal sync called"))
-    monkeypatch.setattr(state_sync, "SOURCES", {"by": FakeSource})
+    monkeypatch.setattr(sources, "SOURCES", {"by": FakeSource})
     monkeypatch.setattr(state_sync, "run", lambda *a, **k: calls.append((a, k)) or 0)
     monkeypatch.setattr(sys, "argv", ["sync.py", "--out", str(tmp_path), "--land", "BY", "--max-minutes", "10"])
     with pytest.raises(SystemExit) as exc:
@@ -345,7 +395,7 @@ def test_cli_land_dispatches_to_state_sync(monkeypatch, tmp_path):
 
 
 def test_cli_unknown_land_exits_2(monkeypatch, tmp_path):
-    monkeypatch.setattr(state_sync, "SOURCES", {})
+    monkeypatch.setattr(sources, "SOURCES", {})
     monkeypatch.setattr(sys, "argv", ["sync.py", "--out", str(tmp_path), "--land", "xx"])
     with pytest.raises(SystemExit) as exc:
         sync.main()
