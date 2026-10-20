@@ -37,7 +37,8 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY --from=builder /app/.venv /app/.venv
-COPY app/server.py app/store.py app/repo.py app/convert.py app/states.py ./
+# Every module next to server.py, so a new import cannot be left out of the image (0.2.0 missed states.py).
+COPY app/*.py ./
 COPY --from=docs /site /app/site
 
 ENV PATH="/app/.venv/bin:$PATH" \
