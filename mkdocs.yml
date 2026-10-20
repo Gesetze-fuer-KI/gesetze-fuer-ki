@@ -3,7 +3,7 @@ site_description: Aktuelles Bundesrecht für KI-Assistenten. Ein MCP-Server, mit
 site_url: https://gesetze-fuer-ki.de/
 # No repo_url: Material's repository widget asks api.github.com from the visitor's browser, and the privacy page
 # promises that the browser talks to no one but this server. The footer links the code instead.
-copyright: Copyright &copy; 2026 Marcel Bruckner · <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a> · <a href="https://github.com/Gesetze-fuer-KI/server">Quellcode</a> · <a href="/unterstuetzen/">Unterstützen</a>
+copyright: Copyright &copy; 2026 Marcel Bruckner · <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a> · <a href="https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki">Quellcode</a> · <a href="/unterstuetzen/">Unterstützen</a>
 
 # Planning notes are local-only.
 exclude_docs: |

@@ -34,5 +34,5 @@ docker build -t gesetze-fuer-ki:dev .
   users read them in Claude). Code, comments, docstrings, Python names and parameter names stay English.
 - No request content is logged; the privacy page (`docs/datenschutz.md`) promises it. The docs site makes no
   third-party requests either (privacy plugin, no `repo_url`).
-- Releases: tag `vX.Y.Z` → `publish.yml` pushes `ghcr.io/gesetze-fuer-ki/server`. Deployment lives in
+- Releases: tag `vX.Y.Z` → `publish.yml` pushes `ghcr.io/gesetze-fuer-ki/gesetze-fuer-ki`. Deployment lives in
   `../notefeed-stacks` (compose + Caddy, pins the version) and `../notefeed-ansible`, not here.

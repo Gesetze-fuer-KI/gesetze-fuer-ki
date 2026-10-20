@@ -45,7 +45,7 @@ git log -p -- us/ustg_1980.md
 
 Die Texte stammen von gesetze-im-internet.de (Bundesministerium der Justiz). Amtliche
 Gesetzestexte sind nach § 5 UrhG gemeinfrei. Die Umwandlung erledigt
-[`sync.py`](https://github.com/Gesetze-fuer-KI/server/blob/main/app/sync.py) in
+[`sync.py`](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/blob/main/app/sync.py) in
 Gesetze-fuer-KI. Verbindlich ist die amtliche Fassung; für Fehler der Umwandlung wird
 keine Gewähr übernommen.
 

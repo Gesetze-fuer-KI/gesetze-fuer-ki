@@ -59,7 +59,7 @@ Mehr dazu unter [Daten und Grenzen](daten.md).
 ## Offen
 
 Der Server, die Aufbereitung der Gesetze und diese Seite sind Open Source
-([Gesetze-fuer-KI/server](https://github.com/Gesetze-fuer-KI/server)). Die Gesetzestexte
+([Gesetze-fuer-KI/gesetze-fuer-ki](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki)). Die Gesetzestexte
 selbst liegen als lesbare Markdown-Dateien mit vollständiger Änderungshistorie in einem
 eigenen Repository ([gesetze](https://github.com/Gesetze-fuer-KI/gesetze)): Jede Änderung eines
 Gesetzes ist dort ein Commit, den man Zeile für Zeile nachlesen kann.

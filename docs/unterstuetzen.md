@@ -57,4 +57,4 @@ der QR-Code scannen, dann sind die Angaben schon ausgefüllt; den Betrag wählen
   nutzen.
 - **Fehler melden:** Wenn ein Gesetz falsch dargestellt wird oder eine Suche nichts
   findet, was sie finden sollte, schreiben Sie es als
-  [Issue auf GitHub](https://github.com/Gesetze-fuer-KI/server/issues).
+  [Issue auf GitHub](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/issues).
