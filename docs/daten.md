@@ -55,7 +55,7 @@ Texte ausdrücklich vor. Im Repository jedes Landes steht, woran es genau scheit
 | Hessen | noch nicht integriert | [rv.hessenrecht.hessen.de](https://www.rv.hessenrecht.hessen.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-he) |
 | Mecklenburg-Vorpommern | noch nicht integriert | [landesrecht-mv.de](https://www.landesrecht-mv.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-mv) |
 | Niedersachsen | noch nicht integriert | [voris.wolterskluwer-online.de](https://voris.wolterskluwer-online.de) | Betreiber behält sich die Nutzung der Texte vor, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-ni) |
-| Nordrhein-Westfalen | im Aufbau | [recht.nrw.de](https://recht.nrw.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-nw) |
+| Nordrhein-Westfalen | enthalten | [recht.nrw.de](https://recht.nrw.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-nw) |
 | Rheinland-Pfalz | noch nicht integriert | [landesrecht.rlp.de](https://www.landesrecht.rlp.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-rp) |
 | Saarland | noch nicht integriert | [recht.saarland.de](https://recht.saarland.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-sl) |
 | Sachsen | enthalten | [revosax.sachsen.de](https://www.revosax.sachsen.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-sn) |
