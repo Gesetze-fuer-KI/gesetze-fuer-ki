@@ -37,7 +37,7 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY --from=builder /app/.venv /app/.venv
-COPY app/server.py app/store.py app/repo.py app/convert.py ./
+COPY app/server.py app/store.py app/repo.py app/convert.py app/states.py ./
 COPY --from=docs /site /app/site
 
 ENV PATH="/app/.venv/bin:$PATH" \
