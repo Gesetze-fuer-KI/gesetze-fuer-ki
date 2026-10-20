@@ -14,6 +14,24 @@ nav:
   - Verbinden: verbinden.md
   - Werkzeuge: werkzeuge.md
   - Daten und Grenzen: daten.md
+  - Bundesländer:
+      - laender/index.md
+      - Baden-Württemberg: laender/baden-wuerttemberg.md
+      - Bayern: laender/bayern.md
+      - Berlin: laender/berlin.md
+      - Brandenburg: laender/brandenburg.md
+      - Bremen: laender/bremen.md
+      - Hamburg: laender/hamburg.md
+      - Hessen: laender/hessen.md
+      - Mecklenburg-Vorpommern: laender/mecklenburg-vorpommern.md
+      - Niedersachsen: laender/niedersachsen.md
+      - Nordrhein-Westfalen: laender/nordrhein-westfalen.md
+      - Rheinland-Pfalz: laender/rheinland-pfalz.md
+      - Saarland: laender/saarland.md
+      - Sachsen: laender/sachsen.md
+      - Sachsen-Anhalt: laender/sachsen-anhalt.md
+      - Schleswig-Holstein: laender/schleswig-holstein.md
+      - Thüringen: laender/thueringen.md
   - Unterstützen: unterstuetzen.md
   - Impressum: impressum.md
   - Datenschutz: datenschutz.md
