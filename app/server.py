@@ -112,8 +112,8 @@ def clone_for(law: dict) -> Path:
 def _update_states() -> tuple[dict[str, Path], list[str]]:
     """Clone or update every integrated state's repository: (code -> clone, revisions).
 
-    A state repository that cannot be fetched (not created yet, or gone) is left out, so it
-    never blocks the federal index.
+    A state repository that cannot be fetched keeps its existing clone; one that was never
+    cloned (not created yet, or gone) is left out, so it never blocks the federal index.
     """
     clones: dict[str, Path] = {}
     revisions: list[str] = []
@@ -124,8 +124,12 @@ def _update_states() -> tuple[dict[str, Path], list[str]]:
         try:
             revisions.append(repo.update(clone, STATE_REPO_URL.format(code=code.lower())))
         except Exception as exc:
-            log.warning("state repository %s not available: %s", code, exc)
-            continue
+            if not (clone / ".git").exists():
+                log.warning("state repository %s not available: %s", code, exc)
+                continue
+            # A failed fetch is usually passing: keep serving what the clone already has.
+            log.warning("state repository %s not updated, keeping the clone: %s", code, exc)
+            revisions.append(repo.revision(clone))
         clones[code] = clone
     return clones, revisions
 
@@ -141,7 +145,7 @@ def refresh_once() -> None:
         return
     if db_path.exists():
         existing = store.Store(db_path)
-        if existing.meta("revision") == rev:
+        if existing.meta("revision") == rev and existing.meta("schema") == store.SCHEMA_VERSION:
             INDEX.swap(existing, rev)
             log.info("index at %s is current", rev[:10])
             return

@@ -13,6 +13,7 @@ completed a full pass, so the index never shows a half-mirrored state.
 from __future__ import annotations
 
 import json
+import logging
 import math
 import re
 import sqlite3
@@ -70,6 +71,11 @@ CREATE VIRTUAL TABLE laws_fts USING fts5(
 );
 CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);
 """
+
+# Stored in meta as "schema"; an index built with another version is rebuilt, never reused.
+SCHEMA_VERSION = "2"
+
+log = logging.getLogger("store")
 
 # The `land` value that means federal law only.
 BUND = "BUND"
@@ -140,10 +146,20 @@ def build(data_dir: Path, db_path: Path, revision: str = "", states: dict[str, P
     db.executescript(SCHEMA)
     count = _index_dir(db, data_dir, None)
     for code, clone in sorted((states or {}).items()):
-        complete = _state_complete(clone)
+        # A broken state repository must not take the federal index down with it: its
+        # half-written rows are rolled back and the state counts as incomplete.
+        db.execute("SAVEPOINT state")
+        try:
+            complete = _state_complete(clone)
+            if complete:
+                count += _index_dir(db, clone, code)
+        except Exception as exc:
+            log.warning("state %s not indexed: %s", code, exc)
+            db.execute("ROLLBACK TO state")
+            complete = False
+        db.execute("RELEASE state")
         db.execute("INSERT INTO states VALUES (?, ?)", (code, int(complete)))
-        if complete:
-            count += _index_dir(db, clone, code)
+    db.execute("INSERT INTO meta VALUES ('schema', ?)", (SCHEMA_VERSION,))
     db.execute("INSERT INTO meta VALUES ('revision', ?)", (revision,))
     db.execute("INSERT INTO meta VALUES ('laws', ?)", (str(count),))
     db.commit()

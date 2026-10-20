@@ -1,7 +1,10 @@
+import shutil
+import sqlite3
 import subprocess
 from pathlib import Path
 
 import server
+import store
 import sync
 
 
@@ -82,3 +85,42 @@ def test_refresh_indexes_state_repo(tmp_path, monkeypatch):
     assert law["land"] == "BY"
     assert (server.clone_for(law) / law["path"]).exists()
     assert server.INDEX.revision.count("+") == 1
+
+
+def test_index_with_other_schema_is_rebuilt(tmp_path, monkeypatch):
+    federal = tmp_path / "gesetze"
+    _git_repo(federal, {"ab/abg.md": "---\nabkuerzung: AbG\ntitel: Abgesetz\nquelle: q\n---\n\n# Abgesetz\n"})
+    rev = subprocess.run(["git", "-C", str(federal), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    data = tmp_path / "data"
+    data.mkdir()
+    # An index from before the current schema: same revision, no schema version.
+    db = sqlite3.connect(data / "index.sqlite")
+    db.executescript("CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT);")
+    db.execute("INSERT INTO meta VALUES ('revision', ?)", (rev,))
+    db.commit()
+    db.close()
+    monkeypatch.setattr(server, "DATA_REPO_URL", str(federal))
+    monkeypatch.setattr(server, "DATA_DIR", data)
+    monkeypatch.setattr(server, "STATE_REPO_URL", "")
+    monkeypatch.setattr(server, "INDEX", server.Index())
+    server.refresh_once()
+    s = server.INDEX.get()
+    assert s.meta("schema") == store.SCHEMA_VERSION
+    assert [r["slug"] for r in s.resolve_law("AbG")] == ["abg"]
+
+
+def test_failing_update_keeps_existing_state_clone(tmp_path, monkeypatch):
+    federal, by = tmp_path / "gesetze", tmp_path / "landesrecht-by"
+    _git_repo(federal, {"ab/abg.md": "---\nabkuerzung: AbG\ntitel: Abgesetz\nquelle: q\n---\n\n# Abgesetz\n"})
+    _git_repo(by, {"by/by-bayg.md": "---\nland: BY\nabkuerzung: BayG\ntitel: Bayerngesetz\nquelle: q\n---\n\n# B\n",
+                   ".sync/state.json": '{"complete": true}'})
+    monkeypatch.setattr(server, "DATA_REPO_URL", str(federal))
+    monkeypatch.setattr(server, "DATA_DIR", tmp_path / "data")
+    monkeypatch.setattr(server, "STATE_REPO_URL", str(tmp_path / "landesrecht-{code}"))
+    monkeypatch.setattr(server, "INDEX", server.Index())
+    server.refresh_once()
+    revision = server.INDEX.revision
+    shutil.rmtree(by)  # the remote is gone; the server's clone stays
+    server.refresh_once()
+    assert server.INDEX.revision == revision
+    assert server.INDEX.get().state_status() == {"BY": True}

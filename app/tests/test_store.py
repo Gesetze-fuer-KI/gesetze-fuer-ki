@@ -139,3 +139,24 @@ def test_clone_without_state_file_counts_as_incomplete(tmp_path):
     s = store.Store(db)
     assert s.state_status() == {"SN": False}
     s.close()
+
+
+def test_broken_state_does_not_abort_build(tmp_path):
+    data, bad_json, bad_law = tmp_path / "data", tmp_path / "landesrecht-sn", tmp_path / "landesrecht-hb"
+    (data / "m").mkdir(parents=True)
+    md, _ = convert(MINI, "minig")
+    (data / "m" / "minig.md").write_text(md, encoding="utf-8")
+    _state_law(bad_json, "SN", "sn-sng", "SnG", "Sächsisches Gesetz", "§ 1 Geltungsbereich", "Text.")
+    (bad_json / ".sync").mkdir()
+    (bad_json / ".sync" / "state.json").write_text("{not json")
+    _state_law(bad_law, "HB", "hb-hbg", "HbG", "Bremisches Gesetz", "§ 1 Geltungsbereich", "Text.")
+    (bad_law / "hb" / "hb-kaputt.md").write_text("---\nfront matter without end\n", encoding="utf-8")
+    _state_file(bad_law, complete=True)
+    db = tmp_path / "index.sqlite"
+    assert store.build(data, db, "rev", states={"SN": bad_json, "HB": bad_law}) == 1
+    s = store.Store(db)
+    assert s.state_status() == {"HB": False, "SN": False}
+    assert [r["land"] for r in s.resolve_law("MiniG")] == [None]
+    assert s.resolve_law("HbG", land="HB") == []
+    assert s.meta("schema") == store.SCHEMA_VERSION
+    s.close()
