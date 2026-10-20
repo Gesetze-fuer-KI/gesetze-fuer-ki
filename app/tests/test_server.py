@@ -200,7 +200,8 @@ def test_state_in_progress(srv):
 
 
 def test_unknown_land(srv):
-    assert "Bayern" in server.search_laws("x", land="Österreich")
+    out = server.search_laws("x", land="Österreich")
+    assert "„Österreich“ ist kein Bundesland" in out and "Bayern" in out
 
 
 def test_land_scope(srv):
@@ -242,7 +243,29 @@ def test_federal_provision_unchanged(srv):
 def test_not_found_lists_contained_states(srv):
     out = server.get_provision("HBO", "§ 1")
     assert "Enthalten: Bundesrecht und Landesrecht aus Bayern und Bremen." in out
+    assert "Im Aufbau: Brandenburg, Nordrhein-Westfalen und Sachsen." in out
     assert "Andere Länder fehlen noch (kontakt@gesetze-fuer-ki.de)." in out
+
+
+def test_missing_provision_has_no_coverage_footer(srv):
+    out = server.get_provision("GeltG", "§ 99")
+    assert "nicht gefunden" in out and "Enthalten:" not in out
+
+
+def test_federal_law_with_land_falls_back_to_federal(srv):
+    out = server.get_provision("GeltG", "§ 1", land="Bayern")
+    assert "Dieses Gesetz gilt für den Bund." in out and "Landesrecht" not in out
+    assert "Geltungsgesetz" in server.get_law_outline("GeltG", land="BY")
+
+
+def test_law_not_found_in_state_names_the_state(srv):
+    out = server.get_provision("HBO", "§ 1", land="Bayern")
+    assert "Kein Gesetz zu „HBO“ im Landesrecht Bayern gefunden." in out and "gesetz_finden" in out
+
+
+def test_no_hits_in_state_names_the_state(srv):
+    out = server.search_laws("Mondfahrt", land="Bayern")
+    assert "Keine Treffer für „Mondfahrt“ im Landesrecht Bayern." in out and "juristischere Begriffe" in out
 
 
 def test_not_found_without_complete_states(tmp_path, monkeypatch):
@@ -289,3 +312,7 @@ def test_history_works_for_state_law(srv_with_git):
 def test_health_reports_states(srv):
     response = asyncio.run(server.health(None))
     assert json.loads(response.body)["states"] == {"BY": True, "HB": True, "NW": False}
+
+
+def test_search_in_federal_law_with_land(srv):
+    assert "geltg" in server.search_laws("Geltungsbereich", law="GeltG", land="Bayern")

@@ -251,12 +251,26 @@ def land_scope(s: store.Store, land: str | None) -> tuple[str | None, str | None
     return state.code, None
 
 
+def _names(row, law: str) -> bool:
+    """Whether `law` is exactly this law's abbreviation or slug."""
+    return row["abk_norm"] == store.abk_key(law) or row["slug"] == law.strip().lower()
+
+
 def resolve(s: store.Store, law: str, land: str | None = None) -> tuple[dict | None, str | None]:
-    """The one law meant by `law` (in all sources, or in one state's), or an error text with the candidates."""
+    """The one law meant by `law` (in all sources, or in one state's), or an error text with the candidates.
+
+    With `land`, a federal law named exactly is still found: the instructions say to set land whenever
+    the user's state is known, so "BGB" with land="Bayern" must not fail.
+    """
     rows = s.resolve_law(law, land)
+    if land and not any(_names(r, law) for r in rows):
+        federal = [r for r in s.resolve_law(law, store.BUND) if _names(r, law)]
+        if len(federal) == 1:
+            return dict(federal[0]), None
     if not rows:
+        where = f" im Landesrecht {states.STATES[land].name}" if land else ""
         return None, (
-            f"Kein Gesetz zu „{law}“ gefunden. Mit gesetz_finden nach dem Namen suchen.\n\n{coverage(s)}"
+            f"Kein Gesetz zu „{law}“{where} gefunden. Mit gesetz_finden nach dem Namen suchen.\n\n{coverage(s)}"
         )
     # A slug is unique and is what the "mehrdeutig" list asks for, so one given exactly (slugs are
     # lower case) wins: "minig" is the federal law, while "MiniG" stays ambiguous with Bavaria's MiniG.
@@ -304,6 +318,8 @@ def _not_ready() -> str:
 # ---- tools ------------------------------------------------------------------------------------
 
 LAND_DESCRIPTION = "Optional: Bundesland, z. B. „Bayern“, „BY“, „NRW“. Weglassen für Bundesrecht."
+# For the tools that read one law: they find it in all sources, so land only picks among namesakes.
+LAND_PICK_DESCRIPTION = "Optional: Bundesland, z. B. „Bayern“, „BY“, „NRW“. Nur nötig, wenn die Abkürzung mehrdeutig ist."
 
 
 @mcp.tool(
@@ -333,12 +349,13 @@ def search_laws(
         return notice
     slug = None
     if law:
-        # Without land, the law may come from any source; the search then stays inside it.
+        # The law may come from any source (federal even with land set); the search stays inside it.
         found, error = resolve(s, law, code)
         if error:
             return error
         slug = found["slug"]
-    rows = s.search(query, slug, limit, land=code or (None if slug else store.BUND))
+    # A law is its own scope: with land set it may still be federal (see resolve).
+    rows = s.search(query, slug, limit, land=None if slug else (code or store.BUND))
     hint = ""
     if not land and not law:
         counts = s.count_by_land(query)
@@ -349,7 +366,8 @@ def search_laws(
     if not rows:
         # State hits are the better pointer; without them, say what the index holds.
         footer = hint or f"\n\n{coverage(s)}"
-        return f"Keine Treffer für „{query}“. Andere, juristischere Begriffe oder weniger Wörter versuchen.{footer}"
+        where = f" im Landesrecht {states.STATES[code].name}" if code and not slug else ""
+        return f"Keine Treffer für „{query}“{where}. Andere, juristischere Begriffe oder weniger Wörter versuchen.{footer}"
     lines = [f"Treffer für „{query}“:", ""]
     sources = set()
     for r in rows:
@@ -417,7 +435,7 @@ def get_provision(
     provision: Annotated[str, Field(description="Der Paragraf oder Artikel, z. B. „§ 19“, „19a“, „Art 3“, „Anlage 2“")],
     date: Annotated[str | None, Field(description="Optional, als JJJJ-MM-TT: der Wortlaut, der an diesem Tag galt. Weglassen für den aktuellen Text.")] = None,
     part: Annotated[int, Field(ge=1, description="Bei sehr langen Vorschriften: welcher Teil")] = 1,
-    land: Annotated[str | None, Field(description=LAND_DESCRIPTION)] = None,
+    land: Annotated[str | None, Field(description=LAND_PICK_DESCRIPTION)] = None,
 ) -> str:
     """The full text of one provision, with its Stand and official link."""
     try:
@@ -436,7 +454,7 @@ def get_provision(
     if unit is None:
         return (
             f"{provision} {found['abk']} nicht gefunden. "
-            f"Mit gliederung_anzeigen('{found['slug']}') die Gliederung ansehen.\n\n{coverage(s)}"
+            f"Mit gliederung_anzeigen('{found['slug']}') die Gliederung ansehen."
         )
     return _format_provision(found, dict(unit), part, stand=found["stand"])
 
@@ -493,7 +511,7 @@ def _provision_at(law: dict, provision: str, date: str, part: int) -> str:
 )
 def get_law_outline(
     law: Annotated[str, Field(description="Abkürzung wie „GewO“, auch Landesrecht wie „BayBO“, oder eine Kennung")],
-    land: Annotated[str | None, Field(description=LAND_DESCRIPTION)] = None,
+    land: Annotated[str | None, Field(description=LAND_PICK_DESCRIPTION)] = None,
 ) -> str:
     """The structure of a law with all headings."""
     try:
@@ -533,7 +551,7 @@ def get_law_outline(
 def get_law_changes(
     law: Annotated[str, Field(description="Abkürzung wie „EStG“, auch Landesrecht wie „BayBO“, oder eine Kennung")],
     limit: Annotated[int, Field(ge=1, le=50, description="Höchstzahl der Einträge")] = 10,
-    land: Annotated[str | None, Field(description=LAND_DESCRIPTION)] = None,
+    land: Annotated[str | None, Field(description=LAND_PICK_DESCRIPTION)] = None,
 ) -> str:
     """When a law changed in this mirror, newest first, with the official amendment note."""
     try:
