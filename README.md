@@ -34,7 +34,7 @@ gesetze-im-internet.de ──nachts──▶ Gesetze-fuer-KI/gesetze ──stün
   Ein erster vollständiger Lauf dauert etwa eine Minute; ein nächtlicher Lauf besteht aus
   rund 6.100 Antworten `304 Not Modified`.
 - **[Gesetze-fuer-KI/gesetze](https://github.com/Gesetze-fuer-KI/gesetze)** enthält das Ergebnis. Seine
-  Action (Vorlage in [`data-repo/`](data-repo/)) führt den Abgleich jede Nacht aus und
+  [Action](https://github.com/Gesetze-fuer-KI/gesetze/blob/main/.github/workflows/sync.yml) führt den Abgleich jede Nacht aus und
   committet mit den amtlichen Änderungsvermerken als Nachricht; git ist damit die
   Versionsgeschichte.
 - **`app/server.py`** klont dieses Repository, baut den Index (**`app/store.py`**) neu, wenn

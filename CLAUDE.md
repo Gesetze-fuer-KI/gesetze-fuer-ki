@@ -4,8 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 # Gesetze für KI
 
-Public MCP server for German federal law. Code in `app/`, docs site (German) in `docs/`, template for the
-`Gesetze-fuer-KI/gesetze` data repository in `data-repo/`.
+Public MCP server for German federal law. Code in `app/`, docs site (German) in `docs/`. The data lives in
+`Gesetze-fuer-KI/gesetze`; its nightly workflow (`.github/workflows/sync.yml` there) checks out this repo and runs
+`app/sync.py`, so a change to the sync's command line must be made in both repos.
 
 Data flow: `sync.py` (nightly, in the data repo's Action) mirrors gesetze-im-internet.de into one Markdown file per
 law and commits; `server.py` clones that repo, pulls hourly, rebuilds the SQLite FTS5 index (`store.py`) on change
