@@ -200,7 +200,11 @@ def provision_url(law: dict, enbez: str | None) -> str:
 def law_label(law: dict) -> str:
     label = f"{law['abk']} ({law['titel']})" if law["abk"] != law["titel"] else law["titel"]
     land = _land(law)
-    return f"{label} – Landesrecht {states.STATES[land].name}" if land else label
+    if land:
+        return f"{label} – Landesrecht {states.STATES[land].name}"
+    # A federal law found although land was set (see resolve) says so, in that response only.
+    asked = law["asked_land"] if "asked_land" in law.keys() else None
+    return f"{label} – Bundesrecht (gilt auch in {states.STATES[asked].name})" if asked else label
 
 
 def _land(law) -> str | None:
@@ -266,7 +270,7 @@ def resolve(s: store.Store, law: str, land: str | None = None) -> tuple[dict | N
     if land and not any(_names(r, law) for r in rows):
         federal = [r for r in s.resolve_law(law, store.BUND) if _names(r, law)]
         if len(federal) == 1:
-            return dict(federal[0]), None
+            return {**dict(federal[0]), "asked_land": land}, None
     if not rows:
         where = f" im Landesrecht {states.STATES[land].name}" if land else ""
         return None, (

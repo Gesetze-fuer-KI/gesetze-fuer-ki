@@ -255,7 +255,9 @@ def test_missing_provision_has_no_coverage_footer(srv):
 def test_federal_law_with_land_falls_back_to_federal(srv):
     out = server.get_provision("GeltG", "§ 1", land="Bayern")
     assert "Dieses Gesetz gilt für den Bund." in out and "Landesrecht" not in out
-    assert "Geltungsgesetz" in server.get_law_outline("GeltG", land="BY")
+    assert "GeltG (Geltungsgesetz) – Bundesrecht (gilt auch in Bayern)" in out
+    assert "– Bundesrecht (gilt auch in Bayern)" in server.get_law_outline("GeltG", land="BY")
+    assert "Bundesrecht" not in server.get_provision("GeltG", "§ 1")
 
 
 def test_law_not_found_in_state_names_the_state(srv):
