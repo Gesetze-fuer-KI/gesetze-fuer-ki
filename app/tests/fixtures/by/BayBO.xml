@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE byrecht-norm PUBLIC "-//Verlag C.H.Beck/DTD Vorschriften//DE" "http://gesetze-bayern.de/schema/byrecht.normen.dtd">
+<byrecht-norm builddate="20.10.2026_02:01">
+  <kopf>
+    <angaben.versunabh>
+      <dokumentation doktyp="gesetz" dokid="BayBO" ersatz="BayBO" />
+      <ausfertigung>
+        <ausfertigungsdatum>2007-08-14</ausfertigungsdatum>
+        <fundstelle.GVBl>
+          <jahr>1962</jahr>
+          <seite>S=179</seite>
+        </fundstelle.GVBl>
+      </ausfertigung>
+    </angaben.versunabh>
+    <angaben.versabh version.id="p">
+      <inkraft>2026-05-01</inkraft>
+      
+      <fassung>
+        <fassungsdatum>2007-08-14</fassungsdatum>
+        <fundstelle.GVBl>
+          <jahr>2007</jahr>
+          <seite>S=588</seite>
+        </fundstelle.GVBl>
+      </fassung>
+      <gliederungsNr.BayRS>BayRS 2132-1-B
+</gliederungsNr.BayRS>
+      <kurzbezeichnung />
+      <titelangaben>Bayerische Bauordnung<br /> (<amtlicheAbk>BayBO</amtlicheAbk>) <br />in der Fassung der Bekanntmachung vom 14. August 2007<br />(GVBl. S. 588)<br />BayRS 2132-1-B
+</titelangaben>
+      <amtlicheAbk>BayBO</amtlicheAbk>
+    </angaben.versabh>
+  </kopf>
+  <rumpf>
+    <aenderungsverlauf>
+      <p>Änderungen</p>
+      <ul>
+        <li>
+          <symbol id="x">1.</symbol>
+          <p>
+          <verweis.norm>
+            <v.abk ersatz="BayBGGAendG">§ 7 G zur Änd. des Bayerischen BehindertengleichstellungsG und anderer Rechtsvorschriften</v.abk>
+          </verweis.norm>
+         vom 22.7.2008<br />(GVBl. S. 479)</p>
+        </li>
+        <li>
+          <symbol id="x">2.</symbol>
+          <p>
+          <verweis.norm>
+            <v.abk ersatz="BayBOAendG_09">§ 1 ÄndG</v.abk>
+          </verweis.norm>
+         vom 28.5.2009<br />(GVBl. S. 218)</p>
+        </li>
+        <li>
+          <symbol id="x">35.</symbol>
+          <p>
+          <verweis.norm>
+            § <v.norm ersatz="Bay_110_2026_190">2</v.norm> <v.abk ersatz="Bay_110_2026_190">Gesetz zur Förderung der Verteidigungsindustrie in Bayern</v.abk></verweis.norm>
+         vom 23.4.2026<br />(GVBl. S. 190)</p>
+        </li>
+      </ul>
+    </aenderungsverlauf>
+    <normzitat>Bayerische Bauordnung (BayBO) in der Fassung der Bekanntmachung vom 14. August 2007 (GVBl. S. 588, BayRS 2132-1-B), die zuletzt durch § 2 des Gesetzes vom 23. April 2026 (GVBl. S. 190) geändert worden ist</normzitat>
+    <gliederung gliederungsid="G_1" version="p">
+      <gliederung.titel><p>
+        Erster Teil 
+        Allgemeine Vorschriften
+      </p></gliederung.titel>
+      <einzelnorm version="p" einzelnormid="P_1"><para.nr>Art. 1</para.nr><para.titel>
+          Anwendungsbereich
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Dieses Gesetz gilt für alle baulichen Anlagen und Bauprodukte. <satz.nr id="xx">2</satz.nr>Es gilt auch für Grundstücke sowie für andere Anlagen und Einrichtungen, an die nach diesem Gesetz oder in Vorschriften auf Grund dieses Gesetzes Anforderungen gestellt werden.</p>
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>Dieses Gesetz gilt nicht für</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Anlagen des öffentlichen Verkehrs sowie ihre Nebenanlagen und Nebenbetriebe, ausgenommen Gebäude an Flugplätzen,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Anlagen, die der Bergaufsicht unterliegen,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Rohrleitungsanlagen sowie Leitungen aller Art, ausgenommen in Gebäuden,</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Kräne und Krananlagen,</p>
+              </li>
+              <li>
+                <symbol id="x">5.</symbol>
+                <p>Gerüste,</p>
+              </li>
+              <li>
+                <symbol id="x">6.</symbol>
+                <p>Feuerstätten, die nicht der Raumheizung oder der Brauchwassererwärmung dienen, ausgenommen Gas-Haushalts-Kochgeräte,</p>
+              </li>
+              <li>
+                <symbol id="x">7.</symbol>
+                <p>Einrichtungsgegenstände, insbesondere Regale und Messestände.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz></einzelnorm>
+      <einzelnorm version="p" einzelnormid="P_2"><para.nr>Art. 2</para.nr><para.titel>
+          Begriffe
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Bauliche Anlagen sind mit dem Erdboden verbundene, aus Bauprodukten hergestellte Anlagen. <satz.nr id="xx">2</satz.nr>Ortsfeste Anlagen der Wirtschaftswerbung (Werbeanlagen) einschließlich Automaten sind bauliche Anlagen. <satz.nr id="xx">3</satz.nr>Als bauliche Anlagen gelten Anlagen, die nach ihrem Verwendungszweck dazu bestimmt sind, überwiegend ortsfest benutzt zu werden, sowie</p>
+          
+            
+          
+            
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Aufschüttungen, soweit sie nicht unmittelbare Folge von Abgrabungen sind,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Lagerplätze, Abstellplätze und Ausstellungsplätze,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Campingplätze und Wochenendplätze,</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Freizeit- und Vergnügungsparks,</p>
+              </li>
+              <li>
+                <symbol id="x">5.</symbol>
+                <p>Stellplätze für Kraftfahrzeuge.</p>
+              </li>
+            </ul>
+          
+            <p> <satz.nr id="xx">4</satz.nr>Anlagen sind bauliche Anlagen sowie andere Anlagen und Einrichtungen im Sinn des <verweis.norm>Art. <v.norm ersatz="BayBO">1</v.norm> Abs. 1 Satz 2</verweis.norm>.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>Gebäude sind selbständig benutzbare, überdeckte bauliche Anlagen, die von Menschen betreten werden können.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(3)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Gebäude werden in folgende Gebäudeklassen eingeteilt:</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Gebäudeklasse 1:</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>freistehende Gebäude mit einer Höhe bis zu 7 m und nicht mehr als zwei Nutzungseinheiten von insgesamt nicht mehr als 400 m<sup>2</sup> und</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>land- oder forstwirtschaftlich genutzte Gebäude,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Gebäudeklasse 2:</p>
+                <p>Gebäude mit einer Höhe bis zu 7 m und nicht mehr als zwei Nutzungseinheiten von insgesamt nicht mehr als 400 m<sup>2</sup>,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Gebäudeklasse 3:</p>
+                <p>sonstige Gebäude mit einer Höhe bis zu 7 m,</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Gebäudeklasse 4:</p>
+                <p>Gebäude mit einer Höhe bis zu 13 m und</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>Nutzungseinheiten mit jeweils nicht mehr als 400 m<sup>2</sup> oder</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>Teilen von Nutzungseinheiten, die durch Außen- oder Trennwände nach <verweis.norm>Art. <v.norm ersatz="BayBO">27</v.norm> Abs. 2 Nr. 1</verweis.norm> begrenzt sind und über von anderen Teilen unabhängige Rettungswege nach <verweis.norm>Art. <v.norm ersatz="BayBO">31</v.norm> Abs. 1</verweis.norm> verfügen, mit jeweils nicht mehr als 400 m<sup>2</sup>,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">5.</symbol>
+                <p>Gebäudeklasse 5:</p>
+                <p>sonstige Gebäude einschließlich unterirdischer Gebäude.</p>
+              </li>
+            </ul>
+          
+            <p> <satz.nr id="xx">2</satz.nr>Höhe im Sinn des Satzes 1 ist das Maß der Fußbodenoberkante des höchstgelegenen Geschosses, in dem ein Aufenthaltsraum möglich ist, über der Geländeoberfläche im Mittel. <satz.nr id="xx">3</satz.nr>Bei der Berechnung der Flächen nach Satz 1 bleiben die Flächen im Kellergeschoss außer Betracht.</p>
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(4)</absatz.nr><absatz.text>
+            <p>Sonderbauten sind Anlagen und Räume besonderer Art oder Nutzung, die einen der nachfolgenden Tatbestände erfüllen:</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Hochhäuser (Gebäude mit einer Höhe nach Abs. 3 Satz 2 von mehr als 22 m),</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>bauliche Anlagen mit einer Höhe von mehr als 30 m,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Gebäude mit mehr als 1 600 m<sup>2</sup> Fläche des Geschosses mit der größten Ausdehnung, ausgenommen Wohngebäude und Garagen,</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Verkaufsstätten, deren Verkaufsräume und Ladenstraßen eine Fläche von insgesamt mehr als 800 m<sup>2</sup>, bei erdgeschossigen Verkaufsstätten mehr als 2 000 m<sup>2</sup>, haben,</p>
+              </li>
+              <li>
+                <symbol id="x">5.</symbol>
+                <p>Gebäude mit Räumen, die einer Büro- oder Verwaltungsnutzung dienen und einzeln mehr als 400 m<sup>2</sup> haben,</p>
+              </li>
+              <li>
+                <symbol id="x">6.</symbol>
+                <p>Gebäude mit Räumen, die einzeln für eine Nutzung durch mehr als 100 Personen bestimmt sind,</p>
+              </li>
+              <li>
+                <symbol id="x">7.</symbol>
+                <p>Versammlungsstätten</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>mit Versammlungsräumen, die insgesamt mehr als 200 Besucher fassen, wenn diese Versammlungsräume gemeinsame Rettungswege haben,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>im Freien mit Szenenflächen sowie Freisportanlagen jeweils mit Tribünen, die keine fliegenden Bauten sind und insgesamt mehr als 1 000 Besucher fassen,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">8.</symbol>
+                <p>Gaststätten</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>mit mehr als 60 Gastplätzen in Gebäuden, soweit sie nicht ausschließlich erdgeschossig sind,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>mit mehr als 100 Gastplätzen in Gebäuden, soweit sie ausschließlich erdgeschossig sind, oder</p>
+                  </li>
+                  <li>
+                    <symbol id="x">c)</symbol>
+                    <p>mit mehr als 1 000 Gastplätzen im Freien,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">9.</symbol>
+                <p>Beherbergungsstätten mit mehr als 30 Betten,</p>
+              </li>
+              <li>
+                <symbol id="x">10.</symbol>
+                <p>Spielhallen mit mehr als 150 m<sup>2</sup>,</p>
+              </li>
+              <li>
+                <symbol id="x">11.</symbol>
+                <p>Gebäude mit Nutzungseinheiten zum Zweck der Pflege oder Betreuung von Personen mit Pflegebedürftigkeit oder Behinderung, deren Selbstrettungsfähigkeit eingeschränkt ist, wenn die Nutzungseinheiten</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>einzeln für mehr als sechs Personen bestimmt sind,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>für Personen mit Intensivpflegebedarf bestimmt sind oder</p>
+                  </li>
+                  <li>
+                    <symbol id="x">c)</symbol>
+                    <p>einen gemeinsamen Rettungsweg haben und für insgesamt mehr als zwölf Personen bestimmt sind,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">12.</symbol>
+                <p>Krankenhäuser,</p>
+              </li>
+              <li>
+                <symbol id="x">13.</symbol>
+                <p>sonstige Einrichtungen zur Unterbringung von Personen sowie Wohnheime,</p>
+              </li>
+              <li>
+                <symbol id="x">14.</symbol>
+                <p>Tageseinrichtungen für Kinder, Menschen mit Behinderung und alte Menschen, in denen mehr als zehn Personen betreut werden,</p>
+              </li>
+              <li>
+                <symbol id="x">15.</symbol>
+                <p>Schulen, Hochschulen und ähnliche Einrichtungen,</p>
+              </li>
+              <li>
+                <symbol id="x">16.</symbol>
+                <p>Justizvollzugsanstalten und bauliche Anlagen für den Maßregelvollzug,</p>
+              </li>
+              <li>
+                <symbol id="x">17.</symbol>
+                <p>Freizeit- und Vergnügungsparks,</p>
+              </li>
+              <li>
+                <symbol id="x">18.</symbol>
+                <p>fliegende Bauten, soweit sie einer Ausführungsgenehmigung bedürfen, sowie Fahrgeschäfte, die keine fliegenden Bauten und nicht verfahrensfrei sind,</p>
+              </li>
+              <li>
+                <symbol id="x">19.</symbol>
+                <p>Regale mit einer Oberkante Lagerguthöhe von mehr als 7,50 m,</p>
+              </li>
+              <li>
+                <symbol id="x">20.</symbol>
+                <p>bauliche Anlagen, deren Nutzung durch Umgang mit oder Lagerung von Stoffen mit Explosions- oder erhöhter Brandgefahr verbunden ist,</p>
+              </li>
+              <li>
+                <symbol id="x">21.</symbol>
+                <p>Anlagen und Räume, die in den Nrn. 1 bis 20 nicht aufgeführt und deren Art oder Nutzung mit vergleichbaren Gefahren verbunden sind, ausgenommen Wohngebäude, die keine Hochhäuser sind.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(5)</absatz.nr><absatz.text>
+            <p>Aufenthaltsräume sind Räume, die zum nicht nur vorübergehenden Aufenthalt von Menschen bestimmt oder geeignet sind.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(6)</absatz.nr><absatz.text>
+            <p>Flächen von Gebäuden, Geschossen, Nutzungseinheiten und Räumen sind als Brutto-Grundfläche zu ermitteln, soweit nichts anderes geregelt ist.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(7)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Geschosse sind oberirdische Geschosse, wenn ihre Deckenoberkanten im Mittel mehr als 1,40 m über die Geländeoberfläche hinausragen; im Übrigen sind sie Kellergeschosse. <satz.nr id="xx">2</satz.nr>Hohlräume zwischen der obersten Decke und der Bedachung, in denen Aufenthaltsräume nicht möglich sind, sind keine Geschosse.</p>
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(8)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Stellplätze sind Flächen, die dem Abstellen von Kraftfahrzeugen außerhalb der öffentlichen Verkehrsfläche dienen. <satz.nr id="xx">2</satz.nr>Garagen sind Gebäude oder Gebäudeteile zum Abstellen von Kraftfahrzeugen. <satz.nr id="xx">3</satz.nr>Ausstellungs-, Verkaufs-, Werk- und Lagerräume für Kraftfahrzeuge sind keine Stellplätze oder Garagen.</p>
+          
+            
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(9)</absatz.nr><absatz.text>
+            <p>Feuerstätten sind in oder an Gebäuden ortsfest benutzte Anlagen, die dazu bestimmt sind, durch Verbrennung Wärme zu erzeugen.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(10)</absatz.nr><absatz.text>
+            <p>Barrierefrei sind bauliche Anlagen, soweit sie für Menschen mit Behinderung in der allgemein üblichen Weise, ohne besondere Erschwernis und grundsätzlich ohne fremde Hilfe zugänglich und nutzbar sind.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(11)</absatz.nr><absatz.text>
+            <p>Bauprodukte sind</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Produkte, Baustoffe, Bauteile, Anlagen und Bausätze gemäß <verweis.norm>Art. <v.norm ersatz="EWG_VO_305_2011">2</v.norm> Nr. 2 der <v.abk ersatz="EWG_VO_305_2011">Verordnung (EU) Nr. 305/2011</v.abk></verweis.norm>, die hergestellt werden, um dauerhaft in bauliche Anlagen eingebaut zu werden,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>aus ihnen vorgefertigte Anlagen, die hergestellt werden, um mit dem Erdboden verbunden zu werden,</p>
+              </li>
+            </ul>
+            <p>wenn sich deren Verwendung auf die Anforderungen nach <verweis.norm>Art. <v.norm ersatz="BayBO">3</v.norm> Satz 1</verweis.norm> auswirken kann.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(12)</absatz.nr><absatz.text>
+            <p>Bauart ist das Zusammenfügen von Bauprodukten zu baulichen Anlagen oder Teilen von baulichen Anlagen.</p>
+          </absatz.text></jurAbsatz></einzelnorm>
+      <einzelnorm version="p" einzelnormid="P_3"><para.nr>Art. 3</para.nr><para.titel>
+          Allgemeine Anforderungen
+        </para.titel><jurAbsatz><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Bei der Anordnung, Errichtung, Änderung, Nutzungsänderung, Instandhaltung und Beseitigung von Anlagen sind die Belange der Baukultur, insbesondere die anerkannten Regeln der Baukunst, so zu berücksichtigen, dass die öffentliche Sicherheit und Ordnung, insbesondere Leben und Gesundheit, und die natürlichen Lebensgrundlagen nicht gefährdet werden. <satz.nr id="xx">2</satz.nr>Anlagen müssen bei ordnungsgemäßer Instandhaltung die Anforderungen des Satzes 1 während einer dem Zweck entsprechenden angemessenen Zeitdauer erfüllen und ohne Missstände benutzbar sein.</p>
+          
+            
+          </absatz.text></jurAbsatz></einzelnorm>
+    </gliederung>
+    <gliederung gliederungsid="G_2" version="p">
+      <gliederung.titel><p>
+        Zweiter Teil 
+        Das Grundstück und seine Bebauung
+      </p></gliederung.titel>
+      <einzelnorm version="p" einzelnormid="P_4"><para.nr>Art. 4</para.nr><para.titel>
+          Bebauung der Grundstücke mit Gebäuden
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>Gebäude dürfen nur unter folgenden Voraussetzungen errichtet werden:</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Das Grundstück muss nach Lage, Form, Größe und Beschaffenheit für die beabsichtigte Bebauung geeignet sein;</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>das Grundstück muss in einer angemessenen Breite an einer befahrbaren öffentlichen Verkehrsfläche liegen.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>Abweichend von Abs. 1 Nr. 2 sind im Geltungsbereich eines Bebauungsplans im Sinn der <verweis.norm>§§ <v.norm ersatz="BauGB">12</v.norm> und <v.norm ersatz="BauGB">30</v.norm> Abs. 1 des <v.abk ersatz="BauGB">Baugesetzbuchs (BauGB)</v.abk></verweis.norm> und innerhalb eines im Zusammenhang bebauten Ortsteils (<verweis.norm>§ <v.norm ersatz="BauGB">34</v.norm> <v.abk ersatz="BauGB">BauGB</v.abk></verweis.norm>) nicht erforderlich</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>die Befahrbarkeit von Wohnwegen begrenzter Länge, wenn keine Bedenken wegen des Brandschutzes oder des Rettungsdienstes bestehen,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>die Widmung von Wohnwegen begrenzter Länge, wenn von dem Wohnweg nur Wohngebäude der Gebäudeklassen 1 bis 3 erschlossen werden und gegenüber dem Rechtsträger der Bauaufsichtsbehörde rechtlich gesichert ist, dass der Wohnweg sachgerecht unterhalten wird und allgemein benutzt werden kann.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(3)</absatz.nr><absatz.text>
+            <p>Im Außenbereich genügt eine befahrbare, gegenüber dem Rechtsträger der Bauaufsichtsbehörde rechtlich gesicherte Zufahrt zu einem befahrbaren öffentlichen Weg.</p>
+          </absatz.text></jurAbsatz></einzelnorm>
+      <einzelnorm version="p" einzelnormid="P_5"><para.nr>Art. 5</para.nr><para.titel>
+          Zugänge und Zufahrten auf den Grundstücken
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Von öffentlichen Verkehrsflächen ist insbesondere für die Feuerwehr ein geradliniger Zu- oder Durchgang zu rückwärtigen Gebäuden zu schaffen; zu anderen Gebäuden ist er zu schaffen, wenn der zweite Rettungsweg dieser Gebäude über Rettungsgeräte der Feuerwehr führt. <satz.nr id="xx">2</satz.nr>Zu Gebäuden, bei denen die Oberkante der Brüstung von zum Anleitern bestimmten Fenstern oder Stellen mehr als 8 m über dem Gelände liegt, ist in den Fällen des Satzes 1 an Stelle eines Zu- oder Durchgangs eine Zu- oder Durchfahrt zu schaffen. <satz.nr id="xx">3</satz.nr>Ist für die Personenrettung der Einsatz von Hubrettungsfahrzeugen erforderlich, sind die dafür erforderlichen Aufstell- und Bewegungsflächen vorzusehen. <satz.nr id="xx">4</satz.nr>Bei Gebäuden, die ganz oder mit Teilen mehr als 50 m von einer öffentlichen Verkehrsfläche entfernt sind, sind Zufahrten oder Durchfahrten nach Satz 2 zu den vor und hinter den Gebäuden gelegenen Grundstücksteilen und Bewegungsflächen herzustellen, wenn sie aus Gründen des Feuerwehreinsatzes erforderlich sind.</p>
+          
+            
+          
+            
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Zu- und Durchfahrten, Aufstellflächen und Bewegungsflächen müssen für Feuerwehreinsatzfahrzeuge ausreichend befestigt und tragfähig sein; sie sind als solche zu kennzeichnen und ständig frei zu halten; die Kennzeichnung von Zufahrten muss von der öffentlichen Verkehrsfläche aus sichtbar sein. <satz.nr id="xx">2</satz.nr>Fahrzeuge dürfen auf den Flächen nach Satz 1 nicht abgestellt werden.</p>
+          
+            
+          </absatz.text></jurAbsatz></einzelnorm>
+      <einzelnorm version="p" einzelnormid="P_6"><para.nr>Art. 6</para.nr><para.titel>
+          Abstandsflächen, Abstände
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Vor den Außenwänden von Gebäuden sind Abstandsflächen von oberirdischen Gebäuden freizuhalten. <satz.nr id="xx">2</satz.nr>Satz 1 gilt entsprechend für andere Anlagen, von denen Wirkungen wie von Gebäuden ausgehen, gegenüber Gebäuden und Grundstücksgrenzen. <satz.nr id="xx">3</satz.nr>Satz 2 gilt insbesondere nicht für</p>
+          
+            
+          
+            
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Antennen und Antennen tragende Masten für den Mobilfunk und den Digitalfunk der Behörden und Organisationen mit Sicherheitsaufgaben (BOS) im Außenbereich,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Windenergieanlagen im Außenbereich,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>ebenerdige Terrassen und</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Wärmepumpen und zugehörige Einhausungen mit einer Höhe bis zu 2 m über der Geländeoberfläche.</p>
+              </li>
+            </ul>
+          
+            <p> <satz.nr id="xx">4</satz.nr>Eine Abstandsfläche ist nicht erforderlich vor Außenwänden, die an Grundstücksgrenzen errichtet werden, wenn nach planungsrechtlichen Vorschriften an die Grenze gebaut werden muss oder gebaut werden darf. <satz.nr id="xx">5</satz.nr><verweis.norm>Art. <v.norm ersatz="BayBO">63</v.norm></verweis.norm> bleibt unberührt.</p>
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Abstandsflächen sowie Abstände nach <verweis.norm>Art. <v.norm ersatz="BayBO">28</v.norm> Abs. 2 Nr. 1 und Art. <v.norm ersatz="BayBO">30</v.norm> Abs. 2</verweis.norm> müssen auf dem Grundstück selbst liegen. <satz.nr id="xx">2</satz.nr>Sie dürfen auch auf öffentlichen Verkehrs-, Grün- und Wasserflächen liegen, jedoch nur bis zu deren Mitte. <satz.nr id="xx">3</satz.nr>Abstandsflächen sowie Abstände im Sinn des Satzes 1 dürfen sich ganz oder teilweise auf andere Grundstücke erstrecken, wenn rechtlich oder tatsächlich gesichert ist, dass sie nicht überbaut werden, oder wenn der Nachbar gegenüber der Bauaufsichtsbehörde schriftlich zustimmt; die Zustimmung des Nachbarn gilt auch für und gegen seinen Rechtsnachfolger. <satz.nr id="xx">4</satz.nr>Abstandsflächen dürfen auf die auf diesen Grundstücken erforderlichen Abstandsflächen nicht angerechnet werden.</p>
+          
+            
+          
+            
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(3)</absatz.nr><absatz.text>
+            <p>Die Abstandsflächen dürfen sich nicht überdecken; das gilt nicht für</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Außenwände, die in einem Winkel von mehr als 75 Grad zueinander stehen,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Außenwände zu einem fremder Sicht entzogenen Gartenhof bei Wohngebäuden der Gebäudeklassen 1 und 2,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Gebäude und andere bauliche Anlagen, die in den Abstandsflächen zulässig sind.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(4)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Die Tiefe der Abstandsfläche bemisst sich nach der Wandhöhe; sie wird senkrecht zur Wand gemessen. <satz.nr id="xx">2</satz.nr>Wandhöhe ist das Maß von der Geländeoberfläche bis zum Schnittpunkt der Wand mit der Dachhaut oder bis zum oberen Abschluss der Wand. <satz.nr id="xx">3</satz.nr>Die Höhe von Dächern mit einer Neigung von bis einschließlich 70 Grad wird zu einem Drittel der Wandhöhe, von Dächern mit einer Neigung von mehr als 70 Grad voll der Wandhöhe hinzugerechnet. <satz.nr id="xx">4</satz.nr>Die Sätze 1 bis 3 gelten für Dachaufbauten entsprechend. <satz.nr id="xx">5</satz.nr>Das sich ergebende Maß ist H.</p>
+          
+            
+          
+            
+          
+            
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(5)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Die Tiefe der Abstandsflächen beträgt 0,4 H, in Gewerbe- und Industriegebieten 0,2 H, jeweils aber mindestens 3 m. <satz.nr id="xx">2</satz.nr>Durch städtebauliche Satzung oder eine Satzung nach <verweis.norm>Art. <v.norm ersatz="BayBO">81</v.norm></verweis.norm> kann ein abweichendes Maß der Tiefe der Abstandsfläche zugelassen oder vorgeschrieben werden. <satz.nr id="xx">3</satz.nr>Für solche Regelungen in Bebauungsplänen gilt <verweis.norm>§ <v.norm ersatz="BauGB">33</v.norm> <v.abk ersatz="BauGB">BauGB</v.abk></verweis.norm> entsprechend.</p>
+          
+            
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(5a)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Abweichend von Abs. 5 Satz 1 beträgt die Abstandsfläche in Gemeinden mit mehr als 250 000 Einwohnern außerhalb von Gewerbe-, Kern- und Industriegebieten sowie festgesetzten urbanen Gebieten 1 H, mindestens jedoch 3 m, wenn die nähere Umgebung überwiegend durch Gebäude der Gebäudeklassen 1, 2 oder 3 geprägt ist. <satz.nr id="xx">2</satz.nr>Vor bis zu zwei Außenwänden von nicht mehr als 16 m Länge genügen in diesen Fällen 0,5 H, mindestens jedoch 3 m, wenn das Gebäude an mindestens zwei Außenwänden Satz 1 beachtet. <satz.nr id="xx">3</satz.nr>Abweichend von Abs. 4 Satz 3 wird die Höhe von Dächern mit einer Neigung von mehr als 45 Grad zu einem Drittel, mit einer Neigung von mehr als 70 Grad voll der Wandhöhe hinzugerechnet. <satz.nr id="xx">4</satz.nr>Die Höhe der Giebelflächen im Bereich des Dachs wird abweichend von Satz 3 und von Abs. 4 Satz 3 bei Dachneigung von mehr als 70 Grad voll, im Übrigen zu einem Drittel angerechnet. <satz.nr id="xx">5</satz.nr>Dabei bleiben auch untergeordnete Dachgauben bei der Bemessung der Abstandsfläche außer Betracht, wenn </p>
+          
+            
+          
+            
+          
+            
+          
+            
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>sie insgesamt nicht mehr als ein Drittel der Breite der Außenwand des jeweiligen Gebäudes, höchstens jeweils 5 m in Anspruch nehmen und</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>ihre Ansichtsfläche jeweils nicht mehr als 4 m<sup>2</sup> beträgt und eine Höhe von nicht mehr als 2,5 m aufweist.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(6)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Bei der Bemessung der Abstandsflächen bleiben außer Betracht</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>vor die Außenwand vortretende Bauteile wie Gesimse und Dachüberstände,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>untergeordnete Vorbauten wie Balkone und eingeschossige Erker, wenn sie</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>insgesamt nicht mehr als ein Drittel der Breite der Außenwand des jeweiligen Gebäudes, höchstens jeweils 5 m, in Anspruch nehmen,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>nicht mehr als 1,50 m vor diese Außenwand vortreten und</p>
+                  </li>
+                  <li>
+                    <symbol id="x">c)</symbol>
+                    <p>mindestens 2 m von der gegenüberliegenden Nachbargrenze entfernt bleiben,</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>bei Gebäuden an der Grundstücksgrenze die Seitenwände von Vorbauten und Dachaufbauten, auch wenn sie nicht an der Grundstücksgrenze errichtet werden,</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Maßnahmen zum Zwecke der Energieeinsparung an bestehenden Gebäuden, wenn sie</p>
+                <ul>
+                  <li>
+                    <symbol id="x">a)</symbol>
+                    <p>eine Stärke von nicht mehr als 0,30 m aufweisen und</p>
+                  </li>
+                  <li>
+                    <symbol id="x">b)</symbol>
+                    <p>mindestens 2,50 m von der Grundstücksgrenze zurückbleiben.</p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          
+            <p> <satz.nr id="xx">2</satz.nr>Abs. 5a Satz 5 bleibt unberührt.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(7)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>In den Abstandsflächen sowie ohne eigene Abstandsflächen sind, auch wenn sie nicht an der Grundstücksgrenze errichtet werden, zulässig</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Garagen einschließlich ihrer Nebenräume, überdachte Tiefgaragenzufahrten, Aufzüge zu Tiefgaragen und Gebäude ohne Aufenthaltsräume und Feuerstätten mit einer mittleren Wandhöhe bis zu 3 m und einer Gesamtlänge je Grundstücksgrenze von 9 m, wobei die Höhe von Dächern mit einer Neigung von mehr als 45 Grad zu einem Drittel, mit einer Neigung von mehr als 70 Grad voll der Wandhöhe hinzugerechnet wird; Giebelflächen bleiben bei einer Dachneigung bis zu 45 Grad unberücksichtigt,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>gebäudeunabhängige Solaranlagen mit einer Höhe bis zu 3 m und einer Gesamtlänge je Grundstücksgrenze von 9 m,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Stützmauern und geschlossene Einfriedungen in Gewerbe- und Industriegebieten, außerhalb dieser Baugebiete mit einer Höhe bis zu 2 m.</p>
+              </li>
+            </ul>
+          
+            <p> <satz.nr id="xx">2</satz.nr>Die Länge der die Abstandsflächentiefe gegenüber den Grundstücksgrenzen nicht einhaltenden Bebauung nach den Nrn. 1 und 2 darf auf einem Grundstück insgesamt 15 m nicht überschreiten.</p>
+          </absatz.text></jurAbsatz></einzelnorm>
+      <einzelnorm version="p" einzelnormid="P_7"><para.nr>Art. 7</para.nr><para.titel>
+          Begrünung
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Die nicht mit Gebäuden oder vergleichbaren baulichen Anlagen überbauten Flächen der bebauten Grundstücke sind</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>wasseraufnahmefähig zu belassen oder herzustellen und</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>zu begrünen oder zu bepflanzen,</p>
+              </li>
+            </ul>
+            <p>soweit dem nicht die Erfordernisse einer anderen zulässigen Verwendung der Flächen entgegenstehen. <satz.nr id="xx">2</satz.nr>Soweit die Flächen nach Satz 1 zulässigerweise anders verwendet werden, ist eine Bodenversiegelung möglichst zu vermeiden. <satz.nr id="xx">3</satz.nr>Satz 1 findet keine Anwendung, soweit Bebauungspläne oder andere Satzungen Festsetzungen zu den nicht überbauten Flächen treffen.</p>
+          
+            
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Im Eigentum des Freistaates Bayern stehende Gebäude und ihre zugehörigen Freiflächen sollen über Abs. 1 hinaus vorbehaltlich der bestehenden baurechtlichen, satzungsrechtlichen, denkmalschützenden oder sonstigen rechtlichen Festlegungen angemessen begrünt oder bepflanzt werden. <satz.nr id="xx">2</satz.nr>Den kommunalen Gebietskörperschaften wird empfohlen, hinsichtlich ihrer Gebäude und zugehörigen Freiflächen entsprechend Satz 1 zu verfahren.</p>
+          
+            
+          </absatz.text></jurAbsatz></einzelnorm>
+    </gliederung>
+    <gliederung gliederungsid="G_3" version="p">
+      <gliederung.titel><p>
+        Dritter Teil 
+        Bauliche Anlagen
+      </p></gliederung.titel>
+      <gliederung gliederungsid="G_4" version="p">
+        <gliederung.titel><p>
+          Abschnitt I 
+          Baugestaltung
+        </p></gliederung.titel>
+        <einzelnorm version="p" einzelnormid="P_8"><para.nr>Art. 8</para.nr><para.titel>
+            Baugestaltung
+          </para.titel><jurAbsatz><absatz.text>
+              <p>
+                <satz.nr id="xx">1</satz.nr>Bauliche Anlagen müssen nach Form, Maßstab, Verhältnis der Baumassen und Bauteile zueinander, Werkstoff und Farbe so gestaltet sein, dass sie nicht verunstaltet wirken. <satz.nr id="xx">2</satz.nr>Bauliche Anlagen dürfen das Straßen-, Orts- und Landschaftsbild nicht verunstalten. <satz.nr id="xx">3</satz.nr>Die störende Häufung von Werbeanlagen ist unzulässig.</p>
+            
+              
+            
+              
+            </absatz.text></jurAbsatz></einzelnorm>
+      </gliederung>
+      </gliederung>
+    </rumpf>
+  <annex version="p" annexid="ANL_1">
+    <annex.koerper version="p"><annex.nummer int="1">Anlage</annex.nummer><annex.titel>
+          <span class="i"> (nicht mehr belegt)</span>
+        </annex.titel></annex.koerper>
+  </annex>
+</byrecht-norm>

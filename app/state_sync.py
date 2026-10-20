@@ -229,3 +229,7 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
     finally:
         if started:
             save()
+
+
+# The sources package fills SOURCES; imported last, since its modules import this one.
+import sources  # noqa: E402, F401
