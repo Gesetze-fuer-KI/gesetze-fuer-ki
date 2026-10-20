@@ -356,3 +356,22 @@ def test_a_corrupt_state_clone_is_left_out(tmp_path, monkeypatch, caplog):
     s = server.INDEX.get()
     assert s.state_status() == {}
     assert [r["slug"] for r in s.resolve_law("AbG")] == ["abg"]
+
+
+def test_fetch_toc_retries_a_timeout(monkeypatch):
+    import httpx
+
+    calls = []
+
+    def handler(request):
+        calls.append(request.url)
+        if len(calls) < 3:
+            raise httpx.ConnectTimeout("timed out", request=request)
+        return httpx.Response(200, content=b'<items><item><title>T</title>'
+                              b'<link>https://www.gesetze-im-internet.de/abc/xml.zip</link></item></items>')
+
+    sleeps = []
+    monkeypatch.setattr(sync.time, "sleep", sleeps.append)
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert sync.fetch_toc(client) == [("abc", "T")]
+    assert len(calls) == 3 and sleeps == [sync.TOC_RETRY_DELAY, 2 * sync.TOC_RETRY_DELAY]

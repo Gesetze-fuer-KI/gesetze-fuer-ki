@@ -35,6 +35,10 @@ USER_AGENT = "gesetze-fuer-ki.de sync (+https://github.com/Gesetze-fuer-KI/geset
 # A table of contents with fewer entries than this is treated as broken, never as
 # thousands of repealed laws.
 MIN_TOC_ENTRIES = 5000
+# From GitHub's runners the first connection to gesetze-im-internet.de often times out; the table of contents is worth
+# waiting for (15 s, 30 s, … between six attempts), a single law is not.
+TOC_ATTEMPTS = 6
+TOC_RETRY_DELAY = 15.0
 
 log = logging.getLogger("sync")
 
@@ -49,7 +53,7 @@ def law_path(out: Path, slug: str) -> Path:
 
 def fetch_toc(client: httpx.Client) -> list[tuple[str, str]]:
     """(slug, title) for every law in the table of contents."""
-    resp = client.get(TOC_URL)
+    resp = _get(client, TOC_URL, None, attempts=TOC_ATTEMPTS, delay=TOC_RETRY_DELAY)
     resp.raise_for_status()
     root = ET.fromstring(resp.content)
     laws = []
@@ -61,17 +65,20 @@ def fetch_toc(client: httpx.Client) -> list[tuple[str, str]]:
     return laws
 
 
-def _get(client: httpx.Client, url: str, etag: str | None) -> httpx.Response:
+def _get(
+    client: httpx.Client, url: str, etag: str | None, attempts: int = 4, delay: float = 1.0
+) -> httpx.Response:
     headers = {"If-None-Match": etag} if etag else {}
-    for attempt in range(4):
+    for attempt in range(attempts):
         try:
             resp = client.get(url, headers=headers)
             if resp.status_code < 500:
                 return resp
         except httpx.TransportError:
-            if attempt == 3:
+            if attempt == attempts - 1:
                 raise
-        time.sleep(2**attempt)
+        if attempt < attempts - 1:
+            time.sleep(delay * 2**attempt)
     return resp
 
 
