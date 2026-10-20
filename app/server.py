@@ -1,8 +1,8 @@
-"""gesetze-fuer-ki.de: an MCP server that lets AI agents search German federal law.
+"""gesetze-fuer-ki.de: an MCP server that lets AI agents search German federal and state law.
 
-The laws come from the data repository (Markdown files mirrored nightly from
-gesetze-im-internet.de, see sync.py). The server keeps a clone of it, rebuilds
-its search index when the clone changes, and serves:
+The laws come from the data repositories (Markdown files mirrored nightly from
+gesetze-im-internet.de and the integrated states' portals, see sync.py). The server keeps a
+clone of each, rebuilds its search index when one changes, and serves:
 
 - /mcp     the MCP endpoint (streamable HTTP), no login: the data is public law
 - /health  liveness plus the state of the index
@@ -52,8 +52,9 @@ def join_names(names: list[str]) -> str:
 INTEGRATED = join_names(sorted(s.name for s in states.STATES.values() if s.integrated))
 
 INSTRUCTIONS = f"""\
-Aktuelles Bundesrecht von gesetze-im-internet.de: die amtlichen Texte des
-Bundesministeriums der Justiz, jede Nacht abgeglichen.
+Aktuelles Bundesrecht von gesetze-im-internet.de und Landesrecht aus {INTEGRATED}
+von den Portalen der Länder, jede Nacht abgeglichen. Ein Land ist durchsuchbar,
+sobald sein erster vollständiger Abgleich durch ist.
 
 Nutze diese Werkzeuge, sobald eine Frage deutsches Recht berührt: Steuern,
 Gewerbeanmeldung, Arbeit, Miete, Verträge, Datenschutz, Verkehr und so weiter.
