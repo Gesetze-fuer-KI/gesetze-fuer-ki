@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://gesetze-fuer-ki.de/"><img alt="Dokumentation" src="https://img.shields.io/badge/docs-gesetze--fuer--ki.de-1f4e79"></a>
-  <a href="https://github.com/Marceltov/Gesetze-fuer-KI/pkgs/container/gesetze-fuer-ki"><img alt="GHCR-Image" src="https://img.shields.io/badge/ghcr.io-marceltov%2Fgesetze--fuer--ki-2496ED?logo=docker&logoColor=white"></a>
+  <a href="https://github.com/Gesetze-fuer-KI/server/pkgs/container/server"><img alt="GHCR-Image" src="https://img.shields.io/badge/ghcr.io-gesetze--fuer--ki%2Fserver-2496ED?logo=docker&logoColor=white"></a>
   <a href="LICENSE"><img alt="Lizenz: AGPL v3" src="https://img.shields.io/badge/License-AGPL_v3-blue.svg"></a>
 </p>
 
@@ -20,7 +20,7 @@ Ohne Anmeldung, ohne Schlüssel. Wie das in den einzelnen Programmen geht, steht
 ## So funktioniert es
 
 ```text
-gesetze-im-internet.de ──nachts──▶ Marceltov/gesetze ──stündlich git pull──▶ Server ──▶ /mcp
+gesetze-im-internet.de ──nachts──▶ Gesetze-fuer-KI/gesetze ──stündlich git pull──▶ Server ──▶ /mcp
   (6.100 Gesetze als XML)  sync.py   (eine Markdown-Datei   (Klon + SQLite-       (5 Werkzeuge,
                            in der    je Gesetz, Historie    FTS5-Index)           nur lesend)
                            Action    in git)
@@ -32,7 +32,7 @@ gesetze-im-internet.de ──nachts──▶ Marceltov/gesetze ──stündlich 
   wandelt geänderte mit **`app/convert.py`** um und schreibt `<erste zwei Buchstaben>/<kennung>.md`.
   Ein erster vollständiger Lauf dauert etwa eine Minute; ein nächtlicher Lauf besteht aus
   rund 6.100 Antworten `304 Not Modified`.
-- **[Marceltov/gesetze](https://github.com/Marceltov/gesetze)** enthält das Ergebnis. Seine
+- **[Gesetze-fuer-KI/gesetze](https://github.com/Gesetze-fuer-KI/gesetze)** enthält das Ergebnis. Seine
   Action (Vorlage in [`data-repo/`](data-repo/)) führt den Abgleich jede Nacht aus und
   committet mit den amtlichen Änderungsvermerken als Nachricht; git ist damit die
   Versionsgeschichte.
@@ -53,7 +53,7 @@ gesetze-im-internet.de ──nachts──▶ Marceltov/gesetze ──stündlich 
 ```yaml
 services:
   gesetze-fuer-ki:
-    image: ghcr.io/marceltov/gesetze-fuer-ki:0.1.3
+    image: ghcr.io/gesetze-fuer-ki/server:0.1.4
     restart: unless-stopped
     volumes:
       - ./data:/data
@@ -63,7 +63,7 @@ services:
 
 | Variable | Standard | |
 |---|---|---|
-| `GESETZE_REPO_URL` | `https://github.com/Marceltov/gesetze.git` | das Daten-Repository |
+| `GESETZE_REPO_URL` | `https://github.com/Gesetze-fuer-KI/gesetze.git` | das Daten-Repository |
 | `GESETZE_REPO_BRANCH` | `main` | |
 | `REFRESH_SECONDS` | `3600` | wie oft abgeglichen wird |
 | `DATA_DIR` | `/data` | der Klon (~260 MB) und der Index (~300 MB) |

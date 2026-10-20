@@ -59,9 +59,9 @@ Mehr dazu unter [Daten und Grenzen](daten.md).
 ## Offen
 
 Der Server, die Aufbereitung der Gesetze und diese Seite sind Open Source
-([Gesetze-fuer-KI](https://github.com/Marceltov/Gesetze-fuer-KI)). Die Gesetzestexte
+([Gesetze-fuer-KI/server](https://github.com/Gesetze-fuer-KI/server)). Die Gesetzestexte
 selbst liegen als lesbare Markdown-Dateien mit vollständiger Änderungshistorie in einem
-eigenen Repository ([gesetze](https://github.com/Marceltov/gesetze)): Jede Änderung eines
+eigenen Repository ([gesetze](https://github.com/Gesetze-fuer-KI/gesetze)): Jede Änderung eines
 Gesetzes ist dort ein Commit, den man Zeile für Zeile nachlesen kann.
 
 Betrieben wird der Dienst privat. Wer mithelfen möchte, die Kosten für Server und Domain

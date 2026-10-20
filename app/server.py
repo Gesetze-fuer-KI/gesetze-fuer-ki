@@ -29,7 +29,7 @@ from starlette.staticfiles import StaticFiles
 import repo
 import store
 
-DATA_REPO_URL = os.environ.get("GESETZE_REPO_URL", "https://github.com/Marceltov/gesetze.git")
+DATA_REPO_URL = os.environ.get("GESETZE_REPO_URL", "https://github.com/Gesetze-fuer-KI/gesetze.git")
 DATA_REPO_BRANCH = os.environ.get("GESETZE_REPO_BRANCH", "main")
 DATA_DIR = Path(os.environ.get("DATA_DIR", "/data"))
 REFRESH_SECONDS = int(os.environ.get("REFRESH_SECONDS", "3600"))

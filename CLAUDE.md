@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Gesetze für KI
 
 Public MCP server for German federal law. Code in `app/`, docs site (German) in `docs/`, template for the
-`Marceltov/gesetze` data repository in `data-repo/`.
+`Gesetze-fuer-KI/gesetze` data repository in `data-repo/`.
 
 Data flow: `sync.py` (nightly, in the data repo's Action) mirrors gesetze-im-internet.de into one Markdown file per
 law and commits; `server.py` clones that repo, pulls hourly, rebuilds the SQLite FTS5 index (`store.py`) on change
@@ -34,5 +34,5 @@ docker build -t gesetze-fuer-ki:dev .
   users read them in Claude). Code, comments, docstrings, Python names and parameter names stay English.
 - No request content is logged; the privacy page (`docs/datenschutz.md`) promises it. The docs site makes no
   third-party requests either (privacy plugin, no `repo_url`).
-- Releases: tag `vX.Y.Z` → `publish.yml` pushes `ghcr.io/marceltov/gesetze-fuer-ki`. Deployment lives in
+- Releases: tag `vX.Y.Z` → `publish.yml` pushes `ghcr.io/gesetze-fuer-ki/server`. Deployment lives in
   `../notefeed-stacks` (compose + Caddy, pins the version) and `../notefeed-ansible`, not here.

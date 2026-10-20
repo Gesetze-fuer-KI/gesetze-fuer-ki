@@ -1,7 +1,7 @@
 name: Sync
 
 # Every night: mirror gesetze-im-internet.de into this repository and commit what changed.
-# The sync code lives in Marceltov/Gesetze-fuer-KI (app/sync.py); this repository holds only data.
+# The sync code lives in Gesetze-fuer-KI/server (app/sync.py); this repository holds only data.
 #
 # A failed run sends GitHub's usual failure email. If the secret KUMA_PUSH_URL is set, a
 # successful run also pings that Uptime Kuma push monitor, which alerts when no ping arrives
@@ -32,7 +32,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          repository: Marceltov/Gesetze-fuer-KI
+          repository: Gesetze-fuer-KI/server
           path: tool
 
       - uses: astral-sh/setup-uv@v6
