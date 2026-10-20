@@ -27,6 +27,10 @@ dort ein Konto an und können ihn jederzeit beenden, auch gleich nach der ersten
 
 [Über Liberapay unterstützen](https://liberapay.com/GesetzeFuerKI/donate){ .md-button .md-button--primary }
 
+Lieber per Überweisung? Schreiben Sie an
+[kontakt@marcelbruckner.de](mailto:kontakt@marcelbruckner.de?subject=Unterst%C3%BCtzung%20Gesetze%20f%C3%BCr%20KI),
+dann schicke ich Ihnen die Bankverbindung.
+
 !!! warning "Das ist keine Spende"
 
     Ihr Beitrag ist eine freiwillige Unterstützung für einen privat betriebenen Dienst,
