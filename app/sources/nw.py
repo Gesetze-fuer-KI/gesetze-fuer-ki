@@ -18,9 +18,13 @@ Law id: a version's URL carries its date and title ("/lrgv/gesetz/16102026-studi
 and changes with every amendment. The stable id is the law's taxonomy term ("Link zur
 aktuellsten Fassung", /taxonomy/term/31127), which the index does not hold. Every version page
 names it as its canonical link in the first kilobyte, so the listing reads the first few
-kilobytes of each page (an HTTP Range request) to learn it: slug "nw-31127". Two laws (of
+kilobytes of each page (an HTTP Range request) to learn it: slug "nw-31127". A version's law
+never changes, so the URL -> id pairs are kept in the runner's cache across runs and only new
+versions are read; pairs for URLs no longer listed are dropped. Two laws (of
 1,209 on 2026-10-20) had no term; their page is its own canonical link, and the slug is the
-last part of its URL.
+last part of its URL. Should two listed versions ever name the same law, the listing keeps the
+one with the later start date (and the later URL on a tie) instead of failing: its page links
+all the others. The listing still fails if any announced hit is missing or has no law id.
 
 Law: the version page has the whole text: a preamble (Eingangsformel, the Inhaltsübersicht),
 nested <section>s for the Gliederung (legaldoc-part, -chapter, -section, -subsection) and the
@@ -99,6 +103,11 @@ class NwSource:
     # 1,209 listed on 2026-10-20 (480 Gesetze, 729 Rechtsverordnungen); about 90 %.
     min_entries = 1088
 
+    def __init__(self) -> None:
+        # Version URL -> law id, kept by the runner across runs: a version's law never changes,
+        # so only new versions cost a request.
+        self.cache: dict[str, str] = {}
+
     def list_laws(self, client: httpx.Client) -> list[Entry]:
         response = client.post(SEARCH, json=listing_query(datetime.date.today()))
         response.raise_for_status()
@@ -116,8 +125,19 @@ class NwSource:
             if kind not in TYPES:
                 raise ValueError(f"{source.get('url')}: unexpected type {kind!r}")
             versions.append((f"{BASE}{source['url'][0]}", _day(source.get("field_effective_from"))))
+        listed = {url for url, _ in versions}
+        for url in set(self.cache) - listed:
+            del self.cache[url]  # a version no longer listed (superseded or repealed)
+
+        def lookup(url: str) -> str:
+            if url not in self.cache:
+                self.cache[url] = law_id(client, url)  # kept even if another lookup fails
+            return self.cache[url]
+
         with ThreadPoolExecutor(max_workers=self.workers) as pool:
-            terms = list(pool.map(lambda v: law_id(client, v[0]), versions))
+            # All lookups run to the end (and fill the cache) before a failed one is raised.
+            futures = [pool.submit(lookup, url) for url, _ in versions]
+        terms = [f.result() for f in futures]
         entries: dict[str, Entry] = {}
         for term, (url, lastmod) in zip(terms, versions):
             entry = Entry(slug_for(term), url, lastmod)

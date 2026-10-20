@@ -404,3 +404,60 @@ def test_cli_unknown_land_exits_2(monkeypatch, tmp_path):
     with pytest.raises(SystemExit) as exc:
         sync.main()
     assert exc.value.code == 2
+
+
+class CachingSource(FakeSource):
+    """Keeps something in the runner's per-source cache: the slugs it has listed so far."""
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        self.cache: dict = {}
+        self.seen_cache: dict | None = None
+        self.interrupt = False
+
+    def list_laws(self, client):
+        self.seen_cache = dict(self.cache)
+        for slug in self.lastmod:
+            self.cache[slug] = "known"
+        return super().list_laws(client)
+
+    def fetch(self, client, entry, today):
+        if self.interrupt:
+            raise KeyboardInterrupt
+        return super().fetch(client, entry, today)
+
+
+def test_cache_is_kept_in_the_state_and_handed_back(tmp_path):
+    src = CachingSource(n=3, min_entries=1)
+    assert run(tmp_path, src) == 0
+    assert src.seen_cache == {}
+    assert load_state(tmp_path)["cache"] == {f"by-law{i:02d}": "known" for i in range(3)}
+    again = CachingSource(n=3, min_entries=1)
+    run(tmp_path, again)
+    assert again.seen_cache == {f"by-law{i:02d}": "known" for i in range(3)}
+
+
+def test_cache_is_saved_when_the_run_is_interrupted(tmp_path):
+    src = CachingSource(n=3, min_entries=1)
+    src.interrupt = True
+    with pytest.raises(KeyboardInterrupt):
+        run(tmp_path, src)
+    assert load_state(tmp_path)["cache"] == {f"by-law{i:02d}": "known" for i in range(3)}
+
+
+def test_a_source_without_a_cache_is_left_alone(tmp_path):
+    src = FakeSource(n=3, min_entries=1)
+    run(tmp_path, src)
+    assert not hasattr(src, "cache")
+    assert load_state(tmp_path)["cache"] == {}
+
+
+def test_cache_is_saved_when_the_listing_breaks_off(tmp_path):
+    class Breaking(CachingSource):
+        def list_laws(self, client):
+            self.cache["half"] = "done"
+            raise KeyboardInterrupt
+
+    with pytest.raises(KeyboardInterrupt):
+        run(tmp_path, Breaking(n=3, min_entries=1))
+    assert load_state(tmp_path)["cache"] == {"half": "done"}

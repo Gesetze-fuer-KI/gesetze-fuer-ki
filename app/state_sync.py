@@ -61,6 +61,9 @@ class Fetched:
 
 
 class Source(Protocol):
+    """A state portal. A source may also have a `cache` dict attribute: the runner then sets it
+    to what the source kept there in the last run before list_laws, and saves it with the state."""
+
     code: str
     crawl_delay: float  # seconds between requests; > 0 requires workers == 1
     workers: int
@@ -104,7 +107,8 @@ def _client(source: Source, sleep: Callable[[float], None], transport: httpx.Bas
 def _load_state(path: Path) -> dict:
     state = json.loads(path.read_text()) if path.exists() else {}
     return {"complete": state.get("complete", False), "pass_done": state.get("pass_done", []),
-            "pass_failed": state.get("pass_failed", []), "laws": state.get("laws", {})}
+            "pass_failed": state.get("pass_failed", []), "laws": state.get("laws", {}),
+            "cache": state.get("cache", {})}
 
 
 def _failure_limit(total: int) -> int:
@@ -125,6 +129,8 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
     # Laws this pass has handled: fetched or unchanged (pass_done), or failed (pass_failed, retried next pass).
     pass_done: set[str] = set(state["pass_done"])
     pass_failed: set[str] = set(state["pass_failed"]) - pass_done
+    if hasattr(source, "cache"):
+        source.cache = state["cache"]  # the source's own memory across runs, saved with the state
     started = False
 
     def save() -> None:
@@ -132,6 +138,7 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
         state["pass_done"] = sorted(pass_done)
         state["pass_failed"] = sorted(pass_failed)
         state["laws"] = dict(sorted(laws.items()))
+        state["cache"] = getattr(source, "cache", state["cache"])
         tmp = state_file.with_suffix(".tmp")
         tmp.write_text(json.dumps(state, indent=1, ensure_ascii=False) + "\n")
         tmp.replace(state_file)
@@ -250,5 +257,5 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
             return 1
         return 0
     finally:
-        if started:
-            save()
+        if started or hasattr(source, "cache"):
+            save()  # a listing that breaks off keeps what it has cached

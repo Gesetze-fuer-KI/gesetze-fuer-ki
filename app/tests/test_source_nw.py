@@ -366,3 +366,38 @@ def test_run_end_to_end(tmp_path):
     message = (tmp_path / ".sync" / "commit-message.txt").read_text(encoding="utf-8")
     assert "- neu: StWG (Gesetz über die Studierendenwerke im Land Nordrhein-Westfalen)" in message
     assert "- neu: VergabeVO NRW (Verordnung über die Vergabe von Studienplätzen in Nordrhein-Westfalen)" in message
+
+
+def test_a_warm_cache_spares_the_page_requests():
+    portal = Portal()
+    source = nw.NwSource()
+    with portal.client() as client:
+        first = source.list_laws(client)
+    assert source.cache == {nw.BASE + p: t for t, p in PATHS.items()}
+    portal.requests.clear()
+    with portal.client() as client:
+        second = source.list_laws(client)
+    assert portal.requests == ["POST listing"]
+    assert sorted((e.slug, e.url, e.lastmod) for e in second) == sorted((e.slug, e.url, e.lastmod) for e in first)
+
+
+def test_the_cache_reads_new_urls_and_drops_unlisted_ones():
+    source = nw.NwSource()
+    stale = nw.BASE + "/lrgv/gesetz/01012025-gesetz-ueber-die-studierendenwerke-im-land-nordrhein-westfalen"
+    source.cache = {nw.BASE + p: t for t, p in PATHS.items() if t != "32868"} | {stale: "31127"}
+    portal = Portal()
+    with portal.client() as client:
+        entries = source.list_laws(client)
+    assert portal.requests == ["POST listing", f"GET {PATHS['32868']}/ bytes=0-8191"]
+    assert len(entries) == 4
+    assert stale not in source.cache and source.cache[nw.BASE + PATHS["32868"]] == "32868"
+
+
+def test_a_broken_listing_keeps_the_ids_it_has_read():
+    pages = {p: page(t) for t, p in PATHS.items()}
+    del pages[PATHS["26520"]]
+    source = nw.NwSource()
+    portal = Portal(pages=pages)
+    with portal.client() as client, pytest.raises(httpx.HTTPStatusError):
+        source.list_laws(client)
+    assert source.cache == {nw.BASE + p: t for t, p in PATHS.items() if t != "26520"}
