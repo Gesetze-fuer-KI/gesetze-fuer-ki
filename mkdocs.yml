@@ -24,8 +24,7 @@ theme:
   font:
     text: Atkinson Hyperlegible Next
     code: Atkinson Hyperlegible Mono
-  icon:
-    logo: material/scale-balance
+  logo: assets/logo.svg
   favicon: favicon.svg
   palette:
     - media: "(prefers-color-scheme: light)"
