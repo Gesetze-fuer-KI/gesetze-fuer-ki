@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Gesetze-fuer-KI/.github/main/profile/logo-dunkel.svg">
-    <img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src="https://raw.githubusercontent.com/Gesetze-fuer-KI/.github/main/profile/logo.svg" width="110">
+    <source media="(prefers-color-scheme: dark)" srcset=".github/readme/logo-dunkel.svg">
+    <img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src=".github/readme/logo.svg" width="110">
   </picture>
 </p>
 
@@ -28,8 +28,8 @@ Wie man den eigenen Assistenten verbindet, steht auf **[gesetze-fuer-ki.de](http
 ## So funktioniert es
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Gesetze-fuer-KI/.github/main/profile/ablauf-dunkel.svg">
-  <img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src="https://raw.githubusercontent.com/Gesetze-fuer-KI/.github/main/profile/ablauf.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/readme/ablauf-dunkel.svg">
+  <img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf.svg" width="100%">
 </picture>
 
 - **`app/sync.py`** spiegelt gesetze-im-internet.de: Für jedes Gesetz aus `gii-toc.xml` fragt es das XML-Archiv mit dem letzten ETag an, wandelt geänderte mit **`app/convert.py`** in Markdown um und schreibt `<erste zwei Buchstaben>/<kennung>.md`. Ein vollständiger Lauf dauert etwa eine Minute, ein nächtlicher besteht aus rund 6.100 Antworten `304 Not Modified`.
