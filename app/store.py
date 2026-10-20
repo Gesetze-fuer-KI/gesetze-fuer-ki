@@ -176,12 +176,16 @@ def _state_complete(clone: Path) -> bool:
     return bool(json.loads(path.read_text(encoding="utf-8")).get("complete"))
 
 
+def law_files(data_dir: Path) -> list[Path]:
+    """The law files of a data repository: not READMEs, nothing in a dot directory (.github, .sync)."""
+    return [p for p in sorted(data_dir.glob("*/*.md"))
+            if not p.name.startswith("README") and not any(x.startswith(".") for x in p.relative_to(data_dir).parts)]
+
+
 def _index_dir(db: sqlite3.Connection, data_dir: Path, land: str | None) -> int:
     """Index the law files of one repository; paths are stored relative to it."""
     count = 0
-    for path in sorted(data_dir.glob("*/*.md")):
-        if path.name.startswith("README"):
-            continue
+    for path in law_files(data_dir):
         front, _, units = split_law(path.read_text(encoding="utf-8"))
         slug = path.stem
         abk = str(front.get("abkuerzung") or slug)

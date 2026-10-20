@@ -160,3 +160,20 @@ def test_broken_state_does_not_abort_build(tmp_path):
     assert s.resolve_law("HbG", land="HB") == []
     assert s.meta("schema") == store.SCHEMA_VERSION
     s.close()
+
+
+def test_files_in_dot_directories_are_not_indexed(tmp_path):
+    data, clone = tmp_path / "data", tmp_path / "landesrecht-by"
+    (data / "m").mkdir(parents=True)
+    md, _ = convert(MINI, "minig")
+    (data / "m" / "minig.md").write_text(md, encoding="utf-8")
+    (data / ".github").mkdir()
+    (data / ".github" / "minig.md").write_text(md, encoding="utf-8")
+    _state_law(clone, "BY", "by-minig", "MiniG", "Bayerisches Minigesetz", "Art. 1", "Text.")
+    _state_file(clone, complete=True)
+    (clone / ".github").mkdir()
+    (clone / ".github" / "by-minig.md").write_text((clone / "by" / "by-minig.md").read_text(encoding="utf-8"))
+    (clone / ".sync" / "notes.md").write_text("Notizen\n")
+    db = tmp_path / "index.sqlite"
+    assert store.build(data, db, "rev", states={"BY": clone}) == 2
+    assert store.law_files(clone) == [clone / "by" / "by-minig.md"]

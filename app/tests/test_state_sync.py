@@ -138,11 +138,13 @@ def test_complete_stays_true_during_later_partial_pass(tmp_path):
 def test_short_listing_refuses_and_deletes_nothing(tmp_path):
     src = FakeSource(n=10, min_entries=5)
     assert run(tmp_path, src) == 0
-    before = {p: p.read_bytes() for p in (tmp_path / ".sync").iterdir()}
+    before = (tmp_path / ".sync" / "state.json").read_bytes()
     src.lastmod = dict(list(src.lastmod.items())[:2])
     assert run(tmp_path, src) == 2
     assert len(files(tmp_path)) == 10
-    assert {p: p.read_bytes() for p in (tmp_path / ".sync").iterdir()} == before
+    # The state is untouched and there is no commit message, not even the last run's.
+    assert (tmp_path / ".sync" / "state.json").read_bytes() == before
+    assert [p.name for p in (tmp_path / ".sync").iterdir()] == ["state.json"]
 
 
 def test_short_listing_on_first_run_writes_nothing(tmp_path):
@@ -490,3 +492,107 @@ def test_cache_is_saved_sorted(tmp_path):
     run(tmp_path, Unsorted(n=3, min_entries=1))
     keys = list(load_state(tmp_path)["cache"])
     assert keys == sorted(keys)
+
+
+def test_a_stale_commit_message_is_removed_when_the_listing_is_refused(tmp_path):
+    src = FakeSource(n=10, min_entries=5)
+    assert run(tmp_path, src) == 0
+    src.lastmod = dict(list(src.lastmod.items())[:2])
+    assert run(tmp_path, src) == 2
+    assert not (tmp_path / ".sync" / "commit-message.txt").exists()
+
+
+def test_a_listing_that_breaks_off_writes_no_commit_message(tmp_path):
+    src = FakeSource()
+    assert run(tmp_path, src) == 0
+
+    def broken(client):
+        raise RuntimeError("listing down")
+
+    src.list_laws = broken
+    with pytest.raises(RuntimeError):
+        run(tmp_path, src)
+    assert not (tmp_path / ".sync" / "commit-message.txt").exists()
+
+
+def test_an_interrupted_run_writes_a_commit_message_for_its_progress(tmp_path):
+    src = FakeSource(n=40)
+    assert run(tmp_path, src) == 0
+    src.lastmod = {slug: "2026-05-05" for slug in src.lastmod}
+    for slug in ("by-law00", "by-law01"):
+        src.texts[slug] = law(f"{slug} geändert")
+    real = src.fetch
+
+    def interrupted(client, entry, today):
+        if entry.slug == "by-law03":
+            raise KeyboardInterrupt
+        return real(client, entry, today)
+
+    src.fetch = interrupted
+    with pytest.raises(KeyboardInterrupt):
+        run(tmp_path, src)
+    msg = commit_msg(tmp_path)
+    assert msg.splitlines()[0] == "Bayern Stand 2026-10-20: 2 geändert, 0 neu, 0 entfernt"
+    assert "- BY-LAW00: x" in msg and "- BY-LAW01: x" in msg
+    assert msg.rstrip().endswith("Abgleich abgebrochen, Fortschritt gesichert")
+
+
+def test_a_pass_that_would_delete_too_many_files_deletes_nothing(tmp_path, caplog):
+    src = FakeSource(n=30, min_entries=5)
+    assert run(tmp_path, src) == 0
+    for i in range(11):  # more than _failure_limit(19) == 10
+        del src.lastmod[f"by-law{i:02d}"]
+    assert run(tmp_path, src) == 1
+    assert len(files(tmp_path)) == 30
+    assert any(r.levelname == "ERROR" for r in caplog.records)
+    assert "entfernt:" not in commit_msg(tmp_path)
+    # Up to the limit, laws that left the listing are deleted as before.
+    src2 = FakeSource(n=30, min_entries=5)
+    out2 = tmp_path / "two"
+    assert run(out2, src2) == 0
+    for i in range(10):
+        del src2.lastmod[f"by-law{i:02d}"]
+    assert run(out2, src2) == 0
+    assert len(files(out2)) == 20
+
+
+def test_files_in_dot_directories_are_never_deleted(tmp_path):
+    src = FakeSource()
+    assert run(tmp_path, src) == 0
+    (tmp_path / ".github").mkdir()
+    (tmp_path / ".github" / "pull_request_template.md").write_text("Hinweis\n")
+    (tmp_path / ".sync" / "notes.md").write_text("x\n")
+    assert run(tmp_path, src) == 0
+    assert (tmp_path / ".github" / "pull_request_template.md").exists()
+    assert (tmp_path / ".sync" / "notes.md").exists()
+
+
+def test_the_client_retries_once_after_a_server_error_through_the_throttle(tmp_path):
+    src = FakeSource(n=1, min_entries=1)
+    src.crawl_delay = 20
+    responses = iter([httpx.Response(503), httpx.Response(200, text="ok")])
+    src.transport = httpx.MockTransport(lambda r: next(responses, httpx.Response(200, text="ok")))
+    sleeps = []
+    assert run(tmp_path, src, sleep=sleeps.append) == 0
+    # listing: 503, backoff, throttled retry; then the law, throttled
+    assert sleeps == [state_sync.RETRY_DELAY, 20, 20]
+
+
+def test_the_client_retries_a_transport_error_once_and_not_a_404(tmp_path):
+    calls = []
+
+    def handle(request):
+        calls.append(request.url.path)
+        if request.url.path == "/down":
+            raise httpx.ConnectError("refused")
+        if request.url.path == "/flaky" and calls.count("/flaky") == 1:
+            raise httpx.ReadTimeout("slow")
+        return httpx.Response(404 if request.url.path == "/missing" else 200, text="ok")
+
+    src = FakeSource()
+    with state_sync._client(src, noop, httpx.MockTransport(handle)) as client:
+        assert client.get("https://fake.example/flaky").text == "ok"
+        assert client.get("https://fake.example/missing").status_code == 404
+        with pytest.raises(httpx.ConnectError):
+            client.get("https://fake.example/down")
+    assert calls == ["/flaky", "/flaky", "/missing", "/down", "/down"]

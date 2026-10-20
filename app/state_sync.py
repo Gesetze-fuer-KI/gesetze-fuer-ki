@@ -9,8 +9,10 @@ State portals are slower and stricter than gesetze-im-internet.de, so the first 
 may take several nights: a run stops starting new fetches after `--max-minutes`, saves
 which laws this pass has done in `<out>/.sync/state.json`, and the next run carries on.
 Only after a full pass are laws that left the listing deleted, and `complete` (read by
-the server) turns true, unless too many laws failed. A law that fails keeps its old file
-and is tried again in the next pass. Later passes refetch a law only when the portal's
+the server) turns true, unless too many laws failed; a pass that would delete more files
+than failures are allowed deletes none and exits 1. A law that fails keeps its old file
+and is tried again in the next pass. A run that breaks off still saves its progress and
+writes a commit message saying so. Later passes refetch a law only when the portal's
 lastmod changes, its file is missing, or a known future version has come into force.
 """
 
@@ -73,7 +75,10 @@ class Source(Protocol):
     def list_laws(self, client: httpx.Client) -> list[Entry]: ...
 
     def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
-        """None means the entry is no Gesetz or Verordnung and is skipped."""
+        """None means the entry is no Gesetz or Verordnung and is skipped (its file deleted at the
+        end of the pass). Return it only for a document positively recognised as a non-law (a type
+        or link the source knows); anything unknown or unrecognised raises, so the law keeps its
+        file and is tried again next pass."""
         ...
 
 
@@ -89,20 +94,45 @@ def state_law_path(out: Path, slug: str) -> Path:
     return law_path(out, doc_id).with_name(f"{slug}.md")
 
 
+RETRY_DELAY = 5.0  # seconds before the one retry of a request that failed on the server's side
+
+
+class _Polite(httpx.BaseTransport):
+    """Waits crawl_delay before every request but the first, whoever sends it, and retries a
+    network error or a 5xx once after RETRY_DELAY; the retry waits its turn like any request."""
+
+    def __init__(self, source: Source, sleep: Callable[[float], None], inner: httpx.BaseTransport) -> None:
+        self.source, self.sleep, self.inner = source, sleep, inner
+        self.lock = threading.Lock()
+        self.sent = False
+
+    def throttle(self) -> None:
+        with self.lock:
+            if self.sent and self.source.crawl_delay > 0:
+                self.sleep(self.source.crawl_delay)
+            self.sent = True
+
+    def handle_request(self, request: httpx.Request) -> httpx.Response:
+        self.throttle()
+        try:
+            response = self.inner.handle_request(request)
+            if response.status_code < 500:
+                return response
+            response.close()
+        except httpx.TransportError as exc:
+            log.info("%s: %s, retrying", request.url, exc)
+        self.sleep(RETRY_DELAY)
+        self.throttle()
+        return self.inner.handle_request(request)
+
+    def close(self) -> None:
+        self.inner.close()
+
+
 def _client(source: Source, sleep: Callable[[float], None], transport: httpx.BaseTransport | None) -> httpx.Client:
-    """A client that waits crawl_delay before every request but the first, whoever sends it."""
-    lock = threading.Lock()
-    sent = False
-
-    def throttle(request: httpx.Request) -> None:
-        nonlocal sent
-        with lock:
-            if sent and source.crawl_delay > 0:
-                sleep(source.crawl_delay)
-            sent = True
-
+    """A client that waits crawl_delay between requests and retries a failed one once."""
     return httpx.Client(headers={"User-Agent": USER_AGENT}, timeout=60, follow_redirects=True,
-                        event_hooks={"request": [throttle]}, transport=transport)
+                        transport=_Polite(source, sleep, transport or httpx.HTTPTransport()))
 
 
 def _load_state(path: Path) -> dict:
@@ -132,6 +162,12 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
     pass_failed: set[str] = set(state["pass_failed"]) - pass_done
     if hasattr(source, "cache"):
         source.cache = state["cache"]  # the source's own memory across runs, saved with the state
+    message_file = state_dir / "commit-message.txt"
+    message_file.unlink(missing_ok=True)  # a run that ends early must not leave the last run's message
+    prefix = f"{states.STATES[source.code.upper()].name} Stand {today.isoformat()}"
+    changed: list[dict] = []
+    removed: list[str] = []
+    failed: list[str] = []
     started = False
 
     def save() -> None:
@@ -196,8 +232,6 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
                     log.warning("%s: %s", e.slug, exc)
                     return e, "failed", None
 
-            changed: list[dict] = []
-            failed: list[str] = []
             pool = ThreadPoolExecutor(max_workers=source.workers)
             try:
                 for i, (e, status, fetched) in enumerate(pool.map(one, todo), 1):
@@ -232,13 +266,19 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
             finally:
                 pool.shutdown(cancel_futures=True)
 
-        removed: list[str] = []
         failed_in_pass = sorted(pass_failed)
         finished = not only and listed <= pass_done | pass_failed
+        refused = 0  # files a pass would have deleted, had there not been too many
         if finished:
             keep = {s for s in listed if not laws.get(s, {}).get("skip")}
-            for path in sorted(out.glob("*/*.md")):
-                if path.stem not in keep and not path.name.startswith("README"):
+            gone = [p for p in store.law_files(out) if p.stem not in keep]
+            if len(gone) > _failure_limit(len(listed)):
+                # A source that wrongly skips (or stops listing) many laws must not wipe them.
+                log.error("pass would delete %d files, more than %d: deleting none", len(gone),
+                          _failure_limit(len(listed)))
+                refused = len(gone)
+            else:
+                for path in gone:
                     path.unlink()
                     removed.append(path.stem)
             for slug in set(laws) - listed:
@@ -250,17 +290,23 @@ def run(out: Path, source: Source, only: list[str] | None, max_minutes: float, t
             pass_done, pass_failed = set(), set()
         save()
 
-        lines = commit_lines(f"{states.STATES[source.code.upper()].name} Stand {today.isoformat()}",
-                             changed, removed, failed_in_pass if finished else failed)
+        lines = commit_lines(prefix, changed, removed, failed_in_pass if finished else failed)
+        if refused:
+            lines += ["", f"Nicht gelöscht: {refused} Dateien wären entfernt worden, zu viele für einen Abgleich"]
         if not only and not finished:
             lines += ["", f"Abgleich läuft noch: {len((pass_done | pass_failed) & listed)} von {len(listed)}"]
-        (state_dir / "commit-message.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        message_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
         log.info("%d changed, %d removed, %d failed; pass %s", len(changed), len(removed), len(failed),
                  "finished" if finished else f"{len(pass_done | pass_failed)}/{len(listed)}")
 
-        if failed and len(failed) > _failure_limit(len(listed)):
+        if refused or (failed and len(failed) > _failure_limit(len(listed))):
             return 1
         return 0
     finally:
         if started or hasattr(source, "cache"):
             save()  # a listing that breaks off keeps what it has cached
+        if started and not message_file.exists():
+            # Broken off (job timeout, error): commit what is saved, with a message that says so.
+            lines = commit_lines(prefix, changed, removed, failed)
+            message_file.write_text("\n".join(lines + ["", "Abgleich abgebrochen, Fortschritt gesichert"]) + "\n",
+                                    encoding="utf-8")
