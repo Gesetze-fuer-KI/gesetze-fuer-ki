@@ -94,6 +94,10 @@ def files(out):
 def test_state_law_path_shards_by_id():
     out = state_sync.Path("/d")
     assert state_sync.state_law_path(out, "by-baybo") == out / "ba" / "by-baybo.md"
+    # Numeric ids (Sachsen) are sharded by their first two digits, not all into "0-9".
+    assert state_sync.state_law_path(out, "sn-20111") == out / "20" / "sn-20111.md"
+    assert state_sync.state_law_path(out, "sn-3975") == out / "39" / "sn-3975.md"
+    assert state_sync.state_law_path(out, "sn-7") == out / "0-9" / "sn-7.md"
 
 
 def test_first_pass_resumes_across_runs(tmp_path):

@@ -74,8 +74,15 @@ class Source(Protocol):
 
 
 def state_law_path(out: Path, slug: str) -> Path:
-    """Sharded like federal laws, by the part after the state prefix; the file keeps the full slug."""
-    return law_path(out, slug.split("-", 1)[1]).with_name(f"{slug}.md")
+    """Sharded like federal laws, by the part after the state prefix; the file keeps the full slug.
+
+    Numeric ids (Sachsen: "sn-20111") are sharded by their first two digits ("20/"), or they
+    would all land in "0-9/", past the 1,000 entries GitHub lists per directory.
+    """
+    doc_id = slug.split("-", 1)[1]
+    if len(doc_id) >= 2 and doc_id[:2].isdigit():
+        return out / doc_id[:2] / f"{slug}.md"
+    return law_path(out, doc_id).with_name(f"{slug}.md")
 
 
 def _client(source: Source, sleep: Callable[[float], None], transport: httpx.BaseTransport | None) -> httpx.Client:

@@ -61,9 +61,10 @@ def page(doc_id: str) -> str:
     return (FIXTURES / f"{doc_id}.html").read_text(encoding="utf-8")
 
 
-def fetch(doc_id: str, html: str | None = None, today: datetime.date = D) -> state_sync.Fetched | None:
+def fetch(doc_id: str, html: str | None = None, today: datetime.date = D,
+          lastmod: str | None = None) -> state_sync.Fetched | None:
     portal = Portal({doc_id: html if html is not None else page(doc_id)})
-    entry = state_sync.Entry(sn.slug_for(doc_id), f"{sn.BASE}/vorschrift/{doc_id}", "2025-01-01")
+    entry = state_sync.Entry(sn.slug_for(doc_id), f"{sn.BASE}/vorschrift/{doc_id}", lastmod)
     with portal.client() as client:
         return sn.SnSource().fetch(client, entry, today)
 
@@ -278,3 +279,41 @@ def test_run_with_sn_source(tmp_path, monkeypatch):
     assert path.exists() and "land: SN" in path.read_text(encoding="utf-8")
     assert "- neu: Verfassung (Verfassung des Freistaates Sachsen)" in \
         (tmp_path / ".sync" / "commit-message.txt").read_text(encoding="utf-8")
+
+
+def test_footnote_on_a_gliederung_heading_keeps_it_a_gliederung():
+    # Live case: the heading of SächsWG Teil 3 Abschnitt 5 carries a footnote ("Überschrift … geändert").
+    units = units_of("12868")
+    seq = [(u.kind, u.unit_id, u.ebene) for u in units]
+    i = seq.index(("gliederung", "teil3", 1))
+    assert seq[i:i + 5] == [
+        ("gliederung", "teil3", 1),
+        ("gliederung", "teil3-abschnitt4", 2),
+        ("norm", "par58", None),
+        ("gliederung", "teil3-abschnitt5", 2),
+        ("norm", "par59", None),
+    ]
+    abschnitt5 = units[i + 3]
+    assert abschnitt5.heading == "Abschnitt 5 Vorbeugender Gewässerschutz und Gewässerschutzbeauftragte"
+    assert abschnitt5.body == ("> **Fußnote**\n>\n> 13) Überschrift Abschnitt 5 geändert durch Artikel 12 des "
+                               "Gesetzes vom 20. Dezember 2022 (SächsGVBl. S. 705)")
+    assert "> **Fußnote**" not in units[i + 4].body
+    # Without the footnote the ids are the same.
+    html = page("12868").replace('<a title="Überschrift Abschnitt 5', '<a data-x="1" title="Überschrift Abschnitt 5')
+    html = html.replace('href="#FNID_13"><sup>13</sup></a>', "")
+    assert html.count("FNID_13") == 1
+    assert [u.unit_id for u in units_of("12868", html)] == [u.unit_id for u in units]
+
+
+def test_gliederung_with_text_of_its_own_stays_a_gliederung():
+    html = page("20111").replace("Allgemeine Vorschriften</h4>", "Allgemeine Vorschriften</h4><p>Vorbemerkung.</p>", 1)
+    assert html != page("20111")
+    units = units_of("20111", html)
+    assert (units[1].kind, units[1].unit_id, units[1].body) == ("gliederung", "abschnitt1", "Vorbemerkung.")
+    assert units[2].unit_id == "par1"
+
+
+def test_page_newer_or_older_than_the_listing_is_refused():
+    assert fetch("20111", lastmod="2025-01-01") is not None
+    with pytest.raises(ValueError, match="2024-05-01"):
+        fetch("20111", lastmod="2024-05-01")

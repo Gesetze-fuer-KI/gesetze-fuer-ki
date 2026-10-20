@@ -55,7 +55,7 @@ _VERSION_DATE = re.compile(r"(\d{2})\.(\d{2})\.(\d{4})")
 # A norm's designation at the start of its heading, and a Gliederung's ("1. Abschnitt", "Teil 2").
 _NORM_DESIGNATION = re.compile(r"(?:§§?|Art\.|Artikel|Anlagen?|Anhang)\s*(?:\d+[a-z]*\b)?(?:\s+bis\s+\d+[a-z]*\b)?")
 _GLIEDERUNG_DESIGNATION = re.compile(
-    r"(?:[IVXLC\d]+\.\s*)?(?:Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)"
+    r"(?:[IVXLC\d]+\.\s*)?(?:Teil|Buch|Kapitel|Unterkapitel|Abschnitt|Unterabschnitt|Titel|Untertitel)\b"
     r"(?:\s+[IVXLC\d]+[a-z]?\b\.?)?")
 
 _VOID = {"br", "img", "col", "input", "meta", "link", "hr", "wbr", "source"}
@@ -107,7 +107,12 @@ class SnSource:
     def fetch(self, client: httpx.Client, entry: Entry, today: datetime.date) -> Fetched | None:
         response = client.get(entry.url)
         response.raise_for_status()
-        return parse_law(response.text, entry.url, today)
+        fetched = parse_law(response.text, entry.url, today)
+        if fetched is not None and entry.lastmod and fetched.front["gilt_ab"] != entry.lastmod:
+            # The page and the listing disagree (one was updated in between): try again next run
+            # rather than store this text under the listing's lastmod.
+            raise ValueError(f"page valid from {fetched.front['gilt_ab']}, listing says {entry.lastmod}")
+        return fetched
 
 
 def slug_for(doc_id: str) -> str:
@@ -349,8 +354,10 @@ class _Law:
         lines = self.heading_lines(heading_node) if heading_node is not None else []
         heading = " ".join(lines) or _line(el.attrs.get("title", "")) or "(ohne Bezeichnung)"
         blocks = self.blocks(el, skip=heading_node)
+        # Norm or Gliederung by designation and body only: a footnote on a heading changes neither.
         norm = _NORM_DESIGNATION.match(heading)
-        if norm or blocks or self.notes:
+        g = _GLIEDERUNG_DESIGNATION.match(heading)
+        if norm or (blocks and not g):
             designation = norm[0] if norm else (lines[0] if lines else heading)
             self.add("norm", _slug(designation) or "vorschrift", None, heading, blocks)
             return
@@ -358,10 +365,10 @@ class _Law:
         level = int(level_attr) if level_attr.isdigit() else 1
         while self.path and self.path[-1][0] >= level:
             self.path.pop()
-        g = _GLIEDERUNG_DESIGNATION.match(heading)
         part = _slug(g[0] if g else (lines[0] if lines else heading)) or "gliederung"
         self.path.append((level, part))
-        self.add("gliederung", "-".join(p for _, p in self.path), len(self.path), heading, [])
+        # Text of its own and footnotes on its heading stay with the Gliederung, as its body.
+        self.add("gliederung", "-".join(p for _, p in self.path), len(self.path), heading, blocks)
 
     def heading_lines(self, el: _Node) -> list[str]:
         """The lines of a heading (split at <br>); footnote markers are left out, their notes kept."""
