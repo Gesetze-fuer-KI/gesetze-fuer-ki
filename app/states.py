@@ -90,11 +90,13 @@ def find(text: str) -> State | None:
 
 
 def not_integrated_text(state: State) -> str:
-    """Explain, in German, why a state is missing and where its law can be read."""
+    """Explain, in German, why a state is missing and where its law can be read.
+
+    Each URL ends its line: a period after it would end up in the link in many clients."""
     return (
-        f"{state.name} ist noch nicht integriert. {state.reason} "
-        f"Die Texte stehen auf {state.portal}. "
-        f"Mehr dazu: {state.repo}. "
+        f"{state.name} ist noch nicht integriert. {state.reason}\n"
+        f"Die Texte stehen auf dem Landesportal: {state.portal}\n"
+        f"Mehr dazu: {state.repo}\n"
         f"Wer {state.name} braucht oder die Nutzung erlauben kann: {CONTACT}"
     )
 

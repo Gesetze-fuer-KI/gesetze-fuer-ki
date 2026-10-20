@@ -1,3 +1,5 @@
+import re
+
 import pytest
 
 import states
@@ -51,6 +53,14 @@ def test_not_integrated_text_names_portal_and_contact():
 def test_not_integrated_text_links_the_state_repo():
     assert states.STATES["HE"].repo == "https://github.com/Gesetze-fuer-KI/landesrecht-he"
     assert states.STATES["HE"].repo in states.not_integrated_text(states.STATES["HE"])
+
+
+def test_no_url_is_followed_by_a_period():
+    # A client that links URLs would take the period into the link.
+    for state in states.STATES.values():
+        text = states.not_integrated_text(state)
+        assert re.search(r"https?://\S*[.,;:]($|\s)", text) is None, text
+        assert text.count("\n") >= 2  # each URL ends its line
     assert all(s.repo.endswith("landesrecht-" + s.code.lower()) for s in states.STATES.values())
 
 

@@ -141,7 +141,11 @@ def _update_states() -> tuple[dict[str, Path], list[str]]:
                 continue
             # A failed fetch is usually passing: keep serving what the clone already has.
             log.warning("state repository %s not updated, keeping the clone: %s", code, exc)
-            revisions.append(repo.revision(clone))
+            try:
+                revisions.append(repo.revision(clone))
+            except Exception as exc2:  # a broken clone must not take the federal index down
+                log.warning("state repository %s left out, its clone is unusable: %s", code, exc2)
+                continue
         clones[code] = clone
     return clones, revisions
 
@@ -251,8 +255,8 @@ def land_scope(s: store.Store, land: str | None) -> tuple[str | None, str | None
         return None, states.not_integrated_text(state)
     if not s.state_status().get(state.code):
         return None, (
-            f"{state.name} wird gerade zum ersten Mal abgeglichen und ist bald verfügbar. "
-            f"Bis dahin stehen die Texte auf {state.portal}."
+            f"{state.name} wird gerade zum ersten Mal abgeglichen und ist bald verfügbar.\n"
+            f"Bis dahin stehen die Texte auf dem Landesportal: {state.portal}"
         )
     return state.code, None
 
@@ -297,6 +301,22 @@ def resolve(s: store.Store, law: str, land: str | None = None) -> tuple[dict | N
         for r in candidates[:10]
     ]
     return None, "\n".join(lines)
+
+
+def resolve_in(s: store.Store, law: str, land: str | None) -> tuple[dict | None, str | None]:
+    """resolve() for the tools that read one law, with `land` as the user gave it.
+
+    For a state whose law is not in the index (not integrated, or still being built), a federal
+    law named exactly is still found, as for complete states; anything else gets the notice.
+    """
+    code, notice = land_scope(s, land)
+    if not notice:
+        return resolve(s, law, code)
+    state = states.find(land) if land else None
+    federal = [r for r in s.resolve_law(law, store.BUND) if _names(r, law)]
+    if state is not None and len(federal) == 1:
+        return {**dict(federal[0]), "asked_land": state.code}, None
+    return None, notice
 
 
 def split_parts(body: str, size: int = PART_CHARS) -> list[str]:
@@ -351,15 +371,15 @@ def search_laws(
     except NotReady:
         return _not_ready()
     code, notice = land_scope(s, land)
-    if notice:
-        return notice
     slug = None
     if law:
         # The law may come from any source (federal even with land set); the search stays inside it.
-        found, error = resolve(s, law, code)
+        found, error = resolve_in(s, law, land)
         if error:
             return error
         slug = found["slug"]
+    elif notice:
+        return notice
     # A law is its own scope: with land set it may still be federal (see resolve).
     rows = s.search(query, slug, limit, land=None if slug else (code or store.BUND))
     hint = ""
@@ -448,10 +468,7 @@ def get_provision(
         s = INDEX.get()
     except NotReady:
         return _not_ready()
-    code, notice = land_scope(s, land)
-    if notice:
-        return notice
-    found, error = resolve(s, law, code)
+    found, error = resolve_in(s, law, land)
     if error:
         return error
     if date:
@@ -524,10 +541,7 @@ def get_law_outline(
         s = INDEX.get()
     except NotReady:
         return _not_ready()
-    code, notice = land_scope(s, land)
-    if notice:
-        return notice
-    found, error = resolve(s, law, code)
+    found, error = resolve_in(s, law, land)
     if error:
         return error
     lines = [f"# {law_label(found)}", f"Stand: {found['stand'] or 'unbekannt'}", f"Quelle: {found['quelle']}"]
@@ -564,10 +578,7 @@ def get_law_changes(
         s = INDEX.get()
     except NotReady:
         return _not_ready()
-    code, notice = land_scope(s, land)
-    if notice:
-        return notice
-    found, error = resolve(s, law, code)
+    found, error = resolve_in(s, law, land)
     if error:
         return error
     clone = clone_for(found)

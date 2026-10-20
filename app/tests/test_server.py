@@ -197,6 +197,7 @@ def test_not_integrated_state(srv):
 def test_state_in_progress(srv):
     out = server.search_laws("x", land="NRW")
     assert "zum ersten Mal abgeglichen" in out and "https://recht.nrw.de" in out
+    assert "https://recht.nrw.de." not in out
 
 
 def test_unknown_land(srv):
@@ -318,3 +319,40 @@ def test_health_reports_states(srv):
 
 def test_search_in_federal_law_with_land(srv):
     assert "geltg" in server.search_laws("Geltungsbereich", law="GeltG", land="Bayern")
+
+
+@pytest.mark.parametrize("land", ["Hessen", "NRW"])  # not integrated; integrated but still being built
+def test_federal_law_with_a_state_without_index_falls_back_to_federal(srv, monkeypatch, land):
+    name = {"Hessen": "Hessen", "NRW": "Nordrhein-Westfalen"}[land]
+    out = server.get_provision("GeltG", "§ 1", land=land)
+    assert "Dieses Gesetz gilt für den Bund." in out
+    assert f"GeltG (Geltungsgesetz) – Bundesrecht (gilt auch in {name})" in out
+    assert "Geltungsbereich" in server.get_law_outline("GeltG", land=land)
+    assert "geltg" in server.search_laws("Geltungsbereich", law="GeltG", land=land)
+    monkeypatch.setattr(server.repo, "changes", lambda *a: [])
+    monkeypatch.setattr(server.repo, "first_date", lambda *a: "2026-01-01T00:00:00+00:00")
+    assert f"Änderungen an GeltG (Geltungsgesetz) – Bundesrecht (gilt auch in {name})" in \
+        server.get_law_changes("GeltG", land=land)
+    # A law that is no federal law still gets the notice, and so does a search without law.
+    assert ("noch nicht integriert" if land == "Hessen" else "zum ersten Mal abgeglichen") in \
+        server.get_provision("HSchulG", "§ 1", land=land)
+    assert ("noch nicht integriert" if land == "Hessen" else "zum ersten Mal abgeglichen") in \
+        server.search_laws("Geltungsbereich", land=land)
+
+
+def test_a_corrupt_state_clone_is_left_out(tmp_path, monkeypatch, caplog):
+    federal, by = tmp_path / "gesetze", tmp_path / "landesrecht-by"
+    _git_repo(federal, {"ab/abg.md": "---\nabkuerzung: AbG\ntitel: Abgesetz\nquelle: q\n---\n\n# Abgesetz\n"})
+    _git_repo(by, {"by/by-bayg.md": "---\nland: BY\nabkuerzung: BayG\ntitel: Bayerngesetz\nquelle: q\n---\n\n# B\n",
+                   ".sync/state.json": '{"complete": true}'})
+    monkeypatch.setattr(server, "DATA_REPO_URL", str(federal))
+    monkeypatch.setattr(server, "DATA_DIR", tmp_path / "data")
+    monkeypatch.setattr(server, "STATE_REPO_URL", str(tmp_path / "landesrecht-{code}"))
+    monkeypatch.setattr(server, "INDEX", server.Index())
+    server.refresh_once()
+    shutil.rmtree(by)  # the remote is gone, and the clone is broken
+    (tmp_path / "data" / "landesrecht-by" / ".git" / "HEAD").write_text("kaputt\n")
+    server.refresh_once()
+    s = server.INDEX.get()
+    assert s.state_status() == {}
+    assert [r["slug"] for r in s.resolve_law("AbG")] == ["abg"]
