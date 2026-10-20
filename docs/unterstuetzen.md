@@ -27,7 +27,7 @@ regelmäßige Beiträge, wöchentlich, monatlich oder jährlich. Sie nimmt keine
 Gebühr; bezahlt wird mit Karte, SEPA-Lastschrift oder PayPal. Für den Beitrag legen Sie
 dort ein Konto an und können ihn jederzeit beenden.
 
-[Über Liberapay unterstützen](https://liberapay.com/Marceltov/donate){ .md-button .md-button--primary }
+[Über Liberapay unterstützen](https://liberapay.com/GesetzeFuerKI/donate){ .md-button .md-button--primary }
 
 ### Einmalig: Überweisung
 
