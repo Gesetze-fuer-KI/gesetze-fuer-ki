@@ -84,14 +84,14 @@ Quelle.
 ## Was nicht enthalten ist
 
 - **Landesrecht der Länder, die den Abruf nicht erlauben** (siehe Tabelle oben), sowie
-  Verwaltungsvorschriften, Satzungen und Ortsrecht von Städten und Gemeinden.
+  Satzungen und Ortsrecht von Städten und Gemeinden.
 - **EU-Recht.** Die DSGVO und andere EU-Verordnungen gelten unmittelbar, sind aber kein
   Bundesrecht. Deutsche Begleitgesetze wie das BDSG sind enthalten.
 - **Gerichtsentscheidungen.** Die Urteile der Bundesgerichte von
   [rechtsprechung-im-internet.de](https://www.rechtsprechung-im-internet.de) sind
   geplant.
-- **Verwaltungsvorschriften** wie die Umsatzsteuer-Anwendungserlasse und
-  BMF-Schreiben.
+- **Verwaltungsvorschriften** des Bundes und der Länder, etwa die
+  Umsatzsteuer-Anwendungserlasse und BMF-Schreiben.
 - **Ältere Fassungen.** Die Historie beginnt mit dem Start dieses Dienstes im Oktober
   2026, beim Landesrecht mit dem ersten Abgleich des jeweiligen Landes.
 

@@ -36,8 +36,8 @@ Alle Werkzeuge kennen den Parameter `land`, zum Beispiel „Bayern“, „BY“ 
 - **Finden:** `gesetz_finden` sucht ohne `land` in Bund und allen Ländern, mit `land` nur
   in einem Land.
 - **Lesen:** `vorschrift_lesen`, `gliederung_anzeigen` und `aenderungen_anzeigen` finden ein
-  Gesetz über seine Abkürzung, egal ob Bund oder Land („BayBO“, „BGB“). `land` braucht es
-  nur, wenn zwei Länder dieselbe Abkürzung benutzen.
+  Gesetz über seine Abkürzung, egal ob Bund oder Land („BayBO“, „BGB“). `land` ist nur
+  nötig, wenn eine Abkürzung mehrdeutig ist.
 
 Fragt Ihr Assistent nach einem Land, das noch fehlt, bekommt er statt eines leeren
 Ergebnisses eine Erklärung: Das Land ist noch im ersten Abgleich, oder es erlaubt den
