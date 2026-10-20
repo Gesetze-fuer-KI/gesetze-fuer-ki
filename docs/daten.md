@@ -47,7 +47,7 @@ Texte ausdrücklich vor. Im Repository jedes Landes steht, woran es genau scheit
 | Land | Stand | Quelle | Hinweis |
 |---|---|---|---|
 | Baden-Württemberg | noch nicht integriert | [landesrecht-bw.de](https://www.landesrecht-bw.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-bw) |
-| Bayern | im Aufbau | [gesetze-bayern.de](https://www.gesetze-bayern.de) | Nutzungshinweise erlauben uneingeschränkte Weiterverwendung, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-by) |
+| Bayern | enthalten | [gesetze-bayern.de](https://www.gesetze-bayern.de) | Nutzungshinweise erlauben uneingeschränkte Weiterverwendung, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-by) |
 | Berlin | noch nicht integriert | [gesetze.berlin.de](https://gesetze.berlin.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-be) |
 | Brandenburg | im Aufbau | [bravors.brandenburg.de](https://bravors.brandenburg.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG). Texte bis zu zwei Tage alt, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-bb) |
 | Bremen | im Aufbau | [transparenz.bremen.de](https://www.transparenz.bremen.de) | CC BY-NC-ND 3.0, Namensnennung siehe unten. Ohne Ortsgesetze, [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-hb) |
@@ -58,7 +58,7 @@ Texte ausdrücklich vor. Im Repository jedes Landes steht, woran es genau scheit
 | Nordrhein-Westfalen | im Aufbau | [recht.nrw.de](https://recht.nrw.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-nw) |
 | Rheinland-Pfalz | noch nicht integriert | [landesrecht.rlp.de](https://www.landesrecht.rlp.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-rp) |
 | Saarland | noch nicht integriert | [recht.saarland.de](https://recht.saarland.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-sl) |
-| Sachsen | im Aufbau | [revosax.sachsen.de](https://www.revosax.sachsen.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-sn) |
+| Sachsen | enthalten | [revosax.sachsen.de](https://www.revosax.sachsen.de) | Keine Lizenzangabe; amtliche Werke (§ 5 UrhG), [Repository](https://github.com/Gesetze-fuer-KI/landesrecht-sn) |
 | Sachsen-Anhalt | noch nicht integriert | [landesrecht.sachsen-anhalt.de](https://www.landesrecht.sachsen-anhalt.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-st) |
 | Schleswig-Holstein | noch nicht integriert | [gesetze-rechtsprechung.sh.juris.de](https://www.gesetze-rechtsprechung.sh.juris.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-sh) |
 | Thüringen | noch nicht integriert | [landesrecht.thueringen.de](https://landesrecht.thueringen.de) | Portal verbietet automatischen Abruf, [warum](https://github.com/Gesetze-fuer-KI/landesrecht-th) |
