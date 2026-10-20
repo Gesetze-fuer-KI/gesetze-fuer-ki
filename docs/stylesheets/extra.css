@@ -65,22 +65,6 @@
   font-size: 1em;
 }
 
-/* Support page: QR code next to the bank details, stacked on phones. */
-.giro {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  align-items: center;
-}
-.giro img {
-  background: #fff;
-  padding: 0.5rem;
-  border-radius: 0.2rem;
-}
-.giro table {
-  margin: 0;
-}
-
 /* The logo is drawn in ink blue; on the dark scheme it turns white. Its fine strokes need more than
    Material's 1.2rem. */
 .md-header__button.md-logo img {

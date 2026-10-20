@@ -20,29 +20,12 @@ Wenn Ihnen der Dienst geholfen hat, etwa bei der Gewerbeanmeldung oder vor dem T
 bei der Steuerberaterin, freue ich mich über einen Beitrag. Jeder Betrag hilft, den
 Server am Laufen zu halten.
 
-### Regelmäßig: Liberapay
-
 [Liberapay](https://liberapay.com) ist eine gemeinnützige, europäische Plattform für
-regelmäßige Beiträge, wöchentlich, monatlich oder jährlich. Sie nimmt keine eigene
+regelmäßige Beiträge: wöchentlich, monatlich oder jährlich. Sie nimmt keine eigene
 Gebühr; bezahlt wird mit Karte, SEPA-Lastschrift oder PayPal. Für den Beitrag legen Sie
-dort ein Konto an und können ihn jederzeit beenden.
+dort ein Konto an und können ihn jederzeit beenden, auch gleich nach der ersten Zahlung.
 
 [Über Liberapay unterstützen](https://liberapay.com/GesetzeFuerKI/donate){ .md-button .md-button--primary }
-
-### Einmalig: Überweisung
-
-Ohne Konto und ohne Gebühren geht es per Überweisung. Mit der Banking-App lässt sich
-der QR-Code scannen, dann sind die Angaben schon ausgefüllt; den Betrag wählen Sie selbst.
-
-<div class="giro" markdown>
-![GiroCode für die Überweisung](assets/girocode.svg){ width="180" }
-
-| | |
-|---|---|
-| Empfänger | KONTOINHABER |
-| IBAN | IBAN_HIER |
-| Verwendungszweck | Gesetze für KI |
-</div>
 
 !!! warning "Das ist keine Spende"
 

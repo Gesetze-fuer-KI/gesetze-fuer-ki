@@ -46,10 +46,7 @@ Verbindung zu Dritten auf.
 
 Die Seite [Unterstützen](unterstuetzen.md) verlinkt auf Liberapay (Liberapay, Frankreich).
 Erst wenn Sie dem Link folgen, verbindet sich Ihr Browser mit Liberapay; für alles
-Weitere, auch die Zahlung, gilt dann die Datenschutzerklärung von Liberapay. Der
-QR-Code für die Überweisung liegt auf diesem Server. Bei einer Überweisung erhalte ich,
-wie bei jeder Überweisung, Ihren Namen, Ihre IBAN, den Betrag und den
-Verwendungszweck; diese Angaben verwende ich nur für meine Buchhaltung.
+Weitere, auch die Zahlung, gilt dann die Datenschutzerklärung von Liberapay.
 
 ## Ihre Rechte
 
