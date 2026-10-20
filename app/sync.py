@@ -14,6 +14,7 @@ and `<out>/.sync/commit-message.txt` describes the run for the commit.
 from __future__ import annotations
 
 import argparse
+import datetime
 import io
 import json
 import logging
@@ -155,9 +156,14 @@ def run(out: Path, only: list[str] | None, workers: int) -> int:
 
 
 def commit_message(changed: list[dict], removed: list[str], failed: list[str]) -> str:
+    return "\n".join(commit_lines(f"Stand {time.strftime('%Y-%m-%d')}", changed, removed, failed)) + "\n"
+
+
+def commit_lines(prefix: str, changed: list[dict], removed: list[str], failed: list[str]) -> list[str]:
+    """Subject and one line per law; repo.changes parses these lines (shared with state_sync)."""
     new = [c for c in changed if c.get("_new")]
     updated = [c for c in changed if not c.get("_new")]
-    subject = f"Stand {time.strftime('%Y-%m-%d')}: {len(updated)} geändert, {len(new)} neu, {len(removed)} entfernt"
+    subject = f"{prefix}: {len(updated)} geändert, {len(new)} neu, {len(removed)} entfernt"
     lines = [subject, ""]
     for c in updated:
         lines.append(f"- {c.get('abkuerzung', c['slug'])}: {c.get('stand', 'geändert')}")
@@ -168,7 +174,7 @@ def commit_message(changed: list[dict], removed: list[str], failed: list[str]) -
     if failed:
         lines.append("")
         lines.append(f"Nicht abrufbar ({len(failed)}): " + ", ".join(failed[:50]))
-    return "\n".join(lines) + "\n"
+    return lines
 
 
 def main() -> None:
@@ -176,10 +182,23 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True, help="the data repository's working tree")
     parser.add_argument("--only", nargs="*", help="sync just these slugs (no deletions)")
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--land", help="sync one state's law (Landesrecht) instead, e.g. BY")
+    parser.add_argument("--max-minutes", type=float, default=330,
+                        help="with --land: stop starting new fetches after this many minutes")
     args = parser.parse_args()
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)
-    sys.exit(run(args.out, args.only, args.workers))
+    if not args.land:
+        sys.exit(run(args.out, args.only, args.workers))
+
+    import sources  # imports this module (through state_sync), so not at the top
+    import state_sync
+
+    factory = sources.SOURCES.get(args.land.lower())
+    if factory is None:
+        log.error("no source for state %r (known: %s)", args.land, ", ".join(sorted(sources.SOURCES)) or "none")
+        sys.exit(2)
+    sys.exit(state_sync.run(args.out, factory(), args.only, args.max_minutes, datetime.date.today()))
 
 
 if __name__ == "__main__":

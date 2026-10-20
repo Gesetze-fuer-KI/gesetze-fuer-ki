@@ -1,5 +1,5 @@
 ---
-title: Aktuelles Bundesrecht für KI-Assistenten
+title: Aktuelles Bundes- und Landesrecht für KI-Assistenten
 hide:
   - navigation
 ---
@@ -11,7 +11,9 @@ hide:
 Gesetze für KI ist ein kostenloser [MCP-Server](https://modelcontextprotocol.io) mit dem
 gesamten aktuellen Bundesrecht: rund 6.100 Gesetze und Verordnungen, von der
 Gewerbeordnung bis zum Umsatzsteuergesetz, jede Nacht abgeglichen mit den amtlichen
-Texten auf [gesetze-im-internet.de](https://www.gesetze-im-internet.de).
+Texten auf [gesetze-im-internet.de](https://www.gesetze-im-internet.de). Dazu kommt das
+Landesrecht von Bayern, Brandenburg, Bremen, Nordrhein-Westfalen und Sachsen, direkt von
+den Portalen der Länder ([im Aufbau](daten.md#landesrecht)).
 Einmal verbunden, sucht Claude, ChatGPT oder ein anderer Agent selbst die passenden
 Paragrafen heraus, wenn Ihre Frage das Recht berührt, und antwortet mit dem Wortlaut,
 dem Stand und einem Link zur Quelle.
@@ -46,15 +48,20 @@ der eigenen Website.
 ![Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach.](assets/ablauf-dunkel.svg#only-dark)
 
 Jede Nacht werden die amtlichen Texte abgeglichen; Ihr Assistent liest immer die
-aktuelle Fassung. Mehr dazu unter [Daten und Grenzen](daten.md).
+aktuelle Fassung. Das Landesrecht kommt auf dem gleichen Weg von den Portalen der Länder,
+jedes Land in ein eigenes Repository. Mehr dazu unter [Daten und Grenzen](daten.md).
 
 ## Was drin ist und was nicht
 
 | Enthalten | Nicht enthalten |
 |---|---|
-| Alle Gesetze und Rechtsverordnungen des Bundes in der aktuellen Fassung | Landesrecht (z. B. Bauordnungen, Schulgesetze) |
+| Alle Gesetze und Rechtsverordnungen des Bundes in der aktuellen Fassung | Landesrecht der elf Länder, deren Portale den Abruf nicht erlauben |
 | Änderungen ab Oktober 2026 mit Datum, abrufbar als frühere Fassung | Ältere Fassungen vor dem Start dieses Dienstes |
 | | Gerichtsentscheidungen (geplant), EU-Verordnungen wie die DSGVO |
+
+**Landesrecht (im Aufbau):** Gesetze und Verordnungen von Bayern, Brandenburg, Bremen,
+Nordrhein-Westfalen und Sachsen. Ein Land ist durchsuchbar, sobald sein erster
+vollständiger Abgleich durch ist.
 
 Mehr dazu unter [Daten und Grenzen](daten.md).
 
@@ -69,8 +76,9 @@ Mehr dazu unter [Daten und Grenzen](daten.md).
 Der Server, die Aufbereitung der Gesetze und diese Seite sind Open Source
 ([Gesetze-fuer-KI/gesetze-fuer-ki](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki)). Die Gesetzestexte
 selbst liegen als lesbare Markdown-Dateien mit vollständiger Änderungshistorie in einem
-eigenen Repository ([gesetze](https://github.com/Gesetze-fuer-KI/gesetze)): Jede Änderung eines
-Gesetzes ist dort ein Commit, den man Zeile für Zeile nachlesen kann.
+eigenen Repository ([gesetze](https://github.com/Gesetze-fuer-KI/gesetze), das Landesrecht in
+einem je Land, etwa [landesrecht-by](https://github.com/Gesetze-fuer-KI/landesrecht-by)): Jede
+Änderung eines Gesetzes ist dort ein Commit, den man Zeile für Zeile nachlesen kann.
 
 Betrieben wird der Dienst privat. Wer mithelfen möchte, die Kosten für Server und Domain
 zu tragen: [Unterstützen](unterstuetzen.md).

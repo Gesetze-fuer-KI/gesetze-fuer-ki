@@ -1,0 +1,62 @@
+{
+ "_comment": "Index documents (sources.nw.index_entry) of the fixture laws, from recht.nrw.de/search-middleware on 2026-10-20.",
+ "/lrgv/gesetz/16102026-studierendenwerksgesetz-stwg": {
+  "field_document_type_name": [
+   "Gesetz"
+  ],
+  "field_short_title": [
+   "Studierendenwerksgesetz"
+  ],
+  "field_long_title": [
+   "Gesetz über die Studierendenwerke im Land Nordrhein-Westfalen "
+  ],
+  "field_abbreviation": [
+   "StWG"
+  ],
+  "url": [
+   "/lrgv/gesetz/16102026-studierendenwerksgesetz-stwg"
+  ]
+ },
+ "/lrgv/rechtsverordnung/16102026-landeswahlordnung": {
+  "field_document_type_name": [
+   "Rechtsverordnung"
+  ],
+  "field_long_title": [
+   "Landeswahlordnung "
+  ],
+  "field_abbreviation": [
+   "LWahlO"
+  ],
+  "url": [
+   "/lrgv/rechtsverordnung/16102026-landeswahlordnung"
+  ]
+ },
+ "/lrgv/rechtsverordnung/08092026-vergabeverordnung-nrw-vergabevo-nrw": {
+  "field_document_type_name": [
+   "Rechtsverordnung"
+  ],
+  "field_short_title": [
+   "Vergabeverordnung NRW"
+  ],
+  "field_long_title": [
+   "Verordnung über die Vergabe von Studienplätzen in Nordrhein-Westfalen "
+  ],
+  "field_abbreviation": [
+   "VergabeVO NRW"
+  ],
+  "url": [
+   "/lrgv/rechtsverordnung/08092026-vergabeverordnung-nrw-vergabevo-nrw"
+  ]
+ },
+ "/lrgv/gesetz/16012026-verfassung-fuer-das-land-nordrhein-westfalen": {
+  "field_document_type_name": [
+   "Gesetz"
+  ],
+  "field_long_title": [
+   "Verfassung für das Land Nordrhein-Westfalen"
+  ],
+  "url": [
+   "/lrgv/gesetz/16012026-verfassung-fuer-das-land-nordrhein-westfalen"
+  ]
+ }
+}

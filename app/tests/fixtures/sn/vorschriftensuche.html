@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+<head><title>REVOSax Landesrecht Sachsen</title></head>
+<body>
+<!-- https://www.revosax.sachsen.de/vorschriftensuche saved 2026-10-20, trimmed to the search form. -->
+<div id="content">
+<h1>Erweiterte Suche</h1>
+<form data-turbo="false" class="new_search_request" id="new_search_request" action="/suche" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="khcWwTS0T_mSH-xJaGIWZWZVrUibKXL3o9lC4euHe87SrhQLYWPNc0C7H5nb7-7h7pFkO-0zqWtM6MRJ108UdA" autocomplete="off" /><input autocomplete="off" type="hidden" value="fullsearch" name="search_request[mode]" id="search_request_mode" />
+<p class="text1">Bitte geben Sie einen oder mehrere Suchbegriffe ein</p>
+<fieldset>
+<div class="left">
+<label for="search_request_search_text">Vorschrift enthält</label>
+</div>
+<div class="right">
+<input type="text" name="search_request[search_text]" id="search_request_search_text" />
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_none_words">aber nicht</label>
+</div>
+<div class="right">
+<input type="text" name="search_request[none_words]" id="search_request_none_words" />
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_exactly_words">oder exakt</label>
+</div>
+<div class="right">
+<input type="text" name="search_request[exactly_words]" id="search_request_exactly_words" />
+</div>
+<div class="fixfloat"></div>
+<div class="left"></div>
+<div class="right">
+<input name="search_request[title_search]" type="hidden" value="0" autocomplete="off" /><input type="checkbox" value="1" checked="checked" name="search_request[title_search]" id="search_request_title_search" />
+<label for="search_request_title_search">nur im Titel suchen</label>
+</div>
+<div class="fixfloat"></div>
+</fieldset>
+<fieldset>
+<legend>
+Ressortzuständigkeit:
+<br>
+</legend>
+<div class="left">
+<label for="search_request_ressort_id">Ressort</label>
+</div>
+<div class="right">
+<select name="search_request[ressort_id]" id="search_request_ressort_id"><option value="">alle</option>
+<option value="10">Staatskanzlei</option>
+<option value="20">Staatsministerium des Innern</option>
+<option value="30">Staatsministerium der Finanzen</option>
+<option value="40">Staatsministerium der Justiz</option>
+<option value="50">Staatsministerium für Kultus</option>
+<option value="60">Staatsministerium für Wissenschaft, Kultur und Tourismus</option>
+<option value="70">Sächsisches Staatsministerium für Wirtschaft, Arbeit, Energie und Klimaschutz</option>
+<option value="80">Staatsministerium für Soziales, Gesundheit und Gesellschaftlichen Zusammenhalt</option>
+<option value="90">Staatsministerium für Umwelt und Landwirtschaft</option>
+<option value="100">Staatsministerium für Infrastruktur und Landesentwicklung</option>
+<option value="200">Sächsischer Landtag</option>
+<option value="210">Landesdirektion Sachsen</option>
+<option value="300">weitere</option></select>
+</div>
+<div class="fixfloat"></div>
+<div class="left"></div>
+<div class="right">
+<input name="search_request[is_government]" type="hidden" value="0" autocomplete="off" /><input type="checkbox" value="1" name="search_request[is_government]" id="search_request_is_government" />
+<label for="search_request_is_government">nur Staatsregierung</label>
+</div>
+<div class="fixfloat"></div>
+</fieldset>
+<fieldset>
+<legend>
+Vorschriftentyp:
+<br>
+</legend>
+<div class="left">
+Gesetz
+</div>
+<div class="right">
+<input type="checkbox" value="G" checked="checked" name="search_request[categories][]" id="search_request_categories_g" />
+<label class="category" for="search_request_categories_g">G</label>
+<input id="categories_aeg" type="checkbox" value="ÄG" name="search_request[categories][]" />
+<label for="categories_aeg">ÄG</label>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+Verordnung
+</div>
+<div class="right">
+<input type="checkbox" value="VO" checked="checked" name="search_request[categories][]" id="search_request_categories_vo" />
+<label class="category" for="search_request_categories_vo">VO</label>
+<input id="categories_aevo" type="checkbox" value="ÄVO" name="search_request[categories][]" />
+<label for="categories_aevo">ÄVO</label>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+Verwaltungsvorschrift
+</div>
+<div class="right">
+<input type="checkbox" value="VwV" checked="checked" name="search_request[categories][]" id="search_request_categories_vwv" />
+<label class="category" for="search_request_categories_vwv">VwV</label>
+<input id="categories_aevwv" type="checkbox" value="ÄVwV" name="search_request[categories][]" />
+<label for="categories_aevwv">ÄVwV</label>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+Förderrichtlinie
+</div>
+<div class="right">
+<input type="checkbox" value="FRL" checked="checked" name="search_request[categories][]" id="search_request_categories_frl" />
+<label class="category" for="search_request_categories_frl">FRL</label>
+<input id="categories_aefrl" type="checkbox" value="ÄFRL" name="search_request[categories][]" />
+<label for="categories_aefrl">ÄFRL</label>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+Staatsvertrag
+</div>
+<div class="right">
+<input type="checkbox" value="StV" checked="checked" name="search_request[categories][]" id="search_request_categories_stv" />
+<label class="category" for="search_request_categories_stv">StV</label>
+<input id="categories_aestv" type="checkbox" value="ÄStV" name="search_request[categories][]" />
+<label for="categories_aestv">ÄStV</label>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+Zustimmungsgesetz
+</div>
+<div class="right">
+<input type="checkbox" value="ZuG" checked="checked" name="search_request[categories][]" id="search_request_categories_zug" />
+<label class="category" for="search_request_categories_zug">ZuG</label>
+<input id="categories_aezug" type="checkbox" value="ÄZuG" name="search_request[categories][]" />
+<label for="categories_aezug">ÄZuG</label>
+</div>
+<div class="fixfloat"></div>
+<div class="left"></div>
+<div class="right">
+<input name="search_request[include_envelopes]" type="hidden" value="0" autocomplete="off" /><input type="checkbox" value="1" checked="checked" name="search_request[include_envelopes]" id="search_request_include_envelopes" />
+<label for="search_request_include_envelopes">zugleich Mantelvorschriften</label>
+</div>
+<div class="fixfloat"></div>
+</fieldset>
+<fieldset class="dates">
+<legend>
+Zeitangaben zur Gültigkeit:
+<br>
+</legend>
+<div class="left">
+<label for="search_request_valid_from_de">von</label>
+</div>
+<div class="right">
+<input pattern="\d{1,2}.\d{1,2}.\d{4}" placeholder="TT.MM.JJJJ" type="text" name="search_request[valid_from_de]" id="search_request_valid_from_de" />
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_valid_to_de">bis</label>
+</div>
+<div class="right">
+<input pattern="\d{1,2}.\d{1,2}.\d{4}" placeholder="TT.MM.JJJJ" type="text" name="search_request[valid_to_de]" id="search_request_valid_to_de" />
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_valid_day_de">Geltungstag</label>
+</div>
+<div class="right">
+<input pattern="\d{1,2}.\d{1,2}.\d{4}" placeholder="TT.MM.JJJJ" type="text" value="20.10.2026" name="search_request[valid_day_de]" id="search_request_valid_day_de" />
+</div>
+<div class="fixfloat"></div>
+</fieldset>
+<fieldset class="origin">
+<legend>
+Fundstelle:
+<br>
+</legend>
+<div class="left">
+<label for="search_request_edition_abbr">Ausgabeblatt</label>
+</div>
+<div class="right">
+<select name="search_request[edition_abbr]" id="search_request_edition_abbr"><option value="">alle</option>
+<option value="SächsGVBl.">SächsGVBl.</option>
+<option value="SächsABl.">SächsABl.</option>
+<option value="SächsABl. SDr.">SächsABl. SDr.</option>
+<option value="MBl. SMF">MBl. SMF</option>
+<option value="MBl. SMK">MBl. SMK</option>
+<option value="MBl. SMK. SDr.">MBl. SMK. SDr.</option>
+<option value="SächsJMBl.">SächsJMBl.</option>
+<option value="SächsJMBl. SDr.">SächsJMBl. SDr.</option></select>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_origin_year">Jahrgang</label>
+</div>
+<div class="right">
+<select name="search_request[origin_year]" id="search_request_origin_year"><option value="">alle</option>
+<option value="2026">2026</option>
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option>
+<option value="2018">2018</option>
+<option value="2017">2017</option>
+<option value="2016">2016</option>
+<option value="2015">2015</option>
+<option value="2014">2014</option>
+<option value="2013">2013</option>
+<option value="2012">2012</option>
+<option value="2011">2011</option>
+<option value="2010">2010</option>
+<option value="2009">2009</option>
+<option value="2008">2008</option>
+<option value="2007">2007</option>
+<option value="2006">2006</option>
+<option value="2005">2005</option>
+<option value="2004">2004</option>
+<option value="2003">2003</option>
+<option value="2002">2002</option>
+<option value="2001">2001</option>
+<option value="2000">2000</option>
+<option value="1999">1999</option>
+<option value="1998">1998</option>
+<option value="1997">1997</option>
+<option value="1996">1996</option>
+<option value="1995">1995</option>
+<option value="1994">1994</option>
+<option value="1993">1993</option>
+<option value="1992">1992</option>
+<option value="1991">1991</option>
+<option value="1990">1990</option></select>
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_origin_nr">Blattnummer</label>
+</div>
+<div class="right">
+<input min="1" type="number" name="search_request[origin_nr]" id="search_request_origin_nr" />
+</div>
+<div class="fixfloat"></div>
+<div class="left">
+<label for="search_request_origin_page">Seite</label>
+</div>
+<div class="right">
+<input min="1" type="number" name="search_request[origin_page]" id="search_request_origin_page" />
+</div>
+<div class="fixfloat"></div>
+</fieldset>
+<div class="submit">
+<a class="pright_m" href="/reset_search">Löschen</a>
+<input type="submit" name="commit" value="Finden" data-disable-with="Finden" />
+</div>
+</form>
+</div>
+</body>
+</html>

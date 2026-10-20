@@ -1,5 +1,5 @@
 site_name: Gesetze für KI
-site_description: Aktuelles Bundesrecht für KI-Assistenten. Ein MCP-Server, mit dem Claude, ChatGPT und andere Agenten die Gesetze selbst nachschlagen.
+site_description: Aktuelles Bundes- und Landesrecht für KI-Assistenten. Ein MCP-Server, mit dem Claude, ChatGPT und andere Agenten die Gesetze selbst nachschlagen.
 site_url: https://gesetze-fuer-ki.de/
 # No repo_url: Material's repository widget asks api.github.com from the visitor's browser, and the privacy page
 # promises that the browser talks to no one but this server. The footer links the code instead.

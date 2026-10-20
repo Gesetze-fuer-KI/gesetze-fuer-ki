@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE byrecht-norm PUBLIC "-//Verlag C.H.Beck/DTD Vorschriften//DE" "http://gesetze-bayern.de/schema/byrecht.normen.dtd">
+<byrecht-norm builddate="20.10.2026_02:00">
+  <kopf>
+    <angaben.versunabh>
+      <dokumentation doktyp="gesetz" dokid="BayAlmG" ersatz="BayAlmG" />
+      <ausfertigung>
+        <ausfertigungsdatum>1932-04-28</ausfertigungsdatum>
+        <fundstelle.GVBl>
+          <jahr />
+          <seite />
+        </fundstelle.GVBl>
+      </ausfertigung>
+    </angaben.versunabh>
+    <angaben.versabh version.id="p">
+      <inkraft>1983-01-01</inkraft>
+      
+      <fassung>
+        <fassungsdatum>1932-04-28</fassungsdatum>
+        <fundstelle.GVBl>
+          <jahr />
+          <seite />
+        </fundstelle.GVBl>
+      </fassung>
+      <gliederungsNr.BayRS>BayRS  7817-2-L
+</gliederungsNr.BayRS>
+      <kurzbezeichnung>Almgesetz</kurzbezeichnung>
+      <titelangaben>Gesetz über den Schutz der Almen und die Förderung der Almwirtschaft<br /> (<kurzbezeichnung>Almgesetz</kurzbezeichnung>) <br />Vom 28. April 1932<br />BayRS  7817-2-L
+</titelangaben>
+      <amtlicheAbk />
+    </angaben.versabh>
+  </kopf>
+  <rumpf>
+    <aenderungsverlauf>
+      <p>Änderungen</p>
+      <ul>
+        <li>
+          <symbol id="x">1.</symbol>
+          <p>
+          <verweis.norm>
+            <v.abk ersatz="BayEuroAnpG_2">§ 59 2. Euroanpassungsgesetz</v.abk>
+          </verweis.norm>
+         vom 24.4.2001<br />(GVBl. S. 140)</p>
+        </li>
+      </ul>
+    </aenderungsverlauf>
+    <normzitat>Almgesetz in der in der Bayerischen Rechtssammlung (BayRS 7817-2-L) veröffentlichten bereinigten Fassung, das durch § 59 des Gesetzes vom 24. April 2001 (GVBl. S. 140) geändert worden ist</normzitat>
+    <einzelnorm version="p" einzelnormid="P_1">
+      
+      <para.nr>Art. 1</para.nr>
+      
+      <jurAbsatz>
+        <absatz.nr>(1)</absatz.nr>
+        <absatz.text>
+          <p>Der Genehmigung durch die zuständige Behörde bedürfen:</p>
+          <ul>
+            <li>
+              <symbol id="x">1.</symbol>
+              <p>die Auflassung, Verpachtung und sonstige Überlassung eines Almgrundstücks;</p>
+            </li>
+            <li>
+              <symbol id="x">2.</symbol>
+              <p>die Bestellung, Veräußerung, Verpachtung und sonstige Überlassung eines dinglichen Rechts zur Nutzung eines Almgrundstücks sowie die Veräußerung, Verpachtung und sonstige Überlassung eines anderen Almrechts;</p>
+            </li>
+            <li>
+              <symbol id="x">3.</symbol>
+              <p>Rechtsgeschäfte der in Nummern 1 und 2 bezeichneten Art in Ansehung von Anteilen an Almgrundstücken und Almrechten;</p>
+            </li>
+            <li>
+              <symbol id="x">4.</symbol>
+              <p>die rechtsgeschäftliche Begründung, Änderung oder Aufhebung von Gemeinschaftsverhältnissen an Almgrundstücken und Almrechten;</p>
+            </li>
+            <li>
+              <symbol id="x">5.</symbol>
+              <p>die dauernde oder vorübergehende Herausnahme notwendiger Betriebseinrichtungen aus dem almwirtschaftlichen Betrieb, soweit sie nicht im Rahmen einer ordnungsgemäßen Wirtschaft erfolgt;</p>
+            </li>
+            <li>
+              <symbol id="x">6.</symbol>
+              <p>
+                <span class="i">
+                   (aufgehoben)
+                </span>
+              </p>
+            </li>
+          </ul>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(2)</absatz.nr>
+        <absatz.text>
+          <p>Die Genehmigung ist nicht erforderlich bei den in Absatz 1 Nrn. 1 bis 4 bezeichneten Rechtsgeschäften zwischen Ehegatten oder Personen, die untereinander in gerader Linie verwandt oder verschwägert oder in der Seitenlinie bis zum zweiten Grad verwandt sind, wenn die Vertragschließenden die Landwirtschaft im Hauptberuf ausüben oder früher ausgeübt haben.</p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(3)</absatz.nr>
+        <absatz.text>
+          <p>Die Genehmigung soll nur versagt werden, wenn es im öffentlichen Interesse geboten ist und dem Eigentümer oder sonstigen Berechtigten keine unverhältnismäßig hohen Nachteile erwachsen.</p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_2">
+      
+      <para.nr>Art. 2</para.nr>
+      
+      <jurAbsatz>
+        <absatz.nr>(1)</absatz.nr>
+        <absatz.text>
+          <p>
+            <satz.nr id="xx">1</satz.nr>Ist im Grundbuch auf Grund eines nicht genehmigten Rechtsgeschäfts eine Rechtsänderung eingetragen, so kann die zuständige Behörde, falls nach ihrem Ermessen die Genehmigung erforderlich war, das Grundbuchamt um die Eintragung eines Widerspruchs ersuchen. <satz.nr id="xx">2</satz.nr><verweis.norm>§ <v.norm ersatz="GBO">53</v.norm> Abs. 1</verweis.norm> der Grundbuchordnung<fn.call><fn.text>1)</fn.text><fn.def><p>BGBl. FN 315-11</p></fn.def></fn.call> bleibt unberührt.</p>
+        
+          
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(2)</absatz.nr>
+        <absatz.text>
+          <p>Ein nach Absatz 1 eingetragener Widerspruch ist zu löschen, wenn die zuständige Behörde darum ersucht oder wenn die Genehmigung nach Art. <verweis.norm><v.norm ersatz="BayAlmG">1</v.norm></verweis.norm> erteilt wird.</p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_3">
+      
+      <para.nr>Art. 3</para.nr>
+      
+      <jurAbsatz>
+        <absatz.nr>(1)</absatz.nr>
+        <absatz.text>
+          <p>Veräußert ein Teilhaber seinen Anteil an einem gemeinschaftlichen Almgrundstück oder einem gemeinschaftlichen Almrecht ganz oder zum Teil ohne sein landwirtschaftliches Anwesen, so sind die übrigen Teilhaber zum Vorkauf berechtigt, wenn sie durch eine Bestätigung der zuständigen Behörde nachweisen, daß sie den Anteil für ihre eigene Wirtschaft benötigen.</p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(2)</absatz.nr>
+        <absatz.text>
+          <p>Das Vorkaufsrecht hat Vorrang vor allen durch Rechtsgeschäft bestellten Vorkaufsrechten, es sei denn, daß diese bereits bei Inkrafttreten des Gesetzes bestehen; es bedarf nicht der Eintragung in das Grundbuch.</p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(3)</absatz.nr>
+        <absatz.text>
+          <p>Die Frist zur Ausübung des Vorkaufsrechts beträgt zwei Monate.</p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(4)</absatz.nr>
+        <absatz.text>
+          <p>Im übrigen finden auf das Vorkaufsrecht die Vorschriften des Bürgerlichen Gesetzbuchs<fn.call><fn.text>2)</fn.text><fn.def><p>BGBl. FN 400-2</p></fn.def></fn.call> entsprechende Anwendung.</p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_4">
+      
+      <para.nr>Art. 4</para.nr>
+      
+      <jurAbsatz>
+        <absatz.nr>(1)</absatz.nr>
+        <absatz.text>
+          <p>
+            <satz.nr id="xx">1</satz.nr>Die zuständige Behörde kann für gemeinschaftliche Almgrundstücke und gemeinschaftliche Almrechte anordnen, daß die Beteiligten binnen einer von der Behörde zu bestimmenden Frist eine Verwaltungs- und Nutzungsordnung aufstellen. <satz.nr id="xx">2</satz.nr>Diese bedarf der Genehmigung der zuständigen Behörde.</p>
+        
+          
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(2)</absatz.nr>
+        <absatz.text>
+          <p>Die zuständige Behörde kann das Stimmenverhältnis der Beteiligten regeln.</p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(3)</absatz.nr>
+        <absatz.text>
+          <p>Kommt eine Verwaltungs- und Nutzungsordnung innerhalb der festgesetzten Frist nicht zustande, so kann die zuständige Behörde diese Ordnung treffen.</p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(4)</absatz.nr>
+        <absatz.text>
+          <p>Die zuständige Behörde überwacht die Einhaltung der Verwaltungs- und Nutzungsordnung und der von ihr getroffenen Anordnungen.</p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_5">
+      
+      <para.nr>Art. 5 bis 17</para.nr>
+      
+      <jurAbsatz>
+        
+        <absatz.text>
+          <p>
+            <span class="i">(entfallen)</span>
+          </p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_6">
+      
+      <para.nr>Art. 18</para.nr>
+      
+      <jurAbsatz>
+        
+        <absatz.text>
+          <p>Mit Geldbuße bis zu zweitausendfünfhundert Euro kann belegt werden, wer</p>
+          <ul>
+            <li>
+              <symbol id="x">1.</symbol>
+              <p>ohne die nach Art. <verweis.norm><v.norm ersatz="BayAlmG">1</v.norm> Abs. 1</verweis.norm> erforderliche Genehmigung den Besitz eines Almgrundstücks oder ein Almrecht einem anderen überträgt oder von einem anderen erwirbt oder außerhalb des Rahmens einer ordnungsgemäßen Wirtschaft notwendige Betriebseinrichtungen aus dem almwirtschaftlichen Betrieb herausnimmt,</p>
+            </li>
+            <li>
+              <symbol id="x">2.</symbol>
+              <p>einer mit einer Genehmigung nach Art. <verweis.norm><v.norm ersatz="BayAlmG">1</v.norm></verweis.norm> verbundenen vollziehbaren Auflage zuwiderhandelt.</p>
+            </li>
+          </ul>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_7">
+      
+      <para.nr>Art. 19</para.nr>
+      
+      <jurAbsatz>
+        <absatz.nr>(1)</absatz.nr>
+        <absatz.text>
+          <p>
+            <satz.nr id="xx">1</satz.nr>Zuständige Behörde und Aufsichtsbehörde im Sinn des Gesetzes ist die Kreisverwaltungsbehörde. <satz.nr id="xx">2</satz.nr>Ihr obliegt, soweit nichts anderes bestimmt ist, auch der Vollzug des Gesetzes. <satz.nr id="xx">3</satz.nr>Auf das Verfahren finden die Vorschriften der <span class="i">Art. 167 bis 176 des Wassergesetzes</span><fn.call><fn.text>3)</fn.text><fn.def><p>Nunmehr Art. <verweis.norm><v.norm ersatz="BayWG">76</v.norm> bis <v.norm ersatz="BayWG">82</v.norm></verweis.norm> BayWG, BayRS 753-1-I</p></fn.def></fn.call>mit der Maßgabe entsprechende Anwendung, daß auch der Eigentümer des Almgrundstücks in Angelegenheiten, die nur die Almberechtigten betreffen, zu hören ist.</p>
+        
+          
+        
+          
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(2) und (3)</absatz.nr>
+        <absatz.text>
+          <p>
+            <span class="i">(gegenstandslos)</span>
+          </p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_8">
+      
+      <para.nr>Art. 20</para.nr>
+      
+      <jurAbsatz>
+        
+        <absatz.text>
+          <p>
+            <span class="i">(entfallen)</span>
+          </p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_9">
+      
+      <para.nr>Art. 21</para.nr>
+      
+      <jurAbsatz>
+        
+        <absatz.text>
+          <p>
+            <satz.nr id="xx">1</satz.nr>Die Vorschriften in Art. <verweis.norm><v.norm ersatz="BayAlmG">1</v.norm></verweis.norm> finden auf Rechtsgeschäfte und Maßnahmen, die der Freistaat Bayern in Ansehung von eigenen oder fremden Almgrundstücken und Almrechten vornimmt, keine Anwendung. <satz.nr id="xx">2</satz.nr>Die allgemeinen Grundsätze dieses Gesetzes sind auch vom Freistaat Bayern bei allen Rechtsgeschäften und Maßnahmen zu beachten.</p>
+        
+          
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+    <einzelnorm version="p" einzelnormid="P_10">
+      
+      <para.nr>Art. 22</para.nr>
+      
+      <jurAbsatz>
+        <absatz.nr>(1)</absatz.nr>
+        <absatz.text>
+          <p>Das Gesetz tritt am 1. April 1932 in Kraft.<fn.call><fn.text>4)</fn.text><fn.def><p>Betrifft die ursprüngliche Fassung vom 28. April 1932 (Nr. 20 des Gesetz- und Verordnungsblattes vom 29. April 1932, S. 237)</p></fn.def></fn.call></p>
+        </absatz.text>
+      </jurAbsatz>
+      <jurAbsatz>
+        <absatz.nr>(2)</absatz.nr>
+        <absatz.text>
+          <p>Die beteiligten Staatsministerien erlassen die Vorschriften zur Ausführung des Gesetzes.</p>
+        </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+  </rumpf>
+</byrecht-norm>

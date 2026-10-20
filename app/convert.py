@@ -287,7 +287,10 @@ def _footnotes(notes: ET.Element) -> list[str]:
     blocks = _blocks(content)
     if not blocks:
         return []
-    quoted = []
-    for block in blocks:
-        quoted.append("\n".join("> " + line if line else ">" for line in block.split("\n")))
-    return ["> **Fußnote**\n>\n" + "\n>\n".join(quoted)]
+    return [footnote_block(blocks)]
+
+
+def footnote_block(blocks: list[str]) -> str:
+    """Footnote text, one or more blocks, as a Markdown quote headed „Fußnote“."""
+    quoted = ["\n".join("> " + line if line else ">" for line in block.split("\n")) for block in blocks]
+    return "> **Fußnote**\n>\n" + "\n>\n".join(quoted)

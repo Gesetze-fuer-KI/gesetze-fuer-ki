@@ -1,0 +1,1038 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE byrecht-norm PUBLIC "-//Verlag C.H.Beck/DTD Vorschriften//DE" "http://gesetze-bayern.de/schema/byrecht.normen.dtd">
+<byrecht-norm builddate="20.10.2026_02:01">
+  <kopf>
+    <angaben.versunabh>
+      <dokumentation doktyp="verordnung" dokid="BayBhV" ersatz="BayBhV" />
+      <ausfertigung>
+        <ausfertigungsdatum>2007-01-02</ausfertigungsdatum>
+        <fundstelle.GVBl>
+          <jahr>2007</jahr>
+          <seite>S=15</seite>
+        </fundstelle.GVBl>
+      </ausfertigung>
+    </angaben.versunabh>
+    <angaben.versabh version.id="p">
+      <inkraft>2026-09-01</inkraft>
+      
+      <fassung>
+        <fassungsdatum>2007-01-02</fassungsdatum>
+        <fundstelle.GVBl>
+          <jahr>2007</jahr>
+          <seite>S=15</seite>
+        </fundstelle.GVBl>
+      </fassung>
+      <gliederungsNr.BayRS>BayRS 2030-2-27-F
+</gliederungsNr.BayRS>
+      <kurzbezeichnung>Bayerische Beihilfeverordnung</kurzbezeichnung>
+      <titelangaben>Verordnung über die Beihilfefähigkeit von Aufwendungen in Krankheits-, Geburts-, Pflege- und sonstigen Fällen<br /> (<kurzbezeichnung>Bayerische Beihilfeverordnung</kurzbezeichnung> – <amtlicheAbk>BayBhV</amtlicheAbk>) <br />Vom 2. Januar 2007<br />(GVBl. S. 15)<br />BayRS 2030-2-27-F
+</titelangaben>
+      <amtlicheAbk>BayBhV</amtlicheAbk>
+    </angaben.versabh>
+  </kopf>
+  <rumpf>
+    <aenderungsverlauf>
+      <p>Änderungen</p>
+      <ul>
+        <li>
+          <symbol id="x">1.</symbol>
+          <p>
+          <verweis.norm>
+            <v.abk ersatz="BayBhVAendVO">§ 1 ÄndV</v.abk>
+          </verweis.norm>
+         vom 16.4.2009<br />(GVBl. S. 117, insoweit geänd. durch V v. 24.7.2017, GVBl. S. 418)</p>
+        </li>
+        <li>
+          <symbol id="x">2.</symbol>
+          <p>
+          <verweis.norm>
+            <v.abk ersatz="BayBhVAendVO2011">§ 1 ÄndV</v.abk>
+          </verweis.norm>
+         vom 11.3.2011<br />(GVBl. S. 130, insoweit geänd. durch V v. 24.7.2017, GVBl. S. 418)</p>
+        </li>
+        <li>
+          <symbol id="x">11.</symbol>
+          <p>
+          <verweis.norm>
+            §§ <v.norm ersatz="Bay_110_2026_495">1</v.norm>, <v.norm ersatz="Bay_110_2026_495">2</v.norm>, <v.norm ersatz="Bay_110_2026_495">3</v.norm>, <v.norm ersatz="Bay_110_2026_495">4</v.norm> und <v.norm ersatz="Bay_110_2026_495">5</v.norm> <v.abk ersatz="Bay_110_2026_495">Verordnung zur Änderung der Bayerischen Beihilfeverordnung und der Bayerischen Heilverfahrensverordnung</v.abk></verweis.norm>
+         vom 7.7.2026<br />(GVBl. S. 495)</p>
+        </li>
+      </ul>
+    </aenderungsverlauf>
+    <normzitat>Bayerische Beihilfeverordnung (BayBhV) vom 2. Januar 2007 (GVBl. S. 15, BayRS 2030-2-27-F), die zuletzt durch die §§ 1, 2, 3, 4 und 5 der Verordnung vom 7. Juli 2026 (GVBl. S. 495) geändert worden ist</normzitat>
+    <einleitungssatz version="p">
+      <einleitungssatz.text>
+      <p>Auf Grund des <verweis.norm>Art. <v.norm ersatz="BayBG">86a</v.norm> Abs. 5 Satz 1 des <v.abk ersatz="BayBG">Bayerischen Beamtengesetzes (BayBG)</v.abk></verweis.norm> in der Fassung der Bekanntmachung vom 27. August 1998 (GVBl S. 702, BayRS 2030-1-1-F), zuletzt geändert durch § 1 des Gesetzes vom 8. Dezember 2006 (GVBl S. 987), erlässt das Bayerische Staatsministerium der Finanzen folgende Verordnung:</p>
+    </einleitungssatz.text>
+    </einleitungssatz>
+    <gliederung gliederungsid="G_1" version="p">
+      <gliederung.titel><p>
+        Abschnitt I 
+        Allgemeines
+      </p></gliederung.titel>
+      <einzelnorm version="p" einzelnormid="P_1"><para.nr>§ 1</para.nr><para.titel>
+          Anwendungsbereich, Zweckbestimmung und Rechtsnatur
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Diese Verordnung regelt die Gewährung von Beihilfen in Krankheits-, Pflege- und Geburtsfällen, bei Maßnahmen zur Früherkennung von Krankheiten, bei Schutzimpfungen und sonstigen Fällen. <satz.nr id="xx">2</satz.nr>Die Beihilfen ergänzen in diesen Fällen die Eigenvorsorge, die aus den laufenden Bezügen zu bestreiten ist.</p>
+          
+            
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Auf die Beihilfe besteht ein Rechtsanspruch. <satz.nr id="xx">2</satz.nr>Der Anspruch kann nicht abgetreten, verpfändet oder gepfändet werden; jedoch ist die Pfändung durch einen Forderungsgläubiger bezüglich des für seine Forderung zustehenden und noch nicht ausgezahlten Betrags einer Beihilfe zulässig.</p>
+          
+            
+          </absatz.text></jurAbsatz></einzelnorm>
+    </gliederung>
+    <gliederung gliederungsid="G_4" version="p">
+      <gliederung.titel><p>
+        Abschnitt IV 
+        Beihilfefähige Aufwendungen in Krankheitsfällen
+      </p></gliederung.titel>
+      <einzelnorm version="p" einzelnormid="P_13"><para.nr>§ 12a</para.nr><para.titel>
+          Systemische Therapie
+        </para.titel><jurAbsatz><absatz.nr>(1)</absatz.nr><absatz.text><p>Aufwendungen für eine Systemische Therapie sind je Krankheitsfall in folgendem Umfang, auch im Mehrpersonensetting, beihilfefähig:</p>
+            <table rules="none" border="1" frame="box"><colgroup><col align="left" /><col align="center" /><col align="center" /></colgroup>
+              
+              
+              
+              <thead>
+                <tr>
+                  <th colspan="1" rowspan="1" style="text-align:left" class="rb">
+                    <p> </p>
+                  </th>
+                  <th colspan="1" rowspan="1" style="text-align:center" class="rb">
+                    <p>Einzelbehandlung</p>
+                  </th>
+                  <th colspan="1" rowspan="1" style="text-align:center" class="rb">
+                    <p>Gruppenbehandlung</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="1" rowspan="1" style="text-align:left" class="rb">
+                    <p>1. Regelfall</p>
+                  </td>
+                  <td colspan="1" rowspan="1" style="text-align:center" class="rb">
+                    <p>36 Sitzungen</p>
+                  </td>
+                  <td colspan="1" rowspan="1" style="text-align:center" class="rb">
+                    <p>36 Sitzungen</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="1" rowspan="1" style="text-align:left" class="rb">
+                    <p>2. Ausnahmefälle</p>
+                  </td>
+                  <td colspan="1" rowspan="1" style="text-align:center" class="rb">
+                    <p>weitere 12 Sitzungen</p>
+                  </td>
+                  <td colspan="1" rowspan="1" style="text-align:center" class="rb">
+                    <p>weitere 12 Sitzungen</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(2)</absatz.nr><absatz.text>
+            <p>
+              <verweis.norm>§ <v.norm ersatz="BayBhV">11</v.norm> Abs. 1 Satz 3 bis 5 und Abs. 3</verweis.norm> gilt entsprechend.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(3)</absatz.nr><absatz.text>
+            <p>Wird die Behandlung durch ärztliche Psychotherapeutinnen oder ärztliche Psychotherapeuten durchgeführt, muss diese Person Fachärztin oder Facharzt mit erfolgreicher Weiterbildung auf dem Gebiet der Systemischen Therapie für eines der folgenden Fachgebiete sein:</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Psychiatrie und Psychotherapie,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Psychosomatische Medizin und Psychotherapie,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Kinder- und Jugendpsychiatrie und -psychotherapie oder</p>
+              </li>
+              <li>
+                <symbol id="x">4.</symbol>
+                <p>Ärztin oder Arzt mit der Zusatzbezeichnung „Psychotherapie“.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(4)</absatz.nr><absatz.text>
+            <p>Leistungen der Systemischen Therapie dürfen bei Personen, die das 21. Lebensjahr vollendet haben, nur von folgenden Personen erbracht werden:</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Psychotherapeutinnen und Psychotherapeuten, die die Voraussetzungen nach <verweis.norm anfrage="">§ <v.norm ersatz="SGB_V">95c</v.norm> <v.abk ersatz="SGB_V">SGB V</v.abk></verweis.norm> zur Eintragung in das Arztregister erfüllen, mit einer Weiterbildung für die Behandlung von Erwachsenen auf dem Gebiet der Systemischen Therapie,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Psychologischen Psychotherapeutinnen und Psychologischen Psychotherapeuten mit einer vertieften Ausbildung auf dem Gebiet der Systemischen Therapie,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Psychologischen Psychotherapeutinnen und Psychologischen Psychotherapeuten mit einer vertieften Ausbildung in einem Verfahren nach <verweis.norm anfrage="">§ <v.norm ersatz="BayBhV">11</v.norm> oder § <v.norm ersatz="BayBhV">12</v.norm></verweis.norm> und einer Zusatzqualifikation im Sinne des <verweis.norm anfrage="">§ <v.norm ersatz="***">4</v.norm> Abs. 5 der <v.abk ersatz="***">Psychotherapie-Vereinbarung</v.abk></verweis.norm> auf dem Gebiet der Systemischen Therapie.</p>
+              </li>
+            </ul>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(5)</absatz.nr><absatz.text>
+            <p>
+              <satz.nr id="xx">1</satz.nr>Leistungen der Systemischen Therapie dürfen bei Personen, die das 21. Lebensjahr noch nicht vollendet haben, nur von folgenden Personen erbracht werden:</p>
+            <ul>
+              <li>
+                <symbol id="x">1.</symbol>
+                <p>Psychotherapeutinnen und Psychotherapeuten, die die Voraussetzungen nach <verweis.norm anfrage="">§ <v.norm ersatz="SGB_V">95c</v.norm> <v.abk ersatz="SGB_V">SGB V</v.abk></verweis.norm> zur Eintragung in das Arztregister erfüllen, mit einer Weiterbildung auf dem Gebiet der Systemischen Therapie,</p>
+              </li>
+              <li>
+                <symbol id="x">2.</symbol>
+                <p>Psychologischen Psychotherapeutinnen und Psychologischen Psychotherapeuten mit einer Weiterbildung für die Behandlung von Kindern und Jugendlichen und einer vertieften Ausbildung auf dem Gebiet der Systemischen Therapie,</p>
+              </li>
+              <li>
+                <symbol id="x">3.</symbol>
+                <p>Psychologischen Psychotherapeutinnen und Psychologischen Psychotherapeuten mit einer Weiterbildung für die Behandlung von Kindern und Jugendlichen und einer vertieften Ausbildung in einem Verfahren nach <verweis.norm anfrage="">§ <v.norm ersatz="BayBhV">11</v.norm> oder § <v.norm ersatz="BayBhV">12</v.norm></verweis.norm> und einer Zusatzqualifikation im Sinne des <verweis.norm anfrage="">§ <v.norm ersatz="***">4</v.norm> Abs. 5 der <v.abk ersatz="***">Psychotherapie-Vereinbarung</v.abk></verweis.norm> auf dem Gebiet der Systemischen Therapie.</p>
+              </li>
+            </ul>
+          
+            <p> <satz.nr id="xx">2</satz.nr>Abweichend von Satz 1 sind bei einem Beginn der Behandlung zwischen dem 18. und dem 21. Lebensjahr auch Aufwendungen für Behandlungen von Psychotherapeutinnen und Psychotherapeuten im Sinne des Abs. 4 beihilfefähig.</p>
+          </absatz.text></jurAbsatz><jurAbsatz><absatz.nr>(6)</absatz.nr><absatz.text>
+            <p>Psychotherapeutinnen und Psychotherapeuten, die eine EMDR durchführen, müssen die jeweiligen therapeutenspezifischen Voraussetzungen der Abs. 3 bis 5 erfüllen und Kenntnisse und praktische Erfahrungen in der Behandlung der posttraumatischen Belastungsstörung und in der EMDR im Rahmen einer Weiterbildung erworben haben.</p>
+          </absatz.text></jurAbsatz></einzelnorm>
+      </gliederung>
+    <einzelnorm version="p" einzelnormid="P_57">
+      <para.nr />
+      <para.titel>Schlussformel</para.titel>
+      <jurAbsatz>
+        <absatz.text>
+      <p>München, den 2. Januar 2007</p>
+      <p>
+        <span class="b">Bayerisches Staatsministerium der Finanzen</span>
+      </p>
+      <p>Prof. Dr. Kurt Faltlhauser, Staatsminister</p>
+    </absatz.text>
+      </jurAbsatz>
+    </einzelnorm>
+  </rumpf>
+  <annex version="p" annexid="ANL_1">
+    <annex.koerper version="p"><annex.nummer>Anlage 1 (zu § 7 Abs. 1)</annex.nummer><annex.nummer int="1">Anlage 1</annex.nummer><annex.titel>Beihilfefähige Höchstbeträge bei von Heilpraktikerinnen und Heilpraktikern erbrachten Leistungen</annex.titel><annex.text>
+        <table rules="none" border="1" frame="box"><colgroup><col /><col /><col /><col /></colgroup>
+          
+          
+          
+          
+          
+          <thead>
+            <tr>
+              <th colspan="1" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle" class="rb">
+                <p>GebüH-Nr.</p>
+              </th>
+              <th colspan="2" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle" class="rb">
+                <p>Leistungsbeschreibung</p>
+              </th>
+              <th colspan="1" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle" class="rb">
+                <p>beihilfefähiger Höchstbetrag</p>
+              </th>
+            </tr>
+            <tr>
+              <th colspan="1" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle" class="rb">
+                <p>Sp. 1</p>
+              </th>
+              <th colspan="2" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle" class="rb">
+                <p>Sp. 2</p>
+              </th>
+              <th colspan="1" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle" class="rb">
+                <p>Sp. 3</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="1" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="b">
+                <p>
+                  <span class="b">1 – 10</span>
+                </p>
+              </td>
+              <td colspan="2" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="b">
+                <p>
+                  <span class="b">Allgemeine Leistungen</span>
+                </p>
+              </td>
+              <td colspan="1" rowspan="1" style="text-align:right; vertical-align:middle" valign="middle" class="rb">
+                <p />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="1" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="rb">
+                <p>1</p>
+              </td>
+              <td colspan="2" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="rb">
+                <p>Für die eingehende, das gewöhnliche Maß übersteigende Untersuchung</p>
+              </td>
+              <td colspan="1" rowspan="1" style="text-align:right; vertical-align:middle" valign="middle" class="rb">
+                <p>12,50 €</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="1" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="rb">
+                <p>2a</p>
+              </td>
+              <td colspan="2" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="rb">
+                <p>Erhebung der homöopathischen Erstanamnese mit einer Mindestdauer von einer Stunde je Behandlungsfall</p>
+              </td>
+              <td colspan="1" rowspan="1" style="text-align:right; vertical-align:middle" valign="middle" class="rb">
+                <p>80,00 €</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="1" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="rb">
+                <p>2b</p>
+              </td>
+              <td colspan="2" rowspan="1" style="text-align:left; vertical-align:middle" valign="middle" class="rb">
+                <p>Durchführung des vollständigen Krankenexamens mit Repertorisation nach den Regeln der klassischen Homöopathie</p>
+                <p>
+                  <span class="i">Anmerkung: Die Leistung nach Ziffer 2b ist in einer Sitzung nur einmal und innerhalb von sechs Monaten höchstens dreimal berechnungsfähig.</span>
+                </p>
+              </td>
+              <td colspan="1" rowspan="1" style="text-align:right; vertical-align:middle" valign="middle" class="rb">
+                <p>35,00 €</p>
+              </td>
+            </tr>
+            </tbody>
+        </table>
+      </annex.text></annex.koerper>
+  </annex>
+  <annex version="p" annexid="ANL_2">
+    <annex.koerper version="p"><annex.nummer>Anlage 2 Zu § 7 Abs. 5</annex.nummer><annex.nummer int="1">Anlage 2</annex.nummer><annex.titel>Beihilfefähigkeit wissenschaftlich nicht allgemein anerkannter Methoden</annex.titel><einzelnorm version="p" einzelnormid="P_58"><para.nr>1.</para.nr><para.titel>
+          Völliger Ausschluss
+        </para.titel><jurAbsatz><absatz.text><p>Die Aufwendungen für folgende wissenschaftlich nicht allgemein anerkannte Methoden sind von der Beihilfefähigkeit ausgeschlossen:</p></absatz.text></jurAbsatz><jurAbsatz><absatz.text>
+          <table rules="none" border="0" frame="void"><colgroup><col /><col /></colgroup>
+            
+            
+            <tbody>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:middle" valign="middle">
+                  <p>A</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Anwendung tonmodulierter Verfahren, Audio-Psycho-Phonologische Therapie (z.B. nach Tomatis, Hörtraining nach Dr. Volf, Audiovokale Integration und Therapie, Psychophonie-Verfahren zur Behandlung einer Migräne)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Autohomologe Immuntherapien (z.B. ACTI-Cell)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                  <p>Atlastherapie nach Arlen</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Autologe-Target-Cytokine-Therapie (ATC) nach Dr. Klehr</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Ayurvedische Behandlungen, z.B. nach Maharishi</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>B</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Behandlung mit nicht beschleunigten Elektronen nach Dr. Nuhr</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Biophotonen-Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Bioresonatorentests</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Blutkristallisationstests zur Erkennung von Krebserkrankungen</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Bogomoletz-Serum</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Brechkraftverändernde Operation der Hornhaut des Auges (Keratomileusis) nach Prof. Barraquer</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>C</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Colon-Hydro-Therapie und ihre Modifikationen</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                  <p>Computergestützte mechanische Distraktionsverfahren, zur nichtoperativen segmentalen Distraktion an der Wirbelsäule (z.B. SpineMED, DRX 9000, Accu-SPINA)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Cytotoxologische Lebensmitteltests</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>D</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>DermoDyne-Therapie (DermoDyneLichtimpfung)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>E</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Elektro-Neural-Behandlungen nach Dr. Croon</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Elektro-Neural-Diagnostik</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                  <p>Epidurale Wirbelsäulenkathetertechnik (z.B. nach Racz)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>F</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Frischzellentherapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>G</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Ganzheitsbehandlungen auf bioelektrisch-heilmagnetischer Grundlage (z.B. Bioresonanztherapie, Decoderdermographie, Elektroakupunktur nach Dr. Voll, Elektronische Systemdiagnostik, Medikamententests nach der Bioelektrischen Funktionsdiagnostik (BFD), Mora-Therapie)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Gezielte vegetative Umstimmungsbehandlung oder gezielte vegetative Gesamtumschaltung durch negative statische Elektrizität</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>H</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Heileurhythmie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Hernien, Behandlung ohne Operation</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Höhenflüge zur Asthma- oder Keuchhustenbehandlung</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Hornhautimplantation refraktiv zur Korrektur der Presbyopie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>I</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Immuno-augmentative Therapie (IAT)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Immunseren (Serocytol-Präparate)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Iso- oder hyperbare Inhalationstherapien mit ionisiertem oder nichtionisiertem Sauerstoff/Ozon einschließlich der oralen, parenteralen oder perkutanen Aufnahme (z.B. Hämatogene Oxydationstherapie, Sauerstoff-Darmsanierung, Sauerstoff-Mehrschritt-Therapie nach Prof. Dr. von Ardenne)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>K</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Kinesiologische Behandlung</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Kirlian-Fotographie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Kombinierte Serumtherapie (z.B. Wiedemann-Kur)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Konduktive Förderung nach Petö, sofern nicht als heilpädagogische Behandlung von der Beihilfefähigkeit ausgeschlossen</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>L</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Laser-Behandlung im Bereich der physikalischen Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>M</p>
+                  <p>
+                    <span class="i"> (aufgehoben)</span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>N</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Neurostimulation nach Molsberger (NSM)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Neurotopische Diagnostik und Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Niedrig dosierter, gepulster Ultraschall</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>O</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Osmotische Entwässerungstherapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>P</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Photobiomodulation (PBM) bei trockener altersbedingter Makuladegeneration (AMD)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Photodynamische Lasertherapie in der Parodontologie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Psycotron-Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Pulsierende Signaltherapie (PST)</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Pyramidenenergiebestrahlung</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>R</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Regeneresen-Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Reinigungsprogramm mit Megavitaminen und Ausschwitzen</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Rimkus-Methode</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Rolfing-Behandlung</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>S</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Schwingfeld-Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>SIPARI-Therapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>T</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Thermoregulationsdiagnostik</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Transorbitale Wechselstromstimulation bei Optikusatrophie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Trockenzellentherapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>V</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Vaduril-Injektionen gegen Parodontose</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Vibrationsmassage des Kreuzbeins</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>visuelle Restitutionstherapie</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" rowspan="1" style="text-align:center; vertical-align:top" valign="top">
+                  <p>Z</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>–</p>
+                </td>
+                <td colspan="1" rowspan="1" style="text-align:left; vertical-align:top" valign="top">
+                  <p>Zellmilieu-Therapie</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </absatz.text></jurAbsatz></einzelnorm><einzelnorm version="p" einzelnormid="P_59"><para.nr>2.</para.nr><para.titel>
+          Teilweiser Ausschluss
+        </para.titel><jurAbsatz><absatz.text><p>Die Beihilfefähigkeit der Aufwendungen für folgende wissenschaftlich nicht allgemein anerkannte Methoden sind begrenzt:</p></absatz.text></jurAbsatz><jurAbsatz><absatz.text><ul>
+          <li>
+            <symbol id="x">a)</symbol>
+            <p>Chelat-Therapie</p>
+            <p>Aufwendungen sind nur beihilfefähig bei Behandlung von Schwermetallvergiftung, Morbus Wilson und Siderose. Aufwendungen für alternative Schwermetallausleitungen gehören nicht zur Behandlung von Schwermetallvergiftungen.</p>
+          </li>
+          <li>
+            <symbol id="x">b)</symbol>
+            <p>Fokussierte Extracorporale Stoßwellentherapie (f-ESWT)</p>
+            <ul>
+              <li>
+                <symbol id="x">aa)</symbol>
+                <p>Die Aufwendungen sind im orthopädischen, chirurgischen und schmerztherapeutischen Bereich nur beihilfefähig bei Behandlung folgender Indikationen:</p>
+                <ul>
+                  <li>
+                    <symbol id="x">aaa)</symbol>
+                    <p>Achillodynie (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">bbb)</symbol>
+                    <p>Bursitis trochanterica (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">ccc)</symbol>
+                    <p>Epicondylitis humeri radialis (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">ddd)</symbol>
+                    <p>Fasziitis plantaris,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">eee)</symbol>
+                    <p>Patellaspitzensyndrom (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">fff)</symbol>
+                    <p>Pseudarthrose,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">ggg)</symbol>
+                    <p>Tendinosis calcarea.</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">bb)</symbol>
+                <p>Auf der Grundlage des Beschlusses der Bundesärztekammer zur Analogbewertung der ESWT sind Gebühren nach der Anlage Nr. 1800 GOÄ beihilfefähig.</p>
+              </li>
+              <li>
+                <symbol id="x">cc)</symbol>
+                <p>Daneben sind keine Zuschläge beihilfefähig.</p>
+              </li>
+              <li>
+                <symbol id="x">dd)</symbol>
+                <p>Die Aufwendungen der ESWT in sonstigen Anwendungsbereichen werden vom Teilausschluss nicht erfasst.</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <symbol id="x">c)</symbol>
+            <p>Hyperbare Sauerstofftherapie (Überdruckbehandlung)</p>
+            <p>Aufwendungen sind nur beihilfefähig bei Behandlung von Kohlenmonoxydvergiftung, Gasgangrän, chronischen Knocheninfektionen, Septikämien, schweren Verbrennungen, Gasembolien, peripherer Ischämie, diabetischem Fußsyndrom ab Wagner-Stadium II oder bei mit Perzeptionsstörungen des Innenohres verbundenen Tinnitusleiden.</p>
+          </li>
+          <li>
+            <symbol id="x">d)</symbol>
+            <p>Hyperthermie-Behandlungen</p>
+            <p>Aufwendungen sind nur beihilfefähig bei Tumorbehandlungen in Kombination mit Chemo- oder Strahlentherapie.</p>
+          </li>
+          <li>
+            <symbol id="x">e)</symbol>
+            <p>Klimakammerbehandlungen</p>
+            <p>Aufwendungen sind nur beihilfefähig, soweit andere übliche Behandlungsmethoden nicht zum Erfolg geführt haben und die Festsetzungsstelle auf Grund eines amts- oder vertrauensärztlichen Gutachtens die Beihilfefähigkeit vor Beginn der Behandlung anerkannt hat. Die Gutachterperson wird von der Festsetzungsstelle bestimmt.</p>
+          </li>
+          <li>
+            <symbol id="x">f)</symbol>
+            <p>Lanthasol-Aerosol-Inhalationskur</p>
+            <p>Aufwendungen sind nur beihilfefähig bei Aerosol-Inhalationskuren mit hochwirksamen Medikamenten, z.B. mit Aludrin.</p>
+          </li>
+          <li>
+            <symbol id="x">g)</symbol>
+            <p>Magnetfeldtherapie</p>
+            <p>Die Therapie mit Magnetfeldern ist beihilfefähig bei Behandlung der atrophen Pseudarthrose sowie bei Endoprothesenlockerung, idiopathischer Hüftnekrose und verzögerter Knochenbruchheilung, wenn sie in Verbindung mit einer sachgerechten chirurgischen Therapie durchgeführt wird, sowie im Rahmen einer repetitiven transcraniellen Magnetstimulation bei Depressionen.</p>
+          </li>
+          <li>
+            <symbol id="x">h)</symbol>
+            <p>Modifizierte Eigenblutbehandlung</p>
+            <p>Aufwendungen mit autologen Thrombozytenkonzentraten wie plättchenreiches Plasma (PRP) und plättchenreiches Fibrin (PRF) sind nur bei den folgenden Behandlungen beihilfefähig:</p>
+            <ul>
+              <li>
+                <symbol id="x">aa)</symbol>
+                <p>Zahnheilkunde</p>
+                <p>nach Extraktion eines oder mehrerer Zähne</p>
+                <ul>
+                  <li>
+                    <symbol id="x">aaa)</symbol>
+                    <p>zum Volumenerhalt des Knochens beziehungsweise Alveolarfortsatzes (postextraktioneller, zum Beispiel präimplantologisch indizierter Kieferkammerhalt; Socket/ Ridge Preservation) oder</p>
+                  </li>
+                  <li>
+                    <symbol id="x">bbb)</symbol>
+                    <p>zur Verbesserung der Alveolenheilung und Reduktion des Alveolitis-Risikos (PRF als solide PRF-Plug-Matrix) insbesondere im Rahmen einer operativen Weisheitszahnentfernung</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">bb)</symbol>
+                <p>Augenheilkunde</p>
+                <p>bei einer trockenen Glandulae tarsales (Meibom-Drüsen-Dysfunktion, Sicca-Syndrom, Keratokonjunktivitis sicca etc.) mit autologen Serumaugentropfen aus Eigenblut als Tränenersatzstoff.</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <symbol id="x">i)</symbol>
+            <p>Ozontherapie</p>
+            <p>Aufwendungen sind nur beihilfefähig bei Gasinsufflationen, wenn damit arterielle Verschlusserkrankungen behandelt werden und die Festsetzungsstelle auf Grund eines amts- oder vertrauensärztlichen Gutachtens die Beihilfefähigkeit vor Beginn der Behandlung anerkannt hat. Die Gutachterperson wird von der Festsetzungsstelle bestimmt.</p>
+          </li>
+          <li>
+            <symbol id="x">j)</symbol>
+            <p>Radiale Stoßwellentherapie (r-ESWT)</p>
+            <ul>
+              <li>
+                <symbol id="x">aa)</symbol>
+                <p>Die Aufwendungen sind im orthopädischen, chirurgischen und schmerztherapeutischen Bereich nur beihilfefähig bei Behandlung folgender Indikationen:</p>
+                <ul>
+                  <li>
+                    <symbol id="x">aaa)</symbol>
+                    <p>Achillodynie (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">bbb)</symbol>
+                    <p>Bursitis trochanterica (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">ccc)</symbol>
+                    <p>Epicondylitis humeri radialis (therapierefraktär),</p>
+                  </li>
+                  <li>
+                    <symbol id="x">ddd)</symbol>
+                    <p>Fasziitis plantaris,</p>
+                  </li>
+                  <li>
+                    <symbol id="x">eee)</symbol>
+                    <p>Patellaspitzensyndrom (therapierefraktär).</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <symbol id="x">bb)</symbol>
+                <p>Auf der Grundlage des Beschlusses der Bundesärztekammer zur Analogbewertung der r-ESWT sind Gebühren nach der Anlage Nr. 302 GOÄ beihilfefähig.</p>
+              </li>
+              <li>
+                <symbol id="x">cc)</symbol>
+                <p>Daneben sind keine Zuschläge beihilfefähig.</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <symbol id="x">k)</symbol>
+            <p>Therapeutisches Reiten (Hippotherapie)</p>
+            <p>Aufwendungen sind nur beihilfefähig bei ausgeprägten cerebralen Bewegungsstörungen (Spastik) oder schwerer geistiger Behinderung, sofern die ärztlich verordnete und indizierte Behandlung von Angehörigen der Gesundheits- oder Medizinalfachberufe (z.B. Krankengymnastin oder Krankengymnast) mit entsprechender Zusatzausbildung durchgeführt wird. Die Leistung wird <verweis.norm>Anlage 3 Nr. 4 bis 6</verweis.norm> zugeordnet.</p>
+          </li>
+          <li>
+            <symbol id="x">l)</symbol>
+            <p>Thymustherapie und Behandlung mit Thymuspräparaten</p>
+            <p>Aufwendungen sind nur beihilfefähig bei Krebsbehandlungen, wenn andere übliche Behandlungsmethoden nicht zum Erfolg geführt haben.</p>
+          </li>
+        </ul></absatz.text></jurAbsatz></einzelnorm></annex.koerper>
+  </annex>
+  <annex version="p" annexid="ANL_6">
+    <annex.koerper version="p"><annex.nummer>Anlage 6 Zu § 45 Abs. 4</annex.nummer><annex.nummer int="1">Anlage 6</annex.nummer><annex.titel>Sonderregelungen für Bedienstete mit dienstlichem Wohnsitz im Ausland</annex.titel><gliederung version="p" gliederungsid="G_10"><gliederung.nr><p>I.</p></gliederung.nr><gliederung.titel><p>
+          Beamtinnen und Beamte
+        </p></gliederung.titel><einzelnorm version="p" einzelnormid="P_62"><para.nr>1.</para.nr><para.titel>
+            Zu <verweis.norm>§ <v.norm ersatz="BayBhV">3</v.norm> Abs. 1 Nr. 2</verweis.norm>
+          </para.titel><jurAbsatz><absatz.text><p>Berücksichtigungsfähig sind die nicht selbst beihilfeberechtigten Kinder des Beihilfeberechtigten, für die ein Kinderzuschlag nach <verweis.norm>Art. <v.norm ersatz="BayBesG">38</v.norm> <v.abk ersatz="BayBesG">BayBesG</v.abk></verweis.norm> gezahlt wird oder nur deshalb nicht gezahlt wird, weil im Inland ein Haushalt eines Elternteils besteht, der für das Kind bis zum Erreichen der Volljährigkeit sorgeberechtigt ist oder war.</p></absatz.text></jurAbsatz></einzelnorm><einzelnorm version="p" einzelnormid="P_63"><para.nr>2.</para.nr><para.titel>
+            Zu <verweis.norm>§ <v.norm ersatz="BayBhV">7</v.norm> Abs. 1</verweis.norm>
+          </para.titel><jurAbsatz><absatz.text><p>Die Angemessenheit der Aufwendungen für ärztliche, zahnärztliche und psychotherapeutische Leistungen beurteilt sich anstelle der <verweis.norm><v.abk ersatz="GOAe">Gebührenordnung für Ärzte</v.abk></verweis.norm>, der <verweis.norm><v.abk ersatz="GOZ">Gebührenordnung für Zahnärzte</v.abk></verweis.norm> und der <verweis.norm><v.abk ersatz="GOP">Gebührenordnung für Psychologische Psychotherapeuten und Kinder- und Jugendlichenpsychotherapeuten</v.abk></verweis.norm> unter Berücksichtigung der besonderen Verhältnisse im Ausland nach den ortsüblichen Gebühren; Entsprechendes gilt für Heilpraktikerleistungen.</p></absatz.text></jurAbsatz></einzelnorm></gliederung><gliederung version="p" gliederungsid="G_11"><gliederung.nr><p>II.</p></gliederung.nr><gliederung.titel><p>
+          Arbeitnehmer
+        </p></gliederung.titel><gliederung.text><p>Sofern in das Ausland entsandte Arbeitnehmerinnen und Arbeitnehmer auf Grund von <verweis.norm>Art. <v.norm ersatz="BayBG">144</v.norm> Abs. 1 <v.abk ersatz="BayBG">BayBG</v.abk></verweis.norm> noch einen Beihilfeanspruch haben, finden die Regelungen des Abschnitts I mit der Maßgabe entsprechende Anwendung, dass sich für diese Beschäftigten der Bemessungssatz für die im Ausland entstehenden, nach Anrechnung der Kassenleistung verbleibenden beihilfefähigen Aufwendungen auf 100 % erhöht, wenn sie nach deutschem Recht in der gesetzlichen Krankenversicherung pflichtversichert sind oder freiwillig versichert sind und einen Beitragszuschuss nach <verweis.norm>§ <v.norm ersatz="SGB_V">257</v.norm> <v.abk ersatz="SGB_V">SGB V</v.abk></verweis.norm> erhalten.</p></gliederung.text><gliederung.text><p>Für die bei den Auslandsdienststellen beschäftigten nicht entsandten deutschen und nichtdeutschen Arbeitnehmerinnen und Arbeitnehmern, die auf Grund von <verweis.norm>Art. <v.norm ersatz="BayBG">144</v.norm> Abs. 1 <v.abk ersatz="BayBG">BayBG</v.abk></verweis.norm> noch einen Beihilfeanspruch haben, finden die Regelungen des Abschnitts I mit folgenden Maßgaben entsprechende Anwendung:</p></gliederung.text><einzelnorm version="p" einzelnormid="P_81"><para.nr>1.</para.nr><para.titel>
+            Zu Abschnitt I Nr. 1 (<verweis.norm>§ <v.norm ersatz="BayBhV">3</v.norm> Abs. 1 Nr. 2</verweis.norm>)
+          </para.titel><jurAbsatz><absatz.text><p>Zu Aufwendungen für Kinder kann eine Beihilfe gewährt werden, wenn das Kind bei sinngemäßer Anwendung der für entsandte Bedienstete geltenden Beihilfevorschriften berücksichtigungsfähig wäre.</p></absatz.text></jurAbsatz></einzelnorm><einzelnorm version="p" einzelnormid="P_82"><para.nr>2.</para.nr><para.titel>
+            Zu Abschnitt I Nr. 3 (§ 7 Abs. 4 Nr. 2 sowie <verweis.norm>Art. <v.norm ersatz="BayBG">96</v.norm> Abs. 1 <v.abk ersatz="BayBG">BayBG</v.abk></verweis.norm>)
+          </para.titel><jurAbsatz><absatz.text><p>An die Stelle des in dieser Vorschrift genannten Einkommensbetrags tritt der dem ortsüblichen Einkommensniveau entsprechende Betrag für eine vergleichbare Beschäftigung im Inland. In Zweifelsfällen ist das ortsübliche Einkommen für eine der Entgeltgruppe 5 des <verweis.norm><v.abk ersatz="TV_L">TV-L</v.abk></verweis.norm> vergleichbare Tätigkeit zugrunde zu legen. Ein Kaufkraftausgleich wird nicht vorgenommen.</p></absatz.text></jurAbsatz></einzelnorm></gliederung></annex.koerper>
+  </annex>
+</byrecht-norm>
