@@ -1,39 +1,35 @@
 <p align="center">
-  <img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src=".github/readme/logo.svg#gh-light-mode-only" width="110">
-<img alt="Logo von Gesetze für KI: eine Waage, deren Säule das MCP-Zeichen bildet" src=".github/readme/logo-dunkel.svg#gh-dark-mode-only" width="110">
+  <img alt="Logo von Gesetze für KI" src=".github/readme/logo.svg#gh-light-mode-only" width="110">
+  <img alt="Logo von Gesetze für KI" src=".github/readme/logo-dunkel.svg#gh-dark-mode-only" width="110">
 </p>
 
 <h1 align="center"><a href="https://gesetze-fuer-ki.de">Gesetze für KI</a></h1>
 
+<p align="center"><b>Ihr KI-Assistent schlägt das aktuelle Bundesrecht nach. Kostenlos.</b></p>
+
 <p align="center">
-  <a href="https://gesetze-fuer-ki.de/"><img alt="Webseite" src="https://img.shields.io/badge/gesetze--fuer--ki.de-Anleitung-1f4e79"></a>
+  Alles zum Einrichten und Benutzen steht auf <b><a href="https://gesetze-fuer-ki.de">gesetze-fuer-ki.de</a></b>:<br>
+  <a href="https://gesetze-fuer-ki.de/verbinden/"><b>So verbinden Sie Ihren Assistenten</b></a>
+</p>
+
+<p align="center">
   <a href="https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/actions/workflows/tests.yml/badge.svg"></a>
-  <a href="https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/pkgs/container/gesetze-fuer-ki"><img alt="Container-Image" src="https://img.shields.io/badge/ghcr.io-gesetze--fuer--ki-2496ED?logo=docker&logoColor=white"></a>
   <a href="https://liberapay.com/GesetzeFuerKI"><img alt="Über Liberapay unterstützen" src="https://img.shields.io/badge/Liberapay-unterst%C3%BCtzen-F6C915?logo=liberapay&logoColor=black"></a>
   <a href="LICENSE"><img alt="Lizenz: AGPL v3" src="https://img.shields.io/badge/Lizenz-AGPL_v3-blue"></a>
 </p>
 
-<p align="center"><b>Der MCP-Server hinter gesetze-fuer-ki.de: das aktuelle Bundesrecht für KI-Assistenten.</b></p>
+---
 
-Claude, ChatGPT und andere KI-Assistenten schlagen über diesen Server den Wortlaut von rund 6.100 Gesetzen und Verordnungen nach, statt aus dem Gedächtnis zu zitieren. Ohne Anmeldung, ohne Schlüssel:
+<sub>Ab hier für Neugierige und alle, die mitmachen wollen.</sub>
 
-```text
-https://gesetze-fuer-ki.de/mcp
-```
-
-## Loslegen
-
-- **[Verbinden](https://gesetze-fuer-ki.de/verbinden/)**: Schritt für Schritt für [Claude](https://gesetze-fuer-ki.de/verbinden/#claude-claudeai-desktop-und-mobil), [ChatGPT](https://gesetze-fuer-ki.de/verbinden/#chatgpt), [Claude Code](https://gesetze-fuer-ki.de/verbinden/#claude-code), Cursor, VS Code, Gemini CLI, Codex und [weitere](https://gesetze-fuer-ki.de/verbinden/#weitere-assistenten)
-- **[Werkzeuge](https://gesetze-fuer-ki.de/werkzeuge/)**: Was der Assistent damit kann, [wie die Suche funktioniert](https://gesetze-fuer-ki.de/werkzeuge/#wie-die-suche-funktioniert) und wie man [frühere Fassungen](https://gesetze-fuer-ki.de/werkzeuge/#fruhere-fassungen) abruft
-- **[Daten und Grenzen](https://gesetze-fuer-ki.de/daten/)**: [Woher die Texte kommen](https://gesetze-fuer-ki.de/daten/#woher-die-texte-kommen) und [was nicht enthalten ist](https://gesetze-fuer-ki.de/daten/#was-nicht-enthalten-ist), etwa Landesrecht und Urteile
-- **[Unterstützen](https://gesetze-fuer-ki.de/unterstuetzen/)**: Der Dienst ist kostenlos und wird privat betrieben
-
-## So funktioniert es
+## Wie es funktioniert
 
 <img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf.svg#gh-light-mode-only" width="100%">
 <img alt="Ablauf: Die amtlichen Texte von gesetze-im-internet.de werden jede Nacht in das Repository gesetze übernommen, eine Markdown-Datei je Gesetz mit jeder Änderung als Commit. Der Server gesetze-fuer-ki holt sie stündlich, baut den Suchindex und stellt sie über MCP bereit. Ihr KI-Assistent schlägt darüber den Wortlaut nach." src=".github/readme/ablauf-dunkel.svg#gh-dark-mode-only" width="100%">
 
-Dieses Repository enthält den Server ([`app/`](app/)) und die Webseite ([`docs/`](docs/)). Die Gesetzestexte selbst liegen in **[Gesetze-fuer-KI/gesetze](https://github.com/Gesetze-fuer-KI/gesetze)**; mehr zur Herkunft auf **[Daten und Grenzen](https://gesetze-fuer-ki.de/daten/)**.
+- **[`app/sync.py`](app/sync.py)** holt jede Nacht die geänderten Gesetze von gesetze-im-internet.de und wandelt sie mit [`app/convert.py`](app/convert.py) in Markdown um. Das läuft als Action im Repository **[gesetze](https://github.com/Gesetze-fuer-KI/gesetze)**, das die Dateien samt Historie enthält.
+- **[`app/server.py`](app/server.py)** klont dieses Repository, baut daraus einen SQLite-Suchindex ([`app/store.py`](app/store.py)) und stellt die [fünf Werkzeuge](https://gesetze-fuer-ki.de/werkzeuge/) über MCP bereit. Frühere Fassungen liest [`app/repo.py`](app/repo.py) aus git.
+- **[`docs/`](docs/)** ist die Webseite gesetze-fuer-ki.de; der Server liefert sie unter `/` mit aus.
 
 ## Selbst betreiben
 
@@ -48,15 +44,21 @@ services:
       - "8081:8081"
 ```
 
-Beim ersten Start klont und indiziert der Server etwa eine Minute lang, danach meldet `/health` `"ready": true`. Er braucht etwa 200 MB Arbeitsspeicher und 600 MB Platz. Einstellbar über Umgebungsvariablen: `GESETZE_REPO_URL`, `GESETZE_REPO_BRANCH`, `REFRESH_SECONDS` (Standard 3600), `DATA_DIR`, `ALLOWED_HOSTS`, `PORT` (Standard 8081).
+Der erste Start dauert etwa eine Minute (Klonen und Indizieren); danach meldet `/health` `"ready": true`. Etwa 200 MB Arbeitsspeicher und 600 MB Platz. Einstellbar über `GESETZE_REPO_URL`, `GESETZE_REPO_BRANCH`, `REFRESH_SECONDS`, `DATA_DIR`, `ALLOWED_HOSTS` und `PORT`.
 
-## Entwicklung
+## Mitmachen
 
 ```bash
-cd app && uv sync --all-groups && uv run pytest -q
+cd app
+uv sync --all-groups
+uv run pytest -q                                            # Tests
+uv run python sync.py --out /tmp/gesetze --only estg gewo   # ein paar Gesetze laden
 ```
 
-Weitere Befehle stehen in [`CLAUDE.md`](CLAUDE.md). Code und Kommentare sind Englisch, alles, was Nutzer sehen, ist Deutsch. Fehler und Wünsche bitte als [Issue](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/issues).
+- **Sprache:** Code, Kommentare und Commits sind Englisch; alles, was Nutzer sehen (Webseite, Werkzeugnamen und -beschreibungen, Antworten), ist Deutsch und für Nicht-Juristen geschrieben.
+- **Das Markdown-Format ist ein Vertrag** zwischen `convert.py` und dem Index. Eine Änderung schreibt alle 6.100 Dateien im Daten-Repository neu; bitte vorher in einem Issue besprechen.
+- **Datenschutz:** Der Server protokolliert keine Inhalte von Anfragen. So steht es auf der [Datenschutzseite](https://gesetze-fuer-ki.de/datenschutz/), und so soll es bleiben.
+- Weitere Befehle und Regeln stehen in [`CLAUDE.md`](CLAUDE.md). Fehler, Wünsche und Fragen bitte als [Issue](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/issues).
 
 ## Lizenz
 
@@ -64,4 +66,4 @@ Weitere Befehle stehen in [`CLAUDE.md`](CLAUDE.md). Code und Kommentare sind Eng
 
 ---
 
-<sub>Keine Rechtsberatung: Der Dienst liefert Gesetzestexte; maßgeblich ist die amtliche Fassung. · [Impressum](https://gesetze-fuer-ki.de/impressum/) · [Datenschutz](https://gesetze-fuer-ki.de/datenschutz/)</sub>
+<sub>Keine Rechtsberatung: Der Dienst liefert Gesetzestexte; maßgeblich ist die amtliche Fassung. · [Unterstützen](https://gesetze-fuer-ki.de/unterstuetzen/) · [Impressum](https://gesetze-fuer-ki.de/impressum/) · [Datenschutz](https://gesetze-fuer-ki.de/datenschutz/)</sub>
