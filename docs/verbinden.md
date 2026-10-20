@@ -111,6 +111,6 @@ claude mcp add gesetze --scope user --transport http https://gesetze-fuer-ki.de/
 ## Funktioniert es?
 
 Fragen Sie Ihren Assistenten: *„Was steht in § 14 der Gewerbeordnung?“* Er sollte das
-Werkzeug `get_provision` aufrufen und den Wortlaut mit Stand und Link zeigen. Antwortet
+Werkzeug `vorschrift_lesen` aufrufen und den Wortlaut mit Stand und Link zeigen. Antwortet
 er ohne Werkzeug aus dem Gedächtnis, ist der Connector im aktuellen Chat nicht
 eingeschaltet.

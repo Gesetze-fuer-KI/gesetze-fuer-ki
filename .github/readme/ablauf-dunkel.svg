@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 206" width="840" height="206" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1 8 5 1 9" fill="none" stroke="#79b0e0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<path d="M153 70H265" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" marker-end="url(#arr)"/>
+<text x="209" y="58" text-anchor="middle" font-size="14" fill="#9aa7b4">jede Nacht</text>
+<path d="M363 70H475" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" marker-end="url(#arr)"/>
+<text x="419" y="58" text-anchor="middle" font-size="14" fill="#9aa7b4">stündlich</text>
+<path d="M573 70H685" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" marker-end="url(#arr)"/>
+<text x="629" y="58" text-anchor="middle" font-size="14" fill="#9aa7b4">über MCP</text>
+<circle cx="105" cy="70" r="40" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/>
+<circle cx="315" cy="70" r="40" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/>
+<circle cx="525" cy="70" r="40" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/>
+<circle cx="735" cy="70" r="40" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/>
+<path fill="none" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M92 50h17l9 9v31h-26z M109 50v9h9"/>
+<text x="105" y="82" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="22" fill="#79b0e0">§</text>
+<path fill="none" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M309 46v48"/><circle cx="309" cy="56" r="5" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/><circle cx="309" cy="70" r="5" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/><circle cx="309" cy="84" r="5" fill="#0d1117" stroke="#79b0e0" stroke-width="3"/>
+<path fill="none" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M320 56h10M320 70h14M320 84h8"/>
+<svg x="497" y="42" width="56" height="56" viewBox="0 0 64 64"><g fill="none" stroke="#79b0e0" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.2"><path d="M7 10h50M32 10v7"/><circle cx="32" cy="6.5" r="2.2" fill="#79b0e0" stroke="none"/><path d="M7 10l-4.5 15M7 10l4.5 15M1.5 25h11.0a5.5 5.5 0 0 1-11.0 0"/><path d="M57 10l-4.5 15M57 10l4.5 15M51.5 25h11.0a5.5 5.5 0 0 1-11.0 0"/><path d="M20.6 55.2h24"/></g><g fill="none" stroke="#79b0e0" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(5.85 11.55) scale(0.2380)" stroke-width="13.4"><path d="M25 97.85 92.88 29.97a24 24 0 0 1 33.94 0 24 24 0 0 1 0 33.94L75.56 115.18"/><path d="M76.27 114.47 126.82 63.91a24 24 0 0 1 33.94 0l.36.36a24 24 0 0 1 0 33.94L99.72 159.6a8 8 0 0 0 0 11.31l12.61 12.61"/><path d="M109.85 46.94 59.65 97.15a24 24 0 0 0 0 33.94 24 24 0 0 0 33.94 0l50.2-50.21"/></g></g></svg>
+<path fill="none" stroke="#79b0e0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M715 54h40a5 5 0 0 1 5 5v20a5 5 0 0 1-5 5h-22l-10 9v-9h-8a5 5 0 0 1-5-5v-20a5 5 0 0 1 5-5z"/>
+<circle cx="725" cy="69" r="2.6" fill="#79b0e0"/><circle cx="735" cy="69" r="2.6" fill="#79b0e0"/><circle cx="745" cy="69" r="2.6" fill="#79b0e0"/>
+<text x="105" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">Amtliche Texte</text>
+<text x="105" y="168" text-anchor="middle" font-size="13" fill="#9aa7b4">gesetze-im-internet.de</text>
+<text x="105" y="186" text-anchor="middle" font-size="13" fill="#9aa7b4">amtliche Fassung des BMJ</text>
+<text x="315" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">gesetze</text>
+<text x="315" y="168" text-anchor="middle" font-size="13" fill="#9aa7b4">eine Markdown-Datei je Gesetz,</text>
+<text x="315" y="186" text-anchor="middle" font-size="13" fill="#9aa7b4">jede Änderung ein Commit</text>
+<text x="525" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">gesetze-fuer-ki</text>
+<text x="525" y="168" text-anchor="middle" font-size="13" fill="#9aa7b4">Suchindex und MCP-Server</text>
+<text x="525" y="186" text-anchor="middle" font-size="13" fill="#9aa7b4">unter gesetze-fuer-ki.de/mcp</text>
+<text x="735" y="144" text-anchor="middle" font-size="16" font-weight="600" fill="#e6edf3">Ihr KI-Assistent</text>
+<text x="735" y="168" text-anchor="middle" font-size="13" fill="#9aa7b4">Claude, ChatGPT und andere</text>
+<text x="735" y="186" text-anchor="middle" font-size="13" fill="#9aa7b4">schlagen den Wortlaut nach</text>
+</svg>

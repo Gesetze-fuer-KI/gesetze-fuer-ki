@@ -44,6 +44,10 @@ Die Dokumentation ist eine statische Seite ohne Tracking und ohne Cookies. Schri
 alle anderen Bestandteile werden von diesem Server ausgeliefert; Ihr Browser nimmt keine
 Verbindung zu Dritten auf.
 
+Die Seite [Unterstützen](unterstuetzen.md) verlinkt auf Liberapay (Liberapay, Frankreich).
+Erst wenn Sie dem Link folgen, verbindet sich Ihr Browser mit Liberapay; für alles
+Weitere, auch die Zahlung, gilt dann die Datenschutzerklärung von Liberapay.
+
 ## Ihre Rechte
 
 Da keine Daten gespeichert werden, die einer Person zugeordnet werden können, gibt es

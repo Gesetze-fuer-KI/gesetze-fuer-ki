@@ -64,3 +64,12 @@
 .endpoint code {
   font-size: 1em;
 }
+
+/* The logo is drawn in ink blue; on the dark scheme it turns white. Its fine strokes need more than
+   Material's 1.2rem. */
+.md-header__button.md-logo img {
+  height: 1.9rem;
+}
+[data-md-color-scheme="slate"] .md-logo img {
+  filter: brightness(0) invert(1);
+}

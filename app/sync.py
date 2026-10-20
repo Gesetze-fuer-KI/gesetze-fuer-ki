@@ -30,7 +30,7 @@ import httpx
 from convert import SOURCE_BASE, convert
 
 TOC_URL = f"{SOURCE_BASE}/gii-toc.xml"
-USER_AGENT = "gesetze-fuer-ki.de sync (+https://github.com/Marceltov/Gesetze-fuer-KI)"
+USER_AGENT = "gesetze-fuer-ki.de sync (+https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki)"
 # A table of contents with fewer entries than this is treated as broken, never as
 # thousands of repealed laws.
 MIN_TOC_ENTRIES = 5000
