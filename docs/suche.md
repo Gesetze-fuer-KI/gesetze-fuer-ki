@@ -1,10 +1,58 @@
 # Wie gut die Suche findet
 
-Wenn Claude eine Vorschrift sucht, ruft es `gesetze_durchsuchen` auf. Diese Seite
-misst, wie oft dabei die richtige Vorschrift herauskommt. Sie ist die Grundlage, um
-die Suche zu verbessern: Erst wird gemessen, dann geändert, dann wieder gemessen.
+Wenn Claude eine Vorschrift sucht, ruft es `gesetze_durchsuchen` auf. Diese Seite misst,
+wie oft dabei das richtige Gesetz und die richtige Vorschrift herauskommen. Sie ist der
+Maßstab, um die Suche zu verbessern: Erst wird gemessen, dann geändert, dann wieder
+gemessen.
 
-## So funktioniert die Suche heute
+## So sucht Claude
+
+1. **Claude formuliert die Frage zuerst um.** Es sucht nicht mit den Worten des Nutzers,
+   sondern mit denen des Gesetzes: Aus „Wie hoch darf die Kaution sein?“ wird
+   „Mietsicherheit Monatsmiete“, aus „Ist Schwarzfahren strafbar?“ wird „Erschleichen von
+   Leistungen Beförderung“. Der Server bittet Claude darum, und Claude kennt diese Wörter
+   aus seinem Training.
+2. **Die Suche liefert bis zu 8 Treffer**, und Claude erkennt darunter das passende
+   Gesetz. Steht die richtige Vorschrift nicht ganz oben, sucht es mit `law` gezielt in
+   diesem Gesetz weiter oder liest dessen Gliederung.
+3. **Claude liest den Wortlaut** mit `vorschrift_lesen`, folgt den Verweisen und antwortet
+   mit Stand und Link.
+
+## Ergebnis: Claude findet fast immer das richtige Gesetz
+
+Mit umformulierten Fragen steht das **richtige Gesetz in rund 9 von 10 Fällen unter den
+ersten 3 Treffern**, auch bei seltenen Verordnungen, die kaum jemand kennt. Die genaue
+Vorschrift steht seltener ganz oben; von dort ist sie aber einen Schritt entfernt.
+
+<!-- chart:finden -->
+
+<!-- table:finden -->
+
+Wörtlich gesucht, also mit den Worten des Nutzers, findet die Suche viel weniger: Wörter
+wie „Impressum“, „Kaution“ oder „Minijob“ stehen in keinem Gesetz. Das ist der Grund,
+warum Claude zuerst umformuliert. Wie die Fragen entstanden sind, steht unten in
+[Die Messung](#die-messung).
+
+## Warum es diesen Server trotzdem braucht
+
+Wenn Claude die Wörter des Gesetzes kennt, kennt es dann nicht auch die Antwort? Oft weiß
+Claude, **wo** eine Regel steht. Was dort **heute genau** steht, weiß es nicht sicher:
+
+- **Gesetze ändern sich, Claudes Wissen nicht.** Beispiel § 19 UStG: Bis 2024 lagen die
+  Grenzen für Kleinunternehmer bei 22.000 und 50.000 Euro. Heute stehen dort 25.000 und
+  100.000 Euro, und die Regel selbst ist eine andere (die Umsätze sind jetzt steuerfrei).
+  Aus dem Gedächtnis nennt Claude die alten Zahlen, und zwar überzeugt. Mit
+  `vorschrift_lesen` nennt es den geltenden Wortlaut, mit Stand und Link.
+- **Das Gedächtnis ist in den Einzelheiten ungenau.** Claude erinnert sich, dass es eine
+  Regel gibt, aber nicht an jeden Absatz, jede Ausnahme und jeden Verweis. Für eine
+  Antwort, die man nachprüfen kann, braucht es den Text selbst.
+- **Die meisten Gesetze sind selten gefragt.** Von den 6.144 Gesetzen und Verordnungen
+  kennt Claude viele nur ungefähr oder gar nicht. Gerade dort findet erst die Suche das
+  richtige Gesetz.
+- **Manches kann Claude gar nicht wissen:** das Landesrecht der Länder und wie sich ein
+  Gesetz geändert hat (`aenderungen_anzeigen`, `date=`).
+
+## So funktioniert die Suche
 
 Die Suche vergleicht **Wörter, keine Bedeutungen**. Sie findet einen Paragrafen nur,
 wenn die gesuchten Wörter (oder Wörter, die mit ihnen anfangen) darin vorkommen:
@@ -16,126 +64,53 @@ wenn die gesuchten Wörter (oder Wörter, die mit ihnen anfangen) darin vorkomme
 - Ein Treffer in der Überschrift zählt mehr als einer im Text, und große Gesetze wie
   das BGB bekommen einen kleinen Vorsprung vor Spezialverordnungen.
 
-Deshalb bittet der Server Claude, mit den Wörtern des Gesetzes zu suchen
-(„Informationspflichten Diensteanbieter“ statt „Impressum“).
-
 ## Die Messung
 
-54 Fragen mit bekannter Antwort und 5 Fragen, auf die es im Gesetz keine Antwort gibt:
+Vier Fragensätze mit bekannter Antwort, alle zum Bundesrecht:
 
-- **Alltagssprache (46 Fragen):** so, wie Menschen fragen, etwa „Was muss ins
-  Impressum meiner Webseite?“ (richtig: § 5 DDG) oder „Wer bekommt Bürgergeld?“
-  (richtig: § 19 SGB II).
-- **Fachsprache (8 Fragen):** mit den Wörtern des Gesetzes, etwa „Haftung des
-  Tierhalters“ (richtig: § 833 BGB).
-- **Ohne Antwort (5 Fragen):** etwa „Rezept für Lasagne“. Hier sollte die Suche
-  nichts liefern.
+- **Alltagsfragen (46):** so, wie Menschen fragen, etwa „Was muss ins Impressum meiner
+  Webseite?“ (richtig: § 5 DDG). Dazu 8 Fragen in Fachsprache, etwa „Haftung des
+  Tierhalters“ (§ 833 BGB), und 5 Fragen, auf die es im Gesetz keine Antwort gibt, etwa
+  „Rezept für Lasagne“.
+- **Alltagsfragen, von Claude umformuliert (46):** dieselben Fragen, so, wie Claude sie an
+  die Suche schickt.
+- **Seltene Gesetze (35):** Aus 60 zufällig gezogenen kleineren Gesetzen wurde je eine
+  Vorschrift gezogen, die bekanntesten Gesetze ausgenommen. Zu 35 davon hat Claude eine
+  Frage geschrieben, wie sie ein Mensch stellen würde, etwa „Ich arbeite in einem
+  Schlachtbetrieb. Muss ich meine Schutzkleidung und Messer selbst bezahlen?“ (§ 4 GSA
+  Fleisch).
+- **Seltene Gesetze, von Claude umformuliert (35).**
 
-Gemessen wird, an welcher Stelle die richtige Vorschrift unter den Treffern steht:
+Umformuliert hat jeweils ein eigenes Claude, das nur die Fragen und die Anleitung des
+Servers kannte, nicht die richtigen Antworten. So bleibt die Messung ehrlich.
 
 | Wert | Bedeutung |
 |---|---|
-| Treffer auf Platz 1 | Die richtige Vorschrift steht ganz oben. |
-| Treffer unter den ersten 3 | Sie steht unter den ersten drei Treffern. |
-| Treffer unter den ersten 8 | Sie steht unter den acht Treffern, die die Suche standardmäßig liefert. |
-| MRR | Durchschnitt aus 1 / Platz (Platz 1 zählt 1, Platz 2 zählt ½, nicht gefunden 0). 1 wäre perfekt. |
+| Richtige Vorschrift auf Platz 1 | Sie steht ganz oben. |
+| … unter den ersten 3 / 8 | Sie steht unter den ersten drei Treffern / unter den acht, die die Suche standardmäßig liefert. |
+| Richtiges Gesetz unter den ersten 3 | Unter den ersten drei Treffern ist eine Vorschrift aus dem richtigen Gesetz, vielleicht nicht die gesuchte. Von dort findet Claude sie mit einer Suche im Gesetz. |
 
-Die Fragen stehen in [`app/eval/cases.toml`](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/blob/main/app/eval/cases.toml),
-das Messprogramm in [`app/eval/baseline.py`](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/blob/main/app/eval/baseline.py).
+## Verlauf
 
-## Ergebnis: die heutige Suche
+Jede neue Messung kommt hier hinzu. So zeigt sich, ob eine Änderung an der Suche hilft
+oder schadet.
 
-Gemessen am 6. November 2026 auf dem Bundesrecht mit Stand 5. November 2026
-(106.468 Vorschriften aus 6.144 Gesetzen und Verordnungen).
+<!-- chart:verlauf -->
 
-| Fragen | Platz 1 | Unter den ersten 3 | Unter den ersten 8 | MRR |
-|---|---|---|---|---|
-| Alltagssprache (46) | 0 % | 4 % | 13 % | 0,03 |
-| Fachsprache (8) | 63 % | 88 % | 100 % | 0,76 |
-| Alle (54) | 9 % | 17 % | 26 % | 0,14 |
-
-- **Ohne Antwort:** Die Suche liefert bei allen 5 Fragen trotzdem Treffer. Sie kann
-  nicht erkennen, dass nichts passt.
-- **Antwortzeit:** Die Hälfte der Suchen dauert unter 20 ms, 95 % unter 500 ms. Langsam
-  sind die Fälle, in denen sie auf „irgendeines der Wörter“ ausweicht.
-
-**Was das heißt:** Mit den Wörtern des Gesetzes findet die Suche fast immer die
-richtige Vorschrift. In Alltagssprache findet sie sie fast nie, weil Wörter wie
-„Impressum“, „Kaution“, „Minijob“ oder „Schwarzfahren“ im Gesetz nicht vorkommen. Dann
-gewinnen sehr lange Anlagen, die fast jedes Wort enthalten (etwa Anlage 1 der
-Einbürgerungstestverordnung). In der Praxis übersetzt Claude die Frage meist selbst in
-die Sprache des Gesetzes, bevor es sucht. Die Alltagssprache ist also der ungünstigste
-Fall, zeigt aber, wie viel davon abhängt, dass Claude die richtigen Fachwörter errät.
-Wie viel eine Suche nach Bedeutung daran ändert und wie gut die Suche ist, wenn Claude
-die Frage vorher umformuliert, steht in
-[Suche nach Bedeutung: der Vergleich](suche-vergleich.md).
-
-??? note "Alle Fragen im Einzelnen"
-
-    Platz der richtigen Vorschrift unter den ersten 8 Treffern; „–“ heißt nicht gefunden.
-
-    | Frage | Richtig | Platz |
-    |---|---|---|
-    | Was muss ins Impressum meiner Webseite? | § 5 DDG | – |
-    | Ab welchem Umsatz muss eine kleine Firma Umsatzsteuer zahlen? | § 19 UStG | – |
-    | Wie melde ich ein Gewerbe an? | § 14 GewO | – |
-    | Wie lange ist die Kündigungsfrist für meine Mietwohnung? | § 573c BGB | – |
-    | Wie viele Urlaubstage stehen mir mindestens zu? | § 3 BUrlG | – |
-    | Wie viele Stunden darf ich am Tag höchstens arbeiten? | § 3 ArbZG | – |
-    | Kann ich online gekaufte Sachen zurückschicken? | § 355 / § 312g BGB | – |
-    | Wie hoch darf die Kaution für eine Wohnung sein? | § 551 BGB | – |
-    | Nach wie vielen Jahren muss ich eine offene Rechnung nicht mehr bezahlen? | § 195 / § 199 BGB | – |
-    | Mit welcher Frist kann mein Chef mir kündigen? | § 622 BGB | – |
-    | Darf mein Vermieter einfach die Miete erhöhen? | § 558 BGB | 8 |
-    | Wie viele Monate bekomme ich Elterngeld? | § 4 BEEG | 7 |
-    | Wann darf mein Arbeitgeber mich nicht einfach rauswerfen? | § 1 KSchG | – |
-    | Wie lange habe ich Garantie auf ein gekauftes Handy? | § 438 BGB | – |
-    | Muss ich als Angestellter eine Steuererklärung machen? | § 46 EStG / § 149 AO | – |
-    | Wie viel darf ich im Minijob verdienen? | § 8 SGB IV | – |
-    | Wer erbt, wenn es kein Testament gibt? | § 1924 BGB | – |
-    | Wie viel bekommen enterbte Kinder vom Erbe? | § 2303 BGB | – |
-    | Bekomme ich weiter Lohn, wenn ich krank bin? | § 3 EntgFG | – |
-    | Ab wann vor der Geburt darf ich nicht mehr arbeiten? | § 3 MuSchG | – |
-    | Darf ein Laden mich mit Kameras filmen? | § 4 BDSG | – |
-    | Wer zahlt, wenn ein Hund jemanden beißt? | § 833 BGB | – |
-    | Wer haftet für einen Autounfall? | § 7 StVG | – |
-    | Wie lange dauert die Probezeit in der Lehre? | § 20 BBiG | 6 |
-    | Ab welchem Alter ist man erwachsen? | § 2 BGB | – |
-    | Wie viel Kindergeld gibt es pro Kind? | § 66 EStG | 3 |
-    | Wie hoch ist der Mindestlohn? | § 1 MiLoG | – |
-    | Ab wie vielen Mitarbeitern kann man einen Betriebsrat gründen? | § 1 BetrVG | – |
-    | Die Äste vom Baum des Nachbarn hängen in meinen Garten | § 910 BGB | 3 |
-    | Ich habe eine Geldbörse gefunden, was muss ich tun? | § 965 BGB | – |
-    | Ist Schwarzfahren strafbar? | § 265a StGB | – |
-    | Jemand hat mich beschimpft, ist das strafbar? | § 185 StGB | – |
-    | Personalausweis verloren, was muss ich machen? | § 27 PAuswG | – |
-    | Kann ich erfahren, welche Daten eine Firma über mich hat? | § 34 BDSG | – |
-    | Wie lange muss ich Belege für das Finanzamt aufheben? | § 147 AO / § 257 HGB | – |
-    | Was muss alles auf einer Rechnung stehen? | § 14 UStG | – |
-    | Wie lange muss man getrennt leben bis zur Scheidung? | § 1566 BGB | 8 |
-    | Wie viel Unterhalt muss ich für mein Kind zahlen? | § 1612a / § 1601 BGB | – |
-    | Hotel im Urlaub war dreckig, bekomme ich Geld vom Reiseveranstalter zurück? | § 651m BGB | – |
-    | Wie lange dürfen Jugendliche arbeiten? | § 8 JArbSchG | – |
-    | Wie lange bekomme ich Arbeitslosengeld? | § 147 SGB III | – |
-    | Wer bekommt Bürgergeld? | § 19 SGB II | – |
-    | Mit wie viel Jahren kann ich in Rente gehen? | § 35 SGB VI | – |
-    | Wie wechsle ich meine Krankenkasse? | § 175 SGB V | – |
-    | Wie viel Alkohol darf ich beim Autofahren getrunken haben? | § 24a StVG | – |
-    | Ich bin umgezogen, muss ich mich ummelden? | § 17 BMG | – |
-    | Informationspflichten Diensteanbieter | § 5 DDG | 3 |
-    | Kleinunternehmer Umsatz | § 19 UStG | 4 |
-    | Widerrufsrecht Verbraucherverträge | § 355 BGB | 1 |
-    | Haftung des Tierhalters | § 833 BGB | 1 |
-    | Erschleichen von Leistungen | § 265a StGB | 1 |
-    | Fristen der ordentlichen Kündigung Wohnraum | § 573c BGB | 1 |
-    | Entgeltfortzahlung im Krankheitsfall | § 3 EntgFG | 2 |
-    | Regelaltersrente | § 35 SGB VI | 1 |
+<!-- table:verlauf -->
 
 ## Selbst nachmessen
+
+Die Fragensätze liegen in
+[`app/eval/`](https://github.com/Gesetze-fuer-KI/gesetze-fuer-ki/tree/main/app/eval):
+`cases.toml`, `cases_rewritten.toml`, `cases_rare.toml` und `cases_rare_rewritten.toml`.
 
 ```bash
 git clone --depth 1 https://github.com/Gesetze-fuer-KI/bundesrecht.git /tmp/bundesrecht
 cd app
 uv run python -c "import store; from pathlib import Path; store.build(Path('/tmp/bundesrecht'), Path('/tmp/gk.db'))"
-uv run python eval/baseline.py eval/cases.toml /tmp/gk.db
+uv run python eval/baseline.py eval/cases_rewritten.toml /tmp/gk.db
 ```
+
+Mit `--history ../docs/suche.history.json --stand JJJJ-MM-TT` kommt die Messung in die
+Grafiken dieser Seite.

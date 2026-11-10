@@ -24,6 +24,7 @@ COPY app/pyproject.toml app/uv.lock app/
 RUN cd app && uv sync --frozen --only-group docs
 COPY mkdocs.yml ./
 COPY docs docs
+COPY docs_hooks docs_hooks
 RUN app/.venv/bin/mkdocs build --strict --site-dir /site
 
 # ---- runtime ----

@@ -15,7 +15,6 @@ nav:
   - Werkzeuge: werkzeuge.md
   - Daten und Grenzen: daten.md
   - Wie gut die Suche findet: suche.md
-  - "Suche nach Bedeutung: der Vergleich": suche-vergleich.md
   - Bundesländer:
       - laender/index.md
       - Baden-Württemberg: laender/baden-wuerttemberg.md
@@ -76,6 +75,10 @@ plugins:
       lang: de
   # Downloads fonts and other external assets at build time, so visitors' browsers never contact Google.
   - privacy
+
+# Draws the search charts and their tables from docs/suche.history.json.
+hooks:
+  - docs_hooks/charts.py
 
 extra_css:
   - stylesheets/extra.css
