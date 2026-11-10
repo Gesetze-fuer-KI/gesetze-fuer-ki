@@ -34,11 +34,11 @@ def test_every_chart_has_a_label_and_every_mark_a_tooltip():
         assert svg.count("<title>") == marks - legend, name
 
 
-def test_the_finding_chart_splits_each_set_into_its_questions():
+def test_each_bar_of_the_finding_chart_adds_up_to_its_questions():
     charts = hook()
-    history = charts.load()
-    svg = charts.chart_finden(history)
-    now = charts.latest(history, "heute")
-    for group in charts.FINDEN:
-        counts = [int(c) for c in re.findall(rf"(\d+) von {now[group]['n']} \(", svg)]
-        assert now[group]["n"] in {sum(counts[i:i + 3]) for i in range(len(counts))}, group
+    now = charts.latest(charts.load(), "heute")
+    for rewritten, raw, _ in charts.FINDEN:
+        for group in (rewritten, raw):
+            e = now[group]
+            split = charts._split(e)
+            assert sum(split) == e["n"] and min(split) >= 0, group

@@ -69,44 +69,61 @@ def _legend(items: list[tuple[str, int]], x: float, y: float) -> tuple[str, floa
     return body, y
 
 
-FINDEN = ["alltag", "umformuliert", "selten", "selten_umformuliert"]
+# What Claude searches with first; below each, faded, the same questions searched word for word.
+FINDEN = [("umformuliert", "alltag", "Alltagsfragen"), ("selten_umformuliert", "selten", "Seltene Gesetze")]
 FINDEN_SEGMENTS = [("richtige Vorschrift", 1), ("nur das richtige Gesetz", 3), ("weder noch", 2)]
 
 
+def _split(e: dict) -> list[int]:
+    return [e["hit_at_3"], e["law_at_3"] - e["hit_at_3"], e["n"] - e["law_at_3"]]
+
+
+def _bar(y: float, height: int, e: dict, cls: str, on_text: bool) -> str:
+    body, x, n = "", 0.0, e["n"]
+    for (name, slot), count in zip(FINDEN_SEGMENTS, _split(e)):
+        w = W * count / n
+        if w > 0:
+            body += (f'<rect x="{x + 1:.1f}" y="{y:.1f}" width="{max(w - 2, 0):.1f}" height="{height}" rx="3" '
+                     f'class="gk-s{slot}{cls}"><title>{html.escape(name)}: {count} von {n} ({pct(count, n)})</title></rect>')
+            if on_text and w > 44:
+                body += _text(x + w / 2, y + height / 2 + 5, pct(count, n), "middle", "gk-chart-ontext")
+        x += w
+    return body
+
+
 def chart_finden(history: list[dict]) -> str:
-    """Per question set: the right § in the first three, only the right law there, or neither."""
+    """Per question set, as Claude searches: the right § in the first three, only the right law there, or neither."""
     now = latest(history, "heute")
     body, y = "", 16
-    for group in FINDEN:
-        e = now[group]
-        n = e["n"]
-        counts = [e["hit_at_3"], e["law_at_3"] - e["hit_at_3"], n - e["law_at_3"]]
-        body += _text(0, y, f"{LABELS[group]} ({n})", cls="gk-chart-label")
-        x = 0.0
-        for (name, slot), count in zip(FINDEN_SEGMENTS, counts):
-            w = W * count / n
-            if w > 0:
-                body += (f'<rect x="{x + 1:.1f}" y="{y + 8}" width="{max(w - 2, 0):.1f}" height="26" rx="3" '
-                         f'class="gk-s{slot}"><title>{html.escape(name)}: {count} von {n} ({pct(count, n)})</title></rect>')
-                if w > 44:
-                    body += _text(x + w / 2, y + 26, pct(count, n), "middle", "gk-chart-ontext")
-            x += w
-        y += 62
+    for rewritten, raw, name in FINDEN:
+        body += _text(0, y, f"{name}, von Claude umformuliert ({now[rewritten]['n']})", cls="gk-chart-label")
+        body += _text(W, y, f"richtiges Gesetz: {pct(now[rewritten]['law_at_3'], now[rewritten]['n'])}", "end", "gk-chart-label")
+        body += _bar(y + 8, 28, now[rewritten], "", True)
+        body += _text(0, y + 56, "zum Vergleich: wörtlich gesucht, wie der Nutzer fragt", cls="gk-chart-small")
+        body += _text(W, y + 56, f"richtiges Gesetz: {pct(now[raw]['law_at_3'], now[raw]['n'])}", "end", "gk-chart-small")
+        body += _bar(y + 62, 12, now[raw], " gk-faded", False)
+        y += 106
     legend, y = _legend([(f"{name} unter den ersten 3" if slot == 1 else name, slot) for name, slot in FINDEN_SEGMENTS], 0, y)
     body += legend
-    return _svg(round(y) + 8, body, "Wie oft die heutige Suche die richtige Vorschrift oder das richtige Gesetz "
-                             "unter den ersten drei Treffern hat")
+    return _svg(round(y) + 8, body, "Wie oft die Suche die richtige Vorschrift oder das richtige Gesetz unter den ersten "
+                                    "drei Treffern hat, mit von Claude umformulierten Fragen und zum Vergleich wörtlich")
 
 
 def table_finden(history: list[dict]) -> str:
     now = latest(history, "heute")
     rows = ["| Fragen | Richtige Vorschrift auf Platz 1 | … unter den ersten 3 | … unter den ersten 8 "
             "| Richtiges Gesetz unter den ersten 3 |", "|---|---|---|---|---|"]
-    for group in [*FINDEN, "fach"]:
-        e = now[group]
+
+    def row(label: str, e: dict) -> str:
         n = e["n"]
-        rows.append(f"| {LABELS[group]} ({n}) | {pct(e['hit_at_1'], n)} | {pct(e['hit_at_3'], n)} "
-                    f"| {pct(e['hit_at_8'], n)} | {pct(e['law_at_3'], n)} |")
+        return (f"| {label} ({n}) | {pct(e['hit_at_1'], n)} | {pct(e['hit_at_3'], n)} "
+                f"| {pct(e['hit_at_8'], n)} | {pct(e['law_at_3'], n)} |")
+
+    for rewritten, _, name in FINDEN:
+        rows.append(row(f"**{name}, von Claude umformuliert**", now[rewritten]))
+    rows.append(row("Fragen in Fachsprache", now["fach"]))
+    for _, raw, name in FINDEN:
+        rows.append(row(f"Zum Vergleich: {name}, wörtlich gesucht", now[raw]))
     return "\n".join(rows)
 
 

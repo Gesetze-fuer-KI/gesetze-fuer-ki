@@ -127,3 +127,6 @@
   stroke: var(--md-default-fg-color--lightest);
   stroke-width: 1;
 }
+.gk-chart .gk-faded {
+  opacity: 0.45;
+}

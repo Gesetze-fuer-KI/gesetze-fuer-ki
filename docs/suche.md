@@ -1,37 +1,25 @@
 # Wie gut die Suche findet
 
-Wenn Claude eine Vorschrift sucht, ruft es `gesetze_durchsuchen` auf. Diese Seite misst,
-wie oft dabei das richtige Gesetz und die richtige Vorschrift herauskommen. Sie ist der
-Maßstab, um die Suche zu verbessern: Erst wird gemessen, dann geändert, dann wieder
-gemessen.
-
-## So sucht Claude
-
-1. **Claude formuliert die Frage zuerst um.** Es sucht nicht mit den Worten des Nutzers,
-   sondern mit denen des Gesetzes: Aus „Wie hoch darf die Kaution sein?“ wird
-   „Mietsicherheit Monatsmiete“, aus „Ist Schwarzfahren strafbar?“ wird „Erschleichen von
-   Leistungen Beförderung“. Der Server bittet Claude darum, und Claude kennt diese Wörter
-   aus seinem Training.
-2. **Die Suche liefert bis zu 8 Treffer**, und Claude erkennt darunter das passende
-   Gesetz. Steht die richtige Vorschrift nicht ganz oben, sucht es mit `law` gezielt in
-   diesem Gesetz weiter oder liest dessen Gliederung.
-3. **Claude liest den Wortlaut** mit `vorschrift_lesen`, folgt den Verweisen und antwortet
-   mit Stand und Link.
+Claude sucht nicht mit den Worten des Nutzers. Es formuliert die Frage zuerst in die
+Sprache des Gesetzes um: Aus „Wie hoch darf die Kaution sein?“ wird „Mietsicherheit
+Monatsmiete“, aus „Ist Schwarzfahren strafbar?“ wird „Erschleichen von Leistungen“. Damit
+sucht es (wie die Suche arbeitet, steht unter [Werkzeuge](werkzeuge.md#wie-die-suche-funktioniert)),
+und unter den Treffern erkennt es das passende Gesetz. Dann liest es den Wortlaut der
+Vorschrift. Diese Seite misst, wie oft dabei das richtige Gesetz und die richtige
+Vorschrift herauskommen.
 
 ## Ergebnis: Claude findet fast immer das richtige Gesetz
 
 Mit umformulierten Fragen steht das **richtige Gesetz in rund 9 von 10 Fällen unter den
-ersten 3 Treffern**, auch bei seltenen Verordnungen, die kaum jemand kennt. Die genaue
-Vorschrift steht seltener ganz oben; von dort ist sie aber einen Schritt entfernt.
+ersten 3 Treffern**, auch bei seltenen Verordnungen. Die genaue Vorschrift steht nicht
+immer ganz oben, ist von dort aber einen Schritt entfernt: Claude sucht mit `law` gezielt
+in diesem Gesetz weiter oder liest seine Gliederung. Die blassen Balken zeigen dieselben
+Fragen wörtlich gesucht: Wörter wie „Impressum“ oder „Kaution“ stehen in keinem Gesetz,
+deshalb formuliert Claude um.
 
 <!-- chart:finden -->
 
 <!-- table:finden -->
-
-Wörtlich gesucht, also mit den Worten des Nutzers, findet die Suche viel weniger: Wörter
-wie „Impressum“, „Kaution“ oder „Minijob“ stehen in keinem Gesetz. Das ist der Grund,
-warum Claude zuerst umformuliert. Wie die Fragen entstanden sind, steht unten in
-[Die Messung](#die-messung).
 
 ## Warum es diesen Server trotzdem braucht
 
@@ -52,43 +40,19 @@ Claude, **wo** eine Regel steht. Was dort **heute genau** steht, weiß es nicht 
 - **Manches kann Claude gar nicht wissen:** das Landesrecht der Länder und wie sich ein
   Gesetz geändert hat (`aenderungen_anzeigen`, `date=`).
 
-## So funktioniert die Suche
-
-Die Suche vergleicht **Wörter, keine Bedeutungen**. Sie findet einen Paragrafen nur,
-wenn die gesuchten Wörter (oder Wörter, die mit ihnen anfangen) darin vorkommen:
-
-- Füllwörter wie „der“, „ich“ oder „muss“ fallen weg, die übrigen Wörter werden auf
-  ihren Stamm gekürzt („anzeigen“ wird zu „anzeig“ und findet so auch „Anzeigepflicht“).
-- Zuerst sucht sie Paragrafen, die **alle** Wörter enthalten. Sind das zu wenige,
-  sucht sie Paragrafen mit **irgendeinem** der Wörter.
-- Ein Treffer in der Überschrift zählt mehr als einer im Text, und große Gesetze wie
-  das BGB bekommen einen kleinen Vorsprung vor Spezialverordnungen.
-
 ## Die Messung
-
-Vier Fragensätze mit bekannter Antwort, alle zum Bundesrecht:
 
 - **Alltagsfragen (46):** so, wie Menschen fragen, etwa „Was muss ins Impressum meiner
   Webseite?“ (richtig: § 5 DDG). Dazu 8 Fragen in Fachsprache, etwa „Haftung des
-  Tierhalters“ (§ 833 BGB), und 5 Fragen, auf die es im Gesetz keine Antwort gibt, etwa
-  „Rezept für Lasagne“.
-- **Alltagsfragen, von Claude umformuliert (46):** dieselben Fragen, so, wie Claude sie an
-  die Suche schickt.
+  Tierhalters“ (§ 833 BGB).
 - **Seltene Gesetze (35):** Aus 60 zufällig gezogenen kleineren Gesetzen wurde je eine
   Vorschrift gezogen, die bekanntesten Gesetze ausgenommen. Zu 35 davon hat Claude eine
   Frage geschrieben, wie sie ein Mensch stellen würde, etwa „Ich arbeite in einem
   Schlachtbetrieb. Muss ich meine Schutzkleidung und Messer selbst bezahlen?“ (§ 4 GSA
   Fleisch).
-- **Seltene Gesetze, von Claude umformuliert (35).**
 
-Umformuliert hat jeweils ein eigenes Claude, das nur die Fragen und die Anleitung des
+Beide Sätze hat ein eigenes Claude umformuliert, das nur die Fragen und die Anleitung des
 Servers kannte, nicht die richtigen Antworten. So bleibt die Messung ehrlich.
-
-| Wert | Bedeutung |
-|---|---|
-| Richtige Vorschrift auf Platz 1 | Sie steht ganz oben. |
-| … unter den ersten 3 / 8 | Sie steht unter den ersten drei Treffern / unter den acht, die die Suche standardmäßig liefert. |
-| Richtiges Gesetz unter den ersten 3 | Unter den ersten drei Treffern ist eine Vorschrift aus dem richtigen Gesetz, vielleicht nicht die gesuchte. Von dort findet Claude sie mit einer Suche im Gesetz. |
 
 ## Verlauf
 
