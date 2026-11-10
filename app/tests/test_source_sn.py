@@ -333,3 +333,9 @@ def test_gliederung_named_with_an_ordinal_word_stays_a_gliederung():
     units = units_of("20111", html)
     assert (units[1].kind, units[1].unit_id, units[1].ebene) == ("gliederung", "ersterabschnitt", 1)
     assert units[1].body == "Vorbemerkung."
+
+
+def test_hit_count_heading_with_or_without_a_class():
+    # Revosax R2.3.38 (2026-11-07) added class="hdl-3" to the heading.
+    assert sn.parse_hitlist('<h2 class="hdl-3">888 Treffer</h2>') == (888, [])
+    assert sn.parse_hitlist("<h2>1.024 Treffer</h2>") == (1024, [])
