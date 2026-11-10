@@ -45,7 +45,7 @@ _MONTHS = {m: i for i, m in enumerate(("januar", "februar", "märz", "april", "m
                                        "september", "oktober", "november", "dezember"), 1)}
 _DATE = re.compile(r"(\d{1,2})\.\s*([A-Za-zäÄ]+)\s+(\d{4})")
 _TOKEN = re.compile(r'name="authenticity_token" value="([^"]+)"')
-_COUNT = re.compile(r"<h2>\s*(\d[\d.]*) Treffer")
+_COUNT = re.compile(r"<h2[^>]*>\s*(\d[\d.]*) Treffer")
 _HIT_LINK = re.compile(r'href="/vorschrift/(\d+)[^"]*"')
 _HIT_TYPE = re.compile(r"Vorschriftentyp:\s*([^<\n]+)")
 _HIT_VALID = re.compile(r"Fassung gültig ab:([^<]+)")
