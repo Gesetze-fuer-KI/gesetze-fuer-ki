@@ -1,0 +1,289 @@
+# Federal law only. expect = the provision's URL on gesetze-im-internet.de (matched as a substring of the hit's address).
+
+# ---- Alltagssprache: how users ask -------------------------------------------------------
+[[case]]
+query = "Was muss ins Impressum meiner Webseite?"
+expect = ["/ddg/__5.html"]
+group = "alltag"
+
+[[case]]
+query = "Ab welchem Umsatz muss eine kleine Firma Umsatzsteuer zahlen?"
+expect = ["/ustg_1980/__19.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie melde ich ein Gewerbe an?"
+expect = ["/gewo/__14.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange ist die Kündigungsfrist für meine Mietwohnung?"
+expect = ["/bgb/__573c.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viele Urlaubstage stehen mir mindestens zu?"
+expect = ["/burlg/__3.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viele Stunden darf ich am Tag höchstens arbeiten?"
+expect = ["/arbzg/__3.html"]
+group = "alltag"
+
+[[case]]
+query = "Kann ich online gekaufte Sachen zurückschicken?"
+expect = ["/bgb/__355.html", "/bgb/__312g.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie hoch darf die Kaution für eine Wohnung sein?"
+expect = ["/bgb/__551.html"]
+group = "alltag"
+
+[[case]]
+query = "Nach wie vielen Jahren muss ich eine offene Rechnung nicht mehr bezahlen?"
+expect = ["/bgb/__195.html", "/bgb/__199.html"]
+group = "alltag"
+
+[[case]]
+query = "Mit welcher Frist kann mein Chef mir kündigen?"
+expect = ["/bgb/__622.html"]
+group = "alltag"
+
+[[case]]
+query = "Darf mein Vermieter einfach die Miete erhöhen?"
+expect = ["/bgb/__558.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viele Monate bekomme ich Elterngeld?"
+expect = ["/beeg/__4.html"]
+group = "alltag"
+
+[[case]]
+query = "Wann darf mein Arbeitgeber mich nicht einfach rauswerfen?"
+expect = ["/kschg/__1.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange habe ich Garantie auf ein gekauftes Handy?"
+expect = ["/bgb/__438.html"]
+group = "alltag"
+
+[[case]]
+query = "Muss ich als Angestellter eine Steuererklärung machen?"
+expect = ["/estg/__46.html", "/ao_1977/__149.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viel darf ich im Minijob verdienen?"
+expect = ["/sgb_4/__8.html"]
+group = "alltag"
+
+[[case]]
+query = "Wer erbt, wenn es kein Testament gibt?"
+expect = ["/bgb/__1924.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viel bekommen enterbte Kinder vom Erbe?"
+expect = ["/bgb/__2303.html"]
+group = "alltag"
+
+[[case]]
+query = "Bekomme ich weiter Lohn, wenn ich krank bin?"
+expect = ["/entgfg/__3.html"]
+group = "alltag"
+
+[[case]]
+query = "Ab wann vor der Geburt darf ich nicht mehr arbeiten?"
+expect = ["/muschg_2018/__3.html"]
+group = "alltag"
+
+[[case]]
+query = "Darf ein Laden mich mit Kameras filmen?"
+expect = ["/bdsg_2018/__4.html"]
+group = "alltag"
+
+[[case]]
+query = "Wer zahlt, wenn ein Hund jemanden beißt?"
+expect = ["/bgb/__833.html"]
+group = "alltag"
+
+[[case]]
+query = "Wer haftet für einen Autounfall?"
+expect = ["/stvg/__7.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange dauert die Probezeit in der Lehre?"
+expect = ["/bbig_2005/__20.html"]
+group = "alltag"
+
+[[case]]
+query = "Ab welchem Alter ist man erwachsen?"
+expect = ["/bgb/__2.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viel Kindergeld gibt es pro Kind?"
+expect = ["/estg/__66.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie hoch ist der Mindestlohn?"
+expect = ["/milog/__1.html"]
+group = "alltag"
+
+[[case]]
+query = "Ab wie vielen Mitarbeitern kann man einen Betriebsrat gründen?"
+expect = ["/betrvg/__1.html"]
+group = "alltag"
+
+[[case]]
+query = "Die Äste vom Baum des Nachbarn hängen in meinen Garten"
+expect = ["/bgb/__910.html"]
+group = "alltag"
+
+[[case]]
+query = "Ich habe eine Geldbörse gefunden, was muss ich tun?"
+expect = ["/bgb/__965.html"]
+group = "alltag"
+
+[[case]]
+query = "Ist Schwarzfahren strafbar?"
+expect = ["/stgb/__265a.html"]
+group = "alltag"
+
+[[case]]
+query = "Jemand hat mich beschimpft, ist das strafbar?"
+expect = ["/stgb/__185.html"]
+group = "alltag"
+
+[[case]]
+query = "Personalausweis verloren, was muss ich machen?"
+expect = ["/pauswg/__27.html"]
+group = "alltag"
+
+[[case]]
+query = "Kann ich erfahren, welche Daten eine Firma über mich hat?"
+expect = ["/bdsg_2018/__34.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange muss ich Belege für das Finanzamt aufheben?"
+expect = ["/ao_1977/__147.html", "/hgb/__257.html"]
+group = "alltag"
+
+[[case]]
+query = "Was muss alles auf einer Rechnung stehen?"
+expect = ["/ustg_1980/__14.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange muss man getrennt leben bis zur Scheidung?"
+expect = ["/bgb/__1566.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viel Unterhalt muss ich für mein Kind zahlen?"
+expect = ["/bgb/__1612a.html", "/bgb/__1601.html"]
+group = "alltag"
+
+[[case]]
+query = "Hotel im Urlaub war dreckig, bekomme ich Geld vom Reiseveranstalter zurück?"
+expect = ["/bgb/__651m.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange dürfen Jugendliche arbeiten?"
+expect = ["/jarbschg/__8.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie lange bekomme ich Arbeitslosengeld?"
+expect = ["/sgb_3/__147.html"]
+group = "alltag"
+
+[[case]]
+query = "Wer bekommt Bürgergeld?"
+expect = ["/sgb_2/__19.html"]
+group = "alltag"
+
+[[case]]
+query = "Mit wie viel Jahren kann ich in Rente gehen?"
+expect = ["/sgb_6/__35.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie wechsle ich meine Krankenkasse?"
+expect = ["/sgb_5/__175.html"]
+group = "alltag"
+
+[[case]]
+query = "Wie viel Alkohol darf ich beim Autofahren getrunken haben?"
+expect = ["/stvg/__24a.html"]
+group = "alltag"
+
+[[case]]
+query = "Ich bin umgezogen, muss ich mich ummelden?"
+expect = ["/bmg/__17.html"]
+group = "alltag"
+
+# ---- Fachsprache: how the law says it (today's search should do well) -------------------
+[[case]]
+query = "Informationspflichten Diensteanbieter"
+expect = ["/ddg/__5.html"]
+group = "fach"
+
+[[case]]
+query = "Kleinunternehmer Umsatz"
+expect = ["/ustg_1980/__19.html"]
+group = "fach"
+
+[[case]]
+query = "Widerrufsrecht Verbraucherverträge"
+expect = ["/bgb/__355.html"]
+group = "fach"
+
+[[case]]
+query = "Haftung des Tierhalters"
+expect = ["/bgb/__833.html"]
+group = "fach"
+
+[[case]]
+query = "Erschleichen von Leistungen"
+expect = ["/stgb/__265a.html"]
+group = "fach"
+
+[[case]]
+query = "Fristen der ordentlichen Kündigung Wohnraum"
+expect = ["/bgb/__573c.html"]
+group = "fach"
+
+[[case]]
+query = "Entgeltfortzahlung im Krankheitsfall"
+expect = ["/entgfg/__3.html"]
+group = "fach"
+
+[[case]]
+query = "Regelaltersrente"
+expect = ["/sgb_6/__35.html"]
+group = "fach"
+
+# ---- Kein Treffer erwartet --------------------------------------------------------------
+[[case]]
+query = "Wie backe ich ein Sauerteigbrot?"
+
+[[case]]
+query = "Wie wird das Wetter morgen in Berlin?"
+
+[[case]]
+query = "Wer führt die Bundesliga-Tabelle an?"
+
+[[case]]
+query = "Rezept für Lasagne"
+
+[[case]]
+query = "Wie installiere ich Python unter Windows?"

@@ -1,0 +1,233 @@
+# The 46 everyday questions of cases.toml, as Claude rewrote them for gesetze_durchsuchen (first query, no law filter).
+# Rewritten blind by a separate Claude that saw only the questions and the server instructions, not the answers.
+# Federal law only. expect = the provision's URL on gesetze-im-internet.de (matched as a substring of the hit's address).
+
+[[case]]
+query = "Informationspflichten Diensteanbieter"
+expect = ["/ddg/__5.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Kleinunternehmer Umsatz"
+expect = ["/ustg_1980/__19.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Gewerbe anzeigen"
+expect = ["/gewo/__14.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Kündigungsfrist Mietverhältnis Wohnraum"
+expect = ["/bgb/__573c.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Mindesturlaub Werktage"
+expect = ["/burlg/__3.html"]
+group = "umformuliert"
+
+[[case]]
+query = "werktägliche Arbeitszeit acht Stunden"
+expect = ["/arbzg/__3.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Widerrufsrecht Fernabsatzverträge"
+expect = ["/bgb/__355.html", "/bgb/__312g.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Mietsicherheit Monatsmiete"
+expect = ["/bgb/__551.html"]
+group = "umformuliert"
+
+[[case]]
+query = "regelmäßige Verjährungsfrist"
+expect = ["/bgb/__195.html", "/bgb/__199.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Kündigungsfristen Arbeitsverhältnis Arbeitgeber"
+expect = ["/bgb/__622.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Mieterhöhung ortsübliche Vergleichsmiete"
+expect = ["/bgb/__558.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Bezugsdauer Elterngeld Lebensmonate"
+expect = ["/beeg/__4.html"]
+group = "umformuliert"
+
+[[case]]
+query = "sozial ungerechtfertigte Kündigung"
+expect = ["/kschg/__1.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Verjährung Mängelansprüche Kaufsache"
+expect = ["/bgb/__438.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Veranlagung Arbeitnehmer Einkünfte aus nichtselbständiger Arbeit"
+expect = ["/estg/__46.html", "/ao_1977/__149.html"]
+group = "umformuliert"
+
+[[case]]
+query = "geringfügige Beschäftigung Geringfügigkeitsgrenze"
+expect = ["/sgb_4/__8.html"]
+group = "umformuliert"
+
+[[case]]
+query = "gesetzliche Erben Ordnung"
+expect = ["/bgb/__1924.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Pflichtteil Abkömmlinge"
+expect = ["/bgb/__2303.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Entgeltfortzahlung Arbeitsunfähigkeit Krankheit"
+expect = ["/entgfg/__3.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Schutzfrist vor der Entbindung"
+expect = ["/muschg_2018/__3.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Videoüberwachung öffentlich zugänglicher Räume"
+expect = ["/bdsg_2018/__4.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Haftung Tierhalter"
+expect = ["/bgb/__833.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Haftung Halter Kraftfahrzeug"
+expect = ["/stvg/__7.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Probezeit Berufsausbildungsverhältnis"
+expect = ["/bbig_2005/__20.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Volljährigkeit Vollendung des achtzehnten Lebensjahres"
+expect = ["/bgb/__2.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Höhe des Kindergeldes"
+expect = ["/estg/__66.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Höhe des Mindestlohns"
+expect = ["/milog/__1.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Betriebsrat wahlberechtigte Arbeitnehmer"
+expect = ["/betrvg/__1.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Überhang Zweige Nachbargrundstück"
+expect = ["/bgb/__910.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Fund Anzeigepflicht Finder"
+expect = ["/bgb/__965.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Erschleichen von Leistungen Beförderung"
+expect = ["/stgb/__265a.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Beleidigung"
+expect = ["/stgb/__185.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Personalausweis Verlust anzeigen"
+expect = ["/pauswg/__27.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Auskunftsrecht betroffene Person personenbezogene Daten"
+expect = ["/bdsg_2018/__34.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Aufbewahrungsfrist Buchungsbelege"
+expect = ["/ao_1977/__147.html", "/hgb/__257.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Rechnung Angaben Pflichtangaben Umsatzsteuer"
+expect = ["/ustg_1980/__14.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Scheitern der Ehe getrennt leben"
+expect = ["/bgb/__1566.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Mindestunterhalt minderjähriger Kinder"
+expect = ["/bgb/__1612a.html", "/bgb/__1601.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Reisemangel Minderung Pauschalreise"
+expect = ["/bgb/__651m.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Arbeitszeit Jugendliche"
+expect = ["/jarbschg/__8.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Anspruchsdauer Arbeitslosengeld"
+expect = ["/sgb_3/__147.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Bürgergeld Leistungsberechtigte"
+expect = ["/sgb_2/__19.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Regelaltersrente Regelaltersgrenze"
+expect = ["/sgb_6/__35.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Wahlrecht Krankenkasse Kündigung Mitgliedschaft"
+expect = ["/sgb_5/__175.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Promille Alkohol Kraftfahrzeug führen"
+expect = ["/stvg/__24a.html"]
+group = "umformuliert"
+
+[[case]]
+query = "Meldepflicht Wohnung beziehen anmelden"
+expect = ["/bmg/__17.html"]
+group = "umformuliert"

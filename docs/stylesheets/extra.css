@@ -73,3 +73,60 @@
 [data-md-color-scheme="slate"] .md-logo img {
   filter: brightness(0) invert(1);
 }
+
+/* Charts (docs_hooks/charts.py): three categorical slots, checked for colour-blind separation in light and dark
+   (dataviz validate_palette.js); text in the text colour, never in the series colour. */
+:root > * {
+  --viz-1: #2a78d6;
+  --viz-2: #eb6834;
+  --viz-3: #1baf7a;
+}
+[data-md-color-scheme="slate"] {
+  --viz-1: #3987e5;
+  --viz-2: #d95926;
+  --viz-3: #199e70;
+}
+.md-typeset .gk-chart {
+  display: block;
+  width: 100%;
+  margin: 1rem 0 1.6rem;
+}
+.gk-chart svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.gk-chart text {
+  fill: var(--md-default-fg-color);
+  font-size: 13px;
+}
+.gk-chart .gk-chart-small {
+  fill: var(--md-default-fg-color--light);
+  font-size: 12px;
+}
+.gk-chart .gk-chart-ontext {
+  fill: #fff;
+  font-weight: 700;
+}
+.gk-s1 { fill: var(--viz-1); }
+.gk-s2 { fill: var(--viz-2); }
+.gk-s3 { fill: var(--viz-3); }
+.gk-l1 { stroke: var(--viz-1); }
+.gk-l2 { stroke: var(--viz-2); }
+.gk-l3 { stroke: var(--viz-3); }
+.gk-chart .gk-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.gk-chart .gk-ring {
+  stroke: var(--md-default-bg-color);
+  stroke-width: 2;
+}
+.gk-chart .gk-grid {
+  stroke: var(--md-default-fg-color--lightest);
+  stroke-width: 1;
+}
+.gk-chart .gk-faded {
+  opacity: 0.45;
+}
