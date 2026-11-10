@@ -1,0 +1,214 @@
+# Questions about lesser-known laws: one § drawn at random from each of 60 laws with 5-150 provisions (seed 20261110),
+# the best-known laws left out. A separate Claude wrote a layperson's question for the 35 it judged someone would ask.
+# Federal law only, as of 2026-11-05. expect = the drawn provision's URL on gesetze-im-internet.de.
+
+# § 9 PharmAusbV 2009: § 9 Gewichtungs- und Bestehensregelungen
+[[case]]
+query = "Ab wann hab ich die Abschlussprüfung als Pharmakant bestanden und wie viel zählt jeder Prüfungsteil?"
+expect = ["/pharmausbv_2009/__9.html"]
+group = "selten"
+
+# § 4 VBVG: § 4 Aufwendungsersatz des Vormunds
+[[case]]
+query = "Ich bin beruflich Vormund für ein Kind. Kann ich mir Fahrtkosten und andere Auslagen erstatten lassen?"
+expect = ["/vbvg_2023/__4.html"]
+group = "selten"
+
+# § 9 Offshore-ArbZV: § 9 Transportzeiten
+[[case]]
+query = "Ich arbeite auf einer Offshore-Windanlage. Zählt die Fahrt mit dem Schiff oder Hubschrauber vom Hafen zur Plattform als Arbeitszeit?"
+expect = ["/offshore-arbzv/__9.html"]
+group = "selten"
+
+# § 3 SoldRehaHomG: § 3 Entschädigung; Entschädigungsverfahren
+[[case]]
+query = "Ich wurde als Soldat wegen meiner Homosexualität bei der Bundeswehr benachteiligt. Wie viel Geld bekomme ich als Entschädigung und bis wann muss ich das beantragen?"
+expect = ["/soldrehahomg/__3.html"]
+group = "selten"
+
+# § 3 EF-VO: § 3 Sonderfälle
+[[case]]
+query = "Ich wohne direkt an der Schweizer Grenze. Wie viele Zigaretten und wie viel Einkauf darf ich zollfrei rüberbringen?"
+expect = ["/ef-vo_2008/__3.html"]
+group = "selten"
+
+# § 10 AuslPflVG: § 10 Leistungspflicht des Deutschen Büros Grüne Karte
+[[case]]
+query = "Mich hat ein Auto mit ausländischem Kennzeichen angefahren. An wen wende ich mich in Deutschland wegen Schadensersatz?"
+expect = ["/auslpflvg_2024/__10.html"]
+group = "selten"
+
+# § 2 SVBezGrV 2016: § 2 Bezugsgröße in der Sozialversicherung
+[[case]]
+query = "Wie hoch war die Bezugsgröße in der Sozialversicherung im Jahr 2016 in West und Ost?"
+expect = ["/svbezgrv_2016/__2.html"]
+group = "selten"
+
+# § 10 ZSHG: § 10 Zeugenschutz in justizförmigen Verfahren
+[[case]]
+query = "Ich bin im Zeugenschutzprogramm und soll in einem Zivilprozess aussagen. Muss ich dort meinen neuen Namen und meine Adresse nennen?"
+expect = ["/zshg/__10.html"]
+group = "selten"
+
+# § 13 ZahnmedAusbV: § 13 Prüfungsbereich „Assistieren bei und Dokumentieren von zahnärztlichen Maßnahmen“
+[[case]]
+query = "Wie läuft der praktische Prüfungsteil mit Assistenz bei der Behandlung in der Abschlussprüfung zur Zahnmedizinischen Fachangestellten ab und wie lange dauert er?"
+expect = ["/zahnmedausbv_2022/__13.html"]
+group = "selten"
+
+# § 5 LederVAusbV: § 5 Zwischenprüfung
+[[case]]
+query = "Was muss ich in der Zwischenprüfung zur Fachkraft für Lederverarbeitung machen und wie lange dauert sie?"
+expect = ["/ledervausbv/__5.html"]
+group = "selten"
+
+# § 3 DNBG: § 3 Medienwerke
+[[case]]
+query = "Muss ich mein selbst veröffentlichtes E-Book oder meine Website bei der Nationalbibliothek abliefern, oder zählen nur gedruckte Bücher?"
+expect = ["/dnbg/__3.html"]
+group = "selten"
+
+# § 1 HaftPflG: § 1
+[[case]]
+query = "Ich habe mich beim Aussteigen aus der Straßenbahn verletzt. Haftet das Verkehrsunternehmen auch ohne eigenes Verschulden?"
+expect = ["/haftpflg/__1.html"]
+group = "selten"
+
+# § 2 SolZG: § 2 Abgabepflicht
+[[case]]
+query = "Wer muss eigentlich Solidaritätszuschlag zahlen, auch GmbHs?"
+expect = ["/solzg/__2.html"]
+group = "selten"
+
+# § 13 KochAusbV: § 13 Prüfungsbereich „Produkte, Lagerhaltung und Warenwirtschaft“
+[[case]]
+query = "Was wird in der Kochausbildung in der Prüfung zu Warenwirtschaft und Lagerhaltung abgefragt und wie lange dauert sie?"
+expect = ["/kochausbv_2022/__13.html"]
+group = "selten"
+
+# § 7 MetallbAusbV 2008: § 7 Teil 1 der Gesellenprüfung
+[[case]]
+query = "Wann findet Teil 1 der Gesellenprüfung als Metallbauer statt und was muss ich da machen?"
+expect = ["/metallbausbv_2008/__7.html"]
+group = "selten"
+
+# § 8 IndElekAusbV: § 8 Gewichtung und Bestehensregelung
+[[case]]
+query = "Wie werden die Prüfungsbereiche in der Abschlussprüfung zum Industrieelektriker gewichtet und kann ich mit einer mündlichen Nachprüfung noch bestehen?"
+expect = ["/indelekausbv/__8.html"]
+group = "selten"
+
+# § 7 SonntRStIndAusnV: § 7
+[[case]]
+query = "Wir sind ein Stahlwerk mit Sonntagsarbeit. Welche Aufzeichnungen über freie Sonntage und Ersatzruhetage müssen wir führen und wie lange aufbewahren?"
+expect = ["/sonntrstindausnv/__7.html"]
+group = "selten"
+
+# § 1 Aflatoxin VerbotsV: § 1
+[[case]]
+query = "Welche Grenzwerte für Schimmelpilzgifte gelten für Rohstoffe bei der Herstellung von Arzneimitteln?"
+expect = ["/aflatoxinverbotsv/__1.html"]
+group = "selten"
+
+# § 3 ZuckArtV 2003: § 3 Verkehrsverbote
+[[case]]
+query = "Darf ich Zucker als \"weiß\" oder unter einer bestimmten Zuckerbezeichnung verkaufen, wenn er die Anforderungen nicht ganz erfüllt?"
+expect = ["/zuckartv_2003/__3.html"]
+group = "selten"
+
+# § 21e LuftVO: § 21e Benannte und anerkannte Stellen
+[[case]]
+query = "Wer darf in Deutschland Prüfungen für den Drohnenführerschein abnehmen und wie wird man dafür anerkannt?"
+expect = ["/luftvo_2015/__21e.html"]
+group = "selten"
+
+# § 1 KondMstrV: § 1 Gliederung und Inhalt der Meisterprüfung
+[[case]]
+query = "Aus welchen Teilen besteht die Meisterprüfung im Konditorhandwerk?"
+expect = ["/kondmstrv_2006/__1.html"]
+group = "selten"
+
+# § 3 MuRegV: § 3 Einsichtnahme
+[[case]]
+query = "Kann ich als Anleger kostenlos einsehen, welche Musterverfahren gegen Fondsgesellschaften laufen?"
+expect = ["/klagregv_2012/__3.html"]
+group = "selten"
+
+# § 9 AntiDopG: § 9 Umgang mit personenbezogenen Daten
+[[case]]
+query = "Welche Daten über mich darf die Nationale Anti-Doping-Agentur als Kaderathlet speichern?"
+expect = ["/antidopg/__9.html"]
+group = "selten"
+
+# § 11 EnWFachwBAProFV: § 11 Bewertung der Prüfungsleistungen
+[[case]]
+query = "Wie wird bei der Prüfung zum Fachwirt für Energiewirtschaft die mündliche Prüfung aus Präsentation und Fachgespräch gewichtet?"
+expect = ["/enwfachwbaprofv/__11.html"]
+group = "selten"
+
+# § 4 GSA Fleisch: § 4 Arbeitsmittel, Schutzkleidung und persönliche Schutzausrüstung
+[[case]]
+query = "Ich arbeite in einem Schlachtbetrieb. Muss ich meine Schutzkleidung und Messer selbst bezahlen?"
+expect = ["/safleischwig/__4.html"]
+group = "selten"
+
+# § 8 HörAkAusbV: § 8 Inhalt
+[[case]]
+query = "Was kommt in der Zwischenprüfung der Ausbildung zum Hörakustiker dran?"
+expect = ["/h_rakausbv/__8.html"]
+group = "selten"
+
+# § 15 LederGerbAusbV: § 15 Prüfungsbereich Technologie der Nasszurichtung und Zurichtung
+[[case]]
+query = "Wie lange dauert die schriftliche Prüfung zu Nasszurichtung und Zurichtung in der Gerberausbildung und was wird gefragt?"
+expect = ["/ledergerbausbv/__15.html"]
+group = "selten"
+
+# § 10 GerüstbPrV: § 10 Wiederholung der Prüfung
+[[case]]
+query = "Ich bin bei der Prüfung zum Gerüstbau-Kolonnenführer durchgefallen. Wie oft darf ich wiederholen und muss ich bestandene Teile nochmal machen?"
+expect = ["/ger_stbprv/__10.html"]
+group = "selten"
+
+# § 5 FZulBV: § 5 Bescheinigung nach § 6 des Gesetzes
+[[case]]
+query = "Wie lange dauert es, bis ich die Bescheinigung für die Forschungszulage für unser Entwicklungsprojekt bekomme, und kann ich gegen eine Ablehnung vorgehen?"
+expect = ["/fzulbv/__5.html"]
+group = "selten"
+
+# § 23 GoSiAusbV: § 23 Prüfungsbereich „Wirtschafts- und Sozialkunde“
+[[case]]
+query = "Wie lange dauert die Prüfung in Wirtschafts- und Sozialkunde bei der Ausbildung zum Goldschmied?"
+expect = ["/gosiausbv/__23.html"]
+group = "selten"
+
+# § 3 TVMindestlohnPäda 6: § 3 Entgelt
+[[case]]
+query = "Wie hoch ist der Mindestlohn für pädagogische Mitarbeiter in der Weiterbildung 2026?"
+expect = ["/tvmindestlohnp_da_6/__3.html"]
+group = "selten"
+
+# § 11 BPädFortbV: § 11 Bewertung der Prüfungsleistungen
+[[case]]
+query = "Wie wird die Projektarbeit mit Präsentation bei der Fortbildung zum Geprüften Berufspädagogen bewertet?"
+expect = ["/bp_dfortbv/__11.html"]
+group = "selten"
+
+# § 4 FluLärmSpangV: § 4
+[[case]]
+query = "Wo kann ich die Karte mit dem Lärmschutzbereich um den Militärflugplatz Spangdahlem einsehen?"
+expect = ["/flul_rmspangv/__4.html"]
+group = "selten"
+
+# § 2 ATA-OTA-APrV: § 2 Gliederung der Ausbildung
+[[case]]
+query = "Wie ist die Ausbildung zur Operationstechnischen Assistentin aufgebaut, wechseln sich Schule und Praxis ab?"
+expect = ["/ata-ota-aprv/__2.html"]
+group = "selten"
+
+# § 4 JuSchG: § 4 Gaststätten
+[[case]]
+query = "Darf mein 15-jähriger Sohn abends allein in eine Kneipe oder ein Restaurant gehen und bis wann?"
+expect = ["/juschg/__4.html"]
+group = "selten"
+

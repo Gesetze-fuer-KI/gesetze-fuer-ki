@@ -1,0 +1,213 @@
+# The questions of cases_rare.toml, as Claude rewrote them for gesetze_durchsuchen (first query, no law filter).
+# Rewritten blind by a separate Claude that saw only the questions and the server instructions, not the answers.
+
+# § 9 PharmAusbV 2009: § 9 Gewichtungs- und Bestehensregelungen
+[[case]]
+query = "Pharmakant Abschlussprüfung Bestehen Gewichtung"
+expect = ["/pharmausbv_2009/__9.html"]
+group = "selten_umformuliert"
+
+# § 4 VBVG: § 4 Aufwendungsersatz des Vormunds
+[[case]]
+query = "Vormund Aufwendungsersatz Berufsvormund Vergütung"
+expect = ["/vbvg_2023/__4.html"]
+group = "selten_umformuliert"
+
+# § 9 Offshore-ArbZV: § 9 Transportzeiten
+[[case]]
+query = "Offshore Arbeitszeit Wegezeit"
+expect = ["/offshore-arbzv/__9.html"]
+group = "selten_umformuliert"
+
+# § 3 SoldRehaHomG: § 3 Entschädigung; Entschädigungsverfahren
+[[case]]
+query = "Rehabilitierung Soldaten homosexuell Entschädigung Antrag Frist"
+expect = ["/soldrehahomg/__3.html"]
+group = "selten_umformuliert"
+
+# § 3 EF-VO: § 3 Sonderfälle
+[[case]]
+query = "Reisende Einfuhrabgaben Befreiung Grenzzone Zigaretten"
+expect = ["/ef-vo_2008/__3.html"]
+group = "selten_umformuliert"
+
+# § 10 AuslPflVG: § 10 Leistungspflicht des Deutschen Büros Grüne Karte
+[[case]]
+query = "ausländisches Kraftfahrzeug Haftpflichtversicherung Schadensregulierung Verkehrsopferhilfe"
+expect = ["/auslpflvg_2024/__10.html"]
+group = "selten_umformuliert"
+
+# § 2 SVBezGrV 2016: § 2 Bezugsgröße in der Sozialversicherung
+[[case]]
+query = "Bezugsgröße 2016 Sozialversicherung"
+expect = ["/svbezgrv_2016/__2.html"]
+group = "selten_umformuliert"
+
+# § 10 ZSHG: § 10 Zeugenschutz in justizförmigen Verfahren
+[[case]]
+query = "Zeugenschutz Angaben Personalien Wohnort Zeuge Vernehmung"
+expect = ["/zshg/__10.html"]
+group = "selten_umformuliert"
+
+# § 13 ZahnmedAusbV: § 13 Prüfungsbereich „Assistieren bei und Dokumentieren von zahnärztlichen Maßnahmen“
+[[case]]
+query = "Zahnmedizinische Fachangestellte Abschlussprüfung Assistenz Behandlung"
+expect = ["/zahnmedausbv_2022/__13.html"]
+group = "selten_umformuliert"
+
+# § 5 LederVAusbV: § 5 Zwischenprüfung
+[[case]]
+query = "Fachkraft Lederverarbeitung Zwischenprüfung"
+expect = ["/ledervausbv/__5.html"]
+group = "selten_umformuliert"
+
+# § 3 DNBG: § 3 Medienwerke
+[[case]]
+query = "Ablieferungspflicht Netzpublikationen Medienwerke Nationalbibliothek"
+expect = ["/dnbg/__3.html"]
+group = "selten_umformuliert"
+
+# § 1 HaftPflG: § 1
+[[case]]
+query = "Schienenbahn Betriebsunternehmer Haftung Körperverletzung"
+expect = ["/haftpflg/__1.html"]
+group = "selten_umformuliert"
+
+# § 2 SolZG: § 2 Abgabepflicht
+[[case]]
+query = "Solidaritätszuschlag Abgabepflichtige Körperschaftsteuer"
+expect = ["/solzg/__2.html"]
+group = "selten_umformuliert"
+
+# § 13 KochAusbV: § 13 Prüfungsbereich „Produkte, Lagerhaltung und Warenwirtschaft“
+[[case]]
+query = "Koch Prüfungsbereich Warenwirtschaft"
+expect = ["/kochausbv_2022/__13.html"]
+group = "selten_umformuliert"
+
+# § 7 MetallbAusbV 2008: § 7 Teil 1 der Gesellenprüfung
+[[case]]
+query = "Metallbauer Gesellenprüfung Teil 1"
+expect = ["/metallbausbv_2008/__7.html"]
+group = "selten_umformuliert"
+
+# § 8 IndElekAusbV: § 8 Gewichtung und Bestehensregelung
+[[case]]
+query = "Industrieelektriker Abschlussprüfung Gewichtung mündliche Ergänzungsprüfung"
+expect = ["/indelekausbv/__8.html"]
+group = "selten_umformuliert"
+
+# § 7 SonntRStIndAusnV: § 7
+[[case]]
+query = "Eisen- und Stahlindustrie Sonntagsarbeit Ersatzruhetag Nachweis aufbewahren"
+expect = ["/sonntrstindausnv/__7.html"]
+group = "selten_umformuliert"
+
+# § 1 Aflatoxin VerbotsV: § 1
+[[case]]
+query = "Aflatoxine Arzneimittel Ausgangsstoffe Höchstmengen"
+expect = ["/aflatoxinverbotsv/__1.html"]
+group = "selten_umformuliert"
+
+# § 3 ZuckArtV 2003: § 3 Verkehrsverbote
+[[case]]
+query = "Zuckerarten Verkehrsbezeichnung Weißzucker Anforderungen"
+expect = ["/zuckartv_2003/__3.html"]
+group = "selten_umformuliert"
+
+# § 21e LuftVO: § 21e Benannte und anerkannte Stellen
+[[case]]
+query = "unbemannte Fluggeräte Kenntnisnachweis Stelle Anerkennung"
+expect = ["/luftvo_2015/__21e.html"]
+group = "selten_umformuliert"
+
+# § 1 KondMstrV: § 1 Gliederung und Inhalt der Meisterprüfung
+[[case]]
+query = "Konditor Meisterprüfung Teile"
+expect = ["/kondmstrv_2006/__1.html"]
+group = "selten_umformuliert"
+
+# § 3 MuRegV: § 3 Einsichtnahme
+[[case]]
+query = "Musterverfahren Klageregister Einsicht unentgeltlich"
+expect = ["/klagregv_2012/__3.html"]
+group = "selten_umformuliert"
+
+# § 9 AntiDopG: § 9 Umgang mit personenbezogenen Daten
+[[case]]
+query = "Nationale Anti-Doping Agentur personenbezogene Daten Athleten"
+expect = ["/antidopg/__9.html"]
+group = "selten_umformuliert"
+
+# § 11 EnWFachwBAProFV: § 11 Bewertung der Prüfungsleistungen
+[[case]]
+query = "Fachwirt Energiewirtschaft Präsentation Fachgespräch Gewichtung"
+expect = ["/enwfachwbaprofv/__11.html"]
+group = "selten_umformuliert"
+
+# § 4 GSA Fleisch: § 4 Arbeitsmittel, Schutzkleidung und persönliche Schutzausrüstung
+[[case]]
+query = "Fleischwirtschaft Arbeitsmittel Schutzkleidung Kosten"
+expect = ["/safleischwig/__4.html"]
+group = "selten_umformuliert"
+
+# § 8 HörAkAusbV: § 8 Inhalt
+[[case]]
+query = "Hörakustiker Zwischenprüfung"
+expect = ["/h_rakausbv/__8.html"]
+group = "selten_umformuliert"
+
+# § 15 LederGerbAusbV: § 15 Prüfungsbereich Technologie der Nasszurichtung und Zurichtung
+[[case]]
+query = "Gerber Nasszurichtung Zurichtung Prüfung"
+expect = ["/ledergerbausbv/__15.html"]
+group = "selten_umformuliert"
+
+# § 10 GerüstbPrV: § 10 Wiederholung der Prüfung
+[[case]]
+query = "Gerüstbau-Kolonnenführer Wiederholung Prüfung Befreiung"
+expect = ["/ger_stbprv/__10.html"]
+group = "selten_umformuliert"
+
+# § 5 FZulBV: § 5 Bescheinigung nach § 6 des Gesetzes
+[[case]]
+query = "Forschungszulage Bescheinigung Antrag Frist"
+expect = ["/fzulbv/__5.html"]
+group = "selten_umformuliert"
+
+# § 23 GoSiAusbV: § 23 Prüfungsbereich „Wirtschafts- und Sozialkunde“
+[[case]]
+query = "Goldschmied Wirtschafts- und Sozialkunde"
+expect = ["/gosiausbv/__23.html"]
+group = "selten_umformuliert"
+
+# § 3 TVMindestlohnPäda 6: § 3 Entgelt
+[[case]]
+query = "Mindestlohn Aus- und Weiterbildungsdienstleistungen pädagogisches Personal"
+expect = ["/tvmindestlohnp_da_6/__3.html"]
+group = "selten_umformuliert"
+
+# § 11 BPädFortbV: § 11 Bewertung der Prüfungsleistungen
+[[case]]
+query = "Berufspädagoge Projektarbeit Präsentation Bewertung"
+expect = ["/bp_dfortbv/__11.html"]
+group = "selten_umformuliert"
+
+# § 4 FluLärmSpangV: § 4
+[[case]]
+query = "Lärmschutzbereich Spangdahlem"
+expect = ["/flul_rmspangv/__4.html"]
+group = "selten_umformuliert"
+
+# § 2 ATA-OTA-APrV: § 2 Gliederung der Ausbildung
+[[case]]
+query = "operationstechnische Assistenz Ausbildung theoretischer praktischer Unterricht"
+expect = ["/ata-ota-aprv/__2.html"]
+group = "selten_umformuliert"
+
+# § 4 JuSchG: § 4 Gaststätten
+[[case]]
+query = "Jugendschutz Gaststätten Aufenthalt Kinder Jugendliche"
+expect = ["/juschg/__4.html"]
+group = "selten_umformuliert"
+
