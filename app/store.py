@@ -17,6 +17,7 @@ import logging
 import math
 import re
 import sqlite3
+import threading
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -276,15 +277,44 @@ def fts_query(text: str, mode: str = "AND") -> str:
 
 
 class Store:
-    """Read access to one built index. Open a new Store after a rebuild."""
+    """Read access to one built index. Open a new Store after a rebuild.
+
+    Each thread gets a connection of its own: the MCP tools run in worker threads, and one connection shared by
+    them deadlocked the server. A query calling ln() (search's ranking) holds SQLite's connection lock while it
+    waits for the GIL, and a thread holding the GIL waited for that lock, which froze every thread.
+    """
 
     def __init__(self, db_path: Path):
-        self.db = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, check_same_thread=False)
-        self.db.row_factory = sqlite3.Row
-        self.db.create_function("ln", 1, math.log, deterministic=True)
+        self._uri = f"file:{db_path}?mode=ro"
+        self._local = threading.local()
+        self._all: list[sqlite3.Connection] = []
+        self._all_lock = threading.Lock()
+        self._closed = False
+        self.db  # open the first one now, so a missing or broken index fails here, not on the first call
+
+    @property
+    def db(self) -> sqlite3.Connection:
+        """This thread's connection, opened on its first use."""
+        conn = getattr(self._local, "conn", None)
+        if conn is None:
+            if self._closed:
+                raise sqlite3.ProgrammingError("Cannot operate on a closed database.")
+            # Used by this thread only; check_same_thread=False just lets close() run from the swap's timer thread.
+            conn = sqlite3.connect(self._uri, uri=True, check_same_thread=False)
+            conn.row_factory = sqlite3.Row
+            conn.create_function("ln", 1, math.log, deterministic=True)
+            self._local.conn = conn
+            with self._all_lock:
+                self._all.append(conn)
+        return conn
 
     def close(self) -> None:
-        self.db.close()
+        """Close every thread's connection (after a swap, from a timer thread)."""
+        with self._all_lock:
+            self._closed = True
+            conns, self._all = self._all, []
+        for conn in conns:
+            conn.close()
 
     def meta(self, key: str) -> str | None:
         row = self.db.execute("SELECT value FROM meta WHERE key = ?", (key,)).fetchone()
