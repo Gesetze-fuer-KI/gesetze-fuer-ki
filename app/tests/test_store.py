@@ -177,3 +177,60 @@ def test_files_in_dot_directories_are_not_indexed(tmp_path):
     db = tmp_path / "index.sqlite"
     assert store.build(data, db, "rev", states={"BY": clone}) == 2
     assert store.law_files(clone) == [clone / "by" / "by-minig.md"]
+
+
+# A Store is shared by the MCP tools, which run in worker threads. With one sqlite3 connection for all of them, a query
+# calling the Python function ln() (search's ranking) waits for the GIL while holding SQLite's connection lock, and a
+# thread holding the GIL waits for that lock: the whole server froze (2026-11-11, three MCP sessions at once). The
+# threads run in a child process, since a deadlock holds the GIL and no timeout in this process would fire.
+CONCURRENT = """
+import sys, threading
+sys.path.insert(0, {app!r})
+import store
+s = store.Store(__import__("pathlib").Path({db!r}))
+def work():
+    for _ in range(300):
+        s.search("Gewerbe anzeigen")
+        s.resolve_law("MiniG")
+threads = [threading.Thread(target=work) for _ in range(6)]
+for t in threads: t.start()
+for t in threads: t.join()
+s.close()
+"""
+
+
+def test_searches_from_many_threads_at_once_do_not_deadlock(tmp_path):
+    import subprocess
+    import sys
+
+    data = tmp_path / "data"
+    (data / "m").mkdir(parents=True)
+    md, _ = convert(MINI, "minig")
+    (data / "m" / "minig.md").write_text(md, encoding="utf-8")
+    db = tmp_path / "index.sqlite"
+    store.build(data, db, "rev1")
+    code = CONCURRENT.format(app=str(Path(store.__file__).parent), db=str(db))
+    try:
+        result = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, timeout=60)
+    except subprocess.TimeoutExpired:
+        pytest.fail("searches from six threads did not finish in 60 s: deadlocked")
+    assert result.returncode == 0, result.stderr
+
+
+def test_close_from_another_thread_closes_every_threads_connection(index):
+    import sqlite3
+    import threading
+
+    seen = []
+    t = threading.Thread(target=lambda: seen.append(index.db))
+    t.start()
+    t.join()
+    mine = index.db
+    closer = threading.Thread(target=index.close)  # as the swap's timer does
+    closer.start()
+    closer.join()
+    for conn in (seen[0], mine):
+        with pytest.raises(sqlite3.ProgrammingError):
+            conn.execute("SELECT 1")
+    with pytest.raises(sqlite3.ProgrammingError):
+        index.search("Gewerbe")
